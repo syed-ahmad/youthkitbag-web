@@ -1,0 +1,100 @@
+/* import only the necessary Bootstrap files */
+@import "../../node_modules/bootstrap/scss/functions"; 
+@import "../../node_modules/bootstrap/scss/variables";
+
+/* -------begin customization-------- */
+
+/* 
+  I cannot find a way to force the primary colors to change so am resorting to changing directly in variables 
+  The following commented out variables shows the original bootstrap versions and then the replaced versions
+*/
+
+// $blue:    #007bff !default;
+// $indigo:  #6610f2 !default;
+// $purple:  #6f42c1 !default;
+// $pink:    #e83e8c !default;
+// $red:     #dc3545 !default;
+// $orange:  #fd7e14 !default;
+// $yellow:  #ffc107 !default;
+// $green:   #28a745 !default;
+// $teal:    #20c997 !default;
+// $cyan:    #17a2b8 !default;
+
+// $blue:    #004C9E !default;
+// $indigo:  #6610f2 !default;
+// $purple:  #6f42c1 !default;
+// $pink:    #e83e8c !default;
+// $red:     #dc3545 !default;
+// $orange:  #fd7e14 !default;
+// $yellow:  #ffc107 !default;
+// $green:   #1D7631 !default;
+// $teal:    #20c997 !default;
+// $cyan:    #17a2b8 !default;
+
+/* 80 required to bring primary and secondary colors to AAA standards */
+$theme-colors: (
+  secondary: #535A56,
+  info: #C8E2FC
+);
+
+// /* 119 so that headers automatically grow smaller as screen size reduces */
+// $enable-responsive-font-sizes: true;
+
+// // Your variable overrides
+// $spacer: 1rem;
+// $spacers: (
+//   0: 0,
+//   1: ($spacer * .25),
+//   2: ($spacer * .5),
+//   3: $spacer,
+//   4: ($spacer * 1.5),
+//   5: ($spacer * 2),
+//   6: ($spacer * 2.5),
+//   7: ($spacer * 3),
+//   8: ($spacer * 5),
+//   9: ($spacer * 7.5),
+//   10: ($spacer * 10)
+// );
+
+// /* 172 required to bring link color to AAA standards, but this fails to A link contrast */
+// //$link-color: #004C9E;
+// /* 172 required to bring link color to AA standards to contrast ratio with other text */
+$link-color: #006ADB;
+
+$font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Font `Awesome 5 Free";
+
+// $paragraph-margin-bottom:   0.5rem;
+// // $font-size-base:              2rem !default; // Assumes the browser default, typically `16px`
+// // $font-size-lg:                $font-size-base * 1.1;
+// // $font-size-sm:                $font-size-base * .9;
+
+// // $h1-font-size:                $font-size-base * 2;
+// // $h2-font-size:                $font-size-base * 1.8;
+// // $h3-font-size:                $font-size-base * 1.6;
+// // $h4-font-size:                $font-size-base * 1.4;
+// // $h5-font-size:                $font-size-base * 1.2;
+// // $h6-font-size:                $font-size-base;
+
+/* 222 */
+$grid-gutter-width:           10px;
+
+/* 313 */
+$headings-line-height: 1.4;
+
+// /* 320 required to bring muted color state to AAA standards */
+// $text-muted: $gray-700;
+
+// /* 714 the default .5 seemed to make some labels too small for accessibility size */
+// $navbar-nav-link-padding-x: .75rem;
+
+/* 727,728 required to bring dark navbar to AAA standards */
+$navbar-dark-color: rgba(255, 255, 255, 0.8);
+$navbar-dark-hover-color: rgba(255, 255, 255, 0.9);
+
+// /* 1046 the active breadcrumb is too light when on white background */
+// $breadcrumb-active-color: #535A56;
+
+// /* -------end customization-------- */
+
+/* finally, import Bootstrap to set the changes! */
+@import "../../node_modules/bootstrap/scss/bootstrap";

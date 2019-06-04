@@ -1,0 +1,14 @@
+/* Scss Document */
+
+@charset "UTF-8";
+
+/* Imports */
+
+@import 'youthkitbag-core';
+@import 'youthkitbag-font';
+
+.youthkitbag {
+  @import 'youthkitbag-colors';
+  @import 'youthkitbag-structure';
+  @import 'youthkitbag-bootstrap';
+}

@@ -1,0 +1,120 @@
+<%- include('../includes/head') %>
+
+<%- include('../includes/title', { 
+  title: {title: pageTitle }, 
+  breadcrumbs: [ { style: 'home', title: 'Home', url: '/' }, { title: 'Account', url: '/account/index' }, { title: 'Profile' } ]
+}) %>
+
+<section id="main" class="container-fluid" aria-label="main body of content plus related links and features">
+    <div class="container">
+
+        <form class="pb-3" action="/account/profile" method="POST" enctype="multipart/form-data">
+
+        <div class="row">
+            <div class="col-12 col-lg-6 order-1 order-lg-2" role="main">
+                <img id="preview" class="img-fluid mb-3" src="<%= user.profile.imageUrl %>" alt="" role="presentation">
+            </div>
+            <div class="col-12 col-lg-6 order-2 order-lg-1" role="main">
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="email" name="email" aria-describedby="email" value="<%= user.email %>" readonly>
+                    </div>
+                </div>
+                <hr />
+                <h3 class="h6">Profile (all optional)</h3>
+                <div class="form-group row">
+                    <label for="username" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control <%= errors.find(e => e.param === 'username') ? 'is-invalid' : '' %>" id="username" name="username" aria-describedby="username" value="<%= user.profile.username %>" required="required" aria-required="true">
+                        <div class="invalid-feedback"><%= errors.find(e => e.param === 'username') ? errors.find(e => e.param === 'username').msg : '' %></div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Avatar</label>
+                    <div class="col-sm-10">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input <%= errors.find(e => e.param === 'image') ? 'is-invalid' : '' %>" id="image" name="image" aria-describedby="image">
+                            <label class="custom-file-label" for="image">Choose image</label>
+                            <div class="invalid-feedback"><%= errors.find(e => e.param === 'image') ? errors.find(e => e.param === 'image').msg : '' %></div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="form-group row">
+                    <label for="location" class="col-sm-2 col-form-label">Location</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control <%= errors.find(e => e.param === 'location') ? 'is-invalid' : '' %>" id="location" name="location" aria-describedby="location" value="<%= user.profile.location %>" required="required" aria-required="true">
+                        <div class="invalid-feedback"><%= errors.find(e => e.param === 'location') ? errors.find(e => e.param === 'location').msg : '' %></div>
+                    </div>
+                </div>-->
+                <hr />
+                <h3 class="h6">Preferences (all optional)</h3>
+                <small id="categoryhelp" class="form-text text-muted form-control-help mb-3">You can add activity names and membership groups to your user. Enter names separate by commas. (e.g. football, cycling)</small>
+                <div class="form-group row">
+                    <label for="activitys" class="col-sm-2 col-form-label">Activities</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="activitys" name="activitys" aria-describedby="activitys" value="<% if (user.profile.activitys) { %><%= user.profile.activitys.join(', ') %><% }%>">
+                        <small id="activityshelp" class="form-text text-muted form-control-help">You can select from pre-defined activitys that are registered with YouthKitbag that will help the app monitor items that may be of interest to you.</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="groups" class="col-sm-2 col-form-label">Groups</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="groups" name="groups" aria-describedby="groups" value="<% if (user.profile.groups) { %><%= user.profile.groups.join(', ') %><% }%>">
+                        <small id="activityshelp" class="form-text text-muted form-control-help">You can select from pre-defined groups, teams, clubs, etc. that are registered with YouthKitbag that will help the app monitor items that may be of interest to you.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row pb-3">
+            <div class="col-12 col-lg-6" role="main">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="btn btn-primary" type="submit">Update Profile</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script src="/js/imagetools.js"></script>
+<script>
+document.getElementById('image').onchange = function(evt) {
+    // ImageTools.resize(this.files[0], {
+    //     width: 720, // maximum width
+    //     height: 480 // maximum height
+    // }, function(blob, didItResize) {
+    //     // didItResize will be true if it managed to resize it, otherwise false (and will return the original file as 'blob')
+    //     document.getElementById('preview').src = window.URL.createObjectURL(blob);
+    //     // you can also now upload this blob using an XHR.
+    // });
+
+      const width = 500;
+    const height = 300;
+    const fileName = e.target.files[0].name;
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = event => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+                const elem = document.createElement('canvas');
+                elem.width = width;
+                elem.height = height;
+                const ctx = elem.getContext('2d');
+                // img.width and img.height will contain the original dimensions
+                ctx.drawImage(img, 0, 0, width, height);
+                ctx.canvas.toBlob((blob) => {
+                    const file = new File([blob], fileName, {
+                        type: 'image/jpeg',
+                        lastModified: Date.now()
+                    });
+                }, 'image/jpeg', 1);
+            },
+            reader.onerror = error => console.log(error);
+    };
+};
+</script>
+
+<%- include('../includes/foot') %>

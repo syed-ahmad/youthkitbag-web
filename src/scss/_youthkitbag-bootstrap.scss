@@ -1,0 +1,112 @@
+.alert {
+  border-left-width: 0.45rem;
+
+  &.alert-callout {
+    color: $matisse;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid $matisse;
+    border-left-width: 0.45rem;
+    border-radius: 0.25rem;
+  }
+}
+
+.card {
+  margin-bottom: 1rem;
+  //background-color: $gallery;
+  border: 1rem;
+  border-bottom: .25rem solid $silver;
+  &.card-b1 {
+    border: 1px solid $silver;
+    border-bottom: .25rem solid $silver;
+  }
+  &.card-cta {
+    border: 0rem;
+  }
+  &.card-link {
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    &:hover {
+      background-color: $selago;
+      border-bottom-color: $matisse;
+    }
+    &.card-top {
+      .card-body {
+        background-color: rgba(31,32,37,0.9);
+        color: $white;
+      }
+    }
+    @media only screen and (min-width: 576px)  {
+      &.card-top {
+        .card-img-top {
+          position: relative;
+        }
+        .card-body {
+          bottom: 1rem;
+          position: absolute;
+          right: 0rem;
+          width: 40%;
+        }
+      }
+    }
+  }
+  .card-title {
+    &.ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        line-height: 1.4; /* fallback */
+        max-height: 1.4*2; /* fallback */
+    }
+  }
+  .card-text {
+    &.ellipsis {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3; /* number of lines to show */
+      line-height: 1.5; /* fallback */
+      max-height: 1.5*3; /* fallback */
+    }
+  }
+}
+
+.badge {
+  &.badge-fullsize {
+    font-size: 100%;
+  }
+  &.badge-top-right {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+.img-link {
+  cursor: pointer;
+}
+
+.form-group {
+  .valid-feedback {
+    color: #1D7631 !important;
+    font-size: 100%;
+  }
+  .invalid-feedback {
+    font-size: 100%;
+  }
+  .custom-select {
+    -webkit-appearance: none;
+  }
+  .input-group-prepend {
+    .custom-select {
+      border-top-right-radius: 0rem;
+      border-bottom-right-radius: 0rem;
+    }
+  }
+}

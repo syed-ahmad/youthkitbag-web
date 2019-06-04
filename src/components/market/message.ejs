@@ -1,0 +1,76 @@
+<%- include('../includes/head') %>
+
+<%- include('../includes/title', { 
+    title: { title: pageTitle }, 
+    breadcrumbs: [ { style: 'home', title: 'Home', url: '/' }, { title: 'Market', url: '/market' }, { title: 'Items for sale', url: '/market/message/all' }, { title: pageTitle } ]
+}) %>
+
+<section id="main" class="container-fluid" aria-label="main body of content plus related links and features">
+    <div class="container">
+
+        <form class="pb-3" action="/market/send-message" method="POST">
+
+        <div class="row">
+            <div class="col-12 col-lg-6 order-1 order-lg-2" role="main">
+                <div>
+                    <img id="preview" class="img-fluid mb-3" src="<%= message.images.length > 0 ? message.images[0].imageUrl : '/images/default.png' %>" alt="" role="presentation">
+                </div>
+                <% if (message.images && message.images.length > 1) { %>
+                <div>
+                    <% message.images.forEach(function(image, i) { %>
+                        <img id="preview" class="img-fluid mb-3" style="max-height: 90px;" src="<%= image.imageUrl %>" alt="" role="presentation">
+                    <% }) %>
+                </div>
+                <% } %>
+            </div>
+            <div class="col-12 col-lg-6 order-2 order-lg-1" role="main">
+                <div class="form-group row">
+                    <label for="subtitle" class="col-sm-3 col-form-label">Subtitle</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" readonly aria-describedby="subtitle" value="<%= message.subtitle %>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="description" class="col-sm-3 col-form-label">Description</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" rows="5" readonly><%= message.description %></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="condition" class="col-sm-3 col-form-label">Condition</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" readonly aria-describedby="condition" value="<%= message.condition %>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="askingPrice" class="col-sm-3 col-form-label">Asking Price</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" readonly step=".01" aria-describedby="askingPrice" value="<%= Number(message.askingPrice).toFixed(2) %>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="activitys" class="col-sm-3 col-form-label">Activities</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" readonly aria-describedby="activitys" value="<% if (message.activitys) { %><%= message.activitys.join(', ') %><% }%>">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% if (!message.hassold) { %>
+        <hr />
+        <div class="row pb-3">
+            <div class="col-12 col-lg-6" role="main">
+                <input type="hidden" name="sourceType" value="message">
+                <input type="hidden" name="sourceId" value="<%= message._id %>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button class="btn btn-primary" type="submit">Contact seller</button>
+            </div>
+        </div>
+        <% } %>
+
+        </form>
+
+    </div>
+</section>
+
+<%- include('../includes/foot') %>

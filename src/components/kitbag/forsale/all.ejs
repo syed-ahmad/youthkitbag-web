@@ -1,0 +1,68 @@
+<%- include('../../includes/head') %>
+
+<%- include('../../includes/title', { 
+    title: { title: pageTitle }, 
+    breadcrumbs: [ { style: 'home', title: 'Home', url: '/' }, { title: 'Kitbag', url: '/kitbag/kit/all' }, { title: 'pageTitle' } ]
+}) %>
+
+<section id="main" class="container-fluid" aria-label="main body of content plus related links and features">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12 col-sm-9">
+                <div class="d-inline-block">
+                    <form action="/kitbag/forsale/all" method="GET">
+                        <div class="form-group mr-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <select class="custom-select" id="by" name="by">
+                                        <option value="all" <%= by == 'all' ? 'selected' : '' %> >All for sale</option>
+                                        <option value="title" <%= by == 'title' ? 'selected' : '' %> >Title</option>
+                                        <option value="activity" <%= by == 'activity' ? 'selected' : '' %> >Activity</option>
+                                        <option value="hassold" <%= by == 'hassold' ? 'selected' : '' %> >Sold</option>
+                                    </select>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Search by text" id="search" name="search" value="<%= search %>">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit" id="search">Search</button>
+                                    <a href="/kitbag/forsale/all" class="btn btn-outline-secondary">Clear</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <% if (forsales.length > 0) { %>
+            <div class="row">
+                <% for (let forsale of forsales) { %>
+                <div class="col-6 col-md-4 col-lg-3 mb-3">
+                    <article class="card card-link card-b1">
+                        <a href="/kitbag/forsale/edit/<%= forsale._id %>">
+                        <img class="card-img-top" src="<%= forsale.images.length > 0 ? forsale.images[0].imageUrl : '/images/default.png' %>" alt="<%= forsale.title %>" role="presentation">
+                        <div class="card-body">
+                            <h3 class="card-title h6 ellipsis"><%= forsale.title %></h3>
+                            <% if (forsale.subtitle) { %>
+                                <p class="card-text ellipsis"><%= forsale.subtitle %></p>
+                            <% } %>
+                            <p class="card-text">Selling price: £<%= Number(forsale.askingPrice).toFixed(2) %></p>
+                        </div>
+                        </a>
+                    </article>
+                </div>
+                <% } %>
+            </div>
+            <%- include('../../includes/pagination.ejs', pagination) %>
+        <% } else { %>
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <h3>You currently have no items listed for sale</h3>
+                </div>
+            </div>
+        <% } %>
+
+    </div>
+</section>
+
+<%- include('../../includes/foot') %>
