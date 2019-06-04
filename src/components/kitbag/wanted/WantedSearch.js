@@ -10,7 +10,6 @@ class WantedSearch extends React.Component {
 
   render() {
     return (
-      <div className="col-12 col-sm-9">
         <div className="d-inline-block">
           <form onSubmit={this.onFormSubmit}>
             <div className="form-group mr-3">
@@ -32,7 +31,6 @@ class WantedSearch extends React.Component {
             </div>
           </form>
         </div>
-      </div>
     );
   }
 }

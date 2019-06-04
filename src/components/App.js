@@ -1,14 +1,46 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Home from './Home';
+import Features from './Features';
+import Pricing from './Pricing';
+
+import SignUp from './auth/SignUp';
+import Login from './auth/Login';
+import Reset from './auth/Reset';
+import NewPassword from './auth/NewPassword';
+
+import Purchase from './Purchase';
 
 import KitBag from './kitbag/kit/KitBag';
+import KitItem from './kitbag/kit/KitItem';
 import ForSaleBag from './kitbag/forsale/ForSaleBag';
+//import ForSaleItem from './kitbag/forsale/ForSaleItem';
+import WantedBag from './kitbag/wanted/WantedBag';
+//import WantedItem from './kitbag/wanted/WantedItem';
 
 class App extends React.Component {
 
   render() {
     return (
       <div>
-        <KitBag />
+        <BrowserRouter>
+          <div>
+            <Route path="/" exact component={Home} />
+            <Route path="/features" exact component={Features} />
+            <Route path="/pricing" exact component={Pricing} />
+            <Route path="/signup" exact component={SignUp} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/reset" exact component={Reset} />
+            <Route path="/newpassword" exact component={NewPassword} />
+            <Route path="/purchase" exact component={Purchase} />
+            <Route path="/kitbag/kit/all" exact component={KitBag} />
+            <Route path="/kitbag/kit/add" exact component={KitItem} />
+            <Route path="/kitbag/kit/edit" component={KitItem} />
+            <Route path="/kitbag/forsale/all" exact component={ForSaleBag} />
+            <Route path="/kitbag/wanted/all" exact component={WantedBag} />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }

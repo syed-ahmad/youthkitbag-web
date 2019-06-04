@@ -1,5 +1,6 @@
 import React from 'react';
-import ykbapi from '../../../api/youthwantedbag';
+import { connect } from 'react-redux';
+import { fetchKitBagWanteds } from '../../../actions';
 
 import Title from '../../includes/Title';
 import WantedSearch from './WantedSearch';
@@ -7,25 +8,16 @@ import WantedList from './WantedList';
 import Pagination from '../../includes/Pagination';
 
 class WantedBag extends React.Component {
-  state = { 
-    search: '', by: 'all', 
-    wanteds: [], 
-    pagination: { currentPage: 1, hasNextPage: false, hasPreviousPage: false, incSearch: '', itemsPerPage: 24, lastPage: 1, nextPage: 2, previousPage: 0, totalItems: 0}
-  };
-
-  onSearchSubmit = async (search, by) => {
-    const response = await ykbapi.get('/kitbag/wanted', {
-      params: {
-        search: seartch,
-        by: by
-      }
-    });
-
-    this.setState(response.data);
-  }
 
   getTitle = () => {
-    return `Found items in wantedbag (${this.state.pagination.totalItems})`;
+    if (!this.props.pagination) {
+      return 'Loading ...';
+    }
+    return `Found items in wantedbag (${this.props.pagination.totalItems})`;
+  }
+
+  componentDidMount() {
+    this.props.fetchKitBagWanteds();
   }
 
   render() {
@@ -39,14 +31,14 @@ class WantedBag extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <WantedSearch onSubmit={this.onSearchSubmit}/>
+                <WantedSearch filter={this.props.filter} />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
                 <a href="/wantedbag/wanted/add" className="btn btn-primary">Add new wanted</a>
               </div>
             </div>
-            <WantedList wanteds={this.state.wanteds} />
-            <Pagination pagination={this.state.pagination} />
+            <WantedList wanteds={this.props.wanteds} />
+            <Pagination pagination={this.props.pagination} />
           </div>
         </section>
       </div>
@@ -54,4 +46,9 @@ class WantedBag extends React.Component {
   }
 }
 
-export default WantedBag;
+const mapStateToProps = (state) => {
+  return { filter: state.kitbagWanteds.filter, kits: state.kitbagWanteds.wanteds, pagination: state.kitbagWanteds.pagination };
+
+}
+
+export default connect(mapStateToProps, { fetchKitBagWanteds })(WantedBag);

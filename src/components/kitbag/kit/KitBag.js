@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchKitBagKits } from '../../../actions'
+import { Link } from 'react-router-dom';
 
 import Title from '../../includes/Title';
 import KitSearch from './KitSearch';
@@ -34,7 +35,7 @@ class KitBag extends React.Component {
                 <KitSearch filter={this.props.filter} />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <a href="/kitbag/kit/add" className="btn btn-primary">Add new kit</a>
+                <Link to="/kitbag/kit/add" className="btn btn-primary">Add new kit</Link>
               </div>
             </div>
             <KitList kits={this.props.kits} />
