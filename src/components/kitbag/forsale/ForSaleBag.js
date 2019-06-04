@@ -1,5 +1,6 @@
 import React from 'react';
-import ykbapi from '../../../api/youthforsalebag';
+import { connect } from 'react-redux';
+import { fetchKitBagForSales } from '../../../actions'
 
 import Title from '../../includes/Title';
 import ForSaleSearch from './ForSaleSearch';
@@ -7,25 +8,16 @@ import ForSaleList from './ForSaleList';
 import Pagination from '../../includes/Pagination';
 
 class ForSaleBag extends React.Component {
-  state = { 
-    search: '', by: 'all', 
-    forsales: [], 
-    pagination: { currentPage: 1, hasNextPage: false, hasPreviousPage: false, incSearch: '', itemsPerPage: 24, lastPage: 1, nextPage: 2, previousPage: 0, totalItems: 0}
-  };
-
-  onSearchSubmit = async (search, by) => {
-    const response = await ykbapi.get('/kitbag/forsale', {
-      params: {
-        search: search,
-        by: by
-      }
-    });
-
-    this.setState(response.data);
-  }
 
   getTitle = () => {
-    return `Found items for sale (${this.state.pagination.totalItems})`;
+    if (!this.props.pagination) {
+      return 'Loading ...';
+    }
+    return `Found items for sale (${this.props.pagination.totalItems})`;
+  }
+
+  componentDidMount() {
+    this.props.fetchKitBagForSales();
   }
 
   render() {
@@ -39,14 +31,14 @@ class ForSaleBag extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <ForSaleSearch onSubmit={this.onSearchSubmit}/>
+                <ForSaleSearch filter={this.props.filter} />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
                 <a href="/forsalebag/forsale/add" className="btn btn-primary">Add new forsale</a>
               </div>
             </div>
-            <ForSaleList forsales={this.state.forsales} />
-            <Pagination pagination={this.state.pagination} />
+            <ForSaleList forsales={this.props.forsales} />
+            <Pagination pagination={this.props.pagination} />
           </div>
         </section>
       </div>
@@ -54,4 +46,8 @@ class ForSaleBag extends React.Component {
   }
 }
 
-export default ForSaleBag;
+const mapStateToProps = (state) => {
+  return { filter: state.kitbagForSales.filter, forsales: state.kitbagForSales.forsales, pagination: state.kitbagForSales.pagination };
+}
+
+export default connect(mapStateToProps, { fetchKitBagForSales })(ForSaleBag);

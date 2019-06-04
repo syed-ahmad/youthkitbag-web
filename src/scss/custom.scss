@@ -1,41 +1,21 @@
 /* import only the necessary Bootstrap files */
-@import "../../node_modules/bootstrap/scss/functions"; 
-@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/functions";
 
 /* -------begin customization-------- */
-
-/* 
-  I cannot find a way to force the primary colors to change so am resorting to changing directly in variables 
-  The following commented out variables shows the original bootstrap versions and then the replaced versions
-*/
-
-// $blue:    #007bff !default;
-// $indigo:  #6610f2 !default;
-// $purple:  #6f42c1 !default;
-// $pink:    #e83e8c !default;
-// $red:     #dc3545 !default;
-// $orange:  #fd7e14 !default;
-// $yellow:  #ffc107 !default;
-// $green:   #28a745 !default;
-// $teal:    #20c997 !default;
-// $cyan:    #17a2b8 !default;
-
-// $blue:    #004C9E !default;
-// $indigo:  #6610f2 !default;
-// $purple:  #6f42c1 !default;
-// $pink:    #e83e8c !default;
-// $red:     #dc3545 !default;
-// $orange:  #fd7e14 !default;
-// $yellow:  #ffc107 !default;
-// $green:   #1D7631 !default;
-// $teal:    #20c997 !default;
-// $cyan:    #17a2b8 !default;
+$colors: (
+  "" + blue: #004C9E,
+  "" + green: #1D7631
+);
 
 /* 80 required to bring primary and secondary colors to AAA standards */
 $theme-colors: (
+  primary: #004C9E,
   secondary: #535A56,
+  success: #1D7631,
   info: #C8E2FC
 );
+
+@import "../../node_modules/bootstrap/scss/variables";
 
 // /* 119 so that headers automatically grow smaller as screen size reduces */
 // $enable-responsive-font-sizes: true;

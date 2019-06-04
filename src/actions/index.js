@@ -42,6 +42,49 @@ export const fetchKitBagWanted = (id) =>  async dispatch => {
   dispatch({ type: 'FETCH_KITBAG_WANTED', payload: response.data });
 };
 
+export const fetchMarketForSales = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
+  const response = await youthkitbagApi.get('/market/forsale', {
+    params: { search, by, page, pagesize }
+  });
+
+  dispatch({ type: 'FETCH_MARKET_FORSALES', payload: response.data });
+};
+
+export const fetchMarketForSale = (id) =>  async dispatch => {
+  const response = await youthkitbagApi.get(`/market/forsale/${id}`);
+
+  dispatch({ type: 'FETCH_MARKET_FORSALE', payload: response.data });
+};
+
+export const fetchMarketWanteds = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
+  const response = await youthkitbagApi.get('/market/wanted', {
+    params: { search, by, page, pagesize }
+  });
+
+  dispatch({ type: 'FETCH_MARKET_FORSALES', payload: response.data });
+};
+
+export const fetchMarketWanted = (id) =>  async dispatch => {
+  const response = await youthkitbagApi.get(`/market/wanted/${id}`);
+
+  dispatch({ type: 'FETCH_MARKET_FORSALE', payload: response.data });
+};
+
+export const fetchMarketStolens = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
+  const response = await youthkitbagApi.get('/market/stolen', {
+    params: { search, by, page, pagesize }
+  });
+
+  dispatch({ type: 'FETCH_MARKET_FORSALES', payload: response.data });
+};
+
+export const fetchMarketStolen = (id) =>  async dispatch => {
+  const response = await youthkitbagApi.get(`/market/stolen/${id}`);
+
+  dispatch({ type: 'FETCH_MARKET_FORSALE', payload: response.data });
+};
+
+
 
 
 

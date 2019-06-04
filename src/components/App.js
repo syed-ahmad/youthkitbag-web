@@ -1,6 +1,7 @@
 import React from 'react';
 
 import KitBag from './kitbag/kit/KitBag';
+import ForSaleBag from './kitbag/forsale/ForSaleBag';
 
 class App extends React.Component {
 
