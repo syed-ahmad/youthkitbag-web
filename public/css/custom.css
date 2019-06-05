@@ -2,6 +2,7 @@
 /* import only the necessary Bootstrap files */
 /* -------begin customization-------- */
 /* 80 required to bring primary and secondary colors to AAA standards */
+/* 207 I didn't like the fact that under the xl size the different levels didn't always fill the entire width, so setting the max width to just below the level above */
 /* 222 */
 /* 313 */
 /* 727,728 required to bring dark navbar to AAA standards */
@@ -552,22 +553,22 @@ pre code {
 }
 @media (min-width: 576px) {
   .container {
-    max-width: 540px;
+    max-width: 719px;
   }
 }
 @media (min-width: 768px) {
   .container {
-    max-width: 720px;
+    max-width: 959px;
   }
 }
 @media (min-width: 992px) {
   .container {
-    max-width: 960px;
+    max-width: 1139px;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140px;
+    max-width: 1200px;
   }
 }
 
