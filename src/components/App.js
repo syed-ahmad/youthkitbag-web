@@ -26,34 +26,32 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        <main>
-          <noscript>You need to enable JavaScript to run this app.</noscript>
-          <a id="main-acc-jump" className="sr-only sr-only-focusable" href="#footer-acc-jump">
-            <div className="container">
-              <span className="skiplink-text">Skip to footer content</span>
-            </div>
-          </a>
-          <BrowserRouter>
-            <div>
-              <Route path="/" exact component={Home} />
-              <Route path="/features" exact component={Features} />
-              <Route path="/pricing" exact component={Pricing} />
-              <Route path="/signup" exact component={SignUp} />
-              <Route path="/login" exact component={Login} />
-              <Route path="/reset" exact component={Reset} />
-              <Route path="/newpassword" exact component={NewPassword} />
-              <Route path="/purchase" exact component={Purchase} />
-              <Route path="/kitbag/kit/all" exact component={KitBag} />
-              <Route path="/kitbag/kit/add" exact component={KitItem} />
-              <Route path="/kitbag/kit/edit" component={KitItem} />
-              <Route path="/kitbag/forsale/all" exact component={ForSaleBag} />
-              <Route path="/kitbag/wanted/all" exact component={WantedBag} />
-            </div>
-          </BrowserRouter>
-        </main>
-        <Footer />
+      <div className="react-body">
+        <BrowserRouter>
+          <Header />
+          <main>
+            <noscript>You need to enable JavaScript to run this app.</noscript>
+            <a id="main-acc-jump" className="sr-only sr-only-focusable" href="#footer-acc-jump">
+              <div className="container">
+                <span className="skiplink-text">Skip to footer content</span>
+              </div>
+            </a>
+            <Route path="/" exact component={Home} />
+            <Route path="/features" exact component={Features} />
+            <Route path="/pricing" exact component={Pricing} />
+            <Route path="/signup" exact component={SignUp} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/reset" exact component={Reset} />
+            <Route path="/newpassword" exact component={NewPassword} />
+            <Route path="/purchase" exact component={Purchase} />
+            <Route path="/kitbag/kit/all" exact component={KitBag} />
+            <Route path="/kitbag/kit/add" exact component={KitItem} />
+            <Route path="/kitbag/kit/edit" component={KitItem} />
+            <Route path="/kitbag/forsale/all" exact component={ForSaleBag} />
+            <Route path="/kitbag/wanted/all" exact component={WantedBag} />
+          </main>
+          <Footer />
+        </BrowserRouter>
       </div>
     );
   }

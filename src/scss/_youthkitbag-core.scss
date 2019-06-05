@@ -8,6 +8,14 @@ html {
 
 body {
   height: 100% !important;
+}
+
+#root {
+  height: 100% !important;
+}
+
+.react-body {
+  height: 100% !important;
   display: flex !important;
   flex-direction: column !important;
 }

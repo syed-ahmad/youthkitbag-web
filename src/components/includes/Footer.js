@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Footer extends React.Component {
   render() {
     return (
       <footer>
-        <a id="footer-acc-jump" className="sr-only sr-only-focusable" href="#header-acc-jump">
+        <Link id="footer-acc-jump" className="sr-only sr-only-focusable" to="#header-acc-jump">
           <div className="container">
             <span className="skiplink-text">Skip to header</span>
           </div>
-        </a>
+        </Link>
         <section className="footer" aria-label="secondary navigation">
           <div className="container-fluid text-center text-md-left p-4">
             <h2 className="sr-only">Supplementary navigation to key corporate and informational sections of the website, including contact details</h2>
@@ -16,14 +17,14 @@ class Footer extends React.Component {
               <div className="col-md-4 mx-auto">
                 <h3 className="text-uppercase mb-4 font-weight-bold h6">About YouthKitbag</h3>
                 <ul className="links">
-                  <li><a href="/help-and-contact/index">Help &amp; contacts</a></li>
+                  <li><Link to="/help-and-contact/index">Help &amp; contacts</Link></li>
                 </ul>
               </div>
               <hr className="w-100 clearfix d-md-none mx-3" />
               <div className="col-md-4 mx-auto">
                 <h3 className="text-uppercase mb-4 font-weight-bold h6">Information for</h3>
                 <ul className="links">
-                  <li><a href="/info-for/media/index">Media</a></li>
+                  <li><Link to="/info-for/media/index">Media</Link></li>
                 </ul>
               </div>
               <hr className="w-100 clearfix d-md-none mx-3" />
@@ -43,9 +44,9 @@ class Footer extends React.Component {
             <div className="row d-flex align-items-center">
               <div className="col-md-8">
                 <div className="d-flex flex-column flex-md-row">
-                  <div className="p-2"><a href="/corporate/terms-and-conditions/index">Terms &amp; conditions </a></div>
-                  <div className="p-2"><a href="/corporate/privacy-and-cookies/index">Privacy &amp; cookies</a></div>
-                  <div className="p-2"><a href="/corporate/website-accessibility/index">Website accessibility</a></div>
+                  <div className="p-2"><Link to="/corporate/terms-and-conditions/index">Terms &amp; conditions </Link></div>
+                  <div className="p-2"><Link to="/corporate/privacy-and-cookies/index">Privacy &amp; cookies</Link></div>
+                  <div className="p-2"><Link to="/corporate/website-accessibility/index">Website accessibility</Link></div>
                 </div>
               </div>
               <div className="col-md-4">
