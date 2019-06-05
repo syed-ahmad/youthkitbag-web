@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchKitBagWanteds } from '../../../actions';
+import { Link } from 'react-router-dom';
 
 import Title from '../../includes/Title';
 import WantedSearch from './WantedSearch';
@@ -13,7 +14,7 @@ class WantedBag extends React.Component {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
-    return `Found items in wantedbag (${this.props.pagination.totalItems})`;
+    return `Found items wanted (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {
@@ -21,6 +22,7 @@ class WantedBag extends React.Component {
   }
 
   render() {
+    console.log('fetchKitBagWanteds');
     return (
       <div>
         <Title title={this.getTitle()} />
@@ -47,7 +49,7 @@ class WantedBag extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { filter: state.kitbagWanteds.filter, kits: state.kitbagWanteds.wanteds, pagination: state.kitbagWanteds.pagination };
+  return { filter: state.kitbagWanteds.filter, wanteds: state.kitbagWanteds.wanteds, pagination: state.kitbagWanteds.pagination };
 
 }
 
