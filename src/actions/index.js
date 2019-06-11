@@ -1,5 +1,17 @@
 import youthkitbagApi from '../api/youthkitbag';
 
+export const signIn = () => {
+  return {
+    type: 'SIGN_IN'
+  }
+};
+
+export const signOut = () => {
+  return {
+    type: 'SIGN_OUT'
+  }
+};
+
 export const fetchKitBagKits = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
   const response = await youthkitbagApi.get('/kitbag/kit', {
     params: { search, by, page, pagesize }

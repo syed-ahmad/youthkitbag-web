@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchKitBagWanteds } from '../../../actions';
-import { Link } from 'react-router-dom';
 
 import Title from '../../includes/Title';
 import WantedSearch from './WantedSearch';
