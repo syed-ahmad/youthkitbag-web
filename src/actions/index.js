@@ -1,14 +1,16 @@
+import { SIGN_IN, SIGN_OUT } from './types';
 import youthkitbagApi from '../api/youthkitbag';
 
-export const signIn = () => {
+export const signIn = (userId, givenName, email) => {
   return {
-    type: 'SIGN_IN'
+    type: SIGN_IN,
+    payload: { userId: userId, givenName: givenName, email: email }
   }
 };
 
 export const signOut = () => {
   return {
-    type: 'SIGN_OUT'
+    type: SIGN_OUT
   }
 };
 
