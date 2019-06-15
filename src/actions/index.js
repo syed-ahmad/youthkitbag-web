@@ -1,21 +1,9 @@
-import { SIGN_IN, SIGN_OUT } from './types';
-import youthkitbagApi from '../api/youthkitbag';
+import API from '../helpers/api'
 
-export const signIn = (userId, givenName, email) => {
-  return {
-    type: SIGN_IN,
-    payload: { userId: userId, givenName: givenName, email: email }
-  }
-};
-
-export const signOut = () => {
-  return {
-    type: SIGN_OUT
-  }
-};
+export * from './AuthAction';
 
 export const fetchKitBagKits = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
-  const response = await youthkitbagApi.get('/kitbag/kit', {
+  const response = await API.get('/kitbag/kit', {
     params: { search, by, page, pagesize }
   });
 
@@ -23,13 +11,13 @@ export const fetchKitBagKits = (search = '', by = 'all', page = 1, pagesize = 24
 };
 
 export const fetchKitBagKit = (id) =>  async dispatch => {
-  const response = await youthkitbagApi.get(`/kitbag/kit/${id}`);
+  const response = await API.get(`/kitbag/kit/${id}`);
 
   dispatch({ type: 'FETCH_KITBAG_KIT', payload: response.data });
 };
 
 export const fetchKitBagForSales = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
-  const response = await youthkitbagApi.get('/kitbag/forsale', {
+  const response = await API.get('/kitbag/forsale', {
     params: { search, by, page, pagesize }
   });
 
@@ -37,13 +25,13 @@ export const fetchKitBagForSales = (search = '', by = 'all', page = 1, pagesize 
 };
 
 export const fetchKitBagForSale = (id) =>  async dispatch => {
-  const response = await youthkitbagApi.get(`/kitbag/forsale/${id}`);
+  const response = await API.get(`/kitbag/forsale/${id}`);
 
   dispatch({ type: 'FETCH_KITBAG_FORSALE', payload: response.data });
 };
 
 export const fetchKitBagWanteds = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
-  const response = await youthkitbagApi.get('/kitbag/wanted', {
+  const response = await API.get('/kitbag/wanted', {
     params: { search, by, page, pagesize }
   });
 
@@ -51,13 +39,13 @@ export const fetchKitBagWanteds = (search = '', by = 'all', page = 1, pagesize =
 };
 
 export const fetchKitBagWanted = (id) =>  async dispatch => {
-  const response = await youthkitbagApi.get(`/kitbag/wanted/${id}`);
+  const response = await API.get(`/kitbag/wanted/${id}`);
 
   dispatch({ type: 'FETCH_KITBAG_WANTED', payload: response.data });
 };
 
 export const fetchMarketForSales = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
-  const response = await youthkitbagApi.get('/market/forsale', {
+  const response = await API.get('/market/forsale', {
     params: { search, by, page, pagesize }
   });
 
@@ -65,13 +53,13 @@ export const fetchMarketForSales = (search = '', by = 'all', page = 1, pagesize 
 };
 
 export const fetchMarketForSale = (id) =>  async dispatch => {
-  const response = await youthkitbagApi.get(`/market/forsale/${id}`);
+  const response = await API.get(`/market/forsale/${id}`);
 
   dispatch({ type: 'FETCH_MARKET_FORSALE', payload: response.data });
 };
 
 export const fetchMarketWanteds = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
-  const response = await youthkitbagApi.get('/market/wanted', {
+  const response = await API.get('/market/wanted', {
     params: { search, by, page, pagesize }
   });
 
@@ -79,13 +67,13 @@ export const fetchMarketWanteds = (search = '', by = 'all', page = 1, pagesize =
 };
 
 export const fetchMarketWanted = (id) =>  async dispatch => {
-  const response = await youthkitbagApi.get(`/market/wanted/${id}`);
+  const response = await API.get(`/market/wanted/${id}`);
 
   dispatch({ type: 'FETCH_MARKET_FORSALE', payload: response.data });
 };
 
 export const fetchMarketStolens = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
-  const response = await youthkitbagApi.get('/market/stolen', {
+  const response = await API.get('/market/stolen', {
     params: { search, by, page, pagesize }
   });
 
@@ -93,7 +81,7 @@ export const fetchMarketStolens = (search = '', by = 'all', page = 1, pagesize =
 };
 
 export const fetchMarketStolen = (id) =>  async dispatch => {
-  const response = await youthkitbagApi.get(`/market/stolen/${id}`);
+  const response = await API.get(`/market/stolen/${id}`);
 
   dispatch({ type: 'FETCH_MARKET_FORSALE', payload: response.data });
 };

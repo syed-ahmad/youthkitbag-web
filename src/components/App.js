@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import history from '../helpers/history'
 
 import Header from './includes/Header';
 import Footer from './includes/Footer';
@@ -27,7 +28,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="react-body">
-        <BrowserRouter>
+        <Router history={history}>
           <Header />
           <main>
             <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -51,7 +52,7 @@ class App extends React.Component {
             <Route path="/kitbag/wanted/all" exact component={WantedBag} />
           </main>
           <Footer />
-        </BrowserRouter>
+        </Router>
       </div>
     );
   }

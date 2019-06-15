@@ -1,19 +1,13 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 import authReducer from './authReducer';
-import kitbagKitsReducer from './kitbagKitsReducer';
-import kitbagForSalesReducer from './kitbagForSalesReducer';
-import kitbagWantedsReducer from './kitbagWantedsReducer';
-import marketForSalesReducer from './marketForSalesReducer';
-import marketWantedsReducer from './marketWantedsReducer';
-import marketStolensReducer from './marketStolensReducer';
+import kitbagReducer from './kitbagReducer';
+import marketReducer from './marketReducer';
 
 export default combineReducers({
   auth: authReducer, 
-  kitbagKits: kitbagKitsReducer,
-  kitbagForSales: kitbagForSalesReducer,
-  kitbagWanteds: kitbagWantedsReducer,
-  marketForSales: marketForSalesReducer,
-  marketWanteds: marketWantedsReducer,
-  marketStolens: marketStolensReducer 
+  kitbag: kitbagReducer,
+  market: marketReducer,
+  form: formReducer
 });

@@ -1,9 +1,9 @@
-export default (state = { kit: {}, kits: [], filter: {}, pagination: {} }, action) => {
+export default (state = { current: {}, items: [], filter: {}, pagination: {} }, action) => {
   switch (action.type) {
     case 'FETCH_KITBAG_KITS':
-      return action.payload;
+      return { ...state, items: action.payload.kits, filter: action.payload.filter, pagination: action.payload.pagination };
     case 'FETCH_KITBAG_KIT':
-      return action.payload;
+      return { ...state, current: action.payload };
     default:
       return state;
   }

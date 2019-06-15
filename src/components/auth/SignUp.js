@@ -1,5 +1,5 @@
 import React from 'react';
-import ykbapi from '../../api/youthkitbag';
+import ykbapi from '../../helpers/api';
 
 import Title from '../includes/Title';
 

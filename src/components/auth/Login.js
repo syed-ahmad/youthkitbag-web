@@ -1,24 +1,33 @@
 import React from 'react';
-import ykbapi from '../../api/youthkitbag';
-import GoogleAuth from './GoogleAuth';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+
+import { bindActionCreators } from 'redux';
+import * as AuthActions from '../../actions';
+import classNames from 'classnames';
 
 import Title from '../includes/Title';
 
 class Login extends React.Component {
-  state = { email: '', password: '' };
 
-  onFormSubmit = event => {
-    event.preventDefault();
-    this.onLoginSubmit();
-  }
-
-  onLoginSubmit = async () => {
-    const response = await ykbapi.post('/auth/login', {
-      email: this.state.email,
-      password: this.state.password
+  renderInput(formProps) {
+    const inputClasses = classNames({
+      'form-control': true,
+      'is-invalid': formProps.meta.touched && formProps.meta.invalid
     });
 
-    console.log(response.data);
+    return (
+      <div className="form-group">
+        <label htmlFor={formProps.input.name}>{formProps.title}</label>
+        <input className={inputClasses} {...formProps.input} {...formProps} />
+        <div className="invalid-feedback">{formProps.meta.error}</div>
+      </div>
+    );
+  }
+
+  onSubmit = (formValues) => {
+    const { email, password } = formValues;
+    this.props.actions.login(email, password);
   }
 
   render() {
@@ -30,27 +39,26 @@ class Login extends React.Component {
             <p className="lead">If you don't have an account already, <a href="/signup">then sign up for an account</a>. Or for the forgetful, <a href="/reset">then reset your password</a>.</p>
             <div className="row">
                 <div className="col-12 col-md-6 mb-3 mx-auto">
-                  <form className="w-100 d-block" onSubmit={this.onFormSubmit} noValidate>
-                    <div className="form-group">
-                      <label htmlFor="email">Email <span aria-hidden="true" role="presentation">(*)</span></label>
-                      <input type="email" className="form-control" id="email" name="email" aria-describedby="email" autoComplete="username email" required value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
-                      <div className="invalid-feedback">Please enter a valid email</div>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="password">Password <span aria-hidden="true" role="presentation">(*)</span></label>
-                      <input type="password" className="form-control" id="password" name="password" aria-describedby="password" autoComplete="current-password" required value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
-                      <div className="invalid-feedback">Please enter a valid password</div>
-                    </div>
+                  <form className="w-100 d-block" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                    <Field 
+                      name="email" 
+                      component={this.renderInput} 
+                      title="Email"
+                      type="email" 
+                      id="email" 
+                      ariadescribedby="email" 
+                      autoComplete="username email" />
+                    <Field 
+                      name="password" 
+                      component={this.renderInput} 
+                      title="Password"
+                      type="password" 
+                      id="password" 
+                      ariadescribedby="password" 
+                      autoComplete="current-password" />
                     <button className="btn btn-primary" type="submit">Login</button>
                   </form>
                 </div>
-            </div>
-            <div className="row">
-              <div className="col-12 col-md-6 mb-3 mx-auto">
-                <hr />
-                <h2 className="h4">or authenticate with one of these services</h2>
-                <GoogleAuth />
-              </div>
             </div>
           </div>
         </section>
@@ -59,4 +67,31 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const validate = formValues => {
+  const errors = {};
+
+  if (!formValues.email) {
+    errors.email = 'Please enter a valid email';
+  }
+
+  if (!formValues.password) {
+    errors.password = 'Please enter a valid password';
+  }
+
+  return errors;
+}
+
+const mapStateToProps = state => ({
+  authentication: state.authentication
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(AuthActions, dispatch)
+})
+
+Login = connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export default reduxForm({
+  form: 'login',
+  validate
+})(Login);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchKitBagKits } from '../../../actions'
+import { fetchKitBagKits } from '../../../actions';
 import { Link } from 'react-router-dom';
 
 import Title from '../../includes/Title';
@@ -38,7 +38,7 @@ class KitBag extends React.Component {
                 <Link to="/kitbag/kit/add" className="btn btn-primary">Add new kit</Link>
               </div>
             </div>
-            <KitList kits={this.props.kits} />
+            <KitList kits={this.props.items} />
             <Pagination pagination={this.props.pagination} />
           </div>
         </section>
@@ -48,7 +48,7 @@ class KitBag extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { filter: state.kitbagKits.filter, kits: state.kitbagKits.kits, pagination: state.kitbagKits.pagination };
+  return { kit: state.kitbag.kit.filter, items: state.kitbag.kit.items, pagination: state.kitbag.kit.pagination };
 }
 
 export default connect(mapStateToProps, { fetchKitBagKits })(KitBag);
