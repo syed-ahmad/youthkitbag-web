@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import history from '../helpers/history'
 
+import User from './auth/User';
 import Header from './includes/Header';
 import Footer from './includes/Footer';
 
@@ -29,6 +30,7 @@ class App extends React.Component {
     return (
       <div className="react-body">
         <Router history={history}>
+          <User />
           <Header />
           <main>
             <noscript>You need to enable JavaScript to run this app.</noscript>

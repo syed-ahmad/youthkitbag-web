@@ -1,27 +1,20 @@
-import * as types from '../actions/types'
+import * as types from './types'
 import API from '../helpers/api'
 import history from '../helpers/history'
-
-export const getUser = () => async (dispatch) => {
-  const user = JSON.parse(localStorage.getItem('authentication'))
-  dispatch({ type: types.GET_USER, payload: user })
-}
+import { getUser } from './UserActions'
 
 const loginRequest = (userId, token) => async (dispatch) => {
   try {
-    const response = await API.get(`/Users/${userId}`, {
-      params: {
-        access_token: token,
-      },
-    })
+    const response = await API.get(`/account/${userId}`);
     localStorage.setItem(
       'authentication',
-      JSON.stringify({ id: response.data.id, name: response.data.username }),
+      JSON.stringify(response.data),
     )
-    dispatch({ type: types.GETALL_SUCCESS })
+    dispatch({ type: types.GETALL_SUCCESS})
+    dispatch(getUser(userId))
     history.push('/')
   } catch (err) {
-    if (err.response.status === 400) {
+    if (err.response.status >= 400) {
       window.location.reload()
     }
     dispatch({ type: types.GETALL_FAILURE, payload: err.message })
@@ -31,9 +24,9 @@ const loginRequest = (userId, token) => async (dispatch) => {
 export const login = (email, password) => async (dispatch) => {
   try {
     const { data } = await API.post('/auth/login', { email, password })
-    localStorage.setItem('token', data.id)
+    localStorage.setItem('token', data.token)
     dispatch({ type: types.LOGIN_SUCCESS, payload: data })
-    dispatch(loginRequest(data.userId, data.id))
+    dispatch(loginRequest(data.userId, data.token))
   } catch (err) {
     dispatch({ type: types.LOGIN_FAILURE, payload: err.message })
   }

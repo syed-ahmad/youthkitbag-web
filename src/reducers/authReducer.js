@@ -1,7 +1,6 @@
 import {
   GETALL_FAILURE,
   GETALL_SUCCESS,
-  GET_USER,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT,
@@ -13,16 +12,13 @@ const isLogin = !!(localStorage.getItem('token') && localStorage.getItem('authen
 const initialState = isLogin ? { loggedIn: true } : { loggedIn: false }
 
 export default function authentication(state = initialState, action) {
+  console.log(action.type, action.payload);
   switch (action.type) {
-    case GET_USER:
-      return {
-        loggedIn: true,
-        ...action.payload,
-      }
     case LOGIN_SUCCESS:
       return {
         token: action.payload.token,
         loader: true,
+        loggedIn: true
       }
     case LOGIN_FAILURE:
       return {
@@ -46,7 +42,7 @@ export default function authentication(state = initialState, action) {
     case GETALL_SUCCESS:
       return {
         loggedIn: true,
-        loader: false,
+        loader: false
       }
     case GETALL_FAILURE:
       return {}
