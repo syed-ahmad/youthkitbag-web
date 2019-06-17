@@ -32,7 +32,7 @@ class KitBag extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <KitSearch filter={this.props.filter} />
+                <KitSearch />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
                 <Link to="/kitbag/kit/add" className="btn btn-primary">Add new kit</Link>
@@ -48,7 +48,7 @@ class KitBag extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { kit: state.kitbag.kit.filter, items: state.kitbag.kit.items, pagination: state.kitbag.kit.pagination };
+  return { items: state.kitbag.kit.items, pagination: state.kitbag.kit.pagination };
 }
 
 export default connect(mapStateToProps, { fetchKitBagKits })(KitBag);
