@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-
 import { bindActionCreators } from 'redux';
 import * as AuthActions from '../../actions';
 import classNames from 'classnames';
@@ -25,10 +24,24 @@ class Login extends React.Component {
     );
   }
 
+  renderAlert = () => {
+    console.log(this.props.auth);
+    if (!this.props.auth.loginFailed || !this.props.auth.err)
+      return null;
+
+    return (
+      <div class="alert alert-danger" role="alert">
+        {this.props.auth.err.data.message}
+      </div>
+    );
+  }
+
   onSubmit = (formValues) => {
     const { email, password } = formValues;
     this.props.actions.login(email, password);
   }
+
+  
 
   render() {
     return (
@@ -39,9 +52,9 @@ class Login extends React.Component {
             <p className="lead">If you don't have an account already, <a href="/signup">then sign up for an account</a>. Or for the forgetful, <a href="/reset">then reset your password</a>.</p>
             <div className="row">
                 <div className="col-12 col-md-6 mb-3 mx-auto">
+                  {this.renderAlert()}
                   <form className="w-100 d-block" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                    <Field 
-                      name="email" 
+                    <Field name="email" 
                       component={this.renderInput} 
                       title="Email"
                       type="email" 
@@ -82,7 +95,7 @@ const validate = formValues => {
 }
 
 const mapStateToProps = state => ({
-  authentication: state.authentication
+  auth: state.auth
 })
 
 const mapDispatchToProps = dispatch => ({
