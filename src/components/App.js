@@ -14,6 +14,7 @@ import SignUp from './auth/SignUp';
 import Login from './auth/Login';
 import Reset from './auth/Reset';
 import NewPassword from './auth/NewPassword';
+import Logout from './auth/Logout';
 
 import Purchase from './Purchase';
 
@@ -42,10 +43,13 @@ class App extends React.Component {
             <Route path="/" exact component={Home} />
             <Route path="/features" exact component={Features} />
             <Route path="/pricing" exact component={Pricing} />
-            <Route path="/signup" exact component={SignUp} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/reset" exact component={Reset} />
-            <Route path="/newpassword" exact component={NewPassword} />
+            
+            <Route path="/auth/register" exact component={SignUp} />
+            <Route path="/auth/login" exact component={Login} />
+            <Route path="/auth/reset" exact component={Reset} />
+            <Route path="/auth/newpassword" exact component={NewPassword} />
+            <Route path="/auth/logout" exact component={Logout} />
+
             <Route path="/purchase" exact component={Purchase} />
             <Route path="/kitbag/kit/all" exact component={KitBag} />
             <Route path="/kitbag/kit/add" exact component={KitItem} />
