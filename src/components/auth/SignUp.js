@@ -24,10 +24,10 @@ class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <Title title="Sign Up" />
+        <Title title="Register" />
         <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
-            <p className="lead">If you already have an account, <a href="/login">then login to access your account</a>.</p>
+            <p className="lead">If you already have an account, <a href="/auth/login">then login to access your account</a>.</p>
             <div className="row">
               <div className="col-12 col-md-3"></div>
               <div className="col-12 col-md-6 mb-3 d-flex justify-content-center">
