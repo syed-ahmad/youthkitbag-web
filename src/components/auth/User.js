@@ -1,9 +1,9 @@
-import { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getUser } from '../../actions/UserActions'
 
-class User extends Component {
+class User extends React.Component {
   componentDidMount() {
     if (this.props.auth.loggedIn) {
       this.props.actions.getUser()
