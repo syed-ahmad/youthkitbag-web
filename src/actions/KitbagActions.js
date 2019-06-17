@@ -1,11 +1,17 @@
+import * as types from './types'
 import API from '../helpers/api'
+import history from '../helpers/history'
 
 export const fetchKitBagKits = (search = '', by = 'all', page = 1, pagesize = 24) =>  async dispatch => {
-  const response = await API.get('/kitbag/kit', {
-    params: { search, by, page, pagesize }
-  });
-
-  dispatch({ type: 'FETCH_KITBAG_KITS', payload: response.data });
+  try {
+    const response = await API.get('/kitbag/kit', {
+      params: { search, by, page, pagesize }
+    });
+    dispatch({ type: 'FETCH_KITBAG_KITS', payload: response.data });
+  } catch (err) {
+    dispatch({ type: types.GETALL_FAILURE, payload: err.message })
+    history.push('/')
+  }
 };
 
 export const fetchKitBagKit = (id) =>  async dispatch => {
