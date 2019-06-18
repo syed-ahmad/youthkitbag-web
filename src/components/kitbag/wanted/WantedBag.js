@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchKitBagWanteds } from '../../../actions';
+import { fetchKitbagWanteds } from '../../../actions';
 
 import Title from '../../includes/Title';
 import WantedSearch from './WantedSearch';
@@ -17,11 +17,11 @@ class WantedBag extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchKitBagWanteds();
+    this.props.fetchKitbagWanteds();
   }
 
   render() {
-    console.log('fetchKitBagWanteds');
+    console.log('fetchKitbagWanteds');
     return (
       <div>
         <Title title={this.getTitle()} />
@@ -52,4 +52,4 @@ const mapStateToProps = (state) => {
 
 }
 
-export default connect(mapStateToProps, { fetchKitBagWanteds })(WantedBag);
+export default connect(mapStateToProps, { fetchKitbagWanteds })(WantedBag);

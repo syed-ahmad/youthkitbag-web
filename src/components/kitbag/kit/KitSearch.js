@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchKitBagKits } from '../../../actions/KitbagActions';
+import { fetchKitbagKits } from '../../../actions/KitbagKitActions';
 
 class KitSearch extends React.Component {
 
@@ -28,7 +28,7 @@ class KitSearch extends React.Component {
 
   onSubmit = formValues => {
     const { by, search } = formValues;
-    this.props.actions.fetchKitBagKits(search, by, 1, 24);
+    this.props.actions.fetchKitbagKits(search, by, 1, 24);
   }
 
   render() {
@@ -58,7 +58,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchKitBagKits }, dispatch)
+  actions: bindActionCreators({ fetchKitbagKits }, dispatch)
 })
 
 KitSearch = connect(mapStateToProps, mapDispatchToProps)(KitSearch);

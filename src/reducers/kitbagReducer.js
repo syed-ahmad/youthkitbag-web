@@ -5,7 +5,7 @@ import kitbagForSalesReducer from './kitbagForSalesReducer';
 import kitbagWantedsReducer from './kitbagWantedsReducer';
 
 export default combineReducers({
-  kit: kitbagKitsReducer,
+  kits: kitbagKitsReducer,
   forsale: kitbagForSalesReducer,
   wanted: kitbagWantedsReducer 
 });

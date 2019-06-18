@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Pagination extends React.Component {
 
@@ -23,31 +25,38 @@ class Pagination extends React.Component {
     : '';
 
   render() {
+    if (!this.props.pagination) {
+      return null;
+    }
+
+    console.log(this.props);
     return (
       <nav aria-label="Page navigation">
         <ul className="pagination">
           <li className={`page-item ${this.isFirstPageDisabled()}`}>
-            <a className="page-link" href={this.getPaginationLink(1)}>First</a>
+            <Link 
+              className="page-link" 
+              to={this.getPaginationLink(1)}>First</Link>
           </li>
           <li className={`page-item ${this.isPreviousPageDisabled()}`}>
-            <a
+            <Link
               className="page-link"
-              href={this.getPaginationLink(this.props.pagination.previousPage)}>Previous</a>
+              to={this.getPaginationLink(this.props.pagination.previousPage)}>Previous</Link>
           </li>
           <li className="page-item active">
-            <a
+            <Link
               className="page-link"
-              href={this.getPaginationLink(this.props.pagination.currentPage)}>{this.props.pagination.currentPage}</a>
+              to={this.getPaginationLink(this.props.pagination.currentPage)}>{this.props.pagination.currentPage}</Link>
           </li>
           <li className={`page-item ${this.isNextPageDisabled()}`}>
-            <a
+            <Link
               className="page-link"
-              href={this.getPaginationLink(this.props.pagination.nextPage)}>Next</a>
+              to={this.getPaginationLink(this.props.pagination.nextPage)}>Next</Link>
           </li>
           <li className={`page-item ${this.isLastPageDisabled()}`}>
-            <a
+            <Link
               className="page-link"
-              href={this.getPaginationLink(this.props.pagination.lastPage)}>Last</a>
+              to={this.getPaginationLink(this.props.pagination.lastPage)}>Last</Link>
           </li>
         </ul>
       </nav>
@@ -55,4 +64,8 @@ class Pagination extends React.Component {
   }
 };
 
-export default Pagination;
+const mapStateToProps = (state) => {
+  return { pagination: state.kitbag.kits.pagination };
+}
+
+export default connect(mapStateToProps)(Pagination);

@@ -1,69 +1,118 @@
 import React from 'react';
+import { Form, Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
+import classNames from 'classnames';
 
 import Title from '../../includes/Title';
 
 class KitItem extends React.Component {
-  state = {
-    kit: {
-      title: 'Loading ...',
-      subtitle: '',
-      description: '',
-      status: 0,
-      security: '',
-      purchases: [],
-      inbag: [],
-      warningLevel: null,
-      activitys: [],
-      tags: [],
-      keptInbag: false,
-      active: true,
-      images: []
-    },
-    errors: [],
-    editing: false
-  };
 
-  onFormSubmit = () => {
+  componentDidMount() {
+    this.props.fetchKitbagKit(this.props.match.params.id);
+  }
+
+  onSubmit = () => {
     console.log('form submitetd');
   }
 
-  topImage = () => this.state.kit.images.length > 0 ? this.state.kit.images[0].imageUrl : '/images/default.png';
+  topImage = () => {
+    return this.props.initialValues.images.length > 0 ? this.props.initialValues.images[0].imageUrl : '/images/default.png';
+  }
 
-  render() {
+  secondaryImages = () => {
+    const { images } = this.props.initialValues;
+
+    if (!images || images.length <= 0) {
+      return null;
+    }
+
+    const items = []
+  
+    for (let i = 0; i < images.length; i++) {
+      items.push(<img key={`image${i}`} className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" />)
+    }
+  
     return (
       <div>
-        <Title title={this.state.kit.title} />
+        {items}
+      </div>
+    )
+  }
+
+  renderInput(formProps) {
+    const inputClasses = classNames({
+      'form-control': true,
+      'is-invalid': formProps.meta.touched && formProps.meta.invalid
+    });
+
+    return (
+      <div className="form-group row">
+        <label htmlFor={formProps.input.name} className="col-sm-2 col-form-label">{formProps.title}</label>
+        <div className="col-sm-10">
+            <input className={inputClasses} {...formProps.input} {...formProps} />
+            <div className="invalid-feedback">{formProps.meta.error}</div>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    if (!this.props.initialValues._id) {
+      return (
+        <div>
+        <Title title="This item is loading, be patient ..." />
+        <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+        </section>
+      </div>
+      )
+    }
+
+    return (
+      <div>
+        <Title title={this.props.initialValues.title} />
         <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
-            <form onSubmit={ this.onFormSubmit }>
+            <Form onSubmit={this.props.handleSubmit(this.onSubmit)} initialvalues={this.props.initialValues}>
               <div className="row">
                 <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
                   <div>
-                    <img id="preview" className="img-fluid mb-3" src={ this.topImage() } alt={ this.state.kit.title } role="presentation" />
+                    <img id="preview" className="img-fluid mb-3" src={this.topImage()} alt="" role="presentation" />
                   </div>
+                  {this.secondaryImages()}
                 </div>
                 <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-                    <div className="form-group row">
-                        <label htmlFor="title" className="col-sm-2 col-form-label">Title</label>
-                        <div className="col-sm-10">
-                            <input type="text" className="form-control" id="title" name="title" aria-describedby="title" required="required" aria-required="true" value={this.state.kit.title} onChange={e => this.setState({ kit: { title: e.target.value }})} />
-                        </div>
-                    </div>
+                  <Field name="title" component={this.renderInput} title="Title" type="text" id="title" ariadescribedby="title" />
                 </div>
-            </div>
-            <hr />
-            <div className="row">
-                <div className="col-12 col-lg-6" role="main">
-                    <button className="btn btn-primary" type="submit">Add Kit</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-</section>
+              </div>
+            </Form>
+          </div>
+          <div className="container">
+              <div className="row">
+              </div>
+          </div>
+        </section>
       </div>
     );
   }
 }
 
-export default KitItem;
+const validate = formValues => {
+  const errors = {};
+
+  return errors;
+}
+
+const mapStateToProps = state => ({
+  initialValues: state.kitbag.kit.current
+});
+
+// const mapDispatchToProps = dispatch => ({
+//   actions: bindActionCreators( dispatch)
+// })
+
+export default connect(mapStateToProps, { fetchKitbagKit })(reduxForm({
+  form: 'kititem',
+  enableReinitialize: true,
+  validate
+})(KitItem));

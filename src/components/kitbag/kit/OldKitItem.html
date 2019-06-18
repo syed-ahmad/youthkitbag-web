@@ -1,0 +1,157 @@
+            <div className="row">
+                <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
+                    <div>
+                        <img id="preview" className="img-fluid mb-3" src="<%= kit.images.length > 0 ? kit.images[0].imageUrl : '/images/default.png' %>" alt="" role="presentation">
+                    </div>
+                    <% if (kit.images && kit.images.length > 1) { %>
+                    <div>
+                        <% kit.images.forEach(function(image, i) { %>
+                            <img className="img-fluid mb-3 img-link" style="max-height: 90px;" src="<%= image.imageUrl %>" alt="" role="presentation" onclick="document.getElementById('preview').src='<%= image.imageUrl %>';" />
+                        <% }) %>
+                    </div>
+                    <% } %>
+                </div>
+                <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
+                    <div className="form-group row">
+                        <label for="title" className="col-sm-2 col-form-label">Title</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control <%= errors.find(e => e.param === 'title') ? 'is-invalid' : '' %>" id="title" name="title" aria-describedby="title" value="<%= kit.title %>" required="required" aria-required="true">
+                            <div className="invalid-feedback"><%= errors.find(e => e.param === 'title') ? errors.find(e => e.param === 'title').msg : '' %></div>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label for="subtitle" className="col-sm-2 col-form-label">Subtitle (optional)</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="subtitle" name="subtitle" aria-describedby="subtitle" value="<%= kit.subtitle %>">
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">Images</label>
+                        <div className="col-sm-10">
+                            <div className="custom-file">
+                                <input type="file" multiple className="custom-file-input" id="images" name="photos" aria-describedby="images">
+                                <label className="custom-file-label" for="images">Choose image(s)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label for="description" className="col-sm-2 col-form-label">Description</label>
+                        <div className="col-sm-10">
+                            <textarea className="form-control <%= errors.find(e => e.param === 'description') ? 'is-invalid' : '' %>" id="description" rows="5" name="description"><%= kit.description %></textarea>
+                            <div className="invalid-feedback"><%= errors.find(e => e.param === 'description') ? errors.find(e => e.param === 'description').msg : '' %></div>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label for="status" className="col-sm-2 col-form-label">Status</label>
+                        <div className="col-sm-10">
+                            <select className="custom-select" id="status" name="status">
+                                <% statusList.forEach(function(status, i) { %>
+                                <option value="<%= status.key %>" <%= kit.status == status.key ? 'selected' : '' %> ><%= status.name %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label for="security" className="col-sm-2 col-form-label">Security (optional)</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="security" name="security" aria-describedby="security" value="<%= kit.security %>">
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 className="h6">Purchased (all optional)</h3>
+                    <% for (var i = 0; i < 5; i++) { %>
+                        <% var item = i < kit.purchases.length ? kit.purchases[i] : { from: '', quantity: 0, onDate: null, price: 0.00 }; %>
+                        <div className="form-row">
+                            <div className="form-group col-sm-4">
+                                <% if (i === 0) { %><label className="d-none d-sm-block" for="purchasesfrom<%= i %>">From</label><% } %>
+                                <input type="text" className="form-control" id="purchasesfrom<%= i %>" name="purchases[<%= i %>][from]" aria-describedby="purchasesfrom<%= i %>" value="<%= item.from %>">
+                            </div>
+                            <div className="form-group col-sm-2">
+                                <% if (i === 0) { %><label className="d-none d-sm-block" for="purchasesquantity<%= i %>">Quantity</label><% } %>
+                                <input type="number" className="form-control" id="purchasesquantity<%= i %>" name="purchases[<%= i %>][quantity]" step="1" aria-describedby="purchasesquantity<%= i %>" value="<%= item.quantity %>">
+                            </div>
+                            <div className="form-group col-sm-4">
+                                <% if (i === 0) { %><label className="d-none d-sm-block" for="purchasesondate<%= i %>">On</label><% } %>
+                                <input type="date" className="form-control" id="purchasesondate<%= i %>" name="purchases[<%= i %>][ondate]" aria-describedby="purchasesondate<%= i %>" <% if (item.ondate) { %>value="<%= item.ondate.toISOString().slice(0,10) %>"<% } %> >
+                            </div>
+                            <div className="form-group col-sm-2">
+                                <% if (i === 0) { %><label className="d-none d-sm-block" for="purchasesprice<%= i %>">Price</label><% } %>
+                                <input type="number" className="form-control" id="purchasesprice<%= i %>" name="purchases[<%= i %>][price]" step=".01" aria-describedby="purchasesprice<%= i %>" value="<%= Number(item.price).toFixed(2) %>">
+                            </div>
+                        </div>
+                    <% } %>
+                    <hr />
+                    <h3 className="h6">In Bags / Storage Locations (all optional)</h3>
+                    <div className="form-group form-check">
+                        <input type="checkbox" className="form-check-input" id="keptInbag" name="keptInbag" <%= kit.keptInbag ? 'checked' : '' %>>
+                        <label className="form-check-label" for="keptInbag">Kept in kitbag / Stored in a location</label>
+                    </div>
+                    <% for (var i = 0; i < 10; i++) { %>
+                        <% var item = i < kit.inbag.length ? kit.inbag[i] : { location: '', condition: '', quantity: 0 }; %>
+                        <div className="form-row">
+                            <div className="form-group col-sm-5">
+                                <% if (i === 0) { %><label className="d-none d-sm-block" for="inbaglocation">Location</label><% } %>
+                                <label className="d-sm-none" for="inbaglocation">Location, Condition, Quantity (<%= i + 1 %>)</label>
+                                <input type="text" className="form-control" id="inbaglocation<%= i %>" name="inbag[<%= i %>][location]" aria-describedby="inbaglocation" value="<%= item.location %>">
+                            </div>
+                            <div className="form-group col-sm-4">
+                                <% if (i === 0) { %><label className="d-none d-sm-block" for="inbagcondition">Condition</label><% } %>
+                                <select className="custom-select" id="inbagcondition<%= i %>" name="inbag[<%= i %>][condition]">
+                                    <option value="used" <%= item.condition == 'used' ? 'selected' : '' %>>Used</option>
+                                    <option value="new" <%= item.condition == 'new' ? 'selected' : '' %>>New</option>
+                                    <option value="almostnew" <%= item.condition == 'almostnew' ? 'selected' : '' %>>Almost New</option>
+                                    <option value="other" <%= item.condition == 'other' ? 'selected' : '' %>>Other</option>
+                                </select>
+                            </div>
+                            <div className="form-group col-sm-3">
+                                <% if (i === 0) { %><label className="d-none d-sm-block" for="inbagquantity">Quantity</label><% } %>
+                                <input type="number" className="form-control" id="inbagquantity<%= i %>" name="inbag[<%= i %>][quantity]" step="1" aria-describedby="inbagquantity" value="<%= item.quantity %>">
+                            </div>
+                        </div>
+                    <% } %>
+                    <div className="form-group row">
+                        <label for="warning" className="col-sm-4 col-form-label">Warning Level</label>
+                        <div className="col-sm-8">
+                            <input type="number" className="form-control" id="warning" name="warning" aria-describedby="warning" step="1" value="<%= kit.warning %>">
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 className="h6">Categorise (all optional)</h3>
+                    <small id="categoryhelp" className="form-text text-muted form-control-help">You can add activity names or personal tags to your kit. Enter names separate by commas. (e.g. football, cycling)</small>
+                    <div className="form-group row">
+                        <label for="activitys" className="col-sm-2 col-form-label">Activities</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="activitys" name="activitys" aria-describedby="activitys" value="<% if (kit.activitys) { %><%= kit.activitys.join(', ') %><% }%>">
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label for="tags" className="col-sm-2 col-form-label">Tags</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="tags" name="tags" aria-describedby="tags" value="<% if (kit.tags) { %><%= kit.tags.join(', ') %><% }%>">
+                        </div>
+                    </div>
+                    <div className="form-group row mb-0">
+                        <label className="col-sm-2" for="active">Active</label>
+                        <div className="col-1 col-sm-1">
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id="active" name="active" checked="<%= kit.active ? 'checked' : '' %>"" >
+                            </div>
+                        </div>
+                        <div className="col-11 col-sm-9">
+                            <div className="form-check">
+                                <small id="activehelp" className="form-text text-muted form-control-help">This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div className="row">
+                <div className="col-12 col-lg-6" role="main">
+                        <% if (editing) { %>
+                            <input type="hidden" name="kitId" value="<%= kit._id %>">
+                        <% } %>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button className="btn btn-primary" type="submit"><% if (editing) { %>Update Kit<% } else { %>Add Kit<% } %></button>
+                </div>
+            </div>

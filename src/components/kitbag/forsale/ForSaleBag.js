@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchKitBagForSales } from '../../../actions'
+import { fetchKitbagForSales } from '../../../actions'
 
 import Title from '../../includes/Title';
 import ForSaleSearch from './ForSaleSearch';
@@ -17,7 +17,7 @@ class ForSaleBag extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchKitBagForSales();
+    this.props.fetchKitbagForSales();
   }
 
   render() {
@@ -50,4 +50,4 @@ const mapStateToProps = (state) => {
   return { filter: state.kitbagForSales.filter, forsales: state.kitbagForSales.forsales, pagination: state.kitbagForSales.pagination };
 }
 
-export default connect(mapStateToProps, { fetchKitBagForSales })(ForSaleBag);
+export default connect(mapStateToProps, { fetchKitbagForSales })(ForSaleBag);

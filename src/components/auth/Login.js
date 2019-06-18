@@ -41,8 +41,6 @@ class Login extends React.Component {
     this.props.actions.login(email, password);
   }
 
-  
-
   render() {
     return (
       <div>
