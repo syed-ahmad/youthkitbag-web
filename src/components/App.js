@@ -19,7 +19,8 @@ import Logout from './auth/Logout';
 import Purchase from './Purchase';
 
 import KitBag from './kitbag/kit/KitBag';
-import KitItem from './kitbag/kit/KitItem';
+import KitCreate from './kitbag/kit/KitCreate';
+import KitEdit from './kitbag/kit/KitEdit';
 import ForSaleBag from './kitbag/forsale/ForSaleBag';
 //import ForSaleItem from './kitbag/forsale/ForSaleItem';
 import WantedBag from './kitbag/wanted/WantedBag';
@@ -51,8 +52,8 @@ class App extends React.Component {
             <Route path="/auth/logout" exact component={Logout} />
 
             <Route path="/purchase" exact component={Purchase} />
-            <Route path="/kitbag/kit/add" exact component={KitItem} />
-            <Route path="/kitbag/kit/edit/:id" component={KitItem} />
+            <Route path="/kitbag/kits/new" exact component={KitCreate} />
+            <Route path="/kitbag/kits/:id" exact component={KitEdit} />
             <Route path="/kitbag/kits" exact component={KitBag} />
             <Route path="/kitbag/forsale/all" exact component={ForSaleBag} />
             <Route path="/kitbag/wanted/all" exact component={WantedBag} />

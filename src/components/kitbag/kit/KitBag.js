@@ -42,7 +42,7 @@ class Kitbag extends React.Component {
                 <Search />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <Link to="/kitbag/kit/add" className="btn btn-primary">Add new kit</Link>
+                <Link to="/kitbag/kits/new" className="btn btn-primary">Add new kit</Link>
               </div>
             </div>
             <div className="row">
