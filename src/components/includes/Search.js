@@ -1,10 +1,11 @@
+
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchKitbagKits } from '../../../actions/KitbagKitActions';
+import { fetchKitbagKits } from '../../actions/KitbagKitActions';
 
-class KitSearch extends React.Component {
+class Search extends React.Component {
 
   renderInput(formProps) {
     return (
@@ -12,15 +13,13 @@ class KitSearch extends React.Component {
     );
   }
 
-  renderSelect(formProps) {
+  renderSelect = (formProps) => {
+    console.log('Filter', this.props.filter);
+
     return (
       <div className="input-group-prepend">
-        <select className="custom-select" {...formProps.input} {...formProps}>
-          <option value="all" >All</option>
-          <option value="title" >Title</option>
-          <option value="activity" >Activity</option>
-          <option value="tag" >Tag</option>
-          <option value="inactive"  >All Inactive</option>
+        <select className="custom-select" {...formProps.input}>
+          {this.props.filter.options.map(o => (<option key={o.key} value={o.key}>{o.value}</option>))}
         </select>
       </div>
     );
@@ -28,23 +27,21 @@ class KitSearch extends React.Component {
 
   onSubmit = formValues => {
     const { by, search } = formValues;
-    this.props.actions.fetchKitbagKits(search, by, 1, 24);
+    this.props.actions.fetchKitbagKits(search, by, 1, this.props.pagination.itemsPerPage);
   }
 
   render() {
+    console.log('Filter on render', this.props.filter);
     return (
       <div className="d-inline-block">
         <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <div className="form-group mr-3">
             <div className="input-group">
               <Field name="by" component={this.renderSelect} id="by" />
-              <Field name="search" component={this.renderInput} title="Email"
-                type="text" 
-                id="search" 
-                arialabel="Search by text" />
+              <Field name="search" component={this.renderInput} title="search" type="text" id="search" arialabel="Search by text" />
               <div className="input-group-append">
                 <button className="btn btn-outline-primary" type="submit" id="search">Search</button>
-                <a href="/kitbag/kit/all" className="btn btn-outline-secondary">Clear</a>
+                <a href="/kitbag/kits" className="btn btn-outline-secondary">Clear</a>
               </div>
             </div>
           </div>
@@ -54,15 +51,16 @@ class KitSearch extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-})
+const mapStateToProps = state => {
+  return { filter: state.filter, pagination: state.pagination };
+}
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ fetchKitbagKits }, dispatch)
 })
 
-KitSearch = connect(mapStateToProps, mapDispatchToProps)(KitSearch);
+Search = connect(mapStateToProps, mapDispatchToProps)(Search);
 
 export default reduxForm({
-  form: 'kitsearch'
-})(KitSearch);
+  form: 'search'
+})(Search);

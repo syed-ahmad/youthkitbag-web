@@ -53,7 +53,7 @@ class Header extends React.Component {
                   <li className="nav-item dropdown mr-3">
                     <Link className="nav-item nav-link dropdown-toggle" to="/kitbagdropdown" id="kitbagDropdown" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">Kitbag</Link>
                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="kitbagDropdown">
-                      <Link className="dropdown-item" to="/kitbag/kit/all">View Kitbag</Link>
+                      <Link className="dropdown-item" to="/kitbag/kits">View Kitbag</Link>
                       <Link className="dropdown-item" to="/kitbag/kit/add">Add Kit</Link>
                       <hr />
                       <Link className="dropdown-item" to="/kitbag/forsale/all">Selling</Link>

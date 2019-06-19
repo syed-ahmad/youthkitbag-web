@@ -13,7 +13,7 @@ export default (state = {}, action) => {
     case types.DELETE_KITBAG_KIT:
       return _.omit(state, action.payload);  
     case types.FETCH_KITBAG_KITS:
-      return { ...state, ..._.mapKeys(action.payload.kits, '_id') };
+      return { ..._.mapKeys(action.payload.kits, '_id') };
     default:
       return state;
   }

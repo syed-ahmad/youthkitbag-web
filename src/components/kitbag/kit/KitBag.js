@@ -4,8 +4,8 @@ import { fetchKitbagKits } from '../../../actions';
 import { Link } from 'react-router-dom';
 
 import Title from '../../includes/Title';
-import KitSearch from './KitSearch';
 import KitCard from './KitCard';
+import Search from '../../includes/Search';
 import Pagination from '../../includes/Pagination';
 
 class Kitbag extends React.Component {
@@ -19,13 +19,11 @@ class Kitbag extends React.Component {
 
   componentDidMount() {
     this.props.fetchKitbagKits();
+    console.log('Rendering');
   }
 
   renderList() {
     return this.props.items.map(item => {
-      if (!item._id) {
-        return null
-      }
       return <KitCard key={item._id} kit={item}/>
     })
   }
@@ -41,7 +39,7 @@ class Kitbag extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                {/* <KitSearch /> */}
+                <Search />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
                 <Link to="/kitbag/kit/add" className="btn btn-primary">Add new kit</Link>

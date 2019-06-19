@@ -51,9 +51,9 @@ class App extends React.Component {
             <Route path="/auth/logout" exact component={Logout} />
 
             <Route path="/purchase" exact component={Purchase} />
-            <Route path="/kitbag/kit/all" exact component={KitBag} />
             <Route path="/kitbag/kit/add" exact component={KitItem} />
             <Route path="/kitbag/kit/edit/:id" component={KitItem} />
+            <Route path="/kitbag/kits" exact component={KitBag} />
             <Route path="/kitbag/forsale/all" exact component={ForSaleBag} />
             <Route path="/kitbag/wanted/all" exact component={WantedBag} />
           </main>

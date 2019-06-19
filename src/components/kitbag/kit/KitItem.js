@@ -7,6 +7,10 @@ import classNames from 'classnames';
 import Title from '../../includes/Title';
 
 class KitItem extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('KitItem initialising',props);
+  }
 
   componentDidMount() {
     this.props.fetchKitbagKit(this.props.match.params.id);
@@ -104,7 +108,7 @@ const validate = formValues => {
 }
 
 const mapStateToProps = state => ({
-  initialValues: state.kitbag.kit.current
+  //initialValues: state.kitbag.kits.current
 });
 
 // const mapDispatchToProps = dispatch => ({

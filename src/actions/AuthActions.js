@@ -11,7 +11,7 @@ const loginRequest = (userId) => async (dispatch) => {
     localStorage.setItem('user', JSON.stringify(response.data));
     dispatch({ type: types.GETALL_SUCCESS});
     dispatch(getUser(userId))
-    history.push('/kitbag/kit/all')
+    history.push('/kitbag/kits')
   } catch (err) {
     console.log(err.response, err.message);
     if (err.response.status >= 400) {
