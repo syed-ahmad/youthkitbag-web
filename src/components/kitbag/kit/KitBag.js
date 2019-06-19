@@ -10,8 +10,6 @@ import Pagination from '../../includes/Pagination';
 
 class Kitbag extends React.Component {
 
-
-
   getTitle = () => {
     if (!this.props.pagination) {
       return 'Loading ...';
@@ -61,7 +59,7 @@ class Kitbag extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { items: Object.values(state.kitbag.kits), filter: state.kitbag.kits.filter, pagination: state.kitbag.kits.pagination };
+  return { items: Object.values(state.kitbag.kits), filter: state.filter, pagination: state.pagination };
 }
 
 export default connect(mapStateToProps, { fetchKitbagKits })(Kitbag);

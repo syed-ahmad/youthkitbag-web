@@ -65,7 +65,7 @@ class Pagination extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-  return { pagination: state.kitbag.kits.pagination };
+  return { pagination: state.pagination };
 }
 
 export default connect(mapStateToProps)(Pagination);
