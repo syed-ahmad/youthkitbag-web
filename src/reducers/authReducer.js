@@ -26,11 +26,11 @@ export default function authentication(state = initialState, action) {
         loginFailed: true,
         err: action.payload,
       }
-    case '@@redux-form/CHANGE':
-      return {
-        loginFailed: false,
-        registerFailed: false,
-      }
+    // case '@@redux-form/CHANGE':
+    //   return {
+    //     loginFailed: false,
+    //     registerFailed: false,
+    //   }
     case REGISTER_SUCCESS:
       return {
         registed: true,

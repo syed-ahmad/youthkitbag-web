@@ -1,8 +1,7 @@
 import React from 'react';
-import { Form, Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
-import classNames from 'classnames';
+
 
 import Title from '../../includes/Title';
 
