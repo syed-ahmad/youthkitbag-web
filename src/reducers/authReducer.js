@@ -4,8 +4,8 @@ import {
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT,
-  REGISTER_FAILURE,
-  REGISTER_SUCCESS
+  SIGNUP_FAILURE,
+  SIGNUP_SUCCESS
 } from '../actions/types';
 
 const isLogin = !!(localStorage.getItem('token') && localStorage.getItem('authentication'))
@@ -24,20 +24,16 @@ export default function authentication(state = initialState, action) {
       return {
         loggedIn: false,
         loginFailed: true,
-        err: action.payload,
+        loginError: action.payload,
       }
-    // case '@@redux-form/CHANGE':
-    //   return {
-    //     loginFailed: false,
-    //     registerFailed: false,
-    //   }
-    case REGISTER_SUCCESS:
+    case SIGNUP_SUCCESS:
       return {
-        registed: true,
+        signedUp: true,
       }
-    case REGISTER_FAILURE:
+    case SIGNUP_FAILURE:
       return {
-        registerFailed: true,
+        signupFailed: true,
+        signupError: action.paylod
       }
     case GETALL_SUCCESS:
       return {
@@ -46,7 +42,9 @@ export default function authentication(state = initialState, action) {
       }
     case GETALL_FAILURE:
       return {
-        errorOccurred: true
+        errorOccurred: true,
+        loginFailed: true,
+        loginError: action.payload
       }
     case LOGOUT:
       return {
