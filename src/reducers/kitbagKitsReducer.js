@@ -14,6 +14,8 @@ export default (state = {}, action) => {
       return _.omit(state, action.payload);  
     case types.FETCH_KITBAG_KITS:
       return { ..._.mapKeys(action.payload.kits, '_id') };
+    case types.API_KITBAG_ERROR:
+      return { ...state, error: action.payload };
     default:
       return state;
   }
