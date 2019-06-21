@@ -20,11 +20,6 @@ import Purchase from './Purchase';
 
 import KitBag from './kitbag/kit/KitBag';
 import KitCreate from './kitbag/kit/KitCreate';
-import KitEdit from './kitbag/kit/KitEdit';
-import ForSaleBag from './kitbag/forsale/ForSaleBag';
-//import ForSaleItem from './kitbag/forsale/ForSaleItem';
-import WantedBag from './kitbag/wanted/WantedBag';
-//import WantedItem from './kitbag/wanted/WantedItem';
 
 class App extends React.Component {
 
@@ -45,7 +40,7 @@ class App extends React.Component {
             <Route path="/features" exact component={Features} />
             <Route path="/pricing" exact component={Pricing} />
             
-            <Route path="/auth/register" exact component={SignUp} />
+            <Route path="/auth/signup" exact component={SignUp} />
             <Route path="/auth/login" exact component={Login} />
             <Route path="/auth/reset" exact component={Reset} />
             <Route path="/auth/newpassword" exact component={NewPassword} />
@@ -53,10 +48,8 @@ class App extends React.Component {
 
             <Route path="/purchase" exact component={Purchase} />
             <Route path="/kitbag/kits/new" exact component={KitCreate} />
-            <Route path="/kitbag/kits/:id" exact component={KitEdit} />
             <Route path="/kitbag/kits" exact component={KitBag} />
-            <Route path="/kitbag/forsale/all" exact component={ForSaleBag} />
-            <Route path="/kitbag/wanted/all" exact component={WantedBag} />
+
           </main>
           <Footer />
         </Router>

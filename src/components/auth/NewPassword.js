@@ -1,5 +1,4 @@
 import React from 'react';
-import ykbapi from '../../helpers/api';
 
 import Title from '../includes/Title';
 
@@ -14,12 +13,12 @@ class NewPassword extends React.Component {
   }
 
   onNewPasswordSubmit = async() => {
-    const response = await ykbapi.post('/auth/new-password', {
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword
-    });
+    // const response = await ykbapi.post('/auth/new-password', {
+    //   password: this.state.password,
+    //   confirmPassword: this.state.confirmPassword
+    // });
 
-    console.log(response.data);
+    // console.log(response.data);
   }
 
   render() {

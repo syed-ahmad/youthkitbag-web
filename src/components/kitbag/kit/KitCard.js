@@ -3,9 +3,19 @@ import { Link } from 'react-router-dom';
 
 class KitCard extends React.Component {
 
-  totalQuantity = () => this.props.kit.inbag.reduce(function (x, y) { return x + y.quantity; }, 0);
+  totalQuantity = () => {
+    if (!this.props.kit.inbag) {
+      return 0;
+    }
+    return this.props.kit.inbag.reduce(function (x, y) { return x + y.quantity; }, 0);
+  }
 
-  topImage = () => this.props.kit.images.length > 0 ? this.props.kit.images[0].imageUrl : '/images/default.png';
+  topImage = () => {
+    if (!this.props.kit.image) {
+      return '/images/default.png';
+    }
+    return this.props.kit.images.length > 0 ? this.props.kit.images[0].imageUrl : '/images/default.png'
+  };
 
   render() {
     const { _id, title, subtitle } = this.props.kit;

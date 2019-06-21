@@ -9,20 +9,18 @@ import Title from '../../includes/Title';
 
 class KitCreate extends React.Component {
 
-  renderTextInput(formProps) {
+  renderTextInput({ input, label, meta }) {
     const inputClasses = classNames({
       'form-control': true,
-      'is-invalid': formProps.meta.touched && formProps.meta.invalid
+      'is-invalid': meta.touched && meta.invalid
     });
-
-    const { input, label } = formProps;
 
     return (
       <div className="form-group row">
         <label for={input.name} className="col-sm-3 col-form-label">{label}</label>
         <div className="col-sm-9">
           <input type="text" className={inputClasses} id={input.name} aria-describedby={input.name} {...input} />
-          <div className="invalid-feedback">{formProps.meta.error}</div>
+          <div className="invalid-feedback">{meta.error}</div>
         </div>
       </div>
     );

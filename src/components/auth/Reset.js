@@ -1,5 +1,4 @@
 import React from 'react';
-import ykbapi from '../../helpers/api';
 
 import Title from '../includes/Title';
 
@@ -12,11 +11,11 @@ class Reset extends React.Component {
   }
 
   onResetSubmit = async () => {
-    const response = await ykbapi.post('/auth/reset', {
-      email: this.state.email
-    });
+    // const response = await ykbapi.post('/auth/reset', {
+    //   email: this.state.email
+    // });
 
-    console.log(response.data);
+    // console.log(response.data);
   }
 
   render() {
