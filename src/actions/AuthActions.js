@@ -1,53 +1,58 @@
 import * as types from './types';
-import API from '../helpers/api';
+import axios from 'axios';
 import history from '../helpers/history';
 import { getUser } from './UserActions';
 
+const baseUrl = process.env.YKBAPI || 'http://localhost:8080';
+
 const loginRequest = (userId) => async (dispatch) => {
-  console.log('loginRequest');
   try {
-    const response = await API.get(`/user/${userId}`);
+    const token = localStorage.getItem('token');
+    const response = await axios.get(`${baseUrl}/user/${userId}`, { headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }});
     localStorage.setItem('authentication', JSON.stringify(response.data.email));
     localStorage.setItem('user', JSON.stringify(response.data));
     dispatch({ type: types.GETALL_SUCCESS});
-    dispatch(getUser(userId))
-    history.push('/kitbag/kits')
+    dispatch(getUser(userId));
+    history.push('/kitbag/kits');
   } catch (err) {
-    console.log(err.response, err.message);
-    if (err.response.status >= 400) {
-      window.location.reload()
-    }
-    dispatch({ type: types.GETALL_FAILURE, payload: err.data })
+    dispatch({ type: types.GETALL_FAILURE, payload: err.response });
   }
 }
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    const { data } = await API.post('/auth/login', { email, password })
-    localStorage.setItem('token', data.token)
-    dispatch({ type: types.LOGIN_SUCCESS, payload: data })
+    window.localStorage.clear();
+    const { data } = await axios.post(`${baseUrl}/auth/login`, { email, password }, {
+      'content-type': 'application/json',
+    });
+    localStorage.setItem('token', data.token);
+    dispatch({ type: types.LOGIN_SUCCESS, payload: data });
     dispatch(loginRequest(data.userId))
   } catch (err) {
-    console.log('error', err.response, err.message);
-    dispatch({ type: types.LOGIN_FAILURE, payload: err.response })
+    dispatch({ type: types.LOGIN_FAILURE, payload: err.response });
   }
 }
 
-export const register = (email, password, username) => async (dispatch) => {
+export const signup = (email, password, confirmPassword) => async (dispatch) => {
   try {
-    await API.post('Users', { email, password, username })
-    dispatch({ type: types.REGISTER_SUCCESS })
-    history.push('/auth/login', { register: 'success' })
+    window.localStorage.clear();
+    const { data } = await axios.post(`${baseUrl}/auth/signup`, { email, password, confirmPassword }, {
+      'content-type': 'application/json',
+    });
+    dispatch({ type: types.SIGNUP_SUCCESS, payload: data });
+    history.push('/auth/login', { signup: 'success' });
   } catch (err) {
-    dispatch({ type: types.REGISTER_FAILURE, payload: err.data })
+    console.log('error', err.response, err.message);
+    dispatch({ type: types.SIGNUP_FAILURE, payload: err.response });
   }
 }
 
 export const logout = () => async (dispatch) => {
   try {
-    localStorage.removeItem('authentication')
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
+    window.localStorage.clear();
     dispatch({ type: types.LOGOUT })
     history.push('/auth/login')
   } catch (err) {
