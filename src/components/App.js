@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Link, Router, Route } from 'react-router-dom';
 import history from '../helpers/history'
 
 import User from './auth/User';
@@ -31,11 +31,11 @@ class App extends React.Component {
           <Header />
           <main>
             <noscript>You need to enable JavaScript to run this app.</noscript>
-            <a id="main-acc-jump" className="sr-only sr-only-focusable" href="#footer-acc-jump">
+            <Link id="main-acc-jump" className="sr-only sr-only-focusable" to="#footer-acc-jump">
               <div className="container">
                 <span className="skiplink-text">Skip to footer content</span>
               </div>
-            </a>
+            </Link>
             <Route path="/" exact component={Home} />
             <Route path="/features" exact component={Features} />
             <Route path="/pricing" exact component={Pricing} />

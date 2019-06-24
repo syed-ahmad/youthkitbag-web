@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, API_KITBAG_ERROR } from './types';
+import history from '../helpers/history';
+import * as types from '../actions/types';
 
 const baseUrl = process.env.YKBAPI || 'http://localhost:8080';
 
@@ -16,7 +18,13 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
     dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
   })
   .catch(err => {
-    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/kitbag/kits');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: response });
   });
 };
 
@@ -32,6 +40,12 @@ export const fetchKitbagKit = (id) =>  async dispatch => {
     dispatch({ type: FETCH_KITBAG_KIT, payload: response.data });
   })
   .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/kitbag/kits');
+    }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
   });
 };
@@ -48,6 +62,12 @@ export const createKitbagKit = (formValues) => async dispatch => {
     dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
   })
   .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/kitbag/kits');
+    }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
   });
 }

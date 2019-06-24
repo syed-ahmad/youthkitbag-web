@@ -1,21 +1,44 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as AuthActions from '../../actions';
+import classNames from 'classnames';
 
 import Title from '../includes/Title';
 
 class Reset extends React.Component {
-  state = { email: '' };
 
-  onFormSubmit = event => {
-    event.preventDefault();
-    this.onResetSubmit();
+  renderInput({ input, meta, label, type, autoComplete }) {
+    const inputClasses = classNames({
+      'form-control': true,
+      'is-invalid': meta.touched && meta.invalid
+    });
+
+    return (
+      <div className="form-group">
+        <label htmlFor={input.name}>{label}</label>
+        <input type={type} className={inputClasses} id={input.name} aria-describedby={input.name} {...input} autoComplete={autoComplete} />
+        <div className="invalid-feedback">{meta.error}</div>
+      </div>
+    );
   }
 
-  onResetSubmit = async () => {
-    // const response = await ykbapi.post('/auth/reset', {
-    //   email: this.state.email
-    // });
+  renderAlert = () => {
+    console.log(this.props.auth);
+    if (!this.props.auth.resetFailed || !this.props.auth.resetError)
+      return null;
 
-    // console.log(response.data);
+    return (
+      <div className="alert alert-danger" role="alert">
+        {this.props.auth.resetError.data.message}
+      </div>
+    );
+  }
+
+  onSubmit = (formValues) => {
+    const { email } = formValues;
+    this.props.actions.reset(email);
   }
 
   render() {
@@ -25,17 +48,12 @@ class Reset extends React.Component {
         <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
             <div className="row">
-              <div className="col-12 col-md-3"></div>
-              <div className="col-12 col-md-6 mb-3 d-flex justify-content-center">
-                <form className="w-100" onSubmit={this.onFormSubmit} noValidate>
-                  <div className="form-group">
-                    <label htmlFor="email">Email <span aria-hidden="true" role="presentation">(*)</span></label>
-                    <input type="email" className="form-control" id="email" name="email" aria-describedby="email" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
-                  </div>
+              <div className="col-12 col-md-6 mb-3 mx-auto">
+                <form className="w-100 d-block" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                  <Field name="email" component={this.renderInput} label="Email" type="email" autoComplete="username email" />
                   <button className="btn btn-primary" type="submit">Reset Password</button>
                 </form>
               </div>
-              <div className="col-12 col-md-3"></div>
             </div>
           </div>
         </section>
@@ -44,4 +62,27 @@ class Reset extends React.Component {
   }
 }
 
-export default Reset;
+const validate = formValues => {
+  const errors = {};
+
+  if (!formValues.email) {
+    errors.email = 'Please enter a valid email';
+  }
+
+  return errors;
+}
+
+const mapStateToProps = state => {
+  return { auth: state.auth };
+}
+
+const mapDispatchToProps = dispatch => {
+  return { actions: bindActionCreators(AuthActions, dispatch) };
+}
+
+Reset = connect(mapStateToProps, mapDispatchToProps)(Reset);
+
+export default reduxForm({
+  form: 'reset',
+  validate
+})(Reset);

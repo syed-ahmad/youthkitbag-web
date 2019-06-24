@@ -5,35 +5,39 @@ import { getUser } from './UserActions';
 
 const baseUrl = process.env.YKBAPI || 'http://localhost:8080';
 
-const loginRequest = (userId) => async (dispatch) => {
-  try {
-    const token = localStorage.getItem('token');
-    const response = await axios.get(`${baseUrl}/user/${userId}`, { headers: {
-      Authorization: `bearer ${token}`,
-      'content-type': 'application/json',
-    }});
-    localStorage.setItem('authentication', JSON.stringify(response.data.email));
-    localStorage.setItem('user', JSON.stringify(response.data));
-    dispatch({ type: types.GETALL_SUCCESS});
-    dispatch(getUser(userId));
-    history.push('/kitbag/kits');
-  } catch (err) {
-    dispatch({ type: types.GETALL_FAILURE, payload: err.response });
-  }
-}
+// const loginRequest = (userId) => async (dispatch) => {
+//   try {
+//     const token = localStorage.getItem('token');
+//     const response = await axios.get(`${baseUrl}/user/${userId}`, { headers: {
+//       Authorization: `bearer ${token}`,
+//       'content-type': 'application/json',
+//     }});
+//     localStorage.setItem('authentication', JSON.stringify(response.data.email));
+//     localStorage.setItem('user', JSON.stringify(response.data));
+//     dispatch({ type: types.GETALL_SUCCESS});
+//     dispatch(getUser(userId));
+//   } catch (err) {
+//     dispatch({ type: types.GETALL_FAILURE, payload: err.response });
+//   }
+// }
 
-export const login = (email, password) => async (dispatch) => {
-  try {
-    window.localStorage.clear();
-    const { data } = await axios.post(`${baseUrl}/auth/login`, { email, password }, {
+export const login = (email, password) => dispatch => {
+  window.localStorage.clear();
+
+  axios.post(`${baseUrl}/auth/login`, { email, password }, {
       'content-type': 'application/json',
+    })
+    .then(response => {
+      const { data } = response;
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.userId);
+      dispatch({ type: types.LOGIN_SUCCESS, payload: data });
+      dispatch(getUser());
+      history.push('/kitbag/kits');
+    })
+    .catch(err => {
+      dispatch({ type: types.LOGIN_FAILURE, payload: err.response });
     });
-    localStorage.setItem('token', data.token);
-    dispatch({ type: types.LOGIN_SUCCESS, payload: data });
-    dispatch(loginRequest(data.userId))
-  } catch (err) {
-    dispatch({ type: types.LOGIN_FAILURE, payload: err.response });
-  }
 }
 
 export const signup = (email, password, confirmPassword) => async (dispatch) => {

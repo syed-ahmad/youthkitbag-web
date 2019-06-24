@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -41,7 +42,7 @@ class Search extends React.Component {
               <Field name="search" component={this.renderInput} title="search" type="text" id="search" arialabel="Search by text" />
               <div className="input-group-append">
                 <button className="btn btn-outline-primary" type="submit" id="search">Search</button>
-                <a href="/kitbag/kits" className="btn btn-outline-secondary">Clear</a>
+                <Link to="/kitbag/kits" className="btn btn-outline-secondary">Clear</Link>
               </div>
             </div>
           </div>

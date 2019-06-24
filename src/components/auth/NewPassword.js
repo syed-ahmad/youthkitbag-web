@@ -1,24 +1,44 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as AuthActions from '../../actions';
+import classNames from 'classnames';
 
 import Title from '../includes/Title';
 
 class NewPassword extends React.Component {
-  state = {
-    email: ''
-  };
 
-  onFormSubmit = event => {
-    event.preventDefault();
-    this.onNewPasswordSubmit();
+  renderInput({ input, meta, label, type, autoComplete }) {
+    const inputClasses = classNames({
+      'form-control': true,
+      'is-invalid': meta.touched && meta.invalid
+    });
+
+    return (
+      <div className="form-group">
+        <label htmlFor={input.name}>{label}</label>
+        <input type={type} className={inputClasses} id={input.name} aria-describedby={input.name} {...input} autoComplete={autoComplete} />
+        <div className="invalid-feedback">{meta.error}</div>
+      </div>
+    );
   }
 
-  onNewPasswordSubmit = async() => {
-    // const response = await ykbapi.post('/auth/new-password', {
-    //   password: this.state.password,
-    //   confirmPassword: this.state.confirmPassword
-    // });
+  renderAlert = () => {
+    console.log(this.props.auth);
+    if (!this.props.auth.newPasswordFailed || !this.props.auth.newPasswordError)
+      return null;
 
-    // console.log(response.data);
+    return (
+      <div className="alert alert-danger" role="alert">
+        {this.props.auth.newPasswordError.data.message}
+      </div>
+    );
+  }
+
+  onSubmit = (formValues) => {
+    const { password } = formValues;
+    this.props.actions.newPassword(password);
   }
 
   render() {
@@ -28,19 +48,13 @@ class NewPassword extends React.Component {
         <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
             <div className="row">
-              <div className="col-12 col-md-3"></div>
-              <div className="col-12 col-md-6 mb-3 d-flex justify-content-center">
-                <form className="w-100" onSubmit={this.onFormSubmit}>
-                  <div className="form-group">
-                    <label htmlFor="password">Password
-                      <span aria-hidden="true" role="presentation">(*)</span>
-                    </label>
-                    <input type="password" className="form-control" id="password" name="password" aria-describedby="password" value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
-                  </div>
+              <div className="col-12 col-md-6 mb-3 mx-auto">
+                {this.renderAlert()}
+                <form className="w-100 d-block" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                  <Field name="password" component={this.renderInput} label="Password" type="password" autoComplete="current-password" />
                   <button className="btn btn-primary" type="submit">Update Password</button>
                 </form>
               </div>
-              <div className="col-12 col-md-3"></div>
             </div>
           </div>
         </section>
@@ -49,4 +63,27 @@ class NewPassword extends React.Component {
   }
 }
 
-export default NewPassword;
+const validate = formValues => {
+  const errors = {};
+
+  if (!formValues.password) {
+    errors.password = 'Please enter a valid password';
+  }
+
+  return errors;
+}
+
+const mapStateToProps = state => {
+  return { auth: state.auth };
+}
+
+const mapDispatchToProps = dispatch => {
+  return { actions: bindActionCreators(AuthActions, dispatch) };
+}
+
+NewPassword = connect(mapStateToProps, mapDispatchToProps)(NewPassword);
+
+export default reduxForm({
+  form: 'newpassword',
+  validate
+})(NewPassword);

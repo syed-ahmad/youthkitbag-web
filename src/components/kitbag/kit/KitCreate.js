@@ -17,7 +17,7 @@ class KitCreate extends React.Component {
 
     return (
       <div className="form-group row">
-        <label for={input.name} className="col-sm-3 col-form-label">{label}</label>
+        <label htmlFor={input.name} className="col-sm-3 col-form-label">{label}</label>
         <div className="col-sm-9">
           <input type="text" className={inputClasses} id={input.name} aria-describedby={input.name} {...input} />
           <div className="invalid-feedback">{meta.error}</div>
@@ -33,7 +33,7 @@ class KitCreate extends React.Component {
         <div className="col-sm-9">
           <div className="custom-file">
             <input type="file" multiple className="custom-file-input" id={input.name} aria-describedby={input.name} {...input} />
-            <label className="custom-file-label" for={input.name}>{helptext}</label>
+            <label className="custom-file-label" htmlFor={input.name}>{helptext}</label>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ class KitCreate extends React.Component {
   renderTextArea({ input, label }) {
     return (
       <div className="form-group row">
-        <label for={input.name} className="col-sm-3 col-form-label">{label}</label>
+        <label htmlFor={input.name} className="col-sm-3 col-form-label">{label}</label>
         <div className="col-sm-9">
           <textarea className="form-control" rows="5" {...input}></textarea>
           <div className="invalid-feedback"></div>
@@ -55,7 +55,7 @@ class KitCreate extends React.Component {
   renderOptionList({ input, label }) {
     return (
       <div className="form-group row">
-        <label for={input.name} className="col-sm-3 col-form-label">{label}</label>
+        <label htmlFor={input.name} className="col-sm-3 col-form-label">{label}</label>
         <div className="col-sm-9">
           <select className="custom-select" id={input.name} {...input}>
             <option value="owned">Owned</option>
@@ -77,7 +77,7 @@ class KitCreate extends React.Component {
     return (
       <div className={`form-group col-sm-${col}`}>
         { (instance === 0) &&
-          <label className="d-none d-sm-block" for={input.name}>{label}</label>
+          <label className="d-none d-sm-block" htmlFor={input.name}>{label}</label>
         }
         <input type={type} className="form-control" id={input.name} aria-describedby={input.name} {...input} />
       </div>
@@ -88,7 +88,7 @@ class KitCreate extends React.Component {
     return (
       <div className={`form-group col-sm-${col}`}>
         { (instance === 0) &&
-          <label className="d-none d-sm-block" for={input.name}>{label}</label>
+          <label className="d-none d-sm-block" htmlFor={input.name}>{label}</label>
         }
         <select className="custom-select" id={input.name} {...input}>
           <option value="used" >Used</option>
@@ -104,7 +104,7 @@ class KitCreate extends React.Component {
     return (
       <div className="form-group form-check">
         <input type="checkbox" className="form-check-input" id={input.name} {...input} />
-        <label className="form-check-label" for={input.name}>{label}</label>
+        <label className="form-check-label" htmlFor={input.name}>{label}</label>
       </div>
     );
   }
@@ -112,7 +112,7 @@ class KitCreate extends React.Component {
   renderActiveCheckbox({ input, label }) {
     return (
       <div className="form-group row mb-0">
-        <label className="col-sm-3" for={input.name}>{label}</label>
+        <label className="col-sm-3" htmlFor={input.name}>{label}</label>
         <div className="col-1 col-sm-1">
           <div className="form-check">
             <input className="form-check-input" type="checkbox" id={input.name} {...input} />
