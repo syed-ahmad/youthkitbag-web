@@ -4,6 +4,30 @@ import classNames from 'classnames';
 
 class KitForm extends React.Component {
 
+  topImage = () => {
+    return this.props.initialValues.images.length > 0 ? this.props.initialValues.images[0].imageUrl : '/images/default.png';
+  }
+
+  renderSecondaryImages = () => {
+    const { images } = this.props.initialValues;
+
+    if (!images || images.length <= 0) {
+      return null;
+    }
+
+    const items = []
+  
+    for (let i = 0; i < images.length; i++) {
+      items.push(<img key={`image${i}`} className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" />)
+    }
+  
+    return (
+      <div>
+        {items}
+      </div>
+    )
+  }
+
   renderTextInput({ input, label, meta }) {
     const inputClasses = classNames({
       'form-control': true,
@@ -130,14 +154,14 @@ class KitForm extends React.Component {
     return (
       <form className="mb-3" onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <div className="row">
-          {/* <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
+          <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
             <div>
-              <img id="preview" className="img-fluid mb-3" src="/images/default.png" alt="" role="presentation" />
+              <img id="preview" className="img-fluid mb-3" src={this.topImage()} alt="" role="presentation" />
             </div>
             <div>
-              <img className="img-fluid mb-3 img-link" src="" alt="" role="presentation" />
+              {this.renderSecondaryImages()}
             </div>
-          </div> */}
+          </div>
           <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
             <Field name="title" component={this.renderTextInput} label="Title" />
             <Field name="subtitle" component={this.renderTextInput} label="Subtitle (optional)" />
@@ -235,29 +259,3 @@ const validate = formValues => {
 }
 
 export default reduxForm({ form: 'kitForm', validate })(KitForm);
-
-  //   topImage = () => {
-//     return this.props.initialValues.images.length > 0 ? this.props.initialValues.images[0].imageUrl : '/images/default.png';
-//   }
-
-//   secondaryImages = () => {
-//     const { images } = this.props.initialValues;
-
-//     if (!images || images.length <= 0) {
-//       return null;
-//     }
-
-//     const items = []
-  
-//     for (let i = 0; i < images.length; i++) {
-//       items.push(<img key={`image${i}`} className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" />)
-//     }
-  
-//     return (
-//       <div>
-//         {items}
-//       </div>
-//     )
-//   }
-
-
