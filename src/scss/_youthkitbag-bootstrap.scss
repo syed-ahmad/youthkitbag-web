@@ -88,6 +88,19 @@
   }
 }
 
+span {
+  &.icons-top-left {
+    color: #343a40;
+    font-size: 1.25rem;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    .icon-tray-item {
+      padding-right: 1rem;
+    }
+  }
+}
+
 .img-link {
   cursor: pointer;
 }

@@ -20,6 +20,8 @@ import Purchase from './Purchase';
 
 import KitBag from './kitbag/kit/KitBag';
 import KitCreate from './kitbag/kit/KitCreate';
+import KitEdit from './kitbag/kit/KitEdit';
+import KitDelete from './kitbag/kit/KitDelete';
 
 class App extends React.Component {
 
@@ -47,8 +49,11 @@ class App extends React.Component {
             <Route path="/auth/logout" exact component={Logout} />
 
             <Route path="/purchase" exact component={Purchase} />
-            <Route path="/kitbag/kits/new" exact component={KitCreate} />
+
             <Route path="/kitbag/kits" exact component={KitBag} />
+            <Route path="/kitbag/kits/new" exact component={KitCreate} />
+            <Route path="/kitbag/kits/edit/:id" exact component={KitEdit} />
+            <Route path="/kitbag/kits/delete/:id" exact component={KitDelete} />
 
           </main>
           <Footer />

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, API_KITBAG_ERROR } from './types';
+import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, EDIT_KITBAG_KIT, API_KITBAG_ERROR } from './types';
 import history from '../helpers/history';
 import * as types from '../actions/types';
 
@@ -28,7 +28,7 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
   });
 };
 
-export const fetchKitbagKit = (id) =>  async dispatch => {
+export const fetchKitbagKit = (id) => dispatch => {
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/kits/${id}`, {
     headers: {
@@ -50,7 +50,7 @@ export const fetchKitbagKit = (id) =>  async dispatch => {
   });
 };
 
-export const createKitbagKit = (formValues) => async dispatch => {
+export const createKitbagKit = (formValues) => dispatch => {
   const token = localStorage.getItem('token');
   axios.post(`${baseUrl}/kitbag/kits`, {...formValues}, {
     headers: {
@@ -60,6 +60,7 @@ export const createKitbagKit = (formValues) => async dispatch => {
   })
   .then(response => {
     dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
+    history.push('/kitbag/kits');
   })
   .catch(err => {
     const { response } = err;
@@ -71,6 +72,28 @@ export const createKitbagKit = (formValues) => async dispatch => {
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
   });
 }
+
+export const editKitbagKit = (formValues) =>  dispatch => {
+  const token = localStorage.getItem('token');
+  axios.put(`${baseUrl}/kitbag/kits`, {...formValues}, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }
+  })
+  .then(response => {
+    dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/kitbag/kits');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  });
+};
 
 // export const editKitbagKit = (id, formValues) =>  async dispatch => {
 //   const response = await API.put(`/kitbag/kits/${id}`, formValues);
