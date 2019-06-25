@@ -11,7 +11,6 @@ class KitCard extends React.Component {
   }
 
   topImage = () => {
-    console.log(this.props.kit);
     if (!this.props.kit.images) {
       return '/images/default.png';
     }

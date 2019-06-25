@@ -1,14 +1,23 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, FieldArray, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 class KitForm extends React.Component {
 
   topImage = () => {
+    if (!this.props || !this.props.initialValues) {
+      return '/images/default.png';
+    }
+
     return this.props.initialValues.images.length > 0 ? this.props.initialValues.images[0].imageUrl : '/images/default.png';
   }
 
   renderSecondaryImages = () => {
+    if (!this.props || !this.props.initialValues) {
+      return null;
+    }
+
     const { images } = this.props.initialValues;
 
     if (!images || images.length <= 0) {
@@ -28,7 +37,7 @@ class KitForm extends React.Component {
     )
   }
 
-  renderTextInput({ input, label, meta }) {
+  renderTextInput({ input, label, meta, type = 'text' }) {
     const inputClasses = classNames({
       'form-control': true,
       'is-invalid': meta.touched && meta.invalid
@@ -38,7 +47,7 @@ class KitForm extends React.Component {
       <div className="form-group row">
         <label htmlFor={input.name} className="col-sm-3 col-form-label">{label}</label>
         <div className="col-sm-9">
-          <input type="text" className={inputClasses} id={input.name} aria-describedby={input.name} {...input} />
+          <input type={type} className={inputClasses} id={input.name} aria-describedby={input.name} {...input} />
           <div className="invalid-feedback">{meta.error}</div>
         </div>
       </div>
@@ -146,8 +155,43 @@ class KitForm extends React.Component {
     );
   }
 
+  renderPurchases = ({ fields }) => {
+    return (
+      <div>
+        {fields.map((item, index) => (
+          <div className="form-row" key={index}>
+            <Field name={`${item}.from`} instance={index} component={this.renderSlimTextInput} col="4" label="Purchased from" type="text" />
+            <Field name={`${item}.quantity`} instance={index} component={this.renderSlimTextInput} col="2" label="Quantity" type="number" />
+            <Field name={`${item}.ondate`} instance={index} component={this.renderSlimTextInput} col="4" label="On" type="date" />
+            <Field name={`${item}.price`} instance={index} component={this.renderSlimTextInput} col="2" label="Price" type="number" step=".01" />
+          </div>
+        ))}
+        <button className="btn btn-secondary" type="button" onClick={() => fields.push({})}>
+          Add a new purchase
+        </button>
+      </div>
+    );
+  }
+
+  renderInbag = ({ fields }) => {
+    return (
+      <div>
+        {fields.map((item, index) => (
+          <div className="form-row" key={index}>
+            <Field name={`${item}.location`} instance={index} component={this.renderSlimTextInput} col="5" label="Storage location" type="text" />
+            <Field name={`${item}.condition`} instance={index} component={this.renderSlimOptionList} col="4" label="Condition" />
+            <Field name={`${item}.quantity`} instance={index} component={this.renderSlimTextInput} col="3" label="Quantity" type="number" />
+          </div>
+        ))}
+        <button className="btn btn-secondary" type="button" onClick={() => fields.push({})}>
+          Add a new storage location
+        </button>
+      </div>
+    );
+  }
+
   onSubmit = formValues => {
-    this.props.onSubmit(formValues);
+   this.props.onSubmit(formValues);
   };
 
   render() {
@@ -165,85 +209,32 @@ class KitForm extends React.Component {
           <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
             <Field name="title" component={this.renderTextInput} label="Title" />
             <Field name="subtitle" component={this.renderTextInput} label="Subtitle (optional)" />
-            {/* <Field name="photos" component={this.renderImageSelect} label="Images" helptext="Choose image(s)" /> */}
+            {/* <Field name="photos" component={this.FileInput} label="Images" helptext="Choose image(s)" onChange={this.handlePreview} /> */}
             <Field name="description" component={this.renderTextArea} label="Description" />
             <Field name="status" component={this.renderOptionList} label="Status" />
             <Field name="security" component={this.renderTextInput} label="Security (optional)" />
             <hr />
-            <h3 className="h6">Purchased</h3>
-              <div className="form-row">
-                <Field name="purchases[0].from" instance="0" component={this.renderSlimTextInput} col="4" label="From" type="text" />
-                <Field name="purchases[0].quantity" instance="0" component={this.renderSlimTextInput} col="2" label="Quantity" type="number" />
-                <Field name="purchases[0].ondate" instance="0" component={this.renderSlimTextInput} col="4" label="On" type="date" />
-                <Field name="purchases[0].price" instance="0" component={this.renderSlimTextInput} col="2" label="Price" type="number" step=".01" />
-              </div>
-              <div className="form-row">
-                <Field name="purchases[1].from" instance="1" component={this.renderSlimTextInput} col="4" label="From" type="text" />
-                <Field name="purchases[1].quantity" instance="1" component={this.renderSlimTextInput} col="2" label="Quantity" type="number" />
-                <Field name="purchases[1].ondate" instance="1" component={this.renderSlimTextInput} col="4" label="On" type="date" />
-                <Field name="purchases[1].price" instance="1" component={this.renderSlimTextInput} col="2" label="Price" type="number" step=".01" />
-              </div>
-              <div className="form-row">
-                <Field name="purchases[2].from" instance="2" component={this.renderSlimTextInput} col="4" label="From" type="text" />
-                <Field name="purchases[2].quantity" instance="2" component={this.renderSlimTextInput} col="2" label="Quantity" type="number" />
-                <Field name="purchases[2].ondate" instance="2" component={this.renderSlimTextInput} col="4" label="On" type="date" />
-                <Field name="purchases[2].price" instance="2" component={this.renderSlimTextInput} col="2" label="Price" type="number" step=".01" />
-              </div>
-              <div className="form-row">
-                <Field name="purchases[3].from" instance="3" component={this.renderSlimTextInput} col="4" label="From" type="text" />
-                <Field name="purchases[3].quantity" instance="3" component={this.renderSlimTextInput} col="2" label="Quantity" type="number" />
-                <Field name="purchases[3].ondate" instance="3" component={this.renderSlimTextInput} col="4" label="On" type="date" />
-                <Field name="purchases[3].price" instance="3" component={this.renderSlimTextInput} col="2" label="Price" type="number" step=".01" />
-              </div>
-              <div className="form-row">
-                <Field name="purchases[4].from" instance="4" component={this.renderSlimTextInput} col="4" label="From" type="text" />
-                <Field name="purchases[4].quantity" instance="4" component={this.renderSlimTextInput} col="2" label="Quantity" type="number" />
-                <Field name="purchases[4].ondate" instance="4" component={this.renderSlimTextInput} col="4" label="On" type="date" />
-                <Field name="purchases[4].price" instance="4" component={this.renderSlimTextInput} col="2" label="Price" type="number" step=".01" />
-              </div>
-              <hr />
-              <h3 className="h6">In Bags / Storage Locations (all optional)</h3>
-              <div className="form-row">
-                <Field name="inbag[0].location" instance="0" component={this.renderSlimTextInput} col="5" label="Location" type="text" />
-                <Field name="inbag[0].condition" instance="0" component={this.renderSlimOptionList} col="4" label="Condition" />
-                <Field name="inbag[0].quantity" instance="0" component={this.renderSlimTextInput} col="3" label="Quantity" type="number" />
-              </div>
-              <div className="form-row">
-                <Field name="inbag[1].location" instance="1" component={this.renderSlimTextInput} col="5" label="Location" type="text" />
-                <Field name="inbag[1].condition" instance="1" component={this.renderSlimOptionList} col="4" label="Condition" />
-                <Field name="inbag[1].quantity" instance="1" component={this.renderSlimTextInput} col="3" label="Quantity" type="number" />
-              </div>
-              <div className="form-row">
-                <Field name="inbag[2].location" instance="2" component={this.renderSlimTextInput} col="5" label="Location" type="text" />
-                <Field name="inbag[2].condition" instance="2" component={this.renderSlimOptionList} col="4" label="Condition" />
-                <Field name="inbag[2].quantity" instance="2" component={this.renderSlimTextInput} col="3" label="Quantity" type="number" />
-              </div>
-              <div className="form-row">
-                <Field name="inbag[3].location" instance="3" component={this.renderSlimTextInput} col="5" label="Location" type="text" />
-                <Field name="inbag[3].condition" instance="3" component={this.renderSlimOptionList} col="4" label="Condition" />
-                <Field name="inbag[3].quantity" instance="3" component={this.renderSlimTextInput} col="3" label="Quantity" type="number" />
-              </div>
-              <div className="form-row">
-                <Field name="inbag[4].location" instance="4" component={this.renderSlimTextInput} col="5" label="Location" type="text" />
-                <Field name="inbag[4].condition" instance="4" component={this.renderSlimOptionList} col="4" label="Condition" />
-                <Field name="inbag[4].quantity" instance="4" component={this.renderSlimTextInput} col="3" label="Quantity" type="number" />
-              </div>
-              <Field name="warning" component={this.renderTextInput} label="Warning Level" type="number" step="1" />
-              <hr />
-              <h3 className="h6">Categorise (all optional)</h3>
-              <small id="categoryhelp" className="form-text text-muted form-control-help">You can add activity names or personal tags to your kit. Enter names separate by commas. (e.g. football, cycling)</small>
-              <Field name="activitys" component={this.renderTextInput} label="Activities" />
-              <Field name="tags" component={this.renderTextInput} label="Tags" />
-              <Field name="active" component={this.renderActiveCheckbox} label="Active" />
-            </div>
+            <FieldArray name="purchases" component={this.renderPurchases} />
+            <hr />
+            <FieldArray name="inbag" component={this.renderInbag} />
+            <hr />
+            <Field name="warning" component={this.renderTextInput} label="Warning Level" type="number" step="1" />
+            <hr />
+            <h3 className="h6">Categorise (all optional)</h3>
+            <small id="categoryhelp" className="form-text text-muted form-control-help">You can add activity names or personal tags to your kit. Enter names separate by commas. (e.g. football, cycling)</small>
+            <Field name="activitys" component={this.renderTextInput} label="Activities" />
+            <Field name="tags" component={this.renderTextInput} label="Tags" />
+            <Field name="active" component={this.renderActiveCheckbox} label="Active" />
           </div>
-          <hr />
-          <div className="row">
-            <div className="col-12 col-lg-6" role="main">
-              <button className="btn btn-primary" type="submit">Add Kit</button>
-            </div>
+        </div>
+        <hr />
+        <div className="row">
+          <div className="col-12 col-lg-6" role="main">
+            <button className="btn btn-primary" type="submit">Save</button>
+            <Link className="btn btn-link" to="/kitbag/kits">Cancel</Link>
           </div>
-        </form>
+        </div>
+      </form>
     );
   }
 }

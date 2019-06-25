@@ -13,8 +13,19 @@ class KitEdit extends React.Component {
   }
 
   onSubmit = (formValues) => {
-    console.log(formValues);
-    this.props.actions.editKitbagKit(formValues);
+    var formValuesForApi = {
+      ...formValues,
+      activitys: this.getArray(formValues.activitys),
+      tags: this.getArray(formValues.tags)
+    }
+    this.props.actions.editKitbagKit(this.props.match.params.id, formValuesForApi);
+  }
+
+  getArray(field) {
+    if (Array.isArray(field)) {
+      return field;
+    }
+    return field ? field.split(',') : []
   }
 
   render() {
@@ -36,7 +47,18 @@ class KitEdit extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { kit: state.kitbag.kits[ownProps.match.params.id] };
+  let newKit = state.kitbag.kits[ownProps.match.params.id];
+  if (state.kitbag.kits[ownProps.match.params.id])  {
+    newKit = {
+      ...(state.kitbag.kits[ownProps.match.params.id]),
+      purchases: (state.kitbag.kits[ownProps.match.params.id]).purchases.map(p => {
+        const purchase = {...p};
+        purchase.ondate = p.ondate.toString().substring(0,10);
+        return purchase;
+      })
+    };
+  }
+  return { kit: newKit };
 };
 
 const mapDispatchToProps = dispatch => {

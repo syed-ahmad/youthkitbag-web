@@ -9,8 +9,19 @@ import Title from '../../includes/Title';
 class KitCreate extends React.Component {
 
   onSubmit = (formValues) => {
-    console.log(formValues);
-    this.props.actions.createKitbagKit(formValues);
+    var formValuesForApi = {
+      ...formValues,
+      activitys: this.getArray(formValues.activitys),
+      tags: this.getArray(formValues.tags)
+    }
+    this.props.actions.createKitbagKit(formValuesForApi);
+  }
+
+  getArray(field) {
+    if (Array.isArray(field)) {
+      return field;
+    }
+    return field ? field.split(',') : []
   }
 
   render() {
