@@ -3,7 +3,7 @@ import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, EDIT_KITBAG_KIT
 import history from '../helpers/history';
 import * as types from '../actions/types';
 
-const baseUrl = process.env.YKBAPI || 'http://localhost:8080';
+const baseUrl = process.env.YKBAPI;
 
 export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
   const token = localStorage.getItem('token');
