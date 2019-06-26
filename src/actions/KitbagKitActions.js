@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, EDIT_KITBAG_KIT, API_KITBAG_ERROR } from './types';
+import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, EDIT_KITBAG_KIT, DELETE_KITBAG_KIT, API_KITBAG_ERROR } from './types';
 import history from '../helpers/history';
 import * as types from '../actions/types';
 
@@ -28,9 +28,9 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
   });
 };
 
-export const fetchKitbagKit = (id) => dispatch => {
+export const fetchKitbagKit = (kitId) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.get(`${baseUrl}/kitbag/kits/${id}`, {
+  axios.get(`${baseUrl}/kitbag/kits/${kitId}`, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
@@ -96,12 +96,25 @@ export const editKitbagKit = (kitId, formValues) =>  dispatch => {
   });
 };
 
-// export const editKitbagKit = (id, formValues) =>  async dispatch => {
-//   const response = await API.put(`/kitbag/kits/${id}`, formValues);
-//   dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
-// };
-
-// export const deleteKitbagKit = (id) => async dispatch => {
-//   await API.delete(`/kitbag/kits/${id}`);
-//   dispatch({ type: DELETE_KITBAG_KIT, payload: id });
-// }
+export const deleteKitbagKit = (kitId) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios.delete(`${baseUrl}/kitbag/kits/${kitId}`, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }
+  })
+  .then(() => {
+    dispatch({ type: DELETE_KITBAG_KIT, payload: kitId });
+    history.push('/kitbag/kits');
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/kitbag/kits');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  })
+}

@@ -189,5 +189,7 @@ footer {
   .youthkitbag .form-group .input-group-prepend .custom-select {
     border-top-right-radius: 0rem;
     border-bottom-right-radius: 0rem; }
+  .youthkitbag .bg-smoke {
+    background-color: rgba(10, 10, 10, 0.9); }
 
 /*# sourceMappingURL=youthkitbag.css.map */

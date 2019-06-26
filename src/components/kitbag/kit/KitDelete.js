@@ -1,10 +1,52 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchKitbagKit, deleteKitbagKit } from './../../../actions/KitbagKitActions'
 import Modal from './../../includes/Modal';
+import history from './../../../helpers/history';
 
-const KitDelete = props => {
-  return (
-    <Modal></Modal>
-  );
+class KitDelete extends React.Component {
+  componentDidMount() {
+    this.props.fetchKitbagKit(this.props.match.params.id);
+  }
+
+  renderTitle() {
+    if (!this.props.kit) {
+      return 'Delete item of kit';
+    }
+    return `Delete "${this.props.kit.title}"`;
+  }
+
+  renderContent() {
+    if (!this.props.kit) {
+      return 'Are you sure you want to delete this item? You do have the option to just change the active status and retain the history of this item.';
+    }
+    return `Are you sure you want to delete this item title "${this.props.kit.title}"? You do have the option to just change the active status and retain the history of this item.`;
+  }
+
+  renderActions() {
+    const kitId = this.props.match.params.id;
+    return (
+      <React.Fragment>
+        <Link to="/kitbag/kits" className="btn btn-outline-secondary" data-dismiss="modal">Cancel</Link>
+        <button type="button" className="btn btn-danger" onClick={() => this.props.deleteKitbagKit(kitId)}>Delete</button>
+      </React.Fragment>
+    );
+  }
+
+  render() {
+    return (
+      <Modal 
+        title={this.renderTitle()}
+        content={this.renderContent()}
+        actions={this.renderActions()}
+        onDismiss={() => history.push('/kitbag/kits')} />
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { kit: state.kitbag.kits[ownProps.match.params.id] }
 };
 
-export default KitDelete;
+export default connect(mapStateToProps, { fetchKitbagKit, deleteKitbagKit })(KitDelete);
