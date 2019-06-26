@@ -162,8 +162,14 @@ class KitForm extends React.Component {
           <div className="form-row" key={index}>
             <Field name={`${item}.from`} instance={index} component={this.renderSlimTextInput} col="4" label="Purchased from" type="text" />
             <Field name={`${item}.quantity`} instance={index} component={this.renderSlimTextInput} col="2" label="Quantity" type="number" />
-            <Field name={`${item}.ondate`} instance={index} component={this.renderSlimTextInput} col="4" label="On" type="date" />
+            <Field name={`${item}.ondate`} instance={index} component={this.renderSlimTextInput} col="3" label="On" type="date" />
             <Field name={`${item}.price`} instance={index} component={this.renderSlimTextInput} col="2" label="Price" type="number" step=".01" />
+            <div className="form-group col-sm-1">
+              { (index === 0) &&
+                <label className="d-none d-sm-block">Rem</label>
+              }
+              <button className="btn btn-danger" type="button" title="Remove Purchase" onClick={() => fields.remove(index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+            </div>
           </div>
         ))}
         <button className="btn btn-secondary" type="button" onClick={() => fields.push({})}>
@@ -178,9 +184,15 @@ class KitForm extends React.Component {
       <div>
         {fields.map((item, index) => (
           <div className="form-row" key={index}>
-            <Field name={`${item}.location`} instance={index} component={this.renderSlimTextInput} col="5" label="Storage location" type="text" />
+            <Field name={`${item}.location`} instance={index} component={this.renderSlimTextInput} col="4" label="Storage location" type="text" />
             <Field name={`${item}.condition`} instance={index} component={this.renderSlimOptionList} col="4" label="Condition" />
             <Field name={`${item}.quantity`} instance={index} component={this.renderSlimTextInput} col="3" label="Quantity" type="number" />
+            <div className="form-group col-sm-1">
+              { (index === 0) &&
+                <label className="d-none d-sm-block">Rem</label>
+              }
+              <button className="btn btn-danger" type="button" title="Remove Purchase" onClick={() => fields.remove(index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+            </div>
           </div>
         ))}
         <button className="btn btn-secondary" type="button" onClick={() => fields.push({})}>
