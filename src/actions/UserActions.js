@@ -2,7 +2,7 @@ import * as types from './types'
 import axios from 'axios';
 import history from '../helpers/history'; 
 
-const baseUrl = process.env.YKBAPI;
+const baseUrl = process.env.YKBAPI || 'http://localhost:8080';
 
 export const getUser = () => dispatch => {
   console.log("getUser")

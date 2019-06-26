@@ -3,7 +3,7 @@ import axios from 'axios';
 import history from '../helpers/history';
 import { getUser } from './UserActions';
 
-const baseUrl = process.env.YKBAPI;
+const baseUrl = process.env.YKBAPI || 'http://localhost:8080';
 
 // const loginRequest = (userId) => async (dispatch) => {
 //   try {
