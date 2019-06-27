@@ -1,6 +1,5 @@
 import * as types from './types'
 import axios from 'axios';
-import history from '../helpers/history'; 
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
@@ -20,10 +19,5 @@ export const getUser = () => dispatch => {
       dispatch({ type: types.GET_USER, payload: data });
     })
     .catch(err => {
-      const { location } = history;
-      if (location.pathname !== '/auth/login') {
-        dispatch({ type: types.GETALL_FAILURE, payload: { data: { message: 'You are not authorized for this action. Please login first' }}});
-        history.push(`/auth/login?return=${location.pathname}`);
-      }
     });
 }

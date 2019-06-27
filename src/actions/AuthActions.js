@@ -58,10 +58,10 @@ export const logout = () => async (dispatch) => {
   try {
     window.localStorage.clear();
     dispatch({ type: types.LOGOUT })
-    history.push('/auth/login')
+    history.push('/')
   } catch (err) {
     if (err.response.status === 401) {
-      history.push('/auth/login')
+      history.push('/')
     }
     console.log(err)
   }
