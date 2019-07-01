@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchKitbagKits } from '../../../actions';
 import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 
 import Title from '../../includes/Title';
 import KitCard from './KitCard';
@@ -18,9 +19,19 @@ class Kitbag extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchKitbagKits();
+    this.props.fetchKitbagKits('', '', 1, 24);
     console.log('Rendering');
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.search !== prevProps.location.search) {
+      const values = queryString.parse(this.props.location.search);
+      const search = values.search ? values.search : '';
+      const by = values.by ? values.by : '';
+      const page = values.page ? values.page : '';
+      this.props.fetchKitbagKits(search, by, page, 24);
+    }
+  } 
 
   renderList() {
     return this.props.items.map(item => {
