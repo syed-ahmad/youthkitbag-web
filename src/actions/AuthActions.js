@@ -40,18 +40,20 @@ export const login = (email, password) => dispatch => {
     });
 }
 
-export const signup = (email, password, confirmPassword) => async (dispatch) => {
-  try {
-    window.localStorage.clear();
-    const { data } = await axios.post(`${baseUrl}/auth/signup`, { email, password, confirmPassword }, {
-      'content-type': 'application/json',
-    });
+export const signup = (email, password, confirmPassword) => dispatch => {
+  window.localStorage.clear();
+  axios.post(`${baseUrl}/auth/signup`, { email, password, confirmPassword }, {
+    'content-type': 'application/json',
+  })
+  .then(response => {
+    const { data } = response;
     dispatch({ type: types.SIGNUP_SUCCESS, payload: data });
     history.push('/auth/login', { signup: 'success' });
-  } catch (err) {
+  })
+  .catch(err => {
     console.log('error', err.response, err.message);
     dispatch({ type: types.SIGNUP_FAILURE, payload: err.response });
-  }
+  });
 }
 
 export const logout = () => async (dispatch) => {
@@ -66,3 +68,34 @@ export const logout = () => async (dispatch) => {
     console.log(err)
   }
 }
+
+export const reset = (email) => dispatch => {
+  window.localStorage.clear();
+  axios.post(`${baseUrl}/auth/reset`, { email }, {
+    'content-type': 'application/json',
+  })
+  .then(response => {
+    dispatch({ type: types.RESET_REQUESTED });
+    history.push('/auth/login');
+  })
+  .catch(err => {
+    console.log('error', err.response, err.message);
+    dispatch({ type: types.SIGNUP_FAILURE, payload: err.response });
+  });
+}
+
+export const newPassword = (password, userId, token) => dispatch => {
+  window.localStorage.clear();
+  axios.post(`${baseUrl}/auth/new-password`, { password, userId, token }, {
+    'content-type': 'application/json',
+  })
+  .then(response => {
+    dispatch({ type: types.PASSWORD_RESET });
+    history.push('/auth/login');
+  })
+  .catch(err => {
+    console.log('error', err.response, err.message);
+    dispatch({ type: types.SIGNUP_FAILURE, payload: err.response });
+  });
+}
+

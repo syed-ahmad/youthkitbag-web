@@ -51,13 +51,13 @@ class App extends React.Component {
               <Route path="/auth/signup" exact component={SignUp} />
               <Route path="/auth/login" exact component={Login} />
               <Route path="/auth/reset" exact component={Reset} />
-              <Route path="/auth/newpassword" exact component={NewPassword} />
+              <Route path="/auth/newpassword/:key" exact component={NewPassword} />
               <Route path="/auth/logout" exact component={Logout} />
               <PrivateRoute path="/purchase" exact component={Purchase} auth={this.props.auth} />
-              <PrivateRoute path="/kitbag/kits" exact component={KitBag} auth={this.props.auth} />
               <PrivateRoute path="/kitbag/kits/new" exact component={KitCreate} auth={this.props.auth} />
               <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitEdit} auth={this.props.auth} />
               <PrivateRoute path="/kitbag/kits/delete/:id" exact component={KitDelete} auth={this.props.auth} />
+              <PrivateRoute path="/kitbag/kits" component={KitBag} auth={this.props.auth} />
             </Switch>
           </main>
           <Footer />
