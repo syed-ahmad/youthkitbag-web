@@ -5,13 +5,9 @@ import classNames from 'classnames';
 
 class KitForm extends React.Component {
 
-  topImage = () => {
-    if (!this.props || !this.props.initialValues) {
-      return '/images/default.png';
-    }
-
-    return this.props.initialValues.images.length > 0 ? this.props.initialValues.images[0].imageUrl : '/images/default.png';
-  }
+  state = {
+    topImage: '/images/default.png',
+  };
 
   renderSecondaryImages = () => {
     if (!this.props || !this.props.initialValues) {
@@ -27,7 +23,7 @@ class KitForm extends React.Component {
     const items = []
   
     for (let i = 0; i < images.length; i++) {
-      items.push(<img key={`image${i}`} className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" />)
+      items.push(<img key={`image${i}`} className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" onClick={this.renderTopImage.bind(null, images[i].imageUrl)} />)
     }
   
     return (
@@ -35,6 +31,10 @@ class KitForm extends React.Component {
         {items}
       </div>
     )
+  }
+
+  renderTopImage = (src) => {
+    this.setState({topImage: src});
   }
 
   renderTextInput({ input, label, meta, type = 'text' }) {
@@ -206,13 +206,19 @@ class KitForm extends React.Component {
    this.props.onSubmit(formValues);
   };
 
+  componentDidMount() {
+    if (this.props && this.props.initialValues && this.props.initialValues.images.length > 0) {
+      this.setState({topImage: this.props.initialValues.images[0].imageUrl});
+    }
+  }
+
   render() {
     return (
       <form className="mb-3" onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <div className="row">
           <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
             <div>
-              <img id="preview" className="img-fluid mb-3" src={this.topImage()} alt="" role="presentation" />
+              <img id="preview" className="img-fluid mb-3" src={this.state.topImage} alt="" role="presentation" />
             </div>
             <div>
               {this.renderSecondaryImages()}
