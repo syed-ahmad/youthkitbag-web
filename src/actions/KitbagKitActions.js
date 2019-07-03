@@ -55,7 +55,7 @@ export const createKitbagKit = (formValues) => dispatch => {
   axios.post(`${baseUrl}/kitbag/kits`, {...formValues}, {
     headers: {
       Authorization: `bearer ${token}`,
-      'content-type': 'application/json',
+      'content-type': 'multipart/form-data',
     }
   })
   .then(response => {

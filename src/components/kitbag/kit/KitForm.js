@@ -4,10 +4,16 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 class KitForm extends React.Component {
+  constructor(props) {
+    super(props);
 
-  state = {
-    topImage: '/images/default.png',
-  };
+    this.state = {
+      topImage: '/images/default.png',
+    };
+
+    //this.handleSubmit = this.handleSubmit.bind(this);
+    this.fileInput = React.createRef();
+  }
 
   renderSecondaryImages = () => {
     if (!this.props || !this.props.initialValues) {
@@ -60,7 +66,7 @@ class KitForm extends React.Component {
         <label className="col-sm-3 col-form-label">{label}</label>
         <div className="col-sm-9">
           <div className="custom-file">
-            <input type="file" multiple className="custom-file-input" id={input.name} aria-describedby={input.name} {...input} />
+            <input type="file" multiple ref={this.fileInput} className="custom-file-input" id={input.name} aria-describedby={input.name} {...input} />
             <label className="custom-file-label" htmlFor={input.name}>{helptext}</label>
           </div>
         </div>
@@ -203,6 +209,7 @@ class KitForm extends React.Component {
   }
 
   onSubmit = formValues => {
+    console.log(formValues);
    this.props.onSubmit(formValues);
   };
 
@@ -227,7 +234,16 @@ class KitForm extends React.Component {
           <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
             <Field name="title" component={this.renderTextInput} label="Title" />
             <Field name="subtitle" component={this.renderTextInput} label="Subtitle (optional)" />
-            {/* <Field name="photos" component={this.FileInput} label="Images" helptext="Choose image(s)" onChange={this.handlePreview} /> */}
+            <div className="form-group row">
+              <label className="col-sm-3 col-form-label">Images</label>
+              <div className="col-sm-9">
+                <div className="custom-file">
+                  <input type="file" multiple ref={this.fileInput} className="custom-file-input" id="photos" aria-describedby="photos" />
+                  <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
+                </div>
+              </div>
+            </div>
+            {/* <Field name="photos" component={this.renderImageSelect} label="Images" helptext="Choose image(s)" /> */}
             <Field name="description" component={this.renderTextArea} label="Description" />
             <Field name="status" component={this.renderOptionList} label="Status" />
             <Field name="security" component={this.renderTextInput} label="Security (optional)" />
