@@ -9,11 +9,5 @@ export default function validate(values) {
     errors.email = 'Email address must be 6 or more characters';
   }
 
-  if (!values.password) {
-    errors.password = 'Password is required';
-  } else if (values.password.length <= 4) {
-    errors.password = 'Password must be 5 or more characters';
-  }
-
   return errors;
 };

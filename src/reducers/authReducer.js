@@ -12,7 +12,7 @@ const isLogin = !!(localStorage.getItem('token') && localStorage.getItem('authen
 const initialState = isLogin ? { loggedIn: true } : { loggedIn: false }
 
 export default function authentication(state = initialState, action) {
-  //console.log('AUTH', action.type, action.payload);
+  console.log('AUTH', action.type, action.payload);
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
@@ -23,8 +23,7 @@ export default function authentication(state = initialState, action) {
     case LOGIN_FAILURE:
       return {
         loggedIn: false,
-        loginFailed: true,
-        loginError: action.payload,
+        loginFailed: true
       }
     case SIGNUP_SUCCESS:
       return {
@@ -32,8 +31,7 @@ export default function authentication(state = initialState, action) {
       }
     case SIGNUP_FAILURE:
       return {
-        signupFailed: true,
-        signupError: action.paylod
+        signupFailed: true
       }
     case GETALL_SUCCESS:
       return {

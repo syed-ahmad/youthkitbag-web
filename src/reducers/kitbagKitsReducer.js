@@ -2,7 +2,7 @@ import _ from 'lodash';
 import * as types from '../actions/types';
 
 export default (state = {}, action) => {
-  //console.log('KBKIT', action.type, action.payload);
+  console.log('KBKIT', action.type, action.payload);
   switch (action.type) {
     case types.FETCH_KITBAG_KIT:
       return { ...state, [action.payload._id]: action.payload };

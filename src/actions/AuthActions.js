@@ -67,6 +67,7 @@ export const reset = (email) => dispatch => {
   .catch(err => {
     console.log('error', err.response, err.message);
     dispatch({ type: types.SIGNUP_FAILURE, payload: err.response });
+    dispatch({ type: types.SET_ERROR, payload: err.response });
   });
 }
 
