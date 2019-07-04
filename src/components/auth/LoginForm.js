@@ -2,9 +2,11 @@ import React from 'react';
 import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
 import validate from './LoginFormValidationRules';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const LoginForm = () => {
+
+  const dispatch = useDispatch();
 
   const initialValues = {
     email: '',
@@ -19,7 +21,7 @@ const LoginForm = () => {
   } = useForm(initialValues, loginSubmit, validate);
 
   function loginSubmit() {
-    login(values.email, values.password);
+    dispatch(login(values.email, values.password));
   }
 
   return (

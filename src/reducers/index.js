@@ -7,6 +7,7 @@ import kitbagReducer from './kitbagReducer';
 import marketReducer from './marketReducer';
 import filterReducer from './filterReducer';
 import paginationReducer from './paginationReducer';
+import toastReducer from './toastReducer';
 
 export default combineReducers({
   auth: authReducer, 
@@ -15,5 +16,6 @@ export default combineReducers({
   market: marketReducer,
   form: formReducer,
   filter: filterReducer,
-  pagination: paginationReducer
+  pagination: paginationReducer,
+  toast: toastReducer
 });

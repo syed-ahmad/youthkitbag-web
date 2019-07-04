@@ -5,22 +5,6 @@ import { getUser } from './UserActions';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
-// const loginRequest = (userId) => async (dispatch) => {
-//   try {
-//     const token = localStorage.getItem('token');
-//     const response = await axios.get(`${baseUrl}/user/${userId}`, { headers: {
-//       Authorization: `bearer ${token}`,
-//       'content-type': 'application/json',
-//     }});
-//     localStorage.setItem('authentication', JSON.stringify(response.data.email));
-//     localStorage.setItem('user', JSON.stringify(response.data));
-//     dispatch({ type: types.GETALL_SUCCESS});
-//     dispatch(getUser(userId));
-//   } catch (err) {
-//     dispatch({ type: types.GETALL_FAILURE, payload: err.response });
-//   }
-// }
-
 export const login = (email, password) => dispatch => {
   console.log('LOGIN');
   window.localStorage.clear();
@@ -37,7 +21,8 @@ export const login = (email, password) => dispatch => {
       history.push('/kitbag/kits');
     })
     .catch(err => {
-      dispatch({ type: types.LOGIN_FAILURE, payload: err.response });
+      dispatch({ type: types.LOGIN_FAILURE });
+      dispatch({ type: types.SET_ERROR, payload: err.response });
     });
 }
 
