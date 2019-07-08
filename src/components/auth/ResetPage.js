@@ -4,7 +4,8 @@ import Title from '../includes/Title';
 import Alert from '../includes/Alert';
 import ResetForm from './ResetForm';
 
-const Reset = () => {
+const ResetPage = () => {
+  
   return (
     <div>
       <Title title="Reset your password" />
@@ -20,6 +21,7 @@ const Reset = () => {
       </section>
     </div>
   );
+
 }
 
-export default Reset;
+export default ResetPage;

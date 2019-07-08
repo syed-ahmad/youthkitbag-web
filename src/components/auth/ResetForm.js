@@ -36,4 +36,5 @@ const ResetForm = () => {
     </form>
   );
 }
+
 export default ResetForm;

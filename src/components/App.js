@@ -12,10 +12,10 @@ import Home from './Home';
 import Features from './Features';
 import Pricing from './Pricing';
 
-import SignUp from './auth/SignUp';
-import Login from './auth/Login';
-import Reset from './auth/Reset';
-import NewPassword from './auth/NewPassword';
+import SignUp from './auth/SignUpPage';
+import Login from './auth/LoginPage';
+import Reset from './auth/ResetPage';
+import NewPassword from './auth/NewPasswordPage';
 import Logout from './auth/Logout';
 
 import Purchase from './Purchase';
