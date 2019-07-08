@@ -1,16 +1,14 @@
-import {
-  GET_USER,
-} from '../actions/types';
+import * as types from '../actions/types';
 
-const initialState = {}
+const initialState = {};
 
 export default function authentication(state = initialState, action) {
   console.log('USER', action.type, action.payload);
   switch (action.type) {
-    case GET_USER:
-      return {
-        ...action.payload,
-      }
+    case types.GET_USER:
+      return { ...action.payload }
+    case types.LOGOUT:
+      return initialState;
     default:
       return state
   }

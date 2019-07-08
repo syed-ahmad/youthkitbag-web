@@ -1,6 +1,8 @@
 import * as types from '../actions/types';
 
-export default (state = { currentToast: {}, currentError: {} }, action) => {
+const initialState = { currentToast: {}, currentError: {} };
+
+export default (state = initialState, action) => {
   console.log('FLTER', action.type, action.payload);
   switch (action.type) {
     case types.SET_TOAST: 
@@ -11,6 +13,8 @@ export default (state = { currentToast: {}, currentError: {} }, action) => {
       return { ...state, currentError: action.payload.data };
     case types.RESET_ERROR: 
       return { ...state, currentError: {} };
+    case types.LOGOUT:
+      return initialState;
     default:
       return state;
   }

@@ -1,7 +1,9 @@
 import _ from 'lodash';
 import * as types from '../actions/types';
 
-export default (state = {}, action) => {
+const initialState = {};
+
+export default (state = initialState, action) => {
   console.log('KBKIT', action.type, action.payload);
   switch (action.type) {
     case types.FETCH_KITBAG_KIT:
@@ -16,6 +18,8 @@ export default (state = {}, action) => {
       return { ..._.mapKeys(action.payload.kits, '_id') };
     case types.API_KITBAG_ERROR:
       return { ...state, error: action.payload };
+    case types.LOGOUT:
+      return initialState;
     default:
       return state;
   }

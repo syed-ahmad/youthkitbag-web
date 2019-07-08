@@ -1,12 +1,4 @@
-import {
-  GETALL_FAILURE,
-  GETALL_SUCCESS,
-  LOGIN_FAILURE,
-  LOGIN_SUCCESS,
-  LOGOUT,
-  SIGNUP_FAILURE,
-  SIGNUP_SUCCESS
-} from '../actions/types';
+import * as types from '../actions/types';
 
 const isLogin = !!(localStorage.getItem('token') && localStorage.getItem('authentication'))
 const initialState = isLogin ? { loggedIn: true } : { loggedIn: false }
@@ -14,37 +6,37 @@ const initialState = isLogin ? { loggedIn: true } : { loggedIn: false }
 export default function authentication(state = initialState, action) {
   console.log('AUTH', action.type, action.payload);
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case types.LOGIN_SUCCESS:
       return {
         token: action.payload.token,
         loader: true,
         loggedIn: true
       }
-    case LOGIN_FAILURE:
+    case types.LOGIN_FAILURE:
       return {
         loggedIn: false,
         loginFailed: true
       }
-    case SIGNUP_SUCCESS:
+    case types.SIGNUP_SUCCESS:
       return {
         signedUp: true,
       }
-    case SIGNUP_FAILURE:
+    case types.SIGNUP_FAILURE:
       return {
         signupFailed: true
       }
-    case GETALL_SUCCESS:
+    case types.GETALL_SUCCESS:
       return {
         loggedIn: true,
         loader: false
       }
-    case GETALL_FAILURE:
+    case types.GETALL_FAILURE:
       return {
         errorOccurred: true,
         loginFailed: true,
         loginError: action.payload
       }
-    case LOGOUT:
+    case types.LOGOUT:
       return {
         loggedIn: false,
       }
