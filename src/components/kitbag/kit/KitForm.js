@@ -10,7 +10,23 @@ const KitForm = () => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    title: ''
+    title: '',
+    subtitle: '',
+    description: '',
+    status: 'Owned',
+    purchases: [],
+    security: '',
+    warning: 0,
+    activitys: '',
+    tags: '',
+    active: 'on'
+  };
+
+  const initialPurchase = {
+    from: '',
+    quantity: 0,
+    ondate: '2001-01-01',
+    price: 0.01
   };
 
   const {
@@ -39,6 +55,8 @@ const KitForm = () => {
   }
 
   const topImage = '/images/default.png';
+
+  console.log('values', values);
 
   return (
     <form className="mb-3" onSubmit={handleSubmit}>
@@ -121,10 +139,30 @@ const KitForm = () => {
           <div>
             {values.purchases && values.purchases.map((item, index) => (
               <div className="form-row" key={index}>
-                {/* <Field name={`${item}.from`} instance={index} component={this.renderSlimTextInput} col="4" label="Purchased from" type="text" />
-                <Field name={`${item}.quantity`} instance={index} component={this.renderSlimTextInput} col="2" label="Quantity" type="number" />
-                <Field name={`${item}.ondate`} instance={index} component={this.renderSlimTextInput} col="3" label="On" type="date" />
-                <Field name={`${item}.price`} instance={index} component={this.renderSlimTextInput} col="2" label="Price" type="number" step=".01" /> */}
+                <div className="form-group col-sm-4">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Purchased from</label>
+                  }
+                  <input className="form-control" name={`purchases[${index}].from`} type="text" onChange={handleChange} value={values.purchases[index].from} />
+                </div>
+                <div className="form-group col-sm-2">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Quantity</label>
+                  }
+                  <input className="form-control" name={`purchases[${index}].quantity`} type="number" step="1" onChange={handleChange} value={values.purchases[index].quantity} />
+                </div>
+                <div className="form-group col-sm-3">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">On</label>
+                  }
+                  <input className="form-control" name={`purchases[${index}].ondate`} type="date" onChange={handleChange} value={values.purchases[index].ondate} />
+                </div>
+                <div className="form-group col-sm-2">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Price</label>
+                  }
+                  <input className="form-control" name={`purchases[${index}].price`} type="number" step=".01" onChange={handleChange} value={values.purchases[index].price} />
+                </div>
                 <div className="form-group col-sm-1">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Rem</label>
@@ -133,7 +171,7 @@ const KitForm = () => {
                 </div>
               </div>
             ))}
-            <button className="btn btn-secondary" type="button" onClick={() => values.purchases.push({})}>
+            <button className="btn btn-secondary" type="button" onClick={() => values.purchases.push(initialPurchase)}>
               Add a new purchase
             </button>
           </div>
