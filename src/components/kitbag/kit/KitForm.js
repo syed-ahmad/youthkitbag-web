@@ -15,6 +15,7 @@ const KitForm = () => {
     description: '',
     status: 'Owned',
     purchases: [],
+    inbag: [],
     security: '',
     warning: 0,
     activitys: '',
@@ -29,10 +30,18 @@ const KitForm = () => {
     price: 0.01
   };
 
+  const initialInbag = {
+    location: '',
+    condition: 'used',
+    quantity: 0
+  };
+
   const {
-    values,
     handleChange,
     handleSubmit,
+    addArrayItem,
+    removeArrayItem,
+    values,
     errors
   } = useForm(initialValues, resetSubmit, validate);
 
@@ -44,7 +53,6 @@ const KitForm = () => {
   }
 
   function resetSubmit() {
-    console.log(values);
     const kit = {
       ...values, 
       tags: getArray(values.tags), 
@@ -55,8 +63,6 @@ const KitForm = () => {
   }
 
   const topImage = '/images/default.png';
-
-  console.log('values', values);
 
   return (
     <form className="mb-3" onSubmit={handleSubmit}>
@@ -134,8 +140,6 @@ const KitForm = () => {
             </div>
           </div>
           <hr />
-          {/* <FieldArray name="purchases" component={this.renderPurchases} /> */}
-
           <div>
             {values.purchases && values.purchases.map((item, index) => (
               <div className="form-row" key={index}>
@@ -167,17 +171,55 @@ const KitForm = () => {
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Rem</label>
                   }
-                  <button className="btn btn-danger" type="button" title="Remove Purchase" onClick={() => values.purchases.remove(index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+                  <button className="btn btn-danger" type="button" title="Remove Purchase" onClick={() => removeArrayItem('purchases', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
                 </div>
               </div>
             ))}
-            <button className="btn btn-secondary" type="button" onClick={() => values.purchases.push(initialPurchase)}>
+            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('purchases', initialPurchase)}>
               Add a new purchase
             </button>
           </div>
-
           <hr />
-          {/* <FieldArray name="inbag" component={this.renderInbag} /> */}
+
+          <div>
+            {values.inbag && values.inbag.map((item, index) => (
+              <div className="form-row" key={index}>
+                <div className="form-group col-sm-4">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Storage location</label>
+                  }
+                  <input className="form-control" name={`inbag[${index}].location`} type="text" onChange={handleChange} value={values.inbag[index].location} />
+                </div>
+                <div className="form-group col-sm-4">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Condition</label>
+                  }
+                  <select className="custom-select" name={`inbag[${index}].condition`} onChange={handleChange} value={values.inbag[index].condition}>
+                    <option value="used" >Used</option>
+                    <option value="new" >New</option>
+                    <option value="almostnew" >Almost New</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div className="form-group col-sm-3">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Quantity</label>
+                  }
+                  <input className="form-control" name={`inbag[${index}].quantity`} type="number" onChange={handleChange} value={values.inbag[index].quantity} />
+                </div>
+                <div className="form-group col-sm-1">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Rem</label>
+                  }
+                  <button className="btn btn-danger" type="button" title="Remove Purchase" onClick={() => removeArrayItem('inbag', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+                </div>
+              </div>
+            ))}
+            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('inbag', initialInbag)}>
+              Add a new storage location
+            </button>
+          </div>
+
           <hr />
           <div className="form-group row">
             <label htmlFor="warning" className="col-sm-3 col-form-label">Warning Level</label>

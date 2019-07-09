@@ -19,16 +19,41 @@ const useForm = (initiaValues, callback, validate) => {
     setErrors(validate(values));
   };
 
+  const getNameValue = (eventTarget) => {
+    let { name, value } = eventTarget;
+    if (name.indexOf('[') < 0) {
+      return { name, value };
+    }
+    
+    const arrayName = name.substring(0, name.indexOf('['));
+    const index = +name.substring(name.indexOf('[') + 1, name.indexOf(']'));
+    const propertyName = name.substring(name.indexOf(']') + 2);
+    const newItem = {...values[arrayName][index], [propertyName]: value};
+    const array = values[arrayName].map(function(item, i) { return i === index ? newItem : item }) ;
+    return { name: arrayName, value: array };
+  }
+
   const handleChange = (event) => {
-    console.log(event.target.name, event.target.value);
     event.persist();
-    setValues(values => ({ ...values, [event.target.name]: event.target.value }));
-    console.log(values);
+    const { name, value } = getNameValue(event.target);
+    setValues(values => ({ ...values, [name]: value }));
   };
+
+  const addArrayItem = (arrayName, newItem) => {
+    const array = [...values[arrayName], newItem];
+    setValues(values => ({ ...values, [arrayName]: array }));
+  }
+
+  const removeArrayItem = (arrayName, index) => {
+    const array = values[arrayName].filter(function(item, i) { return i !== index }) ;
+    setValues(values => ({ ...values, [arrayName]: array }));
+  }
 
   return {
     handleChange,
     handleSubmit,
+    addArrayItem,
+    removeArrayItem,
     values,
     errors
   }
