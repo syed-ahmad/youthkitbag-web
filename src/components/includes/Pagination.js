@@ -25,11 +25,10 @@ class Pagination extends React.Component {
     : '';
 
   render() {
-    if (!this.props.pagination) {
+    if (!this.props.pagination || this.props.pagination.totalItems === 0) {
       return null;
     }
 
-    console.log(this.props);
     return (
       <nav aria-label="Page navigation">
         <ul className="pagination">
