@@ -21,7 +21,7 @@ import Logout from './auth/Logout';
 import Purchase from './Purchase';
 
 import KitBag from './kitbag/kit/KitBag';
-import KitCreate from './kitbag/kit/KitCreate';
+import KitCreate from './kitbag/kit/KitCreatePage';
 import KitEdit from './kitbag/kit/KitEdit';
 import KitDelete from './kitbag/kit/KitDelete';
 
