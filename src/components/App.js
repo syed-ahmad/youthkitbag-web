@@ -22,7 +22,7 @@ import Purchase from './Purchase';
 
 import KitBag from './kitbag/kit/KitBag';
 import KitCreate from './kitbag/kit/KitCreatePage';
-import KitEdit from './kitbag/kit/KitEdit';
+import KitEdit from './kitbag/kit/KitEditPage';
 import KitDelete from './kitbag/kit/KitDelete';
 
 class App extends React.Component {

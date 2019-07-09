@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useForm from '../../hooks/useForm';
-import { createKitbagKit } from '../../../actions/KitbagKitActions';
+import { createKitbagKit, editKitbagKit } from '../../../actions/KitbagKitActions';
 import validate from './KitFormValidationRules';
 
 const KitForm = () => {
+
+  const kitId = undefined;
 
   const dispatch = useDispatch();
 
@@ -59,7 +61,11 @@ const KitForm = () => {
       activitys: getArray(values.activitys),
       active: values.active === "on"
     };
-    dispatch(createKitbagKit(kit));
+    if (kitId) {
+      dispatch(editKitbagKit(kitId, kit));
+    } else {
+      dispatch(createKitbagKit(kit));
+    }
   }
 
   const topImage = '/images/default.png';
