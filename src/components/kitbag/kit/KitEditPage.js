@@ -37,7 +37,22 @@ const KitEditPage = (props) => {
   }, [fetchKitbagKit, kitId]);
   
   useEffect(() => {
-    setKit(current);
+    let newKit = {};
+    if (current) {
+      if (current.purchases) {
+        newKit = {
+          ...current,
+          purchases: current.purchases.map(p => {
+            const purchase = {...p};
+            purchase.ondate = p.ondate.toString().substring(0,10);
+            return purchase;
+          })
+        };  
+      } else {
+        newKit = {...current};
+      }
+      setKit(newKit);  
+    }
   }, [current]);
   
   return (

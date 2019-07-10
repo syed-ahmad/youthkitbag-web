@@ -9,7 +9,7 @@ import KitCard from './KitCard';
 import Search from '../../includes/Search';
 import Pagination from '../../includes/Pagination';
 
-class Kitbag extends React.Component {
+class KitBag extends React.Component {
 
   getTitle = () => {
     if (!this.props.pagination) {
@@ -33,8 +33,8 @@ class Kitbag extends React.Component {
   } 
 
   renderList() {
-    return this.props.items.map(item => {
-      return <KitCard key={item._id} kit={item}/>
+    return this.props.items.map((item, index) => {
+      return <KitCard key={`${item._id}-${index}`} kit={item}/>
     })
   }
 
@@ -70,4 +70,4 @@ const mapStateToProps = (state) => {
   return { items: Object.values(state.kitbag.kits), filter: state.filter, pagination: state.pagination };
 }
 
-export default connect(mapStateToProps, { fetchKitbagKits })(Kitbag);
+export default connect(mapStateToProps, { fetchKitbagKits })(KitBag);
