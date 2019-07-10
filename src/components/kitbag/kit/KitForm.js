@@ -43,10 +43,23 @@ const KitForm = ({ kit }) => {
     removeArrayItem,
     values,
     setValues,
-    photos,
-    setPhotos,
     errors
   } = useForm(initialValues, updateKit, validate);
+
+  let formData = new FormData();
+
+  function onFileChanged(event) {
+    console.log(event.target.files);
+    var files = event.target.files || event.dataTransfer.files;
+    if (!files.length) {
+      console.log(files.length);
+      return;
+    }
+    
+    // Add the File object to the formdata
+    formData.append("photos", files);
+    console.log(formData);
+  }
 
   function getArray(field) {
     if (Array.isArray(field)) {
@@ -70,10 +83,15 @@ const KitForm = ({ kit }) => {
       active: values.active === "on" || values.active
     };
 
+  
+    // Add your data...
+    console.log(formData, kit);
+    formData.append('title', kit.title);
+
     if (kit._id) {
-      dispatch(editKitbagKit(kit._id, kit, photos));
+      dispatch(editKitbagKit(kit._id, formData));
     } else {
-      dispatch(createKitbagKit(kit, photos));
+      dispatch(createKitbagKit(formData));
     }
   }
 
@@ -113,12 +131,11 @@ const KitForm = ({ kit }) => {
             <label className="col-sm-3 col-form-label">Images</label>
             <div className="col-sm-9">
               <div className="custom-file">
-                <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => setPhotos(e.target.files)} />
+                <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
                 <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
               </div>
             </div>
           </div>
-          {/* <Field name="photos" component={this.renderImageSelect} label="Images" helptext="Choose image(s)" /> */}
           <div className="form-group row">
             <label htmlFor="description" className="col-sm-3 col-form-label">Description</label>
             <div className="col-sm-9">
