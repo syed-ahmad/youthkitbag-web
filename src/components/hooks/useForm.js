@@ -4,6 +4,7 @@ const useForm = (initiaValues, callback, validate) => {
 
   const [values, setValues] = useState(initiaValues);
   const [errors, setErrors] = useState({});
+  const [photos, setPhotos] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -56,6 +57,8 @@ const useForm = (initiaValues, callback, validate) => {
     removeArrayItem,
     values,
     setValues,
+    photos,
+    setPhotos,
     errors
   }
 };

@@ -43,6 +43,8 @@ const KitForm = ({ kit }) => {
     removeArrayItem,
     values,
     setValues,
+    photos,
+    setPhotos,
     errors
   } = useForm(initialValues, updateKit, validate);
 
@@ -60,6 +62,7 @@ const KitForm = ({ kit }) => {
   }, [kit, setValues]);
 
   function updateKit() {
+
     const kit = {
       ...values, 
       tags: getArray(values.tags), 
@@ -68,9 +71,9 @@ const KitForm = ({ kit }) => {
     };
 
     if (kit._id) {
-      dispatch(editKitbagKit(kit._id, kit));
+      dispatch(editKitbagKit(kit._id, kit, photos));
     } else {
-      dispatch(createKitbagKit(kit));
+      dispatch(createKitbagKit(kit, photos));
     }
   }
 
@@ -106,17 +109,16 @@ const KitForm = ({ kit }) => {
               )}
             </div>
           </div>
-            {/* 
-            <div className="form-group row">
-              <label className="col-sm-3 col-form-label">Images</label>
-              <div className="col-sm-9">
-                <div className="custom-file">
-                  <input type="file" multiple ref={this.fileInput} className="custom-file-input" id="photos" aria-describedby="photos" />
-                  <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
-                </div>
+          <div className="form-group row">
+            <label className="col-sm-3 col-form-label">Images</label>
+            <div className="col-sm-9">
+              <div className="custom-file">
+                <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => setPhotos(e.target.files)} />
+                <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
               </div>
-            </div> */}
-            {/* <Field name="photos" component={this.renderImageSelect} label="Images" helptext="Choose image(s)" /> */}
+            </div>
+          </div>
+          {/* <Field name="photos" component={this.renderImageSelect} label="Images" helptext="Choose image(s)" /> */}
           <div className="form-group row">
             <label htmlFor="description" className="col-sm-3 col-form-label">Description</label>
             <div className="col-sm-9">
