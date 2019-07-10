@@ -68,19 +68,4 @@ const KitEditPage = (props) => {
 
 }
 
-// const mapStateToProps = (state, ownProps) => {
-//   let newKit = state.kitbag.kits[ownProps.match.params.id];
-//   if (state.kitbag.kits[ownProps.match.params.id])  {
-//     newKit = {
-//       ...(state.kitbag.kits[ownProps.match.params.id]),
-//       purchases: (state.kitbag.kits[ownProps.match.params.id]).purchases.map(p => {
-//         const purchase = {...p};
-//         purchase.ondate = p.ondate.toString().substring(0,10);
-//         return purchase;
-//       })
-//     };
-//   }
-//   return { kit: newKit };
-// };
-
 export default connect(mapStateToProps, mapDispatchToProps)(KitEditPage);
