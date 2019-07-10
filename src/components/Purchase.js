@@ -5,7 +5,7 @@ import Title from './includes/Title';
 class Purchase extends React.Component {
 
   onFormSubmit = () => {
-    console.log('Buy package');
+//    console.log('Buy package');
   }
 
   render() {

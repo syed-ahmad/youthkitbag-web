@@ -11,7 +11,7 @@ const useForm = (initiaValues, callback, validate) => {
       callback();
       setIsSubmitting(false);
     }
-  }, [errors]);
+  }, [errors, callback, isSubmitting]);
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
@@ -20,9 +20,9 @@ const useForm = (initiaValues, callback, validate) => {
   };
 
   const getNameValue = (eventTarget) => {
-    let { name, value } = eventTarget;
+    let { name, value, checked, type } = eventTarget;
     if (name.indexOf('[') < 0) {
-      return { name, value };
+      return { name, value: (type === 'checkbox' ? checked : value) };
     }
     
     const arrayName = name.substring(0, name.indexOf('['));
@@ -55,6 +55,7 @@ const useForm = (initiaValues, callback, validate) => {
     addArrayItem,
     removeArrayItem,
     values,
+    setValues,
     errors
   }
 };

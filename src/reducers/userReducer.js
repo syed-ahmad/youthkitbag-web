@@ -3,7 +3,7 @@ import * as types from '../actions/types';
 const initialState = {};
 
 export default function authentication(state = initialState, action) {
-  console.log('USER', action.type, action.payload);
+  //console.log('USER', action.type, action.payload);
   switch (action.type) {
     case types.GET_USER:
       return { ...action.payload }

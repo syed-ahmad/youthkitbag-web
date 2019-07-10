@@ -4,14 +4,14 @@ import * as types from '../actions/types';
 const initialState = {};
 
 export default (state = initialState, action) => {
-  console.log('KBKIT', action.type, action.payload);
+  //console.log('KBKIT', action.type, action.payload);
   switch (action.type) {
     case types.FETCH_KITBAG_KIT:
-      return { ...state, [action.payload._id]: action.payload };
+      return { ...state, current: action.payload };
     case types.CREATE_KITBAG_KIT:
-      return { ...state, [action.payload._id]: action.payload };
+      return { ...state, current: action.payload };
     case types.EDIT_KITBAG_KIT:
-      return { ...state, [action.payload._id]: action.payload };
+      return { ...state, current: action.payload };
     case types.DELETE_KITBAG_KIT:
       return _.omit(state, action.payload);  
     case types.FETCH_KITBAG_KITS:

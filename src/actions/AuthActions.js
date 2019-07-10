@@ -6,7 +6,6 @@ import { getUser } from './UserActions';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const login = (email, password) => dispatch => {
-  console.log('LOGIN');
   window.localStorage.clear();
 
   axios.post(`${baseUrl}/auth/login`, { email, password }, {

@@ -3,13 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
-  componentDidMount() {
-    if (this.props.auth.loggedIn) {
-      console.log('user is logged in');
-    } else {
-      console.log('user is not logged in');
-    }
-  }
+
   render() {
     const { loggedIn } = this.props.auth;
     return (

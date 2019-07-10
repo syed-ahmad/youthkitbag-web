@@ -20,7 +20,6 @@ class Kitbag extends React.Component {
 
   componentDidMount() {
     this.props.fetchKitbagKits('', '', 1, 24);
-    console.log('Rendering');
   }
 
   componentDidUpdate(prevProps) {

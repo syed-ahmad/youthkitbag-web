@@ -1,27 +1,51 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, } from 'react-redux';
 import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
 import KitForm from './KitForm';
 import Title from '../../includes/Title';
 
-const KitEditPage = () => {
+const mapStateToProps = state => ({
+  current: state.kitbag.kits.current
+});
 
-  console.log(this.props.match.params.id);
+const mapDispatchToProps = {
+  fetchKitbagKit
+}
 
-  //const dispatch = useDispatch();
+const KitEditPage = (props) => {
 
-  //const kitState = useState( () => dispatch(fetchKitbagKit('ahjsdhjk')));
+  const { current, fetchKitbagKit, match } = props;
 
-  // componentDidMount() {
-  //   this.props.actions.fetchKitbagKit(this.props.match.params.id);
-  // }
+  const kitId = match.params.id;
 
+  const [kit, setKit] = useState({
+    title: 'Loading requested item of kit ...',
+    subtitle: '',
+    description: '',
+    status: 'Owned',
+    purchases: [],
+    inbag: [],
+    security: '',
+    warning: 0,
+    activitys: '',
+    tags: '',
+    active: 'on'
+  });
+
+  useEffect(() => {
+    fetchKitbagKit(kitId);
+  }, [fetchKitbagKit, kitId]);
+  
+  useEffect(() => {
+    setKit(current);
+  }, [current]);
+  
   return (
     <div>
-      <Title title="Edit kit" />
+      <Title title={!kit ? 'Loading...' : kit.title} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
-          <KitForm />
+          <KitForm kit={kit} />
         </div>
       </section>
     </div>
@@ -44,4 +68,4 @@ const KitEditPage = () => {
 //   return { kit: newKit };
 // };
 
-export default KitEditPage;
+export default connect(mapStateToProps, mapDispatchToProps)(KitEditPage);

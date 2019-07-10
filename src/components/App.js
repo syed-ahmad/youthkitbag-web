@@ -26,12 +26,7 @@ import KitEdit from './kitbag/kit/KitEditPage';
 import KitDelete from './kitbag/kit/KitDelete';
 
 class App extends React.Component {
-  componentDidMount() {
-    console.log('App did mount', this.props.auth);
-  }
-
   render() {
-    console.log('Routes props', this.props.auth);
     return (
       <div className="react-body">
         <Router history={history}>

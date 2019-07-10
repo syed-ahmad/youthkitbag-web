@@ -15,8 +15,6 @@ class Search extends React.Component {
   }
 
   renderSelect = (formProps) => {
-    console.log('Filter', this.props.filter);
-
     return (
       <div className="input-group-prepend">
         <select className="custom-select" {...formProps.input}>
@@ -32,7 +30,6 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log('Filter on render', this.props.filter);
     return (
       <div className="d-inline-block">
         <form onSubmit={this.props.handleSubmit(this.onSubmit)}>

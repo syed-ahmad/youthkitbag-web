@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { createKitbagKit, editKitbagKit } from '../../../actions/KitbagKitActions';
 import validate from './KitFormValidationRules';
 
-const KitForm = () => {
-
-  const kitId = undefined;
+const KitForm = ({ kit }) => {
 
   const dispatch = useDispatch();
 
@@ -44,8 +42,9 @@ const KitForm = () => {
     addArrayItem,
     removeArrayItem,
     values,
+    setValues,
     errors
-  } = useForm(initialValues, resetSubmit, validate);
+  } = useForm(initialValues, updateKit, validate);
 
   function getArray(field) {
     if (Array.isArray(field)) {
@@ -54,15 +53,22 @@ const KitForm = () => {
     return field ? field.split(',') : []
   }
 
-  function resetSubmit() {
+  useEffect(() => {
+    if (kit) {
+      setValues(kit);
+    }
+  }, [kit, setValues]);
+
+  function updateKit() {
     const kit = {
       ...values, 
       tags: getArray(values.tags), 
       activitys: getArray(values.activitys),
-      active: values.active === "on"
+      active: values.active === "on" || values.active
     };
-    if (kitId) {
-      dispatch(editKitbagKit(kitId, kit));
+
+    if (kit._id) {
+      dispatch(editKitbagKit(kit._id, kit));
     } else {
       dispatch(createKitbagKit(kit));
     }

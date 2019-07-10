@@ -21,7 +21,6 @@ class WantedBag extends React.Component {
   }
 
   render() {
-    console.log('fetchKitbagWanteds');
     return (
       <div>
         <Title title={this.getTitle()} />
