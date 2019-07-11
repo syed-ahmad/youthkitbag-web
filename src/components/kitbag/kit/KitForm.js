@@ -112,7 +112,6 @@ const KitForm = ({ kit }) => {
   }
 
   return (
-    <form className="mb-3" onSubmit={handleSubmit}>
       <div className="row">
         <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
           <div>
@@ -121,8 +120,18 @@ const KitForm = ({ kit }) => {
           <div>
             {renderSecondaryImages()}
           </div>
+          <div className="form-group row">
+            <label className="col-sm-3 col-form-label">Images</label>
+            <div className="col-sm-9">
+              <div className="custom-file">
+                <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
+                <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
+        <form className="mb-3" onSubmit={handleSubmit}>
           <div className="form-group row">
             <label htmlFor="title" className="col-sm-3 col-form-label">Title</label>
             <div className="col-sm-9">
@@ -139,15 +148,6 @@ const KitForm = ({ kit }) => {
               {errors.subtitle && (
                 <div className="invalid-feedback">{errors.subtitle}</div>
               )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-3 col-form-label">Images</label>
-            <div className="col-sm-9">
-              <div className="custom-file">
-                <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
-                <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
-              </div>
             </div>
           </div>
           <div className="form-group row">
@@ -225,7 +225,6 @@ const KitForm = ({ kit }) => {
             </button>
           </div>
           <hr />
-
           <div>
             {values.inbag && values.inbag.map((item, index) => (
               <div className="form-row" key={index}>
@@ -264,7 +263,6 @@ const KitForm = ({ kit }) => {
               Add a new storage location
             </button>
           </div>
-
           <hr />
           <div className="form-group row">
             <label htmlFor="warning" className="col-sm-3 col-form-label">Warning Level</label>
@@ -296,7 +294,7 @@ const KitForm = ({ kit }) => {
               )}
             </div>
           </div>
-          <div className="form-group row mb-0">
+          <div className="form-group row">
             <label className="col-sm-3" htmlFor="active">Active</label>
             <div className="col-1 col-sm-1">
               <div className="form-check">
@@ -309,16 +307,14 @@ const KitForm = ({ kit }) => {
               </div>
             </div>
           </div>
+          <hr />
+          <div>
+            <button className="btn btn-primary" type="submit">Save</button>
+            <Link className="btn btn-link" to="/kitbag/kits">Cancel</Link>
+          </div>
+          </form>
         </div>
       </div>
-      <hr />
-      <div className="row">
-        <div className="col-12 col-lg-6" role="main">
-          <button className="btn btn-primary" type="submit">Save</button>
-          <Link className="btn btn-link" to="/kitbag/kits">Cancel</Link>
-        </div>
-      </div>
-    </form>
   );
 }
 
