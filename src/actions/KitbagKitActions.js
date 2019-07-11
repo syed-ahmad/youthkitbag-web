@@ -50,13 +50,12 @@ export const fetchKitbagKit = (kitId) => dispatch => {
   });
 };
 
-export const createKitbagKit = (formData) => dispatch => {
-  console.log('ADD', formData);
+export const createKitbagKit = (formValues) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.post(`${baseUrl}/kitbag/kits`, formData, {
+  axios.post(`${baseUrl}/kitbag/kits`, {...formValues}, {
     headers: {
       Authorization: `bearer ${token}`,
-      'content-type': 'multipart/form-data',
+      'content-type': 'application/json',
     }
   })
   .then(response => {
@@ -74,12 +73,12 @@ export const createKitbagKit = (formData) => dispatch => {
   });
 }
 
-export const editKitbagKit = (kitId, formData) =>  dispatch => {
+export const editKitbagKit = (kitId, formValues) =>  dispatch => {
   const token = localStorage.getItem('token');
-  axios.put(`${baseUrl}/kitbag/kits/${kitId}`, formData, {
+  axios.put(`${baseUrl}/kitbag/kits/${kitId}`, {...formValues}, {
     headers: {
       Authorization: `bearer ${token}`,
-      'content-type': 'multipart/form-data',
+      'content-type': 'application/json',
     }
   })
   .then(response => {

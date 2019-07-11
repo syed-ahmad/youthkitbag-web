@@ -20,7 +20,8 @@ const KitForm = ({ kit }) => {
     warning: 0,
     activitys: '',
     tags: '',
-    active: 'on'
+    active: 'on',
+    topImage: '/images/default.png'
   };
 
   const initialPurchase = {
@@ -37,6 +38,7 @@ const KitForm = ({ kit }) => {
   };
 
   const {
+    setChange,
     handleChange,
     handleSubmit,
     addArrayItem,
@@ -46,8 +48,6 @@ const KitForm = ({ kit }) => {
     errors
   } = useForm(initialValues, updateKit, validate);
 
-  let formData = new FormData();
-
   function onFileChanged(event) {
     console.log(event.target.files);
     var files = event.target.files || event.dataTransfer.files;
@@ -55,10 +55,7 @@ const KitForm = ({ kit }) => {
       console.log(files.length);
       return;
     }
-    
-    // Add the File object to the formdata
-    formData.append("photos", files);
-    console.log(formData);
+    return;
   }
 
   function getArray(field) {
@@ -68,8 +65,32 @@ const KitForm = ({ kit }) => {
     return field ? field.split(',') : []
   }
 
+  function renderSecondaryImages() {
+    if (!values || !values.images || values.images.length <= 0) {
+       return null;
+    }
+
+    const { images } = values;
+    const items = []
+  
+    for (let i = 0; i < images.length; i++) {
+      items.push(<img key={`image${i}`} className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, images[i].imageUrl)} />)
+    }
+  
+    return (
+      <div>
+        {items}
+      </div>
+    )
+  }
+
+  function renderTopImage(src) {
+    setChange('topImage', src)
+  }
+
   useEffect(() => {
     if (kit) {
+      kit.topImage = kit.images ? kit.images[0].imageUrl : '/images/default.png';
       setValues(kit);
     }
   }, [kit, setValues]);
@@ -83,29 +104,22 @@ const KitForm = ({ kit }) => {
       active: values.active === "on" || values.active
     };
 
-  
-    // Add your data...
-    console.log(formData, kit);
-    formData.append('title', kit.title);
-
     if (kit._id) {
-      dispatch(editKitbagKit(kit._id, formData));
+      dispatch(editKitbagKit(kit._id, kit));
     } else {
-      dispatch(createKitbagKit(formData));
+      dispatch(createKitbagKit(kit));
     }
   }
-
-  const topImage = '/images/default.png';
 
   return (
     <form className="mb-3" onSubmit={handleSubmit}>
       <div className="row">
         <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
           <div>
-            <img id="preview" className="img-fluid mb-3" src={topImage} alt="" role="presentation" />
+            <img id="preview" name="preview" className="img-fluid mb-3" src={values.topImage} alt="" role="presentation" />
           </div>
           <div>
-            
+            {renderSecondaryImages()}
           </div>
         </div>
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
