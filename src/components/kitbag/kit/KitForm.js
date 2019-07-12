@@ -21,7 +21,8 @@ const KitForm = ({ kit }) => {
     activitys: '',
     tags: '',
     active: 'on',
-    topImage: '/images/default.png'
+    topImage: '/images/default.png',
+    images: []
   };
 
   const initialPurchase = {
@@ -308,6 +309,15 @@ const KitForm = ({ kit }) => {
             </div>
           </div>
           <hr />
+          <div>
+            {values.images && values.images.map((item, index) => (
+              <div key={`${item._id}-${index}`}>
+                <input name={`images[${index}]._id`} type="hidden" value={values.images[index]._id} />
+                <input name={`images[${index}].image`} type="hidden" value={values.images[index].image} />
+                <input name={`images[${index}].imageUrl`} type="hidden" value={values.images[index].imageUrl} />
+              </div>
+            ))}
+          </div>
           <div>
             <button className="btn btn-primary" type="submit">Save</button>
             <Link className="btn btn-link" to="/kitbag/kits">Cancel</Link>
