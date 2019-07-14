@@ -36,7 +36,6 @@ export const signup = (email, password, confirmPassword) => dispatch => {
     history.push('/auth/login', { signup: 'success' });
   })
   .catch(err => {
-    console.log('error', err.response, err.message);
     dispatch({ type: types.SIGNUP_FAILURE, payload: err.response });
   });
 }
@@ -50,7 +49,6 @@ export const logout = () => async (dispatch) => {
     if (err.response.status === 401) {
       history.push('/')
     }
-    console.log(err)
   }
 }
 
@@ -64,7 +62,6 @@ export const reset = (email) => dispatch => {
     history.push('/auth/login');
   })
   .catch(err => {
-    console.log('error', err.response, err.message);
     dispatch({ type: types.SIGNUP_FAILURE, payload: err.response });
     dispatch({ type: types.SET_ERROR, payload: err.response });
   });
@@ -80,7 +77,6 @@ export const newPassword = (password, userId, token) => dispatch => {
     history.push('/auth/login');
   })
   .catch(err => {
-    console.log('error', err.response, err.message);
     dispatch({ type: types.SIGNUP_FAILURE, payload: err.response });
   });
 }

@@ -12,12 +12,10 @@ export const addImage = (formData) => dispatch => {
     }
   })
   .then(response => {
-    console.log('RESPONSE', response);
     dispatch({ type: ADD_IMAGE, payload: response.data });
   })
   .catch(err => {
     const { response } = err;
-    console.log('ERR', response);
     dispatch({ type: API_KITBAG_ERROR, payload: response });
   });
 };
