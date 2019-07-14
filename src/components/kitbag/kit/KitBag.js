@@ -67,7 +67,7 @@ class KitBag extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { items: Object.values(state.kitbag.kits), filter: state.filter, pagination: state.pagination };
+  return { items: Object.values(state.kitbag.kits.list), filter: state.filter, pagination: state.pagination };
 }
 
 export default connect(mapStateToProps, { fetchKitbagKits })(KitBag);

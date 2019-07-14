@@ -25,11 +25,14 @@ const KitEditPage = (props) => {
     status: 'Owned',
     purchases: [],
     inbag: [],
-    security: '',
+    security: [],
     warning: 0,
     activitys: '',
     tags: '',
-    active: 'on'
+    active: 'on',
+    topImage: '',
+    images: [],
+    imagesToUpload: 0
   });
 
   useEffect(() => {
@@ -37,20 +40,16 @@ const KitEditPage = (props) => {
   }, [fetchKitbagKit, kitId]);
   
   useEffect(() => {
-    let newKit = {};
-    if (current) {
-      if (current.purchases) {
-        newKit = {
-          ...current,
-          purchases: current.purchases.map(p => {
-            const purchase = {...p};
-            purchase.ondate = p.ondate.toString().substring(0,10);
-            return purchase;
-          })
-        };  
-      } else {
-        newKit = {...current};
-      }
+    if (current && current._id) {
+      const newKit = {
+        ...current,
+        purchases: current.purchases.map(p => {
+          let purchase = {...p};
+          purchase.ondate = p.ondate.toString().substring(0,10);
+          return purchase;
+        }),
+        imagesToUpload: 0
+      };
       setKit(newKit);  
     }
   }, [current]);

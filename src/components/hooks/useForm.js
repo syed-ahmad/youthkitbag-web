@@ -44,7 +44,7 @@ const useForm = (initiaValues, callback, validate) => {
   };
 
   const addArrayItem = (arrayName, newItem) => {
-    const array = [...values[arrayName], newItem];
+    const array = [...values[arrayName], ...newItem];
     setValues(values => ({ ...values, [arrayName]: array }));
   }
 

@@ -1,13 +1,22 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { createKitbagKit, editKitbagKit } from '../../../actions/KitbagKitActions';
+import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './KitFormValidationRules';
 
-const KitForm = ({ kit }) => {
+const mapStateToProps = (state) => {
+  return { newImages: state.kitbag.kits.newImages };
+};
 
-  const dispatch = useDispatch();
+const mapDispatchToProps = {
+  createKitbagKit, editKitbagKit, addImage, clearNewImages
+}
+
+const KitForm = (props) => {
+
+  const { kit, newImages, createKitbagKit, editKitbagKit, addImage, clearNewImages } = props;
 
   const initialValues = {
     title: '',
@@ -16,14 +25,14 @@ const KitForm = ({ kit }) => {
     status: 'Owned',
     purchases: [],
     inbag: [],
-    security: '',
     warning: 0,
     activitys: '',
     tags: '',
+    security: '',
     active: 'on',
-    topImage: '/images/default.png',
     images: [],
-    deletedImages: [{ _id: 'agsjdhghjasd' }]
+    topImage: '/images/default.png',
+    imagesToUpload: 0
   };
 
   const initialPurchase = {
@@ -51,11 +60,15 @@ const KitForm = ({ kit }) => {
   } = useForm(initialValues, updateKit, validate);
 
   function onFileChanged(event) {
-    console.log(event.target.files);
-    var files = event.target.files || event.dataTransfer.files;
+    const { files } = event.target;
     if (!files.length) {
-      console.log(files.length);
       return;
+    }
+    setChange('imagesToUpload', files.length);
+    for (let i = 0; i < files.length; i++) {
+      let formData = new FormData();
+      formData.append('photo', files[i]);
+      addImage(formData);
     }
     return;
   }
@@ -68,15 +81,16 @@ const KitForm = ({ kit }) => {
   }
 
   function renderSecondaryImages() {
-    if (!values || !values.images || values.images.length <= 0) {
-       return null;
+    if (!values || !values.images || values.images.filter(i => i.state !== 'D').length <= 0) {
+      return null;
     }
 
     const { images } = values;
     const items = []
   
-    for (let i = 0; i < images.length; i++) {
-      items.push(<img key={`image${i}`} className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, images[i].imageUrl)} />)
+    const activeImages = [...images.filter(i => i.state !== 'D')];
+    for (let i = 0; i < activeImages.length; i++) {
+      items.push(<img key={`image${i}`} className="img-fluid mb-3 img-link mini-img mr-1" src={activeImages[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, activeImages[i].imageUrl)} />)
     }
   
     return (
@@ -92,24 +106,40 @@ const KitForm = ({ kit }) => {
 
   useEffect(() => {
     if (kit) {
-      kit.topImage = kit.images ? kit.images[0].imageUrl : '/images/default.png';
+      kit.topImage = kit.images && kit.images.filter(i => i.state !== 'D').length > 0 ? kit.images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png';
       setValues(kit);
     }
   }, [kit, setValues]);
 
-  function updateKit() {
+  useEffect(() => {
+    if (newImages && newImages.length > 0 && newImages.length === values.imagesToUpload) {
+      const imagesToAdd = [...newImages.map(i => {
+        let image = {};
+        image.photoId = i._id;
+        image.image = i.image;
+        image.imageUrl = i.imageUrl;
+        image.state = 'N';
+        return image;
+      })];
+      clearNewImages();
+      addArrayItem('images', imagesToAdd);
+      setChange('imagesToUpload', 0);
+    }
+  }, [newImages, addArrayItem, setChange, values, clearNewImages])
 
+  function updateKit() {
     const kit = {
       ...values, 
       tags: getArray(values.tags), 
       activitys: getArray(values.activitys),
+      security: getArray(values.security),
       active: values.active === "on" || values.active
     };
 
     if (kit._id) {
-      dispatch(editKitbagKit(kit._id, kit));
+      editKitbagKit(kit._id, kit);
     } else {
-      dispatch(createKitbagKit(kit));
+      createKitbagKit(kit);
     }
   }
 
@@ -177,15 +207,6 @@ const KitForm = ({ kit }) => {
               </select>
             </div>
           </div>
-          <div className="form-group row">
-            <label htmlFor="security" className="col-sm-3 col-form-label">Security (optional)</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.security && 'is-invalid'}`} name="security" type="text" onChange={handleChange} value={values.security} aria-describedby="security" />
-              {errors.security && (
-                <div className="invalid-feedback">{errors.security}</div>
-              )}
-            </div>
-          </div>
           <hr />
           <div>
             {values.purchases && values.purchases.map((item, index) => (
@@ -222,7 +243,7 @@ const KitForm = ({ kit }) => {
                 </div>
               </div>
             ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('purchases', initialPurchase)}>
+            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('purchases', [initialPurchase])}>
               Add a new purchase
             </button>
           </div>
@@ -261,7 +282,7 @@ const KitForm = ({ kit }) => {
                 </div>
               </div>
             ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('inbag', initialInbag)}>
+            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('inbag', [initialInbag])}>
               Add a new storage location
             </button>
           </div>
@@ -276,8 +297,8 @@ const KitForm = ({ kit }) => {
             </div>
           </div>
           <hr />
-          <h3 className="h6">Categorise (all optional)</h3>
-          <small id="categoryhelp" className="form-text text-muted form-control-help">You can add activity names or personal tags to your kit. Enter names separate by commas. (e.g. football, cycling)</small>
+          <h3 className="h6">Categorise/Security (all optional)</h3>
+          <small id="categoryhelp" className="form-text text-muted form-control-help mb-3">You can add activity names, personal tags and security numbers to your kit. Enter names separate by commas. (e.g. football, cycling)</small>
           <div className="form-group row">
             <label htmlFor="activitys" className="col-sm-3 col-form-label">Activities</label>
             <div className="col-sm-9">
@@ -293,6 +314,15 @@ const KitForm = ({ kit }) => {
               <input className={`form-control ${errors.tags && 'is-invalid'}`} name="tags" type="text" onChange={handleChange} value={values.tags} aria-describedby="tags" />
               {errors.tags && (
                 <div className="invalid-feedback">{errors.tags}</div>
+              )}
+            </div>
+          </div>
+          <div className="form-group row">
+            <label htmlFor="security" className="col-sm-3 col-form-label">Security</label>
+            <div className="col-sm-9">
+              <input className={`form-control ${errors.security && 'is-invalid'}`} name="security" type="text" onChange={handleChange} value={values.security} aria-describedby="security" />
+              {errors.security && (
+                <div className="invalid-feedback">{errors.security}</div>
               )}
             </div>
           </div>
@@ -316,6 +346,8 @@ const KitForm = ({ kit }) => {
                 <input name={`images[${index}]._id`} type="hidden" value={values.images[index]._id} />
                 <input name={`images[${index}].image`} type="hidden" value={values.images[index].image} />
                 <input name={`images[${index}].imageUrl`} type="hidden" value={values.images[index].imageUrl} />
+                <input name={`images[${index}].state`} type="hidden" value={values.images[index].state} />
+                <input name={`images[${index}].photoId`} type="hidden" value={values.images[index].photoId} />
               </div>
             ))}
             {values.deletedImages && values.deletedImages.map((item, index) => (
@@ -334,4 +366,4 @@ const KitForm = ({ kit }) => {
   );
 }
 
-export default KitForm;
+export default connect(mapStateToProps, mapDispatchToProps)(KitForm);

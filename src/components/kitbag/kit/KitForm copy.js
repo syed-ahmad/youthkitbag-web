@@ -245,7 +245,6 @@ class KitForm extends React.Component {
             {/* <Field name="photos" component={this.renderImageSelect} label="Images" helptext="Choose image(s)" /> */}
             <Field name="description" component={this.renderTextArea} label="Description" />
             <Field name="status" component={this.renderOptionList} label="Status" />
-            <Field name="security" component={this.renderTextInput} label="Security (optional)" />
             <hr />
             <FieldArray name="purchases" component={this.renderPurchases} />
             <hr />
@@ -254,9 +253,10 @@ class KitForm extends React.Component {
             <Field name="warning" component={this.renderTextInput} label="Warning Level" type="number" step="1" />
             <hr />
             <h3 className="h6">Categorise (all optional)</h3>
-            <small id="categoryhelp" className="form-text text-muted form-control-help">You can add activity names or personal tags to your kit. Enter names separate by commas. (e.g. football, cycling)</small>
+            <small id="categoryhelp" className="form-text text-muted form-control-help">You can add activity names, personal tags and security references to your kit. Enter names separate by commas. (e.g. football, cycling)</small>
             <Field name="activitys" component={this.renderTextInput} label="Activities" />
             <Field name="tags" component={this.renderTextInput} label="Tags" />
+            <Field name="security" component={this.renderTextInput} label="Security" />
             <Field name="active" component={this.renderActiveCheckbox} label="Active" />
           </div>
         </div>
