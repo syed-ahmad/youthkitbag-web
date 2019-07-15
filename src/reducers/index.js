@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
 import authReducer from './authReducer';
 import userReducer from './userReducer';
@@ -14,7 +13,6 @@ export default combineReducers({
   user: userReducer,
   kitbag: kitbagReducer,
   market: marketReducer,
-  form: formReducer,
   filter: filterReducer,
   pagination: paginationReducer,
   toast: toastReducer
