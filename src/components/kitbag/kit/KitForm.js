@@ -1,22 +1,15 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { createKitbagKit, editKitbagKit } from '../../../actions/KitbagKitActions';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './KitFormValidationRules';
 
-const mapStateToProps = (state) => {
-  return { newImages: state.kitbag.kits.newImages };
-};
+const KitForm = ({ kit }) => {
 
-const mapDispatchToProps = {
-  createKitbagKit, editKitbagKit, addImage, clearNewImages
-}
-
-const KitForm = (props) => {
-
-  const { kit, newImages, createKitbagKit, editKitbagKit, addImage, clearNewImages } = props;
+  const dispatch = useDispatch();
+  const newImages = useSelector(state => state.kitbag.kits.newImages);
 
   const initialValues = {
     title: '',
@@ -68,7 +61,7 @@ const KitForm = (props) => {
     for (let i = 0; i < files.length; i++) {
       let formData = new FormData();
       formData.append('photo', files[i]);
-      addImage(formData);
+      dispatch(addImage(formData));
     }
     return;
   }
@@ -121,11 +114,11 @@ const KitForm = (props) => {
         image.state = 'N';
         return image;
       })];
-      clearNewImages();
+      dispatch(clearNewImages());
       addArrayItem('images', imagesToAdd);
       setChange('imagesToUpload', 0);
     }
-  }, [newImages, addArrayItem, setChange, values, clearNewImages])
+  }, [newImages, addArrayItem, setChange, values, dispatch])
 
   function updateKit() {
     const kit = {
@@ -137,9 +130,9 @@ const KitForm = (props) => {
     };
 
     if (kit._id) {
-      editKitbagKit(kit._id, kit);
+      dispatch(editKitbagKit(kit._id, kit));
     } else {
-      createKitbagKit(kit);
+      dispatch(createKitbagKit(kit));
     }
   }
 
@@ -366,4 +359,4 @@ const KitForm = (props) => {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(KitForm);
+export default KitForm;
