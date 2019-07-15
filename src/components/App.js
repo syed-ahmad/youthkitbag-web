@@ -48,11 +48,11 @@ class App extends React.Component {
               <Route path="/auth/reset" exact component={Reset} />
               <Route path="/auth/newpassword/:key" exact component={NewPassword} />
               <Route path="/auth/logout" exact component={Logout} />
-              <PrivateRoute path="/purchase" exact component={Purchase} auth={this.props.auth} />
-              <PrivateRoute path="/kitbag/kits/new" exact component={KitCreate} auth={this.props.auth} />
-              <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitEdit} auth={this.props.auth} />
-              <PrivateRoute path="/kitbag/kits/delete/:id" exact component={KitDelete} auth={this.props.auth} />
-              <PrivateRoute path="/kitbag/kits" component={KitBag} auth={this.props.auth} />
+              <PrivateRoute path="/purchase" exact component={Purchase} />
+              <PrivateRoute path="/kitbag/kits/new" exact component={KitCreate} />
+              <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitEdit} />
+              <PrivateRoute path="/kitbag/kits/delete/:id" exact component={KitDelete} />
+              <PrivateRoute path="/kitbag/kits" component={KitBag} />
             </Switch>
           </main>
           <Footer />
