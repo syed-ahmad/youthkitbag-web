@@ -4,7 +4,7 @@ import useForm from '../hooks/useForm';
 import { fetchKitbagKits } from '../../actions/KitbagKitActions';
 import validate from './SearchFormValidationRules';
 
-const Search = () => {
+const SearchForm = () => {
 
   const dispatch = useDispatch();
   const filter = useSelector(state => state.filter);
@@ -24,7 +24,6 @@ const Search = () => {
   } = useForm(initialValues, searchItems, validate);
   
   function searchItems() {
-    console.log(values)
     const { by, search } = values;
     dispatch(fetchKitbagKits(search, by, 1, pagination.itemsPerPage));
   }
@@ -47,7 +46,7 @@ const Search = () => {
         <div className="form-group mr-3">
           <div className="input-group">
             <div className="input-group-prepend">
-              <select name="by" className="custom-select" onChange={handleChange} value={values.by}>
+              <select name="by" className="custom-select" onChange={handleChange} onBlur={handleChange} value={values.by}>
                 {filter.options.map(o => (<option key={o.key} value={o.key}>{o.value}</option>))}
               </select>
             </div>
@@ -63,4 +62,4 @@ const Search = () => {
   );
 }
 
-export default Search;
+export default SearchForm;
