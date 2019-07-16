@@ -187,7 +187,7 @@ const KitForm = ({ kit }) => {
           <div className="form-group row">
             <label htmlFor="status" className="col-sm-3 col-form-label">Status</label>
             <div className="col-sm-9">
-              <select className="custom-select" name="status" onChange={handleChange} value={values.status} aria-describedby="status">
+              <select className="custom-select" name="status" onChange={handleChange} onBlur={handleChange} value={values.status} aria-describedby="status">
                 <option value="owned">Owned</option>
                 <option value="forsale">For Sale</option>
                 <option value="sold">Sold</option>
@@ -254,7 +254,7 @@ const KitForm = ({ kit }) => {
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Condition</label>
                   }
-                  <select className="custom-select" name={`inbag[${index}].condition`} onChange={handleChange} value={values.inbag[index].condition}>
+                  <select className="custom-select" name={`inbag[${index}].condition`} onChange={handleChange} onBlur={handleChange} value={values.inbag[index].condition}>
                     <option value="used" >Used</option>
                     <option value="new" >New</option>
                     <option value="almostnew" >Almost New</option>
