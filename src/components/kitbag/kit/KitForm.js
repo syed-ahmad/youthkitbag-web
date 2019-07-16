@@ -11,6 +11,9 @@ const KitForm = ({ kit }) => {
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.kitbag.kits.newImages);
 
+  const MAXWIDTH = 720;
+  const MAXHEIGHT = 720;
+
   const initialValues = {
     title: '',
     subtitle: '',
@@ -59,11 +62,72 @@ const KitForm = ({ kit }) => {
     }
     setChange('imagesToUpload', files.length);
     for (let i = 0; i < files.length; i++) {
-      let formData = new FormData();
-      formData.append('photo', files[i]);
-      dispatch(addImage(formData));
+      resize(files[i], MAXWIDTH, MAXHEIGHT, function (resizedDataUrl) {
+        console.log('resizedDataUrl',resizedDataUrl);
+        let formData = new FormData();
+        formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
+        dispatch(addImage(formData));
+      });
     }
     return;
+  }
+
+  function dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++)
+    {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    var bb = new Blob([ab], { "type": mimeString });
+    return bb;
+  }
+
+
+  function resize (file, maxWidth, maxHeight, fn) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function (event) {
+        var dataUrl = event.target.result;
+
+        var image = new Image();
+        image.src = dataUrl;
+        image.onload = function () {
+            var resizedDataUrl = resizeImage(image, maxWidth, maxHeight, 0.7);
+            fn(resizedDataUrl);
+        };
+    };
+}
+
+function resizeImage(image, maxWidth, maxHeight, quality) {
+    var canvas = document.createElement('canvas');
+
+    var width = image.width;
+    var height = image.height;
+
+    if (width > height) {
+        if (width > maxWidth) {
+            height = Math.round(height * maxWidth / width);
+            width = maxWidth;
+        }
+    } else {
+        if (height > maxHeight) {
+            width = Math.round(width * maxHeight / height);
+            height = maxHeight;
+        }
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(image, 0, 0, width, height);
+    return canvas.toDataURL("image/jpeg", quality);
   }
 
   function getArray(field) {
