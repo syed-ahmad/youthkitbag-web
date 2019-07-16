@@ -45,7 +45,7 @@ const KitEditPage = (props) => {
         ...current,
         purchases: current.purchases.map(p => {
           let purchase = {...p};
-          purchase.ondate = p.ondate.toString().substring(0,10);
+          purchase.ondate = p.ondate ? p.ondate.toString().substring(0,10) : '';
           return purchase;
         }),
         imagesToUpload: 0
