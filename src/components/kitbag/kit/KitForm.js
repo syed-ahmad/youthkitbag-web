@@ -97,7 +97,7 @@ const KitForm = ({ kit }) => {
         var image = new Image();
         image.src = dataUrl;
         image.onload = function () {
-            var resizedDataUrl = resizeImage(image, maxWidth, maxHeight, 0.7);
+            var resizedDataUrl = resizeImage(image, maxWidth, maxHeight, 1);
             fn(resizedDataUrl);
         };
     };
@@ -125,6 +125,10 @@ const KitForm = ({ kit }) => {
     canvas.height = height;
 
     var ctx = canvas.getContext("2d");
+    ctx.ImageSmoothingEnabled = false;
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+
     ctx.drawImage(image, 0, 0, width, height);
     return canvas.toDataURL("image/jpeg", quality);
   }
