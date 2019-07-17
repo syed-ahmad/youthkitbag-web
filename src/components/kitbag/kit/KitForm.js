@@ -88,7 +88,6 @@ const KitForm = ({ kit }) => {
     return bb;
   }
 
-
   function resize (file, maxWidth, maxHeight, fn) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
@@ -102,9 +101,9 @@ const KitForm = ({ kit }) => {
             fn(resizedDataUrl);
         };
     };
-}
+  }
 
-function resizeImage(image, maxWidth, maxHeight, quality) {
+  function resizeImage(image, maxWidth, maxHeight, quality) {
     var canvas = document.createElement('canvas');
 
     var width = image.width;
