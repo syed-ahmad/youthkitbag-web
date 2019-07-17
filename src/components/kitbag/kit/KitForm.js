@@ -97,7 +97,7 @@ const KitForm = ({ kit }) => {
         var image = new Image();
         image.src = dataUrl;
         image.onload = function () {
-            var resizedDataUrl = resizeImage(image, maxWidth, maxHeight, 1);
+            var resizedDataUrl = resizeImage(image, maxWidth, maxHeight, 0.9);
             fn(resizedDataUrl);
         };
     };
