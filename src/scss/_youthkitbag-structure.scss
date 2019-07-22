@@ -110,6 +110,15 @@ a.sr-only { color: #004c9d; background-color: $white; }
   }
 }
 
-.mini-img {
-  max-height: 90px;
+.carousel-thumbnail {
+  position: relative;
+
+  .img-delete {
+    cursor: pointer;
+  }
+  
+  .mini-img {
+    max-height: 90px;
+  }
 }
+

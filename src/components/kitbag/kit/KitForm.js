@@ -5,6 +5,7 @@ import useForm from '../../hooks/useForm';
 import { createKitbagKit, editKitbagKit } from '../../../actions/KitbagKitActions';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './KitFormValidationRules';
+import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
 const KitForm = ({ kit }) => {
 
@@ -72,67 +73,6 @@ const KitForm = ({ kit }) => {
     return;
   }
 
-  function dataURItoBlob(dataURI) {
-    var byteString = atob(dataURI.split(',')[1]);
-
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++)
-    {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    var bb = new Blob([ab], { "type": mimeString });
-    return bb;
-  }
-
-  function resize (file, maxWidth, maxHeight, fn) {
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function (event) {
-        var dataUrl = event.target.result;
-
-        var image = new Image();
-        image.src = dataUrl;
-        image.onload = function () {
-            var resizedDataUrl = resizeImage(image, maxWidth, maxHeight, 0.9);
-            fn(resizedDataUrl);
-        };
-    };
-  }
-
-  function resizeImage(image, maxWidth, maxHeight, quality) {
-    var canvas = document.createElement('canvas');
-
-    var width = image.width;
-    var height = image.height;
-
-    if (width > height) {
-        if (width > maxWidth) {
-            height = Math.round(height * maxWidth / width);
-            width = maxWidth;
-        }
-    } else {
-        if (height > maxHeight) {
-            width = Math.round(width * maxHeight / height);
-            height = maxHeight;
-        }
-    }
-
-    canvas.width = width;
-    canvas.height = height;
-
-    var ctx = canvas.getContext("2d");
-    ctx.ImageSmoothingEnabled = false;
-    ctx.webkitImageSmoothingEnabled = false;
-    ctx.mozImageSmoothingEnabled = false;
-
-    ctx.drawImage(image, 0, 0, width, height);
-    return canvas.toDataURL("image/jpeg", quality);
-  }
-
   function getArray(field) {
     if (Array.isArray(field)) {
       return field;
@@ -149,8 +89,16 @@ const KitForm = ({ kit }) => {
     const items = []
   
     const activeImages = [...images.filter(i => i.state !== 'D')];
+    console.log(activeImages);
     for (let i = 0; i < activeImages.length; i++) {
-      items.push(<img key={`image${i}`} className="img-fluid mb-3 img-link mini-img mr-1" src={activeImages[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, activeImages[i].imageUrl)} />)
+      items.push(
+        <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
+          <span className="icons-top-left">
+            <span className="icon-tray-item fas fa-trash-alt img-delete" onClick={deleteImage.bind(null, activeImages[i]._id)}></span>
+          </span>
+          <img className="img-fluid mb-3 img-link mini-img mr-1" src={activeImages[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, activeImages[i].imageUrl)} />
+        </div>
+      )
     }
   
     return (
@@ -161,7 +109,19 @@ const KitForm = ({ kit }) => {
   }
 
   function renderTopImage(src) {
-    setChange('topImage', src)
+    setChange('topImage', src);
+  }
+
+  function deleteImage(id) {
+    if (id) {
+      let images = kit.images.map(i => {
+        if (i._id === id) {
+          i.state ='D';
+        }
+        return i;
+      });
+      setChange('images', images);
+    }
   }
 
   useEffect(() => {
@@ -175,7 +135,7 @@ const KitForm = ({ kit }) => {
     if (newImages && newImages.length > 0 && newImages.length === values.imagesToUpload) {
       const imagesToAdd = [...newImages.map(i => {
         let image = {};
-        image.photoId = i._id;
+        image._id = i._id;
         image.image = i.image;
         image.imageUrl = i.imageUrl;
         image.state = 'N';
