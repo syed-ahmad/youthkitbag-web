@@ -95,6 +95,7 @@ const KitForm = ({ kit }) => {
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
           <span className="icons-top-left">
             <span className="icon-tray-item fas fa-trash-alt img-delete" onClick={deleteImage.bind(null, activeImages[i]._id)}></span>
+            <span className="icon-tray-item fas fa-star img-primary" onClick={setPrimaryImage.bind(null, activeImages[i]._id)}></span>
           </span>
           <img className="img-fluid mb-3 img-link mini-img mr-1" src={activeImages[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, activeImages[i].imageUrl)} />
         </div>
@@ -113,7 +114,7 @@ const KitForm = ({ kit }) => {
   }
 
   function deleteImage(id) {
-    if (id) {
+    if (id && kit.images) {
       let images = kit.images.map(i => {
         if (i._id === id) {
           i.state ='D';
@@ -121,7 +122,17 @@ const KitForm = ({ kit }) => {
         return i;
       });
       setChange('images', images);
+      setChange('topImage', images.filter(i => i.state !== 'D')[0].imageUrl);
     }
+  }
+
+  function setPrimaryImage(id) {
+    // if (id && kit.images) {
+    //   let images = kit.images.filter(i => { if (i._id !== id) { return i; }});
+    //   images.unshift(kit.images.filter(i => { if (i._id === id) { return i; }}));
+    //   setChange('images', images);
+    //   setChange('topImage', images.filter(i => i.state !== 'D')[0].imageUrl);
+    // }
   }
 
   useEffect(() => {
