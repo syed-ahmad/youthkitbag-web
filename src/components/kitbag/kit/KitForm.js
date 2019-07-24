@@ -85,19 +85,26 @@ const KitForm = ({ kit }) => {
       return null;
     }
 
+    console.log('IMAGES',values.images);
+
     const { images } = values;
     const items = []
   
-    const activeImages = [...images.filter(i => i.state !== 'D')];
-    console.log(activeImages);
-    for (let i = 0; i < activeImages.length; i++) {
+    for (let i = 0; i < images.length; i++) {
       items.push(
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
-          <span className="icons-top-left">
-            <span className="icon-tray-item fas fa-trash-alt img-delete" onClick={deleteImage.bind(null, activeImages[i]._id)}></span>
-            <span className="icon-tray-item fas fa-star img-primary" onClick={setPrimaryImage.bind(null, activeImages[i]._id)}></span>
-          </span>
-          <img className="img-fluid mb-3 img-link mini-img mr-1" src={activeImages[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, activeImages[i].imageUrl)} />
+          { images[i].state !== 'D' && 
+            <React.Fragment>
+              <span className="icons-top-left">
+                <span className="icon-tray-item fas fa-trash-alt img-delete" onClick={deleteImage.bind(null, images[i]._id)}></span>
+                <span className="icon-tray-item fas fa-star img-primary" onClick={setPrimaryImage.bind(null, images[i]._id)}></span>
+              </span>
+              <img className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, images[i].imageUrl)} />
+            </React.Fragment>
+          }
+          { images[i].state === 'D' && 
+              <img className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" />
+            }
         </div>
       )
     }
@@ -114,25 +121,26 @@ const KitForm = ({ kit }) => {
   }
 
   function deleteImage(id) {
-    if (id && kit.images) {
-      let images = kit.images.map(i => {
+    if (id && values.images) {
+      let images = values.images.map(i => {
         if (i._id === id) {
           i.state ='D';
         }
         return i;
       });
       setChange('images', images);
-      setChange('topImage', images.filter(i => i.state !== 'D')[0].imageUrl);
+      setChange('topImage', images && images.filter(i => i.state !== 'D').length > 0 ? images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png');
     }
   }
 
   function setPrimaryImage(id) {
-    // if (id && kit.images) {
-    //   let images = kit.images.filter(i => { if (i._id !== id) { return i; }});
-    //   images.unshift(kit.images.filter(i => { if (i._id === id) { return i; }}));
-    //   setChange('images', images);
-    //   setChange('topImage', images.filter(i => i.state !== 'D')[0].imageUrl);
-    // }
+    if (id && values.images) {
+      const primaryImage = values.images.filter(i => i._id === id);
+      const otherImages = values.images.filter(i => i._id !== id);
+      const images = primaryImage.concat(otherImages);
+      setChange('images', images);
+      setChange('topImage', images && images.filter(i => i.state !== 'D').length > 0 ? images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png');
+    }
   }
 
   useEffect(() => {
