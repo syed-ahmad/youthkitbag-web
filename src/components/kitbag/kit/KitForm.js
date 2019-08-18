@@ -9,12 +9,15 @@ import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
 const KitForm = ({ kit }) => {
 
+  // ?? still using redux
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.kitbag.kits.newImages);
 
+  // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
+  // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
   const initialValues = {
     title: '',
     subtitle: '',
@@ -32,6 +35,7 @@ const KitForm = ({ kit }) => {
     imagesToUpload: 0
   };
 
+  // ?? default settings for the block array items
   const initialPurchase = {
     from: '',
     quantity: 0,
@@ -45,6 +49,8 @@ const KitForm = ({ kit }) => {
     quantity: 0
   };
 
+  console.log('loading form', kit);
+
   const {
     setChange,
     handleChange,
@@ -56,6 +62,7 @@ const KitForm = ({ kit }) => {
     errors
   } = useForm(initialValues, updateKit, validate);
 
+  // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
     const { files } = event.target;
     if (!files.length) {
@@ -73,6 +80,7 @@ const KitForm = ({ kit }) => {
     return;
   }
 
+  // ?? be more explicit in naming and push into utility
   function getArray(field) {
     if (Array.isArray(field)) {
       return field;
@@ -80,8 +88,14 @@ const KitForm = ({ kit }) => {
     return field ? field.split(',') : []
   }
 
+  // ?? part of images component
+  // ?? need to provide revert for delete
+  // ?? need to provide hover action
+  // ?? think about accessibility and tabbing to functionality
+  // ?? constants for state
   function renderSecondaryImages() {
-    if (!values || !values.images || values.images.filter(i => i.state !== 'D').length <= 0) {
+    // ?? simplify
+    if (!values || !values.images) {
       return null;
     }
 
@@ -90,6 +104,7 @@ const KitForm = ({ kit }) => {
     const { images } = values;
     const items = []
   
+    // ?? use .map
     for (let i = 0; i < images.length; i++) {
       items.push(
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
@@ -103,8 +118,13 @@ const KitForm = ({ kit }) => {
             </React.Fragment>
           }
           { images[i].state === 'D' && 
+            <React.Fragment>
+              <span className="icons-top-left">
+                <span className="icon-tray-item fas fa-undo img-delete" onClick={reinstateImage.bind(null, images[i]._id)}></span>
+              </span>
               <img className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" />
-            }
+            </React.Fragment>
+          }
         </div>
       )
     }
@@ -130,6 +150,18 @@ const KitForm = ({ kit }) => {
       });
       setChange('images', images);
       setChange('topImage', images && images.filter(i => i.state !== 'D').length > 0 ? images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png');
+    }
+  }
+
+  function reinstateImage(id) {
+    if (id && values.images) {
+      let images = values.images.map(i => {
+        if (i._id === id) {
+          i.state ='N';
+        }
+        return i;
+      });
+      setChange('images', images);
     }
   }
 
