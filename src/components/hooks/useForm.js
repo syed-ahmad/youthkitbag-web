@@ -2,14 +2,11 @@ import { useState, useEffect } from 'react';
 
 const useForm = (initiaValues, callback, validate) => {
 
-  console.log('useform initialvalues', initiaValues);
-
   const [values, setValues] = useState(initiaValues);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    console.log('Watching errors');
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback();
       setIsSubmitting(false);

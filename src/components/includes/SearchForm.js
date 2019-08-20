@@ -3,8 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { fetchKitbagKits } from '../../actions/KitbagKitActions';
 import validate from './SearchFormValidationRules';
+import queryString from 'query-string';
 
-const SearchForm = () => {
+const SearchForm = props => {
+
+  const qsvalues = queryString.parse(props.search);
+  const search = qsvalues.search ? qsvalues.search : '';
+  const by = qsvalues.by ? qsvalues.by : '';
 
   const dispatch = useDispatch();
   const filter = useSelector(state => state.filter);
@@ -12,8 +17,8 @@ const SearchForm = () => {
   const [isClearing, setIsClearing] = useState(false);
 
   const initialValues = {
-    by: 'all',
-    search: ''
+    by: by,
+    search: search
   }
 
   const {
@@ -29,7 +34,7 @@ const SearchForm = () => {
   }
 
   function clearSearch() {
-    setValues(initialValues);
+    setValues({ by: '', search: '' });
     setIsClearing(true);
   }
 

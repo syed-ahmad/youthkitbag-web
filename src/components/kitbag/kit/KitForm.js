@@ -49,8 +49,6 @@ const KitForm = ({ kit }) => {
     quantity: 0
   };
 
-  console.log('loading form', kit);
-
   const {
     setChange,
     handleChange,
@@ -71,7 +69,6 @@ const KitForm = ({ kit }) => {
     setChange('imagesToUpload', files.length);
     for (let i = 0; i < files.length; i++) {
       resize(files[i], MAXWIDTH, MAXHEIGHT, function (resizedDataUrl) {
-        console.log('resizedDataUrl',resizedDataUrl);
         let formData = new FormData();
         formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
         dispatch(addImage(formData));
@@ -98,8 +95,6 @@ const KitForm = ({ kit }) => {
     if (!values || !values.images) {
       return null;
     }
-
-    console.log('IMAGES',values.images);
 
     const { images } = values;
     const items = []

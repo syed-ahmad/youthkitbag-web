@@ -19,7 +19,17 @@ class KitBag extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchKitbagKits('', '', 1, 24);
+    var by = '';
+    var search = '';
+    var page = '';
+    if (this.props.location.search) {
+      const values = queryString.parse(this.props.location.search);
+      search = values.search ? values.search : '';
+      by = values.by ? values.by : '';
+      page = values.page ? values.page : '';
+    }
+
+    this.props.fetchKitbagKits(search, by, page, 24);
   }
 
   componentDidUpdate(prevProps) {
@@ -49,7 +59,7 @@ class KitBag extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <SearchForm />
+                <SearchForm search={this.props.location.search}/>
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
                 <Link to="/kitbag/kits/new" className="btn btn-primary">Add new kit</Link>

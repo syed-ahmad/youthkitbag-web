@@ -16,6 +16,7 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
   })
   .then(response => {
     dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
+    history.push(`/kitbag/kits?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
   })
   .catch(err => {
     const { response } = err;
