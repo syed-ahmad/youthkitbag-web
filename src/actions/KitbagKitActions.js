@@ -7,7 +7,7 @@ const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.get(`${baseUrl}/kitbag/kits`, {
+  axios.get(`${baseUrl}/kitbag/kit`, {
     params: { search, by, page, pagesize },
     headers: {
       Authorization: `bearer ${token}`,
@@ -31,7 +31,7 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
 
 export const fetchKitbagKit = (kitId) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.get(`${baseUrl}/kitbag/kits/${kitId}`, {
+  axios.get(`${baseUrl}/kitbag/kit/${kitId}`, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
@@ -53,7 +53,7 @@ export const fetchKitbagKit = (kitId) => dispatch => {
 
 export const createKitbagKit = (formValues) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.post(`${baseUrl}/kitbag/kits`, {...formValues}, {
+  axios.post(`${baseUrl}/kitbag/kit`, {...formValues}, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
@@ -76,7 +76,7 @@ export const createKitbagKit = (formValues) => dispatch => {
 
 export const editKitbagKit = (kitId, formValues) =>  dispatch => {
   const token = localStorage.getItem('token');
-  axios.put(`${baseUrl}/kitbag/kits/${kitId}`, {...formValues}, {
+  axios.put(`${baseUrl}/kitbag/kit/${kitId}`, {...formValues}, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
@@ -99,7 +99,7 @@ export const editKitbagKit = (kitId, formValues) =>  dispatch => {
 
 export const deleteKitbagKit = (kitId) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.delete(`${baseUrl}/kitbag/kits/${kitId}`, {
+  axios.delete(`${baseUrl}/kitbag/kit/${kitId}`, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
