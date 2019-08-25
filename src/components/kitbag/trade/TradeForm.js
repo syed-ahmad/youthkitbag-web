@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
-import { createKitbagKit, editKitbagKit } from '../../../actions/KitbagKitActions';
+import { createKitbagTrade, editKitbagTrade } from '../../../actions/KitbagTradeActions';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
-import validate from './KitFormValidationRules';
+import validate from './TradeFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
-const KitForm = ({ kit }) => {
+const TradeForm = ({ trade }) => {
+
+  //console.log('TRADE', trade);
 
   // ?? still using redux
   const dispatch = useDispatch();
-  const newImages = useSelector(state => state.kitbag.kit.newImages);
+  const newImages = useSelector(state => state.kitbag.trade.newImages);
 
   // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
@@ -22,31 +24,28 @@ const KitForm = ({ kit }) => {
     title: '',
     subtitle: '',
     description: '',
-    status: 'Owned',
-    purchases: [],
-    inbag: [],
-    warning: 0,
+    condition: 'Used',
+    askingPrice: 0.00,
+    location: {
+      coordinates: ''
+    },
+    traded: {
+      tradedOn: '',
+      toUserId: '',
+      tradePrice: 0,
+      complete: false
+    },
     activitys: '',
-    tags: '',
-    security: '',
-    active: 'on',
+    groups: [],
     images: [],
-    topImage: '/images/default.png',
-    imagesToUpload: 0
+    sourceId: '',
+    userId: '',
+    topImage: '/images/default.png'
   };
 
-  // ?? default settings for the block array items
-  const initialPurchase = {
-    from: '',
-    quantity: 0,
-    ondate: '2001-01-01',
-    price: 0.01
-  };
-
-  const initialInbag = {
-    location: '',
-    condition: 'used',
-    quantity: 0
+  const initialGroup = {
+    name: '',
+    available: '2019-01-01'
   };
 
   const {
@@ -58,7 +57,7 @@ const KitForm = ({ kit }) => {
     values,
     setValues,
     errors
-  } = useForm(initialValues, updateKit, validate);
+  } = useForm(initialValues, updateTrade, validate);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -171,11 +170,11 @@ const KitForm = ({ kit }) => {
   }
 
   useEffect(() => {
-    if (kit) {
-      kit.topImage = kit.images && kit.images.filter(i => i.state !== 'D').length > 0 ? kit.images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png';
-      setValues(kit);
+    if (trade) {
+      trade.topImage = trade.images && trade.images.filter(i => i.state !== 'D').length > 0 ? trade.images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png';
+      setValues(trade);
     }
-  }, [kit, setValues]);
+  }, [trade, setValues]);
 
   useEffect(() => {
     if (newImages && newImages.length > 0 && newImages.length === values.imagesToUpload) {
@@ -193,21 +192,18 @@ const KitForm = ({ kit }) => {
     }
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
-  function updateKit() {
-    console.log('kV', values);
-    const kit = {
+  function updateTrade() {
+    console.log('tV', values);
+    const trade = {
       ...values, 
-      tags: getArray(values.tags), 
-      activitys: getArray(values.activitys),
-      security: getArray(values.security),
-      active: values.active === "on" || values.active
+      activitys: getArray(values.activitys)
     };
-    console.log('KIT', kit);
+    console.log('TRADE', trade);
 
-    if (kit._id) {
-      dispatch(editKitbagKit(kit._id, kit));
+    if (trade._id) {
+      dispatch(editKitbagTrade(trade._id, trade));
     } else {
-      dispatch(createKitbagKit(kit));
+      dispatch(createKitbagTrade(trade));
     }
   }
 
@@ -260,113 +256,49 @@ const KitForm = ({ kit }) => {
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="status" className="col-sm-3 col-form-label">Status</label>
+            <label htmlFor="condition" className="col-sm-3 col-form-label">Condition</label>
             <div className="col-sm-9">
-              <select className="custom-select" name="status" onChange={handleChange} onBlur={handleChange} value={values.status} aria-describedby="status">
-                <option value="owned">Owned</option>
-                <option value="trade">Trade</option>
-                <option value="sold">Sold</option>
-                <option value="stolen">Stolen</option>
-                <option value="wanted">Wanted</option>
-                <option value="recycled">Recycled</option>
-                <option value="trashed">Trashed</option>
-                <option value="donated">Donated</option>
-                <option value="other">Other</option>
+              <select className="custom-select" name="condition" onChange={handleChange} onBlur={handleChange} value={values.condition} aria-describedby="condition">
+                <option value="used">Used</option>
+                <option value="new">New</option>
               </select>
             </div>
           </div>
-          <hr />
-          <div>
-            {values.purchases && values.purchases.map((item, index) => (
-              <div className="form-row" key={index}>
-                <div className="form-group col-sm-4">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Purchased from</label>
-                  }
-                  <input className="form-control" name={`purchases[${index}].from`} type="text" onChange={handleChange} value={values.purchases[index].from} />
-                </div>
-                <div className="form-group col-sm-2">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Quantity</label>
-                  }
-                  <input className="form-control" name={`purchases[${index}].quantity`} type="number" step="1" onChange={handleChange} value={values.purchases[index].quantity} />
-                </div>
-                <div className="form-group col-sm-3">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">On</label>
-                  }
-                  <input className="form-control" name={`purchases[${index}].ondate`} type="date" onChange={handleChange} value={values.purchases[index].ondate} />
-                </div>
-                <div className="form-group col-sm-2">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Price</label>
-                  }
-                  <input className="form-control" name={`purchases[${index}].price`} type="number" step=".01" onChange={handleChange} value={values.purchases[index].price} />
-                </div>
-                <div className="form-group col-sm-1">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Rem</label>
-                  }
-                  <button className="btn btn-danger" type="button" title="Remove Purchase" onClick={() => removeArrayItem('purchases', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
-                </div>
-              </div>
-            ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('purchases', [initialPurchase])}>
-              Add a new purchase
-            </button>
-          </div>
-          <hr />
-          <div>
-            {values.inbag && values.inbag.map((item, index) => (
-              <div className="form-row" key={index}>
-                <div className="form-group col-sm-4">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Storage location</label>
-                  }
-                  <input className="form-control" name={`inbag[${index}].location`} type="text" onChange={handleChange} value={values.inbag[index].location} />
-                </div>
-                <div className="form-group col-sm-4">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Condition</label>
-                  }
-                  <select className="custom-select" name={`inbag[${index}].condition`} onChange={handleChange} onBlur={handleChange} value={values.inbag[index].condition}>
-                    <option value="used" >Used</option>
-                    <option value="new" >New</option>
-                    <option value="almostnew" >Almost New</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div className="form-group col-sm-3">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Quantity</label>
-                  }
-                  <input className="form-control" name={`inbag[${index}].quantity`} type="number" onChange={handleChange} value={values.inbag[index].quantity} />
-                </div>
-                <div className="form-group col-sm-1">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Rem</label>
-                  }
-                  <button className="btn btn-danger" type="button" title="Remove Inbag" onClick={() => removeArrayItem('inbag', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
-                </div>
-              </div>
-            ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('inbag', [initialInbag])}>
-              Add a new storage location
-            </button>
-          </div>
-          <hr />
           <div className="form-group row">
-            <label htmlFor="warning" className="col-sm-3 col-form-label">Warning Level</label>
+            <label htmlFor="askingPrice" className="col-sm-3 col-form-label">Asking Price</label>
             <div className="col-sm-9">
-              <input className={`form-control ${errors.warning && 'is-invalid'}`} name="warning" type="number" step="1" onChange={handleChange} value={values.warning} aria-describedby="warning" />
-              {errors.warning && (
-                <div className="invalid-feedback">{errors.warning}</div>
-              )}
+              <input className="form-control" name="askingPrice" type="number" step=".01" onChange={handleChange} value={values.askingPrice} aria-describedby="askingPrice" />
             </div>
           </div>
           <hr />
-          <h3 className="h6">Categorise/Security (all optional)</h3>
-          <small id="categoryhelp" className="form-text text-muted form-control-help mb-3">You can add activity names, personal tags and security numbers to your kit. Enter names separate by commas. (e.g. football, cycling)</small>
+          <div>
+            {values.groups && values.groups.map((item, index) => (
+              <div className="form-row" key={index}>
+                <div className="form-group col-sm-6">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Name</label>
+                  }
+                  <input className="form-control" name={`groups[${index}].name`} type="text" onChange={handleChange} value={values.groups[index].name} />
+                </div>
+                <div className="form-group col-sm-5">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Available</label>
+                  }
+                  <input className="form-control" name={`groups[${index}].available`} type="date" onChange={handleChange} value={values.groups[index].available} />
+                </div>
+                <div className="form-group col-sm-1">
+                  { (index === 0) &&
+                    <label className="d-none d-sm-block">Rem</label>
+                  }
+                  <button className="btn btn-danger" type="button" title="Remove Group" onClick={() => removeArrayItem('groups', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+                </div>
+              </div>
+            ))}
+            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('groups', [initialGroup])}>
+              Add a new group
+            </button>
+          </div>
+          <hr />
           <div className="form-group row">
             <label htmlFor="activitys" className="col-sm-3 col-form-label">Activities</label>
             <div className="col-sm-9">
@@ -374,37 +306,6 @@ const KitForm = ({ kit }) => {
               {errors.activitys && (
                 <div className="invalid-feedback">{errors.activitys}</div>
               )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="tags" className="col-sm-3 col-form-label">Tags</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.tags && 'is-invalid'}`} name="tags" type="text" onChange={handleChange} value={values.tags} aria-describedby="tags" />
-              {errors.tags && (
-                <div className="invalid-feedback">{errors.tags}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="security" className="col-sm-3 col-form-label">Security</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.security && 'is-invalid'}`} name="security" type="text" onChange={handleChange} value={values.security} aria-describedby="security" />
-              {errors.security && (
-                <div className="invalid-feedback">{errors.security}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-3" htmlFor="active">Active</label>
-            <div className="col-1 col-sm-1">
-              <div className="form-check">
-                <input className="form-check-input" type="checkbox" name="active" onChange={handleChange} checked={values.active} aria-describedby="active" />
-              </div>
-            </div>
-            <div className="col-11 col-sm-8">
-              <div className="form-check">
-                <small id="activehelp" className="form-text text-muted form-control-help">This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search.</small>
-              </div>
             </div>
           </div>
           <hr />
@@ -426,7 +327,7 @@ const KitForm = ({ kit }) => {
           </div>
           <div>
             <button className="btn btn-primary" type="submit">Save</button>
-            <Link className="btn btn-link" to="/kitbag/kits">Cancel</Link>
+            <Link className="btn btn-link" to="/kitbag/trades">Cancel</Link>
           </div>
           </form>
         </div>
@@ -434,4 +335,4 @@ const KitForm = ({ kit }) => {
   );
 }
 
-export default KitForm;
+export default TradeForm;

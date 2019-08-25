@@ -21,9 +21,14 @@ import Logout from './auth/Logout';
 import Purchase from './Purchase';
 
 import KitBag from './kitbag/kit/KitBag';
-import KitCreate from './kitbag/kit/KitCreatePage';
-import KitEdit from './kitbag/kit/KitEditPage';
+import KitCreatePage from './kitbag/kit/KitCreatePage';
+import KitEditPage from './kitbag/kit/KitEditPage';
 import KitDelete from './kitbag/kit/KitDelete';
+
+import Trades from './kitbag/trade/Trades';
+import TradeCreatePage from './kitbag/trade/TradeCreatePage';
+import TradeEditPage from './kitbag/trade/TradeEditPage';
+import TradeDelete from './kitbag/trade/TradeDelete';
 
 class App extends React.Component {
   render() {
@@ -49,10 +54,14 @@ class App extends React.Component {
               <Route path="/auth/newpassword/:key" exact component={NewPassword} />
               <Route path="/auth/logout" exact component={Logout} />
               <PrivateRoute path="/purchase" exact component={Purchase} />
-              <PrivateRoute path="/kitbag/kits/new" exact component={KitCreate} />
-              <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitEdit} />
+              <PrivateRoute path="/kitbag/kits/new" exact component={KitCreatePage} />
+              <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitEditPage} />
               <PrivateRoute path="/kitbag/kits/delete/:id" exact component={KitDelete} />
               <PrivateRoute path="/kitbag/kits" component={KitBag} />
+              <PrivateRoute path="/kitbag/trades/add/:id" exact component={TradeCreatePage} />
+              <PrivateRoute path="/kitbag/trades/edit/:id" exact component={TradeEditPage} />
+              <PrivateRoute path="/kitbag/trades/delete/:id" exact component={TradeDelete} />
+              <PrivateRoute path="/kitbag/trades" component={Trades} />
             </Switch>
           </main>
           <Footer />

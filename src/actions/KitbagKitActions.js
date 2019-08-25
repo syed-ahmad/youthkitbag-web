@@ -11,7 +11,7 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
     params: { search, by, page, pagesize },
     headers: {
       Authorization: `bearer ${token}`,
-      'content-type': 'application/json',
+      'content-type': 'application/json'
     }
   })
   .then(response => {

@@ -1,21 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchKitbagKits } from '../../../actions';
-import { Link } from 'react-router-dom';
+import { fetchKitbagTrades } from '../../../actions';
 import queryString from 'query-string';
 
 import Title from '../../includes/Title';
-import KitCard from './KitCard';
-import KitSearchForm from './KitSearchForm';
+import TradeCard from './TradeCard';
+import TradeSearchForm from './TradeSearchForm';
 import Pagination from '../../includes/Pagination';
 
-class KitBag extends React.Component {
+class Trades extends React.Component {
 
   getTitle = () => {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
-    return `Found items in kitbag (${this.props.pagination.totalItems})`;
+    return `Found items in kitbag for trade (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {
@@ -29,26 +28,29 @@ class KitBag extends React.Component {
       page = values.page ? values.page : '';
     }
 
-    this.props.fetchKitbagKits(search, by, page, 24);
+    this.props.fetchKitbagTrades(search, by, page, 24);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
+      console.log('TRADES new',this.props.location.search);
       const values = queryString.parse(this.props.location.search);
       const search = values.search ? values.search : '';
       const by = values.by ? values.by : '';
       const page = values.page ? values.page : '';
-      this.props.fetchKitbagKits(search, by, page, 24);
+      this.props.fetchKitbagTrades(search, by, page, 24);
     }
   } 
 
   renderList() {
+    //console.log('RENDER', this.props.items);
     return this.props.items.map((item, index) => {
-      return <KitCard key={`${item._id}-${index}`} kit={item}/>
+      return <TradeCard key={`${item._id}-${index}`} trade={item}/>
     })
   }
 
   render() {
+    console.log('TRADES search',this.props.location.search);
     return (
       <div>
         <Title title={this.getTitle()} />
@@ -59,10 +61,7 @@ class KitBag extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <KitSearchForm search={this.props.location.search}/>
-              </div>
-              <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <Link to="/kitbag/kits/new" className="btn btn-primary">Add new kit</Link>
+                <TradeSearchForm search={this.props.location.search}/>
               </div>
             </div>
             <div className="row">
@@ -77,7 +76,7 @@ class KitBag extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { items: Object.values(state.kitbag.kit.list), filter: state.filter, pagination: state.pagination };
+  return { items: Object.values(state.kitbag.trade.list), filter: state.filter, pagination: state.pagination };
 }
 
-export default connect(mapStateToProps, { fetchKitbagKits })(KitBag);
+export default connect(mapStateToProps, { fetchKitbagTrades })(Trades);

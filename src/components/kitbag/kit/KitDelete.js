@@ -46,7 +46,7 @@ class KitDelete extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { kit: state.kitbag.kits[ownProps.match.params.id] }
+  return { kit: state.kitbag.kit[ownProps.match.params.id] }
 };
 
 export default connect(mapStateToProps, { fetchKitbagKit, deleteKitbagKit })(KitDelete);

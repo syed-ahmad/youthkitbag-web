@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import useForm from '../hooks/useForm';
-import { fetchKitbagKits } from '../../actions/KitbagKitActions';
-import validate from './SearchFormValidationRules';
+import useForm from '../../hooks/useForm';
+import { fetchKitbagTrades } from '../../../actions/KitbagTradeActions';
+import validate from './TradeSearchFormValidationRules';
 import queryString from 'query-string';
 
-const SearchForm = props => {
+const TradeSearchForm = props => {
 
   const qsvalues = queryString.parse(props.search);
   const search = qsvalues.search ? qsvalues.search : '';
@@ -30,7 +30,7 @@ const SearchForm = props => {
   
   function searchItems() {
     const { by, search } = values;
-    dispatch(fetchKitbagKits(search, by, 1, pagination.itemsPerPage));
+    dispatch(fetchKitbagTrades(search, by, 1, pagination.itemsPerPage));
   }
 
   function clearSearch() {
@@ -67,4 +67,4 @@ const SearchForm = props => {
   );
 }
 
-export default SearchForm;
+export default TradeSearchForm;

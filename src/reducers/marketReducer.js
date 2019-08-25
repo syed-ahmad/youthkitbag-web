@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import marketForSalesReducer from './marketForSalesReducer';
-import marketWantedsReducer from './marketWantedsReducer';
-import marketStolensReducer from './marketStolensReducer';
+import marketTradeReducer from './marketTradeReducer';
+import marketWantedReducer from './marketWantedReducer';
+import marketStolenReducer from './marketStolenReducer';
 
 export default combineReducers({
-  forsale: marketForSalesReducer,
-  wanted: marketWantedsReducer,
-  stolen: marketStolensReducer 
+  trade: marketTradeReducer,
+  wanted: marketWantedReducer,
+  stolen: marketStolenReducer 
 });

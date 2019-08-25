@@ -3,7 +3,7 @@ import * as types from '../actions/types';
 const initialState = {current: {}, newImages: [], list: [] };
 
 export default (state = initialState, action) => {
-  //console.log('KBKIT', action.type, action.payload);
+  ////console.log('KBKIT', action.type, action.payload);
   switch (action.type) {
     case types.FETCH_KITBAG_KIT:
       return { ...state, current: action.payload, newImages: [] };

@@ -5,7 +5,7 @@ import KitForm from './KitForm';
 import Title from '../../includes/Title';
 
 const mapStateToProps = state => ({
-  current: state.kitbag.kits.current
+  current: state.kitbag.kit.current
 });
 
 const mapDispatchToProps = {

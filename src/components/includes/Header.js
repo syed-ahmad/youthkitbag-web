@@ -36,7 +36,7 @@ class Header extends React.Component {
                 <li className="nav-item dropdown mr-3">
                   <Link className="nav-item nav-link dropdown-toggle" to="/marketdropdown" id="marketDropdown" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">Market</Link>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="marketDropdown">
-                    <Link className="dropdown-item" to="/market/forsale/all">For Sale</Link>
+                    <Link className="dropdown-item" to="/market/trade/all">Trade</Link>
                     <Link className="dropdown-item" to="/market/wanted/all">Wanted</Link>
                     <Link className="dropdown-item" to="/market/stolen/all">Stolen</Link>
                   </div>
@@ -50,7 +50,7 @@ class Header extends React.Component {
                       <Link className="dropdown-item" to="/kitbag/kits">View Kitbag</Link>
                       <Link className="dropdown-item" to="/kitbag/kits/new">Add Kit</Link>
                       <hr />
-                      <Link className="dropdown-item" to="/kitbag/forsale/all">Selling</Link>
+                      <Link className="dropdown-item" to="/kitbag/trades">Trades</Link>
                       <Link className="dropdown-item" to="/kitbag/wanted/all">Want</Link>
                       <Link className="dropdown-item" to="/kitbag/recycle/all">Recycle</Link>
                       <Link className="dropdown-item" to="/kitbag/donate/all">Donate</Link>
