@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { CREATE_KITBAG_WANTED, FETCH_KITBAG_WANTEDS, FETCH_KITBAG_WANTED, EDIT_KITBAG_WANTED, DELETE_KITBAG_WANTED, API_KITBAG_ERROR } from './types';
+import { CREATE_KITBAG_STOLEN, FETCH_KITBAG_STOLENS, FETCH_KITBAG_STOLEN, EDIT_KITBAG_STOLEN, DELETE_KITBAG_STOLEN, API_KITBAG_ERROR } from './types';
 import history from '../helpers/history';
 import * as types from './types';
 
 const baseUrl = process.env.REACT_APP_YKAPI || 'http://localhost:8080';
 
-export const fetchKitbagWanteds = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
+export const fetchKitbagStolens = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.get(`${baseUrl}/kitbag/wanted`, {
+  axios.get(`${baseUrl}/kitbag/stolen`, {
       params: { search, by, page, pagesize },
       headers: {
         Authorization: `bearer ${token}`,
@@ -16,8 +16,8 @@ export const fetchKitbagWanteds = (search = '', by = 'all', page = 1, pagesize =
     })
     .then(response => {
       console.log('RESPONSE', response);
-      dispatch({ type: FETCH_KITBAG_WANTEDS, payload: response.data });
-      history.push(`/kitbag/wanteds?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
+      dispatch({ type: FETCH_KITBAG_STOLENS, payload: response.data });
+      history.push(`/kitbag/stolens?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
     })
     .catch(err => {
       //console.log('ERROR', err);
@@ -25,100 +25,100 @@ export const fetchKitbagWanteds = (search = '', by = 'all', page = 1, pagesize =
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: types.GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/kitbag/wanteds');
+        history.push('/auth/login?return=/kitbag/stolens');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
 };
 
 
-export const fetchKitbagWanted = (wantedId) => dispatch => {
+export const fetchKitbagStolen = (stolenId) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.get(`${baseUrl}/kitbag/wanted/${wantedId}`, {
+  axios.get(`${baseUrl}/kitbag/stolen/${stolenId}`, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
     }
   })
   .then(response => {
-    dispatch({ type: FETCH_KITBAG_WANTED, payload: response.data });
+    dispatch({ type: FETCH_KITBAG_STOLEN, payload: response.data });
   })
   .catch(err => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
       dispatch({ type: types.GETALL_FAILURE, payload: response});
-      history.push('/auth/login?return=/kitbag/wanteds');
+      history.push('/auth/login?return=/kitbag/stolens');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
   });
 };
 
-export const createKitbagWanted = (formValues) => dispatch => {
+export const createKitbagStolen = (formValues) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.post(`${baseUrl}/kitbag/wanted`, {...formValues}, {
+  axios.post(`${baseUrl}/kitbag/stolen`, {...formValues}, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
     }
   })
   .then(response => {
-    dispatch({ type: CREATE_KITBAG_WANTED, payload: response.data });
-    history.push('/kitbag/wanteds');
+    dispatch({ type: CREATE_KITBAG_STOLEN, payload: response.data });
+    history.push('/kitbag/stolens');
   })
   .catch(err => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
       dispatch({ type: types.GETALL_FAILURE, payload: response});
-      history.push('/auth/login?return=/kitbag/wanteds');
+      history.push('/auth/login?return=/kitbag/stolens');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
   });
 }
 
-export const editKitbagWanted = (wantedId, formValues) =>  dispatch => {
-  console.log('EDITWANTED', formValues);
+export const editKitbagStolen = (stolenId, formValues) =>  dispatch => {
+  console.log('EDITSTOLEN', formValues);
   const token = localStorage.getItem('token');
-  axios.put(`${baseUrl}/kitbag/wanted/${wantedId}`, {...formValues}, {
+  axios.put(`${baseUrl}/kitbag/stolen/${stolenId}`, {...formValues}, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
     }
   })
   .then(response => {
-    dispatch({ type: EDIT_KITBAG_WANTED, payload: response.data });
-    history.push('/kitbag/wanteds');
+    dispatch({ type: EDIT_KITBAG_STOLEN, payload: response.data });
+    history.push('/kitbag/stolens');
   })
   .catch(err => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
       dispatch({ type: types.GETALL_FAILURE, payload: response});
-      history.push('/auth/login?return=/kitbag/wanteds');
+      history.push('/auth/login?return=/kitbag/stolens');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
   });
 };
 
-export const deleteKitbagWanted = (wantedId) => dispatch => {
+export const deleteKitbagStolen = (stolenId) => dispatch => {
   const token = localStorage.getItem('token');
-  axios.delete(`${baseUrl}/kitbag/wanted/${wantedId}`, {
+  axios.delete(`${baseUrl}/kitbag/stolen/${stolenId}`, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
     }
   })
   .then(() => {
-    dispatch({ type: DELETE_KITBAG_WANTED, payload: wantedId });
-    history.push('/kitbag/wanteds');
+    dispatch({ type: DELETE_KITBAG_STOLEN, payload: stolenId });
+    history.push('/kitbag/stolens');
   })
   .catch(err => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
       dispatch({ type: types.GETALL_FAILURE, payload: response});
-      history.push('/auth/login?return=/kitbag/wanteds');
+      history.push('/auth/login?return=/kitbag/stolens');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
   })

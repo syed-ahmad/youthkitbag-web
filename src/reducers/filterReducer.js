@@ -7,6 +7,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_KITBAG_KITS: 
     case types.FETCH_KITBAG_TRADES: 
+    case types.FETCH_KITBAG_STOLENS: 
     case types.FETCH_KITBAG_WANTEDS: 
       return { ...state, ...action.payload.filter };
     case types.LOGOUT:
