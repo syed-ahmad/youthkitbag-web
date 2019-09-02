@@ -2,18 +2,17 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
-import { createKitbagTrade, editKitbagTrade } from '../../../actions/KitbagTradeActions';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
-import validate from './TradeFormValidationRules';
+import validate from './GroupFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
-const TradeForm = ({ trade }) => {
+const GroupForm = ({ group }) => {
 
-  //console.log('TRADE', trade);
+  //console.log('group', group);
 
   // ?? still using redux
   const dispatch = useDispatch();
-  const newImages = useSelector(state => state.kitbag.trade.newImages);
+  const newImages = useSelector(state => state.kitbag.group.newImages);
 
   // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
@@ -29,15 +28,15 @@ const TradeForm = ({ trade }) => {
     location: {
       coordinates: ''
     },
-    images: [],
-    traded: {
-      tradedOn: '',
+    groupd: {
+      groupdOn: '',
       toUserId: '',
-      tradePrice: 0,
+      groupPrice: 0,
       complete: false
     },
     activitys: '',
     groups: [],
+    images: [],
     sourceId: '',
     userId: '',
     topImage: '/images/default.png'
@@ -57,7 +56,7 @@ const TradeForm = ({ trade }) => {
     values,
     setValues,
     errors
-  } = useForm(initialValues, updateTrade, validate);
+  } = useForm(initialValues, updategroup, validate);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -170,11 +169,11 @@ const TradeForm = ({ trade }) => {
   }
 
   useEffect(() => {
-    if (trade) {
-      trade.topImage = trade.images && trade.images.filter(i => i.state !== 'D').length > 0 ? trade.images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png';
-      setValues(trade);
+    if (group) {
+      group.topImage = group.images && group.images.filter(i => i.state !== 'D').length > 0 ? group.images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png';
+      setValues(group);
     }
-  }, [trade, setValues]);
+  }, [group, setValues]);
 
   useEffect(() => {
     if (newImages && newImages.length > 0 && newImages.length === values.imagesToUpload) {
@@ -192,19 +191,19 @@ const TradeForm = ({ trade }) => {
     }
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
-  function updateTrade() {
+  function updategroup() {
     console.log('tV', values);
-    const trade = {
+    const group = {
       ...values, 
       activitys: getArray(values.activitys)
     };
-    console.log('TRADE', trade);
+    console.log('group', group);
 
-    if (trade._id) {
-      dispatch(editKitbagTrade(trade._id, trade));
-    } else {
-      dispatch(createKitbagTrade(trade));
-    }
+    // if (group._id) {
+    //   dispatch(editGroup(group._id, group));
+    // } else {
+    //   dispatch(createGroup(group));
+    // }
   }
 
   return (
@@ -327,7 +326,7 @@ const TradeForm = ({ trade }) => {
           </div>
           <div>
             <button className="btn btn-primary" type="submit">Save</button>
-            <Link className="btn btn-link" to="/kitbag/trades">Cancel</Link>
+            <Link className="btn btn-link" to="/kitbag/groups">Cancel</Link>
           </div>
           </form>
         </div>
@@ -335,4 +334,4 @@ const TradeForm = ({ trade }) => {
   );
 }
 
-export default TradeForm;
+export default GroupForm;

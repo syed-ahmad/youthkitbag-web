@@ -19,6 +19,7 @@ import NewPassword from './auth/NewPasswordPage';
 import Logout from './auth/Logout';
 
 import Purchase from './Purchase';
+import Groups from './group/Groups';
 
 import KitBag from './kitbag/kit/KitBag';
 import KitCreatePage from './kitbag/kit/KitCreatePage';
@@ -30,15 +31,24 @@ import TradeCreatePage from './kitbag/trade/TradeCreatePage';
 import TradeEditPage from './kitbag/trade/TradeEditPage';
 import TradeDelete from './kitbag/trade/TradeDelete';
 
+import Wanteds from './kitbag/wanted/Wanteds';
+import WantedCreatePage from './kitbag/wanted/WantedCreatePage';
+import WantedEditPage from './kitbag/wanted/WantedEditPage';
+import WantedDelete from './kitbag/wanted/WantedDelete';
+
 import Stolens from './kitbag/stolen/Stolens';
 import StolenCreatePage from './kitbag/stolen/StolenCreatePage';
 import StolenEditPage from './kitbag/stolen/StolenEditPage';
 import StolenDelete from './kitbag/stolen/StolenDelete';
 
-import Wanteds from './kitbag/wanted/Wanteds';
-import WantedCreatePage from './kitbag/wanted/WantedCreatePage';
-import WantedEditPage from './kitbag/wanted/WantedEditPage';
-import WantedDelete from './kitbag/wanted/WantedDelete';
+import MarketTrades from './market/trade/MarketTrades';
+import MarketTradeEditPage from './market/trade/MarketTradeEditPage';
+
+import MarketWanteds from './market/wanted/MarketWanteds';
+import MarketWantedEditPage from './market/wanted/MarketWantedEditPage';
+
+import MarketStolens from './market/stolen/MarketStolens';
+import MarketStolenEditPage from './market/stolen/MarketStolenEditPage';
 
 class App extends React.Component {
   render() {
@@ -64,6 +74,7 @@ class App extends React.Component {
               <Route path="/auth/newpassword/:key" exact component={NewPassword} />
               <Route path="/auth/logout" exact component={Logout} />
               <PrivateRoute path="/purchase" exact component={Purchase} />
+              <PrivateRoute path="/groups" exact component={Groups} />
               <PrivateRoute path="/kitbag/kits/new" exact component={KitCreatePage} />
               <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitEditPage} />
               <PrivateRoute path="/kitbag/kits/delete/:id" exact component={KitDelete} />
@@ -80,6 +91,12 @@ class App extends React.Component {
               <PrivateRoute path="/kitbag/wanteds/edit/:id" exact component={WantedEditPage} />
               <PrivateRoute path="/kitbag/wanteds/delete/:id" exact component={WantedDelete} />
               <PrivateRoute path="/kitbag/wanteds" component={Wanteds} />
+              <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeEditPage} />
+              <Route path="/market/trades" component={MarketTrades} />
+              <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedEditPage} />
+              <Route path="/market/wanteds" component={MarketWanteds} />
+              <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenEditPage} />
+              <Route path="/market/stolens" component={MarketStolens} />
             </Switch>
           </main>
           <Footer />

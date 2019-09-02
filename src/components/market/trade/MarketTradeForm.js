@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
-import { createKitbagTrade, editKitbagTrade } from '../../../actions/KitbagTradeActions';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
-import validate from './TradeFormValidationRules';
+import validate from './MarketTradeFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
-const TradeForm = ({ trade }) => {
+const MarketTradeForm = ({ trade }) => {
 
   //console.log('TRADE', trade);
 
@@ -29,7 +28,6 @@ const TradeForm = ({ trade }) => {
     location: {
       coordinates: ''
     },
-    images: [],
     traded: {
       tradedOn: '',
       toUserId: '',
@@ -38,6 +36,7 @@ const TradeForm = ({ trade }) => {
     },
     activitys: '',
     groups: [],
+    images: [],
     sourceId: '',
     userId: '',
     topImage: '/images/default.png'
@@ -200,11 +199,11 @@ const TradeForm = ({ trade }) => {
     };
     console.log('TRADE', trade);
 
-    if (trade._id) {
-      dispatch(editKitbagTrade(trade._id, trade));
-    } else {
-      dispatch(createKitbagTrade(trade));
-    }
+    // if (trade._id) {
+    //   dispatch(editMarketTrade(trade._id, trade));
+    // } else {
+    //   dispatch(createMarketTrade(trade));
+    // }
   }
 
   return (
@@ -335,4 +334,4 @@ const TradeForm = ({ trade }) => {
   );
 }
 
-export default TradeForm;
+export default MarketTradeForm;

@@ -6,8 +6,12 @@ export default ( state = initialState, action) => {
   ////console.log('PAGTN', action.type, action.payload);
   switch (action.type) {
     case types.FETCH_KITBAG_KITS:
-      return { ...state, ...action.payload.pagination }
     case types.FETCH_KITBAG_TRADES:
+    case types.FETCH_KITBAG_WANTEDS:
+    case types.FETCH_KITBAG_STOLENS:
+    case types.FETCH_MARKET_TRADES:
+    case types.FETCH_MARKET_WANTEDS:
+    case types.FETCH_MARKET_STOLENS:
       return { ...state, ...action.payload.pagination }
     case types.LOGOUT:
       return initialState;

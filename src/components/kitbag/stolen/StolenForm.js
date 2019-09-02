@@ -9,8 +9,6 @@ import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
 const StolenForm = ({ stolen }) => {
 
-  //console.log('STOLEN', stolen);
-
   // ?? still using redux
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.kitbag.stolen.newImages);
