@@ -8,8 +8,6 @@ import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
 const MarketWantedForm = ({ wanted }) => {
 
-  //console.log('TRADE', wanted);
-
   // ?? still using redux
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.kitbag.wanted.newImages);
@@ -192,12 +190,10 @@ const MarketWantedForm = ({ wanted }) => {
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
   function updateWanted() {
-    console.log('tV', values);
     const wanted = {
       ...values, 
       activitys: getArray(values.activitys)
     };
-    console.log('TRADE', wanted);
 
     // if (wanted._id) {
     //   dispatch(editMarketWanted(wanted._id, wanted));

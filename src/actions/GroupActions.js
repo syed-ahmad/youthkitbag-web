@@ -6,7 +6,6 @@ import * as types from './types';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchGroups = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
-  console.log('FETCHGROUPS');
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/group/search`, {
     params: { search, by, page, pagesize },
@@ -53,7 +52,6 @@ export const fetchGroups = (search = '', by = 'all', page = 1, pagesize = 24) =>
 // };
 
 export const createGroup = (formValues) => dispatch => {
-  console.log(formValues);
   const token = localStorage.getItem('token');
   axios.post(`${baseUrl}/group`, {...formValues}, {
     headers: {

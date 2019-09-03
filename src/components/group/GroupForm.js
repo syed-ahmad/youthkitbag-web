@@ -176,12 +176,10 @@ const GroupForm = ({ group }) => {
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
   function updateGroup() {
-    console.log('tV', values);
     const group = {
       ...values, 
       activitys: getArray(values.activitys)
     };
-    console.log('group', group);
 
     if (group._id) {
       dispatch(editGroup(group._id, group));

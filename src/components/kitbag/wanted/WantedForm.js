@@ -9,8 +9,6 @@ import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
 const WantedForm = ({ wanted }) => {
 
-  //console.log('STOLEN', wanted);
-
   // ?? still using redux
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.kitbag.wanted.newImages);
@@ -196,7 +194,6 @@ const WantedForm = ({ wanted }) => {
       activitys: getArray(values.activitys), 
       security: getArray(values.security)
     };
-    console.log('STOLEN', wanted);
 
     if (wanted._id) {
       dispatch(editKitbagWanted(wanted._id, wanted));

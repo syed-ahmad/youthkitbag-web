@@ -34,7 +34,6 @@ class Groups extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
-      console.log('GROUPS new',this.props.location.search);
       const values = queryString.parse(this.props.location.search);
       const search = values.search ? values.search : '';
       const by = values.by ? values.by : '';

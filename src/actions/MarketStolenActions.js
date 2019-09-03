@@ -15,12 +15,10 @@ export const fetchMarketStolens = (search = '', by = 'all', page = 1, pagesize =
       }
     })
     .then(response => {
-      console.log('RESPONSE', response);
       dispatch({ type: FETCH_MARKET_STOLENS, payload: response.data });
       history.push(`/market/stolens?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
     })
     .catch(err => {
-      //console.log('ERROR', err);
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();

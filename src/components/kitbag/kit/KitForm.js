@@ -194,7 +194,6 @@ const KitForm = ({ kit }) => {
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
   function updateKit() {
-    console.log('kV', values);
     const kit = {
       ...values, 
       tags: getArray(values.tags), 
@@ -202,7 +201,6 @@ const KitForm = ({ kit }) => {
       security: getArray(values.security),
       active: values.active === "on" || values.active
     };
-    console.log('KIT', kit);
 
     if (kit._id) {
       dispatch(editKitbagKit(kit._id, kit));

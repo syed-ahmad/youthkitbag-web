@@ -15,12 +15,10 @@ export const fetchKitbagWanteds = (search = '', by = 'all', page = 1, pagesize =
       }
     })
     .then(response => {
-      console.log('RESPONSE', response);
       dispatch({ type: FETCH_KITBAG_WANTEDS, payload: response.data });
       history.push(`/kitbag/wanteds?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
     })
     .catch(err => {
-      //console.log('ERROR', err);
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -78,7 +76,6 @@ export const createKitbagWanted = (formValues) => dispatch => {
 }
 
 export const editKitbagWanted = (wantedId, formValues) =>  dispatch => {
-  console.log('EDITWANTED', formValues);
   const token = localStorage.getItem('token');
   axios.put(`${baseUrl}/kitbag/wanted/${wantedId}`, {...formValues}, {
     headers: {

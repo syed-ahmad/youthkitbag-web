@@ -194,7 +194,6 @@ const StolenForm = ({ stolen }) => {
       activitys: getArray(values.activitys), 
       security: getArray(values.security)
     };
-    console.log('STOLEN', stolen);
 
     if (stolen._id) {
       dispatch(editKitbagStolen(stolen._id, stolen));

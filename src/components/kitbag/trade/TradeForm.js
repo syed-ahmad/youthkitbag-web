@@ -9,8 +9,6 @@ import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
 const TradeForm = ({ trade }) => {
 
-  //console.log('TRADE', trade);
-
   // ?? still using redux
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.kitbag.trade.newImages);
@@ -193,12 +191,10 @@ const TradeForm = ({ trade }) => {
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
   function updateTrade() {
-    console.log('tV', values);
     const trade = {
       ...values, 
       activitys: getArray(values.activitys)
     };
-    console.log('TRADE', trade);
 
     if (trade._id) {
       dispatch(editKitbagTrade(trade._id, trade));

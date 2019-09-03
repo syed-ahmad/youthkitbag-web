@@ -4,7 +4,6 @@ const isLogin = !!(localStorage.getItem('token') && localStorage.getItem('authen
 const initialState = isLogin ? { loggedIn: true } : { loggedIn: false }
 
 export default function authentication(state = initialState, action) {
-  ////console.log('AUTH', action.type, action.payload);
   switch (action.type) {
     case types.LOGIN_SUCCESS:
       return {

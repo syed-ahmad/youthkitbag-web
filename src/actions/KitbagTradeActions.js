@@ -6,7 +6,6 @@ import * as types from '../actions/types';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchKitbagTrades = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
-  ////console.log('FETCH TRADES');
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/trade`, {
       params: { search, by, page, pagesize },
@@ -16,12 +15,10 @@ export const fetchKitbagTrades = (search = '', by = 'all', page = 1, pagesize = 
       }
     })
     .then(response => {
-      console.log('RESPONSE', response);
       dispatch({ type: FETCH_KITBAG_TRADES, payload: response.data });
       history.push(`/kitbag/trades?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
     })
     .catch(err => {
-      //console.log('ERROR', err);
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -79,7 +76,6 @@ export const createKitbagTrade = (formValues) => dispatch => {
 }
 
 export const editKitbagTrade = (tradeId, formValues) =>  dispatch => {
-  console.log('EDITTRADE', formValues);
   const token = localStorage.getItem('token');
   axios.put(`${baseUrl}/kitbag/trade/${tradeId}`, {...formValues}, {
     headers: {

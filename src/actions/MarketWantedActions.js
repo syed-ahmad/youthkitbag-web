@@ -6,12 +6,10 @@ import * as types from './types';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchMarketWanteds = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
-  console.log('GETWANTEDS');
   axios.get(`${baseUrl}/market/wanted`, {
       params: { search, by, page, pagesize }
     })
     .then(response => {
-      console.log('RESPONSE', response);
       dispatch({ type: FETCH_MARKET_WANTEDS, payload: response.data });
       history.push(`/market/wanteds?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
     })
