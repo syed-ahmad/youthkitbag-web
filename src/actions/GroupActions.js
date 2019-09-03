@@ -17,14 +17,14 @@ export const fetchGroups = (search = '', by = 'all', page = 1, pagesize = 24) =>
   })
   .then(response => {
     dispatch({ type: FETCH_GROUPS, payload: response.data });
-    history.push(`/groups?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
+    history.push(`/account/groups?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
   })
   .catch(err => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
       dispatch({ type: types.GETALL_FAILURE, payload: response});
-      history.push('/auth/login?return=/groups');
+      history.push('/auth/login?return=/account/groups');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: response });
   });

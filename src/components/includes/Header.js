@@ -63,6 +63,7 @@ class Header extends React.Component {
                       <Link to="/account/package" className="nav-link"><i className="fas fa-"></i></Link>
                       <Link to="/account/notifications" className="nav-link"><i className="fas fa-bell"></i></Link>
                       <Link className="dropdown-item" to="/account/profile">Account Profile</Link>
+                      <Link className="dropdown-item" to="/account/groups">Account Groups</Link>
                     </div>
                   </li>
                 }
