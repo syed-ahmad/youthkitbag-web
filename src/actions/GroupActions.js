@@ -63,7 +63,7 @@ export const createGroup = (formValues) => dispatch => {
   })
   .then(response => {
     dispatch({ type: CREATE_GROUP, payload: response.data });
-    history.push('/groups');
+    history.push('/account/groups');
   })
   .catch(err => {
     const { response } = err;
