@@ -292,7 +292,7 @@ const GroupForm = ({ group }) => {
           </div>
           <div>
             <button className="btn btn-primary" type="submit">Save</button>
-            <Link className="btn btn-link" to="/account/groups">Cancel</Link>
+            <Link className="btn btn-link" to="/settings/groups">Cancel</Link>
           </div>
           </form>
         </div>

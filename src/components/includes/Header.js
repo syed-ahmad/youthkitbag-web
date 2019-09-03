@@ -58,12 +58,10 @@ class Header extends React.Component {
                 }
                 { loggedIn && 
                   <li className="nav-item dropdown mr-3">
-                    <Link className="nav-item nav-link dropdown-toggle" to="/accountdropdown" id="accountDropdown" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">User Name</Link>
-                    <div className="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
-                      <Link to="/account/package" className="nav-link"><i className="fas fa-"></i></Link>
-                      <Link to="/account/notifications" className="nav-link"><i className="fas fa-bell"></i></Link>
-                      <Link className="dropdown-item" to="/account/profile">Account Profile</Link>
-                      <Link className="dropdown-item" to="/account/groups">Account Groups</Link>
+                    <Link className="nav-item nav-link dropdown-toggle" to="/settingsdropdown" id="settingsDropdown" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">Settings</Link>
+                    <div className="dropdown-menu dropdown-menu-right" aria-labelledby="settingsDropdown">
+                      <Link className="dropdown-item" to="/settings/account">Account</Link>
+                      <Link className="dropdown-item" to="/settings/groups">Groups</Link>
                     </div>
                   </li>
                 }

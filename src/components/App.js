@@ -98,8 +98,8 @@ class App extends React.Component {
               <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeEditPage} />
               <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedEditPage} />
               <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenEditPage} />
-              <PrivateRoute path="/account/groups/new" exact component={GroupCreatePage} />
-              <PrivateRoute path="/account/groups" component={Groups} />
+              <PrivateRoute path="/settings/groups/new" exact component={GroupCreatePage} />
+              <PrivateRoute path="/settings/groups" component={Groups} />
             </Switch>
           </main>
           <Footer />

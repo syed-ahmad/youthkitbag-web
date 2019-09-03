@@ -16,14 +16,14 @@ export const fetchGroups = (search = '', by = 'all', page = 1, pagesize = 24) =>
   })
   .then(response => {
     dispatch({ type: FETCH_GROUPS, payload: response.data });
-    history.push(`/account/groups?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
+    history.push(`/settings/groups?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
   })
   .catch(err => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
       dispatch({ type: types.GETALL_FAILURE, payload: response});
-      history.push('/auth/login?return=/account/groups');
+      history.push('/auth/login?return=/settings/groups');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: response });
   });
@@ -45,7 +45,7 @@ export const fetchGroups = (search = '', by = 'all', page = 1, pagesize = 24) =>
 //     if (response.status === 401) {
 //       window.localStorage.clear();
 //       dispatch({ type: types.GETALL_FAILURE, payload: response});
-//       history.push('/auth/login?return=/account/groups');
+//       history.push('/auth/login?return=/settings/groups');
 //     }
 //     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
 //   });
@@ -61,14 +61,14 @@ export const createGroup = (formValues) => dispatch => {
   })
   .then(response => {
     dispatch({ type: CREATE_GROUP, payload: response.data });
-    history.push('/account/groups');
+    history.push('/settings/groups');
   })
   .catch(err => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
       dispatch({ type: types.GETALL_FAILURE, payload: response});
-      history.push('/auth/login?return=/account/groups');
+      history.push('/auth/login?return=/settings/groups');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
   });
@@ -84,14 +84,14 @@ export const editGroup = (groupId, formValues) =>  dispatch => {
   })
   .then(response => {
     dispatch({ type: EDIT_GROUP, payload: response.data });
-    history.push('/account/groups');
+    history.push('/settings/groups');
   })
   .catch(err => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
       dispatch({ type: types.GETALL_FAILURE, payload: response});
-      history.push('/auth/login?return=/account/groups');
+      history.push('/auth/login?return=/settings/groups');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
   });
@@ -99,7 +99,7 @@ export const editGroup = (groupId, formValues) =>  dispatch => {
 
 // export const deleteGroupbagGroup = (groupId) => dispatch => {
 //   const token = localStorage.getItem('token');
-//   axios.delete(`${baseUrl}/account/group/${groupId}`, {
+//   axios.delete(`${baseUrl}/settings/group/${groupId}`, {
 //     headers: {
 //       Authorization: `bearer ${token}`,
 //       'content-type': 'application/json',
@@ -107,14 +107,14 @@ export const editGroup = (groupId, formValues) =>  dispatch => {
 //   })
 //   .then(() => {
 //     dispatch({ type: DELETE_GROUP, payload: groupId });
-//     history.push('/account/groups');
+//     history.push('/settings/groups');
 //   })
 //   .catch(err => {
 //     const { response } = err;
 //     if (response.status === 401) {
 //       window.localStorage.clear();
 //       dispatch({ type: types.GETALL_FAILURE, payload: response});
-//       history.push('/auth/login?return=/account/groups');
+//       history.push('/auth/login?return=/settings/groups');
 //     }
 //     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
 //   })
