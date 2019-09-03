@@ -12,7 +12,8 @@ export default ( state = initialState, action) => {
     case types.FETCH_MARKET_TRADES:
     case types.FETCH_MARKET_WANTEDS:
     case types.FETCH_MARKET_STOLENS:
-      return { ...state, ...action.payload.pagination }
+    case types.FETCH_GROUPS:
+          return { ...state, ...action.payload.pagination }
     case types.LOGOUT:
       return initialState;
     default:
