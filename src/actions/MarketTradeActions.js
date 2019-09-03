@@ -3,7 +3,7 @@ import { FETCH_MARKET_TRADES, FETCH_MARKET_TRADE, API_MARKET_ERROR } from './typ
 import history from '../helpers/history';
 import * as types from './types';
 
-const baseUrl = process.env.REACT_APP_YKAPI || 'http://localhost:8080';
+const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchMarketTrades = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
   const token = localStorage.getItem('token');

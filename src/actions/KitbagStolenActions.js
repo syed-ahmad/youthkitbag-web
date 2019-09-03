@@ -3,7 +3,7 @@ import { CREATE_KITBAG_STOLEN, FETCH_KITBAG_STOLENS, FETCH_KITBAG_STOLEN, EDIT_K
 import history from '../helpers/history';
 import * as types from './types';
 
-const baseUrl = process.env.REACT_APP_YKAPI || 'http://localhost:8080';
+const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchKitbagStolens = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
   const token = localStorage.getItem('token');

@@ -3,7 +3,7 @@ import { CREATE_KITBAG_TRADE, FETCH_KITBAG_TRADES, FETCH_KITBAG_TRADE, EDIT_KITB
 import history from '../helpers/history';
 import * as types from '../actions/types';
 
-const baseUrl = process.env.REACT_APP_YKAPI || 'http://localhost:8080';
+const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchKitbagTrades = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
   ////console.log('FETCH TRADES');
