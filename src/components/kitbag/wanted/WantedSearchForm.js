@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { fetchKitbagWanteds } from '../../../actions/KitbagWantedActions';
-import validate from './WantedSearchFormValidationRules';
+import validate from '../../includes/FormEmptyValidationRules';
 import queryString from 'query-string';
 
 const WantedSearchForm = props => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { fetchMarketStolens } from '../../../actions/MarketStolenActions';
-import validate from './MarketStolenSearchFormValidationRules';
+import validate from '../../includes/FormEmptyValidationRules';
 import queryString from 'query-string';
 
 const MarketStolenSearchForm = props => {
