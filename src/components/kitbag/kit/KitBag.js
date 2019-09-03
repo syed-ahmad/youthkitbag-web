@@ -6,7 +6,7 @@ import queryString from 'query-string';
 
 import Title from '../../includes/Title';
 import KitCard from './KitCard';
-import KitSearchForm from './KitSearchForm';
+import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 
 class KitBag extends React.Component {
@@ -59,7 +59,7 @@ class KitBag extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <KitSearchForm search={this.props.location.search}/>
+                <SearchForm search={this.props.location.search} callback={fetchKitbagKits}/>
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
                 <Link to="/kitbag/kits/new" className="btn btn-primary">Add new kit</Link>

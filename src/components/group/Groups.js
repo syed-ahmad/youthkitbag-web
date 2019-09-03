@@ -5,7 +5,7 @@ import queryString from 'query-string';
 
 import Title from '../includes/Title';
 import GroupCard from './GroupCard';
-import GroupSearchForm from './GroupSearchForm';
+import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 
 class Groups extends React.Component {
@@ -59,7 +59,7 @@ class Groups extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <GroupSearchForm search={this.props.location.search}/>
+                <SearchForm search={this.props.location.search} callback={fetchGroups} />
               </div>
             </div>
             <div className="row">

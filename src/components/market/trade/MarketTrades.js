@@ -5,7 +5,7 @@ import queryString from 'query-string';
 
 import Title from '../../includes/Title';
 import MarketTradeCard from './MarketTradeCard';
-import MarketTradeSearchForm from './MarketTradeSearchForm';
+import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 
 class MarketTrades extends React.Component {
@@ -59,7 +59,7 @@ class MarketTrades extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <MarketTradeSearchForm search={this.props.location.search}/>
+                <SearchForm search={this.props.location.search} callback={fetchMarketTrades} />
               </div>
             </div>
             <div className="row">

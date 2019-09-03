@@ -5,7 +5,7 @@ import queryString from 'query-string';
 
 import Title from '../../includes/Title';
 import TradeCard from './TradeCard';
-import TradeSearchForm from './TradeSearchForm';
+import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 
 class Trades extends React.Component {
@@ -33,7 +33,6 @@ class Trades extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
-      console.log('TRADES new',this.props.location.search);
       const values = queryString.parse(this.props.location.search);
       const search = values.search ? values.search : '';
       const by = values.by ? values.by : '';
@@ -43,14 +42,12 @@ class Trades extends React.Component {
   } 
 
   renderList() {
-    //console.log('RENDER', this.props.items);
     return this.props.items.map((item, index) => {
       return <TradeCard key={`${item._id}-${index}`} trade={item}/>
     })
   }
 
   render() {
-    console.log('TRADES search',this.props.location.search);
     return (
       <div>
         <Title title={this.getTitle()} />
@@ -61,7 +58,7 @@ class Trades extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <TradeSearchForm search={this.props.location.search}/>
+                <SearchForm search={this.props.location.search} callback={fetchKitbagTrades} />
               </div>
             </div>
             <div className="row">

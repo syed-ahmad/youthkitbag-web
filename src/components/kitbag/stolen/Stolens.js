@@ -5,7 +5,7 @@ import queryString from 'query-string';
 
 import Title from '../../includes/Title';
 import StolenCard from './StolenCard';
-import StolenSearchForm from './StolenSearchForm';
+import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 
 class Stolens extends React.Component {
@@ -61,7 +61,7 @@ class Stolens extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <StolenSearchForm search={this.props.location.search}/>
+                <SearchForm search={this.props.location.search} callback={fetchKitbagStolens} />
               </div>
             </div>
             <div className="row">
