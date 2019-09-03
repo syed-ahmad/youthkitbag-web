@@ -27,12 +27,6 @@ const GroupEditPage = (props) => {
     location: {
       coordinates: ''
     },
-    groupd: {
-      groupdOn: '',
-      toUserId: '',
-      groupPrice: 0,
-      complete: false
-    },
     activitys: '',
     groups: [],
     images: [],

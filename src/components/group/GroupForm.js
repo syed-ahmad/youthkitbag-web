@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import useForm from '../../hooks/useForm';
-import { addImage, clearNewImages } from '../../../actions/ImageActions';
+import useForm from '../hooks/useForm';
+import { createGroup, editGroup } from '../../actions/GroupActions';
+import { addImage, clearNewImages } from '../../actions/ImageActions';
 import validate from './GroupFormValidationRules';
-import { resize, dataURItoBlob } from '../../../helpers/imageResize';
+import { resize, dataURItoBlob } from '../../helpers/imageResize';
 
 const GroupForm = ({ group }) => {
 
-  //console.log('group', group);
-
   // ?? still using redux
   const dispatch = useDispatch();
-  const newImages = useSelector(state => state.kitbag.group.newImages);
+  const newImages = useSelector(state => state.group.newImages);
 
   // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
@@ -20,31 +19,17 @@ const GroupForm = ({ group }) => {
 
   // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
   const initialValues = {
-    title: '',
-    subtitle: '',
+    name: '',
+    tagline: '',
     description: '',
-    condition: 'Used',
-    askingPrice: 0.00,
+    email: '',
+    website: '',
     location: {
       coordinates: ''
     },
-    groupd: {
-      groupdOn: '',
-      toUserId: '',
-      groupPrice: 0,
-      complete: false
-    },
     activitys: '',
-    groups: [],
     images: [],
-    sourceId: '',
-    userId: '',
     topImage: '/images/default.png'
-  };
-
-  const initialGroup = {
-    name: '',
-    available: '2019-01-01'
   };
 
   const {
@@ -52,11 +37,10 @@ const GroupForm = ({ group }) => {
     handleChange,
     handleSubmit,
     addArrayItem,
-    removeArrayItem,
     values,
     setValues,
     errors
-  } = useForm(initialValues, updategroup, validate);
+  } = useForm(initialValues, updateGroup, validate);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -191,7 +175,7 @@ const GroupForm = ({ group }) => {
     }
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
-  function updategroup() {
+  function updateGroup() {
     console.log('tV', values);
     const group = {
       ...values, 
@@ -199,11 +183,11 @@ const GroupForm = ({ group }) => {
     };
     console.log('group', group);
 
-    // if (group._id) {
-    //   dispatch(editGroup(group._id, group));
-    // } else {
-    //   dispatch(createGroup(group));
-    // }
+    if (group._id) {
+      dispatch(editGroup(group._id, group));
+    } else {
+      dispatch(createGroup(group));
+    }
   }
 
   return (
@@ -228,20 +212,20 @@ const GroupForm = ({ group }) => {
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
           <div className="form-group row">
-            <label htmlFor="title" className="col-sm-3 col-form-label">Title</label>
+            <label htmlFor="name" className="col-sm-3 col-form-label">Name</label>
             <div className="col-sm-9">
-              <input className={`form-control ${errors.title && 'is-invalid'}`} name="title" type="text" onChange={handleChange} value={values.title} aria-describedby="title" />
-              {errors.title && (
-                <div className="invalid-feedback">{errors.title}</div>
+              <input className={`form-control ${errors.name && 'is-invalid'}`} name="name" type="text" onChange={handleChange} value={values.name} aria-describedby="name" />
+              {errors.name && (
+                <div className="invalid-feedback">{errors.name}</div>
               )}
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="subtitle" className="col-sm-3 col-form-label">Subtitle</label>
+            <label htmlFor="tagline" className="col-sm-3 col-form-label">Tagline</label>
             <div className="col-sm-9">
-              <input className={`form-control ${errors.subtitle && 'is-invalid'}`} name="subtitle" type="text" onChange={handleChange} value={values.subtitle} aria-describedby="subtitle" />
-              {errors.subtitle && (
-                <div className="invalid-feedback">{errors.subtitle}</div>
+              <input className={`form-control ${errors.tagline && 'is-invalid'}`} name="tagline" type="text" onChange={handleChange} value={values.tagline} aria-describedby="tagline" />
+              {errors.tagline && (
+                <div className="invalid-feedback">{errors.tagline}</div>
               )}
             </div>
           </div>
@@ -255,47 +239,31 @@ const GroupForm = ({ group }) => {
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="condition" className="col-sm-3 col-form-label">Condition</label>
+            <label htmlFor="email" className="col-sm-3 col-form-label">Email</label>
             <div className="col-sm-9">
-              <select className="custom-select" name="condition" onChange={handleChange} onBlur={handleChange} value={values.condition} aria-describedby="condition">
-                <option value="used">Used</option>
-                <option value="new">New</option>
-              </select>
+              <input className={`form-control ${errors.email && 'is-invalid'}`} name="email" type="email" onChange={handleChange} value={values.email} aria-describedby="email" />
+              {errors.email && (
+                <div className="invalid-feedback">{errors.email}</div>
+              )}
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="askingPrice" className="col-sm-3 col-form-label">Asking Price</label>
+            <label htmlFor="website" className="col-sm-3 col-form-label">Website</label>
             <div className="col-sm-9">
-              <input className="form-control" name="askingPrice" type="number" step=".01" onChange={handleChange} value={values.askingPrice} aria-describedby="askingPrice" />
+              <input className={`form-control ${errors.website && 'is-invalid'}`} name="website" type="website" onChange={handleChange} value={values.website} aria-describedby="website" />
+              {errors.website && (
+                <div className="invalid-feedback">{errors.website}</div>
+              )}
             </div>
           </div>
-          <hr />
-          <div>
-            {values.groups && values.groups.map((item, index) => (
-              <div className="form-row" key={index}>
-                <div className="form-group col-sm-6">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Name</label>
-                  }
-                  <input className="form-control" name={`groups[${index}].name`} type="text" onChange={handleChange} value={values.groups[index].name} />
-                </div>
-                <div className="form-group col-sm-5">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Available</label>
-                  }
-                  <input className="form-control" name={`groups[${index}].available`} type="date" onChange={handleChange} value={values.groups[index].available} />
-                </div>
-                <div className="form-group col-sm-1">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Rem</label>
-                  }
-                  <button className="btn btn-danger" type="button" title="Remove Group" onClick={() => removeArrayItem('groups', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
-                </div>
-              </div>
-            ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('groups', [initialGroup])}>
-              Add a new group
-            </button>
+          <div className="form-group row">
+            <label htmlFor="location" className="col-sm-3 col-form-label">Location</label>
+            <div className="col-sm-9">
+              <input className={`form-control ${errors.location && 'is-invalid'}`} name="location" type="location" onChange={handleChange} value={values.location} aria-describedby="location" />
+              {errors.location && (
+                <div className="invalid-feedback">{errors.location}</div>
+              )}
+            </div>
           </div>
           <hr />
           <div className="form-group row">

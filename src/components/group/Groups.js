@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchGroups } from '../../actions';
+import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 
 import Title from '../includes/Title';
@@ -60,6 +61,9 @@ class Groups extends React.Component {
             <div className="row">
               <div className="col-12 col-sm-9">
                 <SearchForm search={this.props.location.search} callback={fetchGroups} />
+              </div>
+              <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
+                <Link to="/account/groups/new" className="btn btn-primary">Add new group</Link>
               </div>
             </div>
             <div className="row">

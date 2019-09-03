@@ -19,7 +19,9 @@ import NewPassword from './auth/NewPasswordPage';
 import Logout from './auth/Logout';
 
 import Purchase from './Purchase';
+
 import Groups from './group/Groups';
+import GroupCreatePage from './group/GroupCreatePage';
 
 import KitBag from './kitbag/kit/KitBag';
 import KitCreatePage from './kitbag/kit/KitCreatePage';
@@ -96,7 +98,8 @@ class App extends React.Component {
               <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeEditPage} />
               <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedEditPage} />
               <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenEditPage} />
-              <PrivateRoute path="/account/groups" exact component={Groups} />
+              <PrivateRoute path="/account/groups/new" exact component={GroupCreatePage} />
+              <PrivateRoute path="/account/groups" component={Groups} />
             </Switch>
           </main>
           <Footer />

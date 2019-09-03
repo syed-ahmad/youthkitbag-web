@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_GROUPS, API_KITBAG_ERROR } from './types';
+import { FETCH_GROUPS, CREATE_GROUP, EDIT_GROUP, API_KITBAG_ERROR } from './types';
 import history from '../helpers/history';
 import * as types from './types';
 
@@ -30,9 +30,9 @@ export const fetchGroups = (search = '', by = 'all', page = 1, pagesize = 24) =>
   });
 };
 
-// export const fetchKitbagKit = (kitId) => dispatch => {
+// export const fetchGroupbagGroup = (groupId) => dispatch => {
 //   const token = localStorage.getItem('token');
-//   axios.get(`${baseUrl}/kitbag/kit/${kitId}`, {
+//   axios.get(`${baseUrl}/account/group/${groupId}`, {
 //     headers: {
 //       Authorization: `bearer ${token}`,
 //       'content-type': 'application/json',
@@ -46,76 +46,77 @@ export const fetchGroups = (search = '', by = 'all', page = 1, pagesize = 24) =>
 //     if (response.status === 401) {
 //       window.localStorage.clear();
 //       dispatch({ type: types.GETALL_FAILURE, payload: response});
-//       history.push('/auth/login?return=/kitbag/kits');
+//       history.push('/auth/login?return=/account/groups');
 //     }
 //     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
 //   });
 // };
 
-// export const createKitbagKit = (formValues) => dispatch => {
-//   const token = localStorage.getItem('token');
-//   axios.post(`${baseUrl}/kitbag/kit`, {...formValues}, {
-//     headers: {
-//       Authorization: `bearer ${token}`,
-//       'content-type': 'application/json',
-//     }
-//   })
-//   .then(response => {
-//     dispatch({ type: CREATE_GROUP, payload: response.data });
-//     history.push('/kitbag/kits');
-//   })
-//   .catch(err => {
-//     const { response } = err;
-//     if (response.status === 401) {
-//       window.localStorage.clear();
-//       dispatch({ type: types.GETALL_FAILURE, payload: response});
-//       history.push('/auth/login?return=/kitbag/kits');
-//     }
-//     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
-//   });
-// }
+export const createGroup = (formValues) => dispatch => {
+  console.log(formValues);
+  const token = localStorage.getItem('token');
+  axios.post(`${baseUrl}/group`, {...formValues}, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }
+  })
+  .then(response => {
+    dispatch({ type: CREATE_GROUP, payload: response.data });
+    history.push('/groups');
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/account/groups');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  });
+}
 
-// export const editKitbagKit = (kitId, formValues) =>  dispatch => {
-//   const token = localStorage.getItem('token');
-//   axios.put(`${baseUrl}/kitbag/kit/${kitId}`, {...formValues}, {
-//     headers: {
-//       Authorization: `bearer ${token}`,
-//       'content-type': 'application/json',
-//     }
-//   })
-//   .then(response => {
-//     dispatch({ type: EDIT_GROUP, payload: response.data });
-//     history.push('/kitbag/kits');
-//   })
-//   .catch(err => {
-//     const { response } = err;
-//     if (response.status === 401) {
-//       window.localStorage.clear();
-//       dispatch({ type: types.GETALL_FAILURE, payload: response});
-//       history.push('/auth/login?return=/kitbag/kits');
-//     }
-//     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
-//   });
-// };
+export const editGroup = (groupId, formValues) =>  dispatch => {
+  const token = localStorage.getItem('token');
+  axios.put(`${baseUrl}/group/${groupId}`, {...formValues}, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }
+  })
+  .then(response => {
+    dispatch({ type: EDIT_GROUP, payload: response.data });
+    history.push('/account/groups');
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/account/groups');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  });
+};
 
-// export const deleteKitbagKit = (kitId) => dispatch => {
+// export const deleteGroupbagGroup = (groupId) => dispatch => {
 //   const token = localStorage.getItem('token');
-//   axios.delete(`${baseUrl}/kitbag/kit/${kitId}`, {
+//   axios.delete(`${baseUrl}/account/group/${groupId}`, {
 //     headers: {
 //       Authorization: `bearer ${token}`,
 //       'content-type': 'application/json',
 //     }
 //   })
 //   .then(() => {
-//     dispatch({ type: DELETE_GROUP, payload: kitId });
-//     history.push('/kitbag/kits');
+//     dispatch({ type: DELETE_GROUP, payload: groupId });
+//     history.push('/account/groups');
 //   })
 //   .catch(err => {
 //     const { response } = err;
 //     if (response.status === 401) {
 //       window.localStorage.clear();
 //       dispatch({ type: types.GETALL_FAILURE, payload: response});
-//       history.push('/auth/login?return=/kitbag/kits');
+//       history.push('/auth/login?return=/account/groups');
 //     }
 //     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
 //   })
