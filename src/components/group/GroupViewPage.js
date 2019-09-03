@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { connect, } from 'react-redux';
-import { fetchGroup } from '../../../actions/GroupActions';
+import { fetchGroup } from '../../actions/GroupActions';
 import GroupForm from './GroupForm';
-import Title from '../../includes/Title';
+import Title from '../includes/Title';
 
 const mapStateToProps = state => ({
-  current: state.kitbag.group.current
+  current: state.group.current
 });
 
 const mapDispatchToProps = {
   fetchGroup
 }
 
-const GroupEditPage = (props) => {
+const GroupViewPage = (props) => {
 
   const { current, fetchGroup, match } = props;
 
   const groupId = match.params.id;
 
   const [group, setgroup] = useState({
-    title: 'Loading requested item of group ...',
-    subtitle: '',
+    name: 'Loading requested item of group ...',
+    tagline: '',
     description: '',
-    condition: 'Used',
-    askingPrice: 0.00,
+    email: '',
+    website: '',
     location: {
       coordinates: ''
     },
     activitys: '',
-    groups: [],
     images: [],
     sourceId: '',
     userId: '',
@@ -43,11 +42,6 @@ const GroupEditPage = (props) => {
     if (current && current._id) {
       const newgroup = {
         ...current,
-        groups: current.groups.map(g => {
-          let group = {...g};
-          group.available = g.available ? g.available.toString().substring(0,10) : '';
-          return group;
-        }),
         imagesToUpload: 0
       };
       setgroup(newgroup);  
@@ -56,7 +50,7 @@ const GroupEditPage = (props) => {
   
   return (
     <div>
-      <Title title={!group ? 'Loading...' : group.title} />
+      <Title title={!group ? 'Loading...' : group.name} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
           <GroupForm group={group} />
@@ -67,4 +61,4 @@ const GroupEditPage = (props) => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupEditPage);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupViewPage);

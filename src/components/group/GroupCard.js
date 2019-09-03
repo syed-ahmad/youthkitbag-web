@@ -14,14 +14,36 @@ class GroupCard extends React.Component {
     return this.props.group.images.length > 0 ? this.props.group.images[0].imageUrl : '/images/default.png'
   };
 
+  approvalColor = (approval) => {
+    switch (approval) {
+      case 'approved':
+        return 'badge-success';
+      case 'blocked':
+        return 'badge-danger';
+      default:
+        return 'badge-warning';
+    }
+  }
+
+  approvalIcon = (approval) => {
+    switch (approval) {
+      case 'approved':
+        return 'fas fa-check-circle';
+      case 'blocked':
+        return 'fas fa-times-circle';
+      default:
+        return 'fas fa-question-circle';
+    }
+  }
+
   render() {
     const { _id, name, activitys, approval } = this.props.group;
 
     return (
       <div className="col-6 col-md-4 col-lg-3 mb-3">
         <article className="card card-link card-b1">
-          <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">{ approval }</span>
-          <Link to={ `/settings/groups/edit/${ _id }` }>
+          <span className={`badge badge-pill ${this.approvalColor(approval)} badge-fullsize badge-top-right`}><i className={this.approvalIcon(approval)}></i></span>
+          <Link to={ `/settings/groups/view/${ _id }` }>
             <img className="card-img-top" src={ this.topImage() } alt={ name } role="presentation" />
             <div className="card-body">
               <h3 className="card-title h6 ellipsis">{ name }</h3>

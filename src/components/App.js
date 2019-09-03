@@ -22,6 +22,7 @@ import Purchase from './Purchase';
 
 import Groups from './group/Groups';
 import GroupCreatePage from './group/GroupCreatePage';
+import GroupViewPage from './group/GroupViewPage';
 
 import KitBag from './kitbag/kit/KitBag';
 import KitCreatePage from './kitbag/kit/KitCreatePage';
@@ -98,6 +99,7 @@ class App extends React.Component {
               <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeEditPage} />
               <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedEditPage} />
               <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenEditPage} />
+              <PrivateRoute path="/settings/groups/view/:id" exact component={GroupViewPage} />
               <PrivateRoute path="/settings/groups/new" exact component={GroupCreatePage} />
               <PrivateRoute path="/settings/groups" component={Groups} />
             </Switch>
