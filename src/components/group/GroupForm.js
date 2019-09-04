@@ -29,7 +29,9 @@ const GroupForm = ({ group }) => {
     },
     activitys: '',
     images: [],
-    topImage: '/images/default.png'
+    topImage: '/images/default.png',
+    groupAdmin: true,
+    exists: false
   };
 
   const {
@@ -188,6 +190,10 @@ const GroupForm = ({ group }) => {
     }
   }
 
+  function isReadOnly() {
+    return (values.appAdmin || (!values.exists && values.groupAdmin)) ? false : true;
+  }
+
   return (
       <div className="row">
         <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
@@ -212,7 +218,7 @@ const GroupForm = ({ group }) => {
           <div className="form-group row">
             <label htmlFor="name" className="col-sm-3 col-form-label">Name</label>
             <div className="col-sm-9">
-              <input className={`form-control ${errors.name && 'is-invalid'}`} name="name" type="text" onChange={handleChange} value={values.name} aria-describedby="name" />
+              <input className={`form-control ${errors.name && 'is-invalid'}`} name="name" type="text" readOnly={isReadOnly()} onChange={handleChange} value={values.name} aria-describedby="name" />
               {errors.name && (
                 <div className="invalid-feedback">{errors.name}</div>
               )}
@@ -221,7 +227,7 @@ const GroupForm = ({ group }) => {
           <div className="form-group row">
             <label htmlFor="tagline" className="col-sm-3 col-form-label">Tagline</label>
             <div className="col-sm-9">
-              <input className={`form-control ${errors.tagline && 'is-invalid'}`} name="tagline" type="text" onChange={handleChange} value={values.tagline} aria-describedby="tagline" />
+              <input className={`form-control ${errors.tagline && 'is-invalid'}`} name="tagline" type="text" readOnly={isReadOnly()} onChange={handleChange} value={values.tagline} aria-describedby="tagline" />
               {errors.tagline && (
                 <div className="invalid-feedback">{errors.tagline}</div>
               )}
@@ -230,7 +236,7 @@ const GroupForm = ({ group }) => {
           <div className="form-group row">
             <label htmlFor="description" className="col-sm-3 col-form-label">Description</label>
             <div className="col-sm-9">
-              <textarea className={`form-control ${errors.description && 'is-invalid'}`} name="description" rows="5" onChange={handleChange} value={values.description} aria-describedby="description"></textarea>
+              <textarea className={`form-control ${errors.description && 'is-invalid'}`} name="description" rows="5" readOnly={isReadOnly()} onChange={handleChange} value={values.description} aria-describedby="description"></textarea>
               {errors.description && (
                 <div className="invalid-feedback">{errors.description}</div>
               )}
@@ -239,7 +245,7 @@ const GroupForm = ({ group }) => {
           <div className="form-group row">
             <label htmlFor="email" className="col-sm-3 col-form-label">Email</label>
             <div className="col-sm-9">
-              <input className={`form-control ${errors.email && 'is-invalid'}`} name="email" type="email" onChange={handleChange} value={values.email} aria-describedby="email" />
+              <input className={`form-control ${errors.email && 'is-invalid'}`} name="email" type="email" readOnly={isReadOnly()} onChange={handleChange} value={values.email} aria-describedby="email" />
               {errors.email && (
                 <div className="invalid-feedback">{errors.email}</div>
               )}
@@ -248,7 +254,7 @@ const GroupForm = ({ group }) => {
           <div className="form-group row">
             <label htmlFor="website" className="col-sm-3 col-form-label">Website</label>
             <div className="col-sm-9">
-              <input className={`form-control ${errors.website && 'is-invalid'}`} name="website" type="website" onChange={handleChange} value={values.website} aria-describedby="website" />
+              <input className={`form-control ${errors.website && 'is-invalid'}`} name="website" type="website" readOnly={isReadOnly()} onChange={handleChange} value={values.website} aria-describedby="website" />
               {errors.website && (
                 <div className="invalid-feedback">{errors.website}</div>
               )}
@@ -257,7 +263,7 @@ const GroupForm = ({ group }) => {
           <div className="form-group row">
             <label htmlFor="location" className="col-sm-3 col-form-label">Location</label>
             <div className="col-sm-9">
-              <input className={`form-control ${errors.location && 'is-invalid'}`} name="location" type="location" onChange={handleChange} value={values.location} aria-describedby="location" />
+              <input className={`form-control ${errors.location && 'is-invalid'}`} name="location" type="location" readOnly={isReadOnly()} onChange={handleChange} value={values.location} aria-describedby="location" />
               {errors.location && (
                 <div className="invalid-feedback">{errors.location}</div>
               )}
@@ -267,7 +273,7 @@ const GroupForm = ({ group }) => {
           <div className="form-group row">
             <label htmlFor="activitys" className="col-sm-3 col-form-label">Activities</label>
             <div className="col-sm-9">
-              <input className={`form-control ${errors.activitys && 'is-invalid'}`} name="activitys" type="text" onChange={handleChange} value={values.activitys} aria-describedby="activitys" />
+              <input className={`form-control ${errors.activitys && 'is-invalid'}`} name="activitys" type="text" readOnly={isReadOnly()} onChange={handleChange} value={values.activitys} aria-describedby="activitys" />
               {errors.activitys && (
                 <div className="invalid-feedback">{errors.activitys}</div>
               )}
@@ -290,10 +296,17 @@ const GroupForm = ({ group }) => {
               </div>
             ))}
           </div>
-          <div>
-            <button className="btn btn-primary" type="submit">Save</button>
-            <Link className="btn btn-link" to="/settings/groups">Cancel</Link>
-          </div>
+          {(values.appAdmin || !values.exists) && 
+            <div>
+              <button className="btn btn-primary" type="submit">Save</button>
+              <Link className="btn btn-link" to="/settings/groups">Cancel</Link>
+            </div>
+          }
+          {(values.groupAdmin && values.exists) && 
+            <div>
+              <Link className="btn btn-primary" to={`/settings/groups/members/${values._id}`}>Members</Link>
+            </div>
+          }
           </form>
         </div>
       </div>
