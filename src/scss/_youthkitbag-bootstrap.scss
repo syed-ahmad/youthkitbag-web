@@ -91,12 +91,14 @@
 span {
   &.icons-top-left {
     color: #1f79d49c;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
     .icon-tray-item {
+      position: absolute;
       padding-right: 0.5rem;
+      top: -0.25rem;
     }
   }
 }

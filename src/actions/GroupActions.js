@@ -97,6 +97,29 @@ export const editGroup = (groupId, formValues) =>  dispatch => {
   });
 };
 
+export const editGroupStatus = (groupId, status) =>  dispatch => {
+  const token = localStorage.getItem('token');
+  axios.put(`${baseUrl}/group/status/${groupId}`, { approval: status }, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }
+  })
+  .then(response => {
+    dispatch({ type: EDIT_GROUP, payload: response.data });
+    history.push('/settings/groups');
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/settings/groups');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  });
+};
+
 // export const deleteGroupbagGroup = (groupId) => dispatch => {
 //   const token = localStorage.getItem('token');
 //   axios.delete(`${baseUrl}/settings/group/${groupId}`, {
