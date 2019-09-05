@@ -30,6 +30,7 @@ export const fetchGroups = (search = '', by = 'all', page = 1, pagesize = 24) =>
 };
 
 export const fetchGroup = (groupId) => dispatch => {
+  console.log('FETCHING');
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/group/${groupId}`, {
     headers: {

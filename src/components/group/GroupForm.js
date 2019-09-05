@@ -18,21 +18,7 @@ const GroupForm = ({ group }) => {
   const MAXHEIGHT = 720;
 
   // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
-  const initialValues = {
-    name: '',
-    tagline: '',
-    description: '',
-    email: '',
-    website: '',
-    location: {
-      coordinates: ''
-    },
-    activitys: '',
-    images: [],
-    topImage: '/images/default.png',
-    groupAdmin: true,
-    exists: false
-  };
+  const initialValues = { ...group, groupAdmin: true, exists: false };
 
   const {
     setChange,

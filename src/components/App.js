@@ -21,7 +21,7 @@ import Logout from './auth/Logout';
 import Purchase from './Purchase';
 
 import Groups from './group/Groups';
-import GroupViewPage from './group/GroupViewPage';
+import GroupPage from './group/GroupPage';
 import GroupStatus from './group/GroupStatus';
 
 import KitBag from './kitbag/kit/KitBag';
@@ -100,8 +100,8 @@ class App extends React.Component {
               <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedEditPage} />
               <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenEditPage} />
               <PrivateRoute path="/settings/groups/status/:id" exact component={GroupStatus} />
-              <PrivateRoute path="/settings/groups/view/:id" exact component={GroupViewPage} />
-              <PrivateRoute path="/settings/groups/new" exact component={GroupViewPage} />
+              <PrivateRoute path="/settings/groups/view/:id" exact component={GroupPage} />
+              <PrivateRoute path="/settings/groups/new" exact component={GroupPage} />
               <PrivateRoute path="/settings/groups" component={Groups} />
             </Switch>
           </main>

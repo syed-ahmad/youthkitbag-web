@@ -12,20 +12,27 @@ const mapDispatchToProps = {
   fetchGroup
 }
 
-const GroupViewPage = ({ current, fetchGroup, match }) => {
+const GroupPage = ({ current, fetchGroup, match }) => {
 
   const groupId = match.params.id;
   const [group, setGroup] = useState({
+    name: '',
+    tagline: '',
+    description: '',
+    email: '',
+    website: '',
     location: {
       coordinates: ''
     },
+    activitys: '',
     images: [],
-    topImage: '/images/default.png',
-    notloaded: true
+    topImage: '/images/default.png'
   });
 
   useEffect(() => {
-    fetchGroup(groupId);
+    if (groupId) {
+      fetchGroup(groupId);
+    }
   }, [fetchGroup, groupId]);
   
   useEffect(() => {
@@ -63,4 +70,4 @@ const GroupViewPage = ({ current, fetchGroup, match }) => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupViewPage);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupPage);
