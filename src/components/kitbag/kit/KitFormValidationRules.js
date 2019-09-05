@@ -1,9 +1,9 @@
 export default function validate(values) {
   const errors = [];
 
-  if (!values.title) {
-    errors.title = 'Title is required';
-  }
+  // if (!values.title) {
+  //   errors.title = 'Title is required';
+  // }
 
   // if (!values.subtitle) {
   //   errors.subtitle = 'Subtitle is required';

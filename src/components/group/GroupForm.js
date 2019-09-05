@@ -191,7 +191,7 @@ const GroupForm = ({ group }) => {
   }
 
   function isReadOnly() {
-    return (values.appAdmin || (!values.exists && values.groupAdmin)) ? false : true;
+    return (!values._id || values.appAdmin) ? false : true;
   }
 
   return (

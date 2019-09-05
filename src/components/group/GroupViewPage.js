@@ -12,26 +12,16 @@ const mapDispatchToProps = {
   fetchGroup
 }
 
-const GroupViewPage = (props) => {
-
-  const { current, fetchGroup, match } = props;
+const GroupViewPage = ({ current, fetchGroup, match }) => {
 
   const groupId = match.params.id;
-
-  const [group, setgroup] = useState({
-    name: 'Loading requested item of group ...',
-    tagline: '',
-    description: '',
-    email: '',
-    website: '',
+  const [group, setGroup] = useState({
     location: {
       coordinates: ''
     },
-    activitys: '',
     images: [],
-    sourceId: '',
-    userId: '',
-    topImage: '/images/default.png'
+    topImage: '/images/default.png',
+    notloaded: true
   });
 
   useEffect(() => {
@@ -44,13 +34,25 @@ const GroupViewPage = (props) => {
         ...current,
         imagesToUpload: 0
       };
-      setgroup(newgroup);  
+      setGroup(newgroup);  
     }
   }, [current]);
+
+  function waitingForGroupToLoad() {
+    return groupId && !group._id;
+  }
+
+  function getTitle() {
+    if (waitingForGroupToLoad()) {
+      return 'Loading ...';
+    }
+
+    return group._id ? group.name : 'Create new group';
+  }
   
   return (
     <div>
-      <Title title={!group ? 'Loading...' : group.name} />
+      <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
           <GroupForm group={group} />
