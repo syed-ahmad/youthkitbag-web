@@ -12,14 +12,11 @@ const mapDispatchToProps = {
   fetchKitbagStolen
 }
 
-const StolenEditPage = (props) => {
-
-  const { current, fetchKitbagStolen, match } = props;
+const StolenPage = ({ current, fetchKitbagStolen, match }) => {
 
   const stolenId = match.params.id;
-
   const [stolen, setStolen] = useState({
-    title: 'Loading requested item of stolen ...',
+    title: '',
     subtitle: '',
     description: '',
     stolenOn: '',
@@ -34,11 +31,13 @@ const StolenEditPage = (props) => {
     recovered: false,
     sourceId: '',
     userId: '',
-    topImage: '/images/default.png'
+    topImage: ''
   });
 
   useEffect(() => {
-    fetchKitbagStolen(stolenId);
+    if (stolenId) {
+      fetchKitbagStolen(stolenId);
+    }
   }, [fetchKitbagStolen, stolenId]);
   
   useEffect(() => {
@@ -57,9 +56,21 @@ const StolenEditPage = (props) => {
     }
   }, [current]);
   
+  function itemIsLoding() {
+    return stolenId && !stolen._id;
+  }
+
+  function getTitle() {
+    if (itemIsLoding()) {
+      return 'Loading ...';
+    }
+
+    return stolen._id ? stolen.title : 'Report a new stolen item';
+  }
+  
   return (
     <div>
-      <Title title={!stolen ? 'Loading...' : stolen.title} />
+      <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
           <StolenForm stolen={stolen} />
@@ -70,4 +81,4 @@ const StolenEditPage = (props) => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StolenEditPage);
+export default connect(mapStateToProps, mapDispatchToProps)(StolenPage);

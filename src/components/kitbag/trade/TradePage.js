@@ -12,14 +12,11 @@ const mapDispatchToProps = {
   fetchKitbagTrade
 }
 
-const TradeEditPage = (props) => {
-
-  const { current, fetchKitbagTrade, match } = props;
+const TradeEditPage = ({ current, fetchKitbagTrade, match }) => {
 
   const tradeId = match.params.id;
-
   const [trade, setTrade] = useState({
-    title: 'Loading requested item of trade ...',
+    title: '',
     subtitle: '',
     description: '',
     condition: 'Used',
@@ -38,11 +35,13 @@ const TradeEditPage = (props) => {
     images: [],
     sourceId: '',
     userId: '',
-    topImage: '/images/default.png'
+    topImage: ''
   });
 
   useEffect(() => {
-    fetchKitbagTrade(tradeId);
+    if (tradeId) {
+      fetchKitbagTrade(tradeId);
+    }
   }, [fetchKitbagTrade, tradeId]);
   
   useEffect(() => {
@@ -60,9 +59,21 @@ const TradeEditPage = (props) => {
     }
   }, [current]);
   
+  function itemIsLoding() {
+    return tradeId && !trade._id;
+  }
+
+  function getTitle() {
+    if (itemIsLoding()) {
+      return 'Loading ...';
+    }
+
+    return trade._id ? trade.title : 'Create a new item for trade';
+  }
+  
   return (
     <div>
-      <Title title={!trade ? 'Loading...' : trade.title} />
+      <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
           <TradeForm trade={trade} />

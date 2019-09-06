@@ -12,14 +12,11 @@ const mapDispatchToProps = {
   fetchKitbagWanted
 }
 
-const WantedEditPage = (props) => {
-
-  const { current, fetchKitbagWanted, match } = props;
+const WantedPage = ({ current, fetchKitbagWanted, match }) => {
 
   const wantedId = match.params.id;
-
   const [wanted, setWanted] = useState({
-    title: 'Loading requested item of wanted ...',
+    title: '',
     subtitle: '',
     description: '',
     wantedOn: '',
@@ -34,11 +31,13 @@ const WantedEditPage = (props) => {
     recovered: false,
     sourceId: '',
     userId: '',
-    topImage: '/images/default.png'
+    topImage: ''
   });
 
   useEffect(() => {
-    fetchKitbagWanted(wantedId);
+    if (wantedId) {
+      fetchKitbagWanted(wantedId);
+    }
   }, [fetchKitbagWanted, wantedId]);
   
   useEffect(() => {
@@ -57,9 +56,21 @@ const WantedEditPage = (props) => {
     }
   }, [current]);
   
+  function itemIsLoding() {
+    return wantedId && !wanted._id;
+  }
+
+  function getTitle() {
+    if (itemIsLoding()) {
+      return 'Loading ...';
+    }
+
+    return wanted._id ? wanted.title : 'Create a new item that you want';
+  }
+  
   return (
     <div>
-      <Title title={!wanted ? 'Loading...' : wanted.title} />
+      <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
           <WantedForm wanted={wanted} />
@@ -70,4 +81,4 @@ const WantedEditPage = (props) => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WantedEditPage);
+export default connect(mapStateToProps, mapDispatchToProps)(WantedPage);
