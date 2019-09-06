@@ -76,11 +76,12 @@ class App extends React.Component {
               <Route path="/market/wanteds" component={MarketWanteds} />
               <Route path="/market/stolens" component={MarketStolens} />
               <PrivateRoute path="/purchase" exact component={Purchase} />
-              <PrivateRoute path="/kitbag/kits/new" exact component={KitPage} />
+              <PrivateRoute path="/kitbag/kits/new" component={KitPage} />
               <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitPage} />
               <PrivateRoute path="/kitbag/kits/delete/:id" exact component={KitDelete} />
               <PrivateRoute path="/kitbag/kits" component={KitBag} />
-              <PrivateRoute path="/kitbag/trades/add/:id" exact component={TradePage} />
+              <PrivateRoute path="/kitbag/trades/new" exact component={TradePage} />
+              {/* <PrivateRoute path="/kitbag/trades/add/:kit" exact component={TradePage} /> */}
               <PrivateRoute path="/kitbag/trades/edit/:id" exact component={TradePage} />
               <PrivateRoute path="/kitbag/trades/delete/:id" exact component={TradeDelete} />
               <PrivateRoute path="/kitbag/trades" component={Trades} />

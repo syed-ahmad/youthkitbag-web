@@ -27,15 +27,16 @@ const TradeForm = ({ trade }) => {
     location: {
       coordinates: ''
     },
-    images: [],
-    traded: {
+    tradeDetails: {
       tradedOn: '',
       toUserId: '',
       tradePrice: 0,
       complete: false
     },
+    traded: false,
     activitys: '',
     groups: [],
+    images: [],
     sourceId: '',
     userId: '',
     topImage: '/images/default.png'
