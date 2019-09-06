@@ -52,6 +52,28 @@ export const fetchKitbagTrade = (tradeId) => dispatch => {
   });
 };
 
+export const fetchKitbagTradeFromKit = (kitId) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios.get(`${baseUrl}/kitbag/trade/add/${kitId}`, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }
+  })
+  .then(response => {
+    dispatch({ type: FETCH_KITBAG_TRADE, payload: response.data });
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/kitbag/trades');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  });
+};
+
 export const createKitbagTrade = (formValues) => dispatch => {
   const token = localStorage.getItem('token');
   axios.post(`${baseUrl}/kitbag/trade`, {...formValues}, {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { connect, } from 'react-redux';
-import { fetchKitbagTrade } from '../../../actions/KitbagTradeActions';
+import { connect } from 'react-redux';
+import { fetchKitbagTrade, fetchKitbagTradeFromKit } from '../../../actions/KitbagTradeActions';
 import TradeForm from './TradeForm';
 import Title from '../../includes/Title';
 
@@ -9,12 +9,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchKitbagTrade
+  fetchKitbagTrade, fetchKitbagTradeFromKit
 }
 
-const TradeEditPage = ({ current, fetchKitbagTrade, match }) => {
+const TradeEditPage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }) => {
 
   const tradeId = match.params.id;
+  const kitId = match.params.kit;
+
   const [trade, setTrade] = useState({
     title: '',
     subtitle: '',
@@ -24,18 +26,20 @@ const TradeEditPage = ({ current, fetchKitbagTrade, match }) => {
     location: {
       coordinates: ''
     },
-    traded: {
+    tradeDetails: {
       tradedOn: '',
       toUserId: '',
       tradePrice: 0,
       complete: false
     },
+    traded: false,
     activitys: '',
     groups: [],
     images: [],
     sourceId: '',
     userId: '',
-    topImage: ''
+    topImage: '/images/default.png',
+    imagesToUpload: 0
   });
 
   useEffect(() => {
@@ -43,9 +47,15 @@ const TradeEditPage = ({ current, fetchKitbagTrade, match }) => {
       fetchKitbagTrade(tradeId);
     }
   }, [fetchKitbagTrade, tradeId]);
+
+  useEffect(() => {
+    if (kitId) {
+      fetchKitbagTradeFromKit(kitId);
+    }
+  }, [fetchKitbagTradeFromKit, kitId]);
   
   useEffect(() => {
-    if (current && current._id) {
+    if (current && (current._id || current.sourceId)) {
       const newTrade = {
         ...current,
         groups: current.groups.map(g => {

@@ -31,7 +31,7 @@ const WantedPage = ({ current, fetchKitbagWanted, match }) => {
     recovered: false,
     sourceId: '',
     userId: '',
-    topImage: ''
+    topImage: '/images/default.png'
   });
 
   useEffect(() => {

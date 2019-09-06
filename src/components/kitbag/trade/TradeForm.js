@@ -17,33 +17,8 @@ const TradeForm = ({ trade }) => {
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
-  // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
-  const initialValues = {
-    title: '',
-    subtitle: '',
-    description: '',
-    condition: 'Used',
-    askingPrice: 0.00,
-    location: {
-      coordinates: ''
-    },
-    tradeDetails: {
-      tradedOn: '',
-      toUserId: '',
-      tradePrice: 0,
-      complete: false
-    },
-    traded: false,
-    activitys: '',
-    groups: [],
-    images: [],
-    sourceId: '',
-    userId: '',
-    topImage: '/images/default.png'
-  };
-
   const initialGroup = {
-    name: '',
+    title: '',
     available: '2019-01-01'
   };
 
@@ -56,7 +31,7 @@ const TradeForm = ({ trade }) => {
     values,
     setValues,
     errors
-  } = useForm(initialValues, updateTrade, validate);
+  } = useForm(trade, updateTrade, validate);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -275,7 +250,7 @@ const TradeForm = ({ trade }) => {
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Name</label>
                   }
-                  <input className="form-control" name={`groups[${index}].name`} type="text" onChange={handleChange} value={values.groups[index].name} />
+                  <input className="form-control" name={`groups[${index}].title`} type="text" onChange={handleChange} value={values.groups[index].title} />
                 </div>
                 <div className="form-group col-sm-5">
                   { (index === 0) &&

@@ -26,7 +26,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     },
     activitys: '',
     images: [],
-    topImage: '',
+    topImage: '/images/default.png',
     imagesToUpload: 0
   });
 

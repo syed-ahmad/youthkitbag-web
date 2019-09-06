@@ -31,7 +31,7 @@ const StolenPage = ({ current, fetchKitbagStolen, match }) => {
     recovered: false,
     sourceId: '',
     userId: '',
-    topImage: ''
+    topImage: '/images/default.png'
   });
 
   useEffect(() => {
