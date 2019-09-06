@@ -12,14 +12,11 @@ const mapDispatchToProps = {
   fetchKitbagKit
 }
 
-const KitEditPage = (props) => {
-
-  const { current, fetchKitbagKit, match } = props;
+const KitPage = ({ current, fetchKitbagKit, match }) => {
 
   const kitId = match.params.id;
-
   const [kit, setKit] = useState({
-    title: 'Loading requested item of kit ...',
+    title: '',
     subtitle: '',
     description: '',
     status: 'Owned',
@@ -30,13 +27,15 @@ const KitEditPage = (props) => {
     activitys: '',
     tags: '',
     active: 'on',
-    topImage: '',
     images: [],
+    topImage: '',
     imagesToUpload: 0
   });
 
   useEffect(() => {
-    fetchKitbagKit(kitId);
+    if (kitId) {
+      fetchKitbagKit(kitId);
+    }
   }, [fetchKitbagKit, kitId]);
   
   useEffect(() => {
@@ -54,9 +53,21 @@ const KitEditPage = (props) => {
     }
   }, [current]);
   
+  function itemIsLoding() {
+    return kitId && !kit._id;
+  }
+
+  function getTitle() {
+    if (itemIsLoding()) {
+      return 'Loading ...';
+    }
+
+    return kit._id ? kit.title : 'Create new kit';
+  }
+
   return (
     <div>
-      <Title title={!kit ? 'Loading...' : kit.title} />
+      <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
           <KitForm kit={kit} />
@@ -67,4 +78,4 @@ const KitEditPage = (props) => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(KitEditPage);
+export default connect(mapStateToProps, mapDispatchToProps)(KitPage);

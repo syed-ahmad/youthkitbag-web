@@ -26,7 +26,8 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     },
     activitys: '',
     images: [],
-    topImage: '/images/default.png'
+    topImage: '',
+    imagesToUpload: 0
   });
 
   useEffect(() => {
@@ -37,20 +38,20 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   
   useEffect(() => {
     if (current && current._id) {
-      const newgroup = {
+      const newGroup = {
         ...current,
         imagesToUpload: 0
       };
-      setGroup(newgroup);  
+      setGroup(newGroup);  
     }
   }, [current]);
 
-  function waitingForGroupToLoad() {
+  function itemIsLoding() {
     return groupId && !group._id;
   }
 
   function getTitle() {
-    if (waitingForGroupToLoad()) {
+    if (itemIsLoding()) {
       return 'Loading ...';
     }
 

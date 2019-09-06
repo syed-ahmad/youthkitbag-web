@@ -25,8 +25,7 @@ import GroupPage from './group/GroupPage';
 import GroupStatus from './group/GroupStatus';
 
 import KitBag from './kitbag/kit/KitBag';
-import KitCreatePage from './kitbag/kit/KitCreatePage';
-import KitEditPage from './kitbag/kit/KitEditPage';
+import KitPage from './kitbag/kit/KitPage';
 import KitDelete from './kitbag/kit/KitDelete';
 
 import Trades from './kitbag/trade/Trades';
@@ -80,8 +79,8 @@ class App extends React.Component {
               <Route path="/market/wanteds" component={MarketWanteds} />
               <Route path="/market/stolens" component={MarketStolens} />
               <PrivateRoute path="/purchase" exact component={Purchase} />
-              <PrivateRoute path="/kitbag/kits/new" exact component={KitCreatePage} />
-              <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitEditPage} />
+              <PrivateRoute path="/kitbag/kits/new" exact component={KitPage} />
+              <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitPage} />
               <PrivateRoute path="/kitbag/kits/delete/:id" exact component={KitDelete} />
               <PrivateRoute path="/kitbag/kits" component={KitBag} />
               <PrivateRoute path="/kitbag/trades/add/:id" exact component={TradeCreatePage} />
@@ -99,9 +98,9 @@ class App extends React.Component {
               <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeEditPage} />
               <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedEditPage} />
               <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenEditPage} />
-              <PrivateRoute path="/settings/groups/status/:id" exact component={GroupStatus} />
-              <PrivateRoute path="/settings/groups/view/:id" exact component={GroupPage} />
               <PrivateRoute path="/settings/groups/new" exact component={GroupPage} />
+              <PrivateRoute path="/settings/groups/view/:id" exact component={GroupPage} />
+              <PrivateRoute path="/settings/groups/status/:id" exact component={GroupStatus} />
               <PrivateRoute path="/settings/groups" component={Groups} />
             </Switch>
           </main>
