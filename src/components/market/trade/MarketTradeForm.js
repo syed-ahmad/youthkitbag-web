@@ -194,7 +194,7 @@ const MarketTradeForm = ({ trade }) => {
       ...values, 
       activitys: getArray(values.activitys)
     };
-
+    return trade;
     // if (trade._id) {
     //   dispatch(editMarketTrade(trade._id, trade));
     // } else {

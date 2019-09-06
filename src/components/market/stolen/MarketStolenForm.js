@@ -194,6 +194,7 @@ const MarketStolenForm = ({ stolen }) => {
       ...values, 
       activitys: getArray(values.activitys)
     };
+    return stolen;
 
     // if (stolen._id) {
     //   dispatch(editMarketStolen(stolen._id, stolen));

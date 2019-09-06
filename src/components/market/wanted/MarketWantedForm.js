@@ -194,6 +194,7 @@ const MarketWantedForm = ({ wanted }) => {
       ...values, 
       activitys: getArray(values.activitys)
     };
+    return wanted;
 
     // if (wanted._id) {
     //   dispatch(editMarketWanted(wanted._id, wanted));
