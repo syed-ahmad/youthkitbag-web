@@ -253,7 +253,7 @@ const StolenForm = ({ stolen }) => {
           <div className="form-group row">
             <label htmlFor="stolenOn" className="col-sm-3 col-form-label">Stolen On</label>
             <div className="col-sm-9">
-              <input className="form-control" name="stolenOn" type="date" onChange={handleChange} value={values.stolenOn} aria-describedby="stolenOn" />
+              <input className="form-control" name="stolenOn" type="text" onChange={handleChange} value={values.stolenOn} aria-describedby="stolenOn" />
             </div>
           </div>
           <div className="form-group row">
@@ -276,7 +276,7 @@ const StolenForm = ({ stolen }) => {
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Reported On</label>
                   }
-                  <input className="form-control" name={`reportDetails[${index}].reportedOn`} type="date" onChange={handleChange} value={values.reportDetails[index].reportedOn} />
+                  <input className="form-control" name={`reportDetails[${index}].reportedOn`} type="text" onChange={handleChange} value={values.reportDetails[index].reportedOn} />
                 </div>
                 <div className="form-group col-sm-6">
                   { (index === 0) &&

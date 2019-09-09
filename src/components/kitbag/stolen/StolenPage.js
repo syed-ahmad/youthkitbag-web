@@ -53,20 +53,9 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, matc
   useEffect(() => {
     if (current && (current._id || current.sourceId)) {
       const newStolen = {
-        ...current,
-        stolenOn: current.stolenOn ? current.stolenOn.toString().substring(0,10) : '',
-        reportDetails: current.reportDetails.map(r => {
-          let report = {...r};
-          report.reportedOn = r.reportedOn ? r.reportedOn.toString().substring(0,10) : '';
-          return report;
-        }),
-        groups: current.groups.map(g => {
-          let group = {...g};
-          group.available = g.available ? g.available.toString().substring(0,10) : '';
-          return group;
-        }),
-        imagesToUpload: 0
-      };
+         ...current,
+         imagesToUpload: 0
+       };
       setStolen(newStolen);  
     }
   }, [current]);

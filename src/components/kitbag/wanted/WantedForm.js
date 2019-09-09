@@ -270,7 +270,7 @@ const WantedForm = ({ wanted }) => {
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Offered On</label>
                   }
-                  <input className="form-control" name={`offerDetails[${index}].offeredOn`} type="date" onChange={handleChange} value={values.offerDetails[index].offeredOn} />
+                  <input className="form-control" name={`offerDetails[${index}].offeredOn`} type="text" onChange={handleChange} value={values.offerDetails[index].offeredOn} />
                 </div>
                 <div className="form-group col-sm-6">
                   { (index === 0) &&

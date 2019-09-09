@@ -293,7 +293,7 @@ const KitForm = ({ kit }) => {
                   { (index === 0) &&
                     <label className="d-none d-sm-block">On</label>
                   }
-                  <input className="form-control" name={`purchases[${index}].ondate`} type="date" onChange={handleChange} value={values.purchases[index].ondate} />
+                  <input className="form-control" name={`purchases[${index}].ondate`} type="text" onChange={handleChange} value={values.purchases[index].ondate} />
                 </div>
                 <div className="form-group col-sm-2">
                   { (index === 0) &&

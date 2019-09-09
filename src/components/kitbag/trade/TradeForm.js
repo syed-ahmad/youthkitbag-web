@@ -256,7 +256,7 @@ const TradeForm = ({ trade }) => {
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Available</label>
                   }
-                  <input className="form-control" name={`groups[${index}].available`} type="date" onChange={handleChange} value={values.groups[index].available} />
+                  <input className="form-control" name={`groups[${index}].available`} type="text" onChange={handleChange} value={values.groups[index].available} />
                 </div>
                 <div className="form-group col-sm-1">
                   { (index === 0) &&

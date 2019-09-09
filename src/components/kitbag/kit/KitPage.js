@@ -43,11 +43,6 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
     if (current && current._id) {
       const newKit = {
         ...current,
-        purchases: current.purchases.map(p => {
-          let purchase = {...p};
-          purchase.ondate = p.ondate ? p.ondate.toString().substring(0,10) : '';
-          return purchase;
-        }),
         imagesToUpload: 0
       };
       setKit(newKit);  
