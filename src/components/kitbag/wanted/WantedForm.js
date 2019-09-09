@@ -27,7 +27,7 @@ const WantedForm = ({ wanted }) => {
       coordinates: ''
     },
     tracking: '',
-    offers: [],
+    offerDetails: [],
     activitys: '',
     security: '',
     images: [],
@@ -264,29 +264,29 @@ const WantedForm = ({ wanted }) => {
           </div>
           <hr />
           <div>
-            {values.offers && values.offers.map((item, index) => (
+            {values.offerDetails && values.offerDetails.map((item, index) => (
               <div className="form-row" key={index}>
                 <div className="form-group col-sm-5">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Offered On</label>
                   }
-                  <input className="form-control" name={`offers[${index}].offeredOn`} type="date" onChange={handleChange} value={values.offers[index].offeredOn} />
+                  <input className="form-control" name={`offerDetails[${index}].offeredOn`} type="date" onChange={handleChange} value={values.offerDetails[index].offeredOn} />
                 </div>
                 <div className="form-group col-sm-6">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Asking Price</label>
                   }
-                  <input className="form-control" name={`offers[${index}].askingPrice`} type="text" onChange={handleChange} value={values.offers[index].askingPrice} />
+                  <input className="form-control" name={`offerDetails[${index}].askingPrice`} type="text" onChange={handleChange} value={values.offerDetails[index].askingPrice} />
                 </div>
                 <div className="form-group col-sm-1">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Rem</label>
                   }
-                  <button className="btn btn-danger" type="button" title="Remove Offer" onClick={() => removeArrayItem('offers', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+                  <button className="btn btn-danger" type="button" title="Remove Offer" onClick={() => removeArrayItem('offerDetails', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
                 </div>
               </div>
             ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('offers', [initialOffer])}>
+            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('offerDetails', [initialOffer])}>
               Add a new offer
             </button>
           </div>

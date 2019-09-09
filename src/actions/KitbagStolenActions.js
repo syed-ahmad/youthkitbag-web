@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { CREATE_KITBAG_STOLEN, FETCH_KITBAG_STOLENS, FETCH_KITBAG_STOLEN, EDIT_KITBAG_STOLEN, DELETE_KITBAG_STOLEN, API_KITBAG_ERROR } from './types';
+import { CREATE_KITBAG_STOLEN, FETCH_KITBAG_STOLENS, FETCH_KITBAG_STOLEN, EDIT_KITBAG_STOLEN, DELETE_KITBAG_STOLEN, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
-import * as types from './types';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
@@ -22,13 +21,12 @@ export const fetchKitbagStolens = (search = '', by = 'all', page = 1, pagesize =
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: types.GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/kitbag/stolens');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
 };
-
 
 export const fetchKitbagStolen = (stolenId) => dispatch => {
   const token = localStorage.getItem('token');
@@ -45,7 +43,29 @@ export const fetchKitbagStolen = (stolenId) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/kitbag/stolens');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  });
+};
+
+export const fetchKitbagStolenFromKit = (kitId) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios.get(`${baseUrl}/kitbag/stolen/add/${kitId}`, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }
+  })
+  .then(response => {
+    dispatch({ type: FETCH_KITBAG_STOLEN, payload: response.data });
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/stolens');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -68,7 +88,7 @@ export const createKitbagStolen = (formValues) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/stolens');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -91,7 +111,7 @@ export const editKitbagStolen = (stolenId, formValues) =>  dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/stolens');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -114,7 +134,7 @@ export const deleteKitbagStolen = (stolenId) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/stolens');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });

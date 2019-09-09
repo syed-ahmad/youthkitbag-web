@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { CREATE_KITBAG_TRADE, FETCH_KITBAG_TRADES, FETCH_KITBAG_TRADE, EDIT_KITBAG_TRADE, DELETE_KITBAG_TRADE, API_KITBAG_ERROR } from './types';
+import { CREATE_KITBAG_TRADE, FETCH_KITBAG_TRADES, FETCH_KITBAG_TRADE, EDIT_KITBAG_TRADE, DELETE_KITBAG_TRADE, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
-import * as types from '../actions/types';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
@@ -22,13 +21,12 @@ export const fetchKitbagTrades = (search = '', by = 'all', page = 1, pagesize = 
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: types.GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/kitbag/trades');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
 };
-
 
 export const fetchKitbagTrade = (tradeId) => dispatch => {
   const token = localStorage.getItem('token');
@@ -45,7 +43,7 @@ export const fetchKitbagTrade = (tradeId) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/trades');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -67,7 +65,7 @@ export const fetchKitbagTradeFromKit = (kitId) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/trades');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -90,7 +88,7 @@ export const createKitbagTrade = (formValues) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/trades');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -113,7 +111,7 @@ export const editKitbagTrade = (tradeId, formValues) =>  dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/trades');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -136,7 +134,7 @@ export const deleteKitbagTrade = (tradeId) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/trades');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });

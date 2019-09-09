@@ -22,7 +22,7 @@ const KitForm = ({ kit }) => {
     title: '',
     subtitle: '',
     description: '',
-    status: 'Owned',
+    status: 'owned',
     purchases: [],
     inbag: [],
     warning: 0,

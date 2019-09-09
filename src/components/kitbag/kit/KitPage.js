@@ -20,7 +20,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
     title: '',
     subtitle: '',
     description: '',
-    status: 'Owned',
+    status: 'owned',
     purchases: [],
     inbag: [],
     security: [],
@@ -73,9 +73,9 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
         <div className="container">
           {kitId && 
             <div className="row">
-              <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-              <Link to={`/kitbag/trades/add/${kitId}`} className="btn btn-primary">Trade</Link>
-              <Link to={`/kitbag/wanteds/add/${kitId}`} className="btn btn-secondary">Wanted</Link>
+              <div className="col-12 mb-3 d-flex justify-content-end">
+              <Link to={`/kitbag/trades/add/${kitId}`} className="btn btn-primary mr-3">Trade</Link>
+              <Link to={`/kitbag/wanteds/add/${kitId}`} className="btn btn-secondary mr-3">Wanted</Link>
               <Link to={`/kitbag/stolens/add/${kitId}`} className="btn btn-danger">Stolen</Link>
               </div>
             </div>

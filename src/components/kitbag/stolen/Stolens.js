@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagStolens } from '../../../actions';
 import queryString from 'query-string';
@@ -51,14 +52,14 @@ class Stolens extends React.Component {
     return (
       <div>
         <Title title={this.getTitle()} />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features">
+        <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
                 <SearchForm search={this.props.location.search} callback={fetchKitbagStolens} />
+              </div>
+              <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
+                <Link to="/kitbag/stolens/new" className="btn btn-primary">Add new stolen</Link>
               </div>
             </div>
             <div className="row">

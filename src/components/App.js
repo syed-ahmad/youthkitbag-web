@@ -76,23 +76,30 @@ class App extends React.Component {
               <Route path="/market/wanteds" component={MarketWanteds} />
               <Route path="/market/stolens" component={MarketStolens} />
               <PrivateRoute path="/purchase" exact component={Purchase} />
+
               <PrivateRoute path="/kitbag/kits/new" component={KitPage} />
               <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitPage} />
               <PrivateRoute path="/kitbag/kits/delete/:id" exact component={KitDelete} />
               <PrivateRoute path="/kitbag/kits" component={KitBag} />
+
               <PrivateRoute path="/kitbag/trades/new" exact component={TradePage} />
               <PrivateRoute path="/kitbag/trades/add/:kit" exact component={TradePage} />
               <PrivateRoute path="/kitbag/trades/edit/:id" exact component={TradePage} />
               <PrivateRoute path="/kitbag/trades/delete/:id" exact component={TradeDelete} />
               <PrivateRoute path="/kitbag/trades" component={Trades} />
-              <PrivateRoute path="/kitbag/stolens/add/:id" exact component={StolenPage} />
-              <PrivateRoute path="/kitbag/stolens/edit/:id" exact component={StolenPage} />
-              <PrivateRoute path="/kitbag/stolens/delete/:id" exact component={StolenDelete} />
-              <PrivateRoute path="/kitbag/stolens" component={Stolens} />
-              <PrivateRoute path="/kitbag/wanteds/add/:id" exact component={WantedPage} />
+
+              <PrivateRoute path="/kitbag/wanteds/new" exact component={WantedPage} />
+              <PrivateRoute path="/kitbag/wanteds/add/:kit" exact component={WantedPage} />
               <PrivateRoute path="/kitbag/wanteds/edit/:id" exact component={WantedPage} />
               <PrivateRoute path="/kitbag/wanteds/delete/:id" exact component={WantedDelete} />
               <PrivateRoute path="/kitbag/wanteds" component={Wanteds} />
+
+              <PrivateRoute path="/kitbag/stolens/new" exact component={StolenPage} />
+              <PrivateRoute path="/kitbag/stolens/add/:kit" exact component={StolenPage} />
+              <PrivateRoute path="/kitbag/stolens/edit/:id" exact component={StolenPage} />
+              <PrivateRoute path="/kitbag/stolens/delete/:id" exact component={StolenDelete} />
+              <PrivateRoute path="/kitbag/stolens" component={Stolens} />
+
               <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeEditPage} />
               <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedEditPage} />
               <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenEditPage} />

@@ -19,9 +19,9 @@ class TradeDelete extends React.Component {
 
   renderContent() {
     if (!this.props.trade) {
-      return 'Are you sure you want to delete this trade?';
+      return 'Are you sure you want to delete this item from your trading catalog?';
     }
-    return `Are you sure you want to delete this trade titled "${this.props.trade.title}"?`;
+    return `Are you sure you want to delete "${this.props.trade.title}" from your trading catalog?`;
   }
 
   renderActions() {
@@ -45,8 +45,8 @@ class TradeDelete extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return { trade: state.kitbag.trade[ownProps.match.params.id] }
+const mapStateToProps = (state) => {
+  return { trade: state.kitbag.trade.current }
 };
 
 export default connect(mapStateToProps, { fetchKitbagTrade, deleteKitbagTrade })(TradeDelete);

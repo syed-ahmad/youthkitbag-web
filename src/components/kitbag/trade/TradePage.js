@@ -12,7 +12,7 @@ const mapDispatchToProps = {
   fetchKitbagTrade, fetchKitbagTradeFromKit
 }
 
-const TradeEditPage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }) => {
+const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }) => {
 
   const tradeId = match.params.id;
   const kitId = match.params.kit;
@@ -94,4 +94,4 @@ const TradeEditPage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, mat
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TradeEditPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TradePage);

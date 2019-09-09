@@ -27,7 +27,7 @@ const StolenForm = ({ stolen }) => {
       coordinates: ''
     },
     tracking: '',
-    reports: [],
+    reportDetails: [],
     activitys: '',
     security: '',
     images: [],
@@ -270,29 +270,29 @@ const StolenForm = ({ stolen }) => {
           </div>
           <hr />
           <div>
-            {values.reports && values.reports.map((item, index) => (
+            {values.reportDetails && values.reportDetails.map((item, index) => (
               <div className="form-row" key={index}>
                 <div className="form-group col-sm-5">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Reported On</label>
                   }
-                  <input className="form-control" name={`reports[${index}].reportedOn`} type="date" onChange={handleChange} value={values.reports[index].reportedOn} />
+                  <input className="form-control" name={`reportDetails[${index}].reportedOn`} type="date" onChange={handleChange} value={values.reportDetails[index].reportedOn} />
                 </div>
                 <div className="form-group col-sm-6">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Details</label>
                   }
-                  <input className="form-control" name={`reports[${index}].details`} type="text" onChange={handleChange} value={values.reports[index].details} />
+                  <input className="form-control" name={`reportDetails[${index}].details`} type="text" onChange={handleChange} value={values.reportDetails[index].details} />
                 </div>
                 <div className="form-group col-sm-1">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Rem</label>
                   }
-                  <button className="btn btn-danger" type="button" title="Remove Report" onClick={() => removeArrayItem('reports', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+                  <button className="btn btn-danger" type="button" title="Remove Report" onClick={() => removeArrayItem('reportDetails', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
                 </div>
               </div>
             ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('reports', [initialReport])}>
+            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('reportDetails', [initialReport])}>
               Add a new report
             </button>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { connect, } from 'react-redux';
-import { fetchKitbagStolen } from '../../../actions/KitbagStolenActions';
+import { connect } from 'react-redux';
+import { fetchKitbagStolen, fetchKitbagStolenFromKit } from '../../../actions/KitbagStolenActions';
 import StolenForm from './StolenForm';
 import Title from '../../includes/Title';
 
@@ -9,29 +9,33 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchKitbagStolen
+  fetchKitbagStolen, fetchKitbagStolenFromKit
 }
 
-const StolenPage = ({ current, fetchKitbagStolen, match }) => {
+const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, match }) => {
 
   const stolenId = match.params.id;
+  const kitId = match.params.kit;
+
   const [stolen, setStolen] = useState({
     title: '',
     subtitle: '',
     description: '',
-    stolenOn: '',
     location: {
       coordinates: ''
     },
-    tracking: '',
-    reports: [],
+    images: [],
     activitys: '',
     security: '',
-    images: [],
+    stolenOn: '',
+    tracking: '',
     recovered: false,
     sourceId: '',
     userId: '',
-    topImage: '/images/default.png'
+    groups: [],
+    reportDetails: [],
+    topImage: '/images/default.png',
+    imagesToUpload: 0
   });
 
   useEffect(() => {
@@ -39,16 +43,27 @@ const StolenPage = ({ current, fetchKitbagStolen, match }) => {
       fetchKitbagStolen(stolenId);
     }
   }, [fetchKitbagStolen, stolenId]);
+
+  useEffect(() => {
+    if (kitId) {
+      fetchKitbagStolenFromKit(kitId);
+    }
+  }, [fetchKitbagStolenFromKit, kitId]);
   
   useEffect(() => {
-    if (current && current._id) {
+    if (current && (current._id || current.sourceId)) {
       const newStolen = {
         ...current,
         stolenOn: current.stolenOn ? current.stolenOn.toString().substring(0,10) : '',
-        reports: current.reports.map(r => {
+        reportDetails: current.reportDetails.map(r => {
           let report = {...r};
           report.reportedOn = r.reportedOn ? r.reportedOn.toString().substring(0,10) : '';
           return report;
+        }),
+        groups: current.groups.map(g => {
+          let group = {...g};
+          group.available = g.available ? g.available.toString().substring(0,10) : '';
+          return group;
         }),
         imagesToUpload: 0
       };
