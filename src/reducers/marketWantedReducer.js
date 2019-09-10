@@ -1,14 +1,14 @@
-import * as types from '../actions/types';
+import { FETCH_MARKET_WANTEDS, FETCH_MARKET_WANTED, LOGOUT } from '../actions/types';
 
-const initialState = { list: [] };
+const initialState = {current: {}, newImages: [], list: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_MARKET_WANTEDS:
+    case FETCH_MARKET_WANTEDS:
       return { ...state, list: action.payload.wanteds, current: {}, newImages: [] };
-    case types.FETCH_MARKET_WANTED:
+    case FETCH_MARKET_WANTED:
       return { ...state, current: action.payload };
-    case types.LOGOUT:
+    case LOGOUT:
       return initialState;
     default:
       return state;

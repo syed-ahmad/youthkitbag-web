@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { FETCH_MARKET_WANTEDS, FETCH_MARKET_WANTED, API_MARKET_ERROR } from './types';
+import { FETCH_MARKET_WANTEDS, FETCH_MARKET_WANTED, API_MARKET_ERROR, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
-import * as types from './types';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
@@ -17,7 +16,7 @@ export const fetchMarketWanteds = (search = '', by = 'all', page = 1, pagesize =
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: types.GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/market/wanteds');
       }
       dispatch({ type: API_MARKET_ERROR, payload: response });
@@ -39,7 +38,7 @@ export const fetchMarketWanted = (wantedId) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/market/wanteds');
     }
     dispatch({ type: API_MARKET_ERROR, payload: err.response });

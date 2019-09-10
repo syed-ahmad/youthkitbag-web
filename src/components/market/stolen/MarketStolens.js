@@ -14,7 +14,7 @@ class MarketStolens extends React.Component {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
-    return `Found items on market for stolen (${this.props.pagination.totalItems})`;
+    return `Found items in market for stolen (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {
@@ -51,10 +51,7 @@ class MarketStolens extends React.Component {
     return (
       <div>
         <Title title={this.getTitle()} />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features">
+        <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
