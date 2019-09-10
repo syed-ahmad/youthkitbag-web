@@ -9,6 +9,7 @@ export const fetchMarketTrades = (search = '', by = 'all', page = 1, pagesize = 
       params: { search, by, page, pagesize }
     })
     .then(response => {
+      console.log('TRADE', response.data);
       dispatch({ type: FETCH_MARKET_TRADES, payload: response.data });
       history.push(`/market/trades?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
     })
