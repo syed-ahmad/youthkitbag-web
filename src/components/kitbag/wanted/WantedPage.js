@@ -50,7 +50,6 @@ const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, matc
   
   useEffect(() => {
     if (current && (current._id || current.sourceId)) {
-      console.log('OFFER', current);
       const newWanted = {
         ...current,
         wantedOn: current.wantedOn ? current.wantedOn.toString().substring(0,10) : '',
