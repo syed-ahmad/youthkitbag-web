@@ -5,39 +5,24 @@ import MarketWantedDetails from './MarketWantedDetails';
 import Title from '../../includes/Title';
 
 const mapStateToProps = state => ({
-  current: state.kitbag.wanted.current
+  current: state.market.wanted.current
 });
 
 const mapDispatchToProps = {
   fetchMarketWanted
 }
 
-const MarketWantedViewPage = (props) => {
-
-  const { current, fetchMarketWanted, match } = props;
+const MarketWantedViewPage = ({ current, fetchMarketWanted, match }) => {
 
   const wantedId = match.params.id;
 
   const [wanted, setWanted] = useState({
-    title: 'Loading requested item of wanted ...',
+    title: 'Loading requested wanted item ...',
     subtitle: '',
     description: '',
-    condition: 'Used',
-    askingPrice: 0.00,
-    location: {
-      coordinates: ''
-    },
-    wantedd: {
-      wanteddOn: '',
-      toUserId: '',
-      wantedPrice: 0,
-      complete: false
-    },
+    offerPrice: 0.00,
     activitys: '',
-    groups: [],
     images: [],
-    sourceId: '',
-    userId: '',
     topImage: '/images/default.png'
   });
 
@@ -47,16 +32,7 @@ const MarketWantedViewPage = (props) => {
   
   useEffect(() => {
     if (current && current._id) {
-      const newWanted = {
-        ...current,
-        groups: current.groups.map(g => {
-          let group = {...g};
-          group.available = g.available ? g.available.toString().substring(0,10) : '';
-          return group;
-        }),
-        imagesToUpload: 0
-      };
-      setWanted(newWanted);  
+      setWanted(current);  
     }
   }, [current]);
   
