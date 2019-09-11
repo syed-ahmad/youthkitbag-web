@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
-import validate from './MarketWantedFormValidationRules';
+import validate from './MarketStolenDetailsValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
-const MarketWantedForm = ({ wanted }) => {
+const MarketStolenForm = ({ stolen }) => {
 
   // ?? still using redux
   const dispatch = useDispatch();
-  const newImages = useSelector(state => state.kitbag.wanted.newImages);
+  const newImages = useSelector(state => state.kitbag.stolen.newImages);
 
   // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
@@ -26,10 +26,10 @@ const MarketWantedForm = ({ wanted }) => {
     location: {
       coordinates: ''
     },
-    wantedd: {
-      wanteddOn: '',
+    stolend: {
+      stolendOn: '',
       toUserId: '',
-      wantedPrice: 0,
+      stolenPrice: 0,
       complete: false
     },
     activitys: '',
@@ -54,7 +54,7 @@ const MarketWantedForm = ({ wanted }) => {
     values,
     setValues,
     errors
-  } = useForm(initialValues, updateWanted, validate);
+  } = useForm(initialValues, updateStolen, validate);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -167,11 +167,11 @@ const MarketWantedForm = ({ wanted }) => {
   }
 
   useEffect(() => {
-    if (wanted) {
-      wanted.topImage = wanted.images && wanted.images.filter(i => i.state !== 'D').length > 0 ? wanted.images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png';
-      setValues(wanted);
+    if (stolen) {
+      stolen.topImage = stolen.images && stolen.images.filter(i => i.state !== 'D').length > 0 ? stolen.images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png';
+      setValues(stolen);
     }
-  }, [wanted, setValues]);
+  }, [stolen, setValues]);
 
   useEffect(() => {
     if (newImages && newImages.length > 0 && newImages.length === values.imagesToUpload) {
@@ -189,17 +189,17 @@ const MarketWantedForm = ({ wanted }) => {
     }
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
-  function updateWanted() {
-    const wanted = {
+  function updateStolen() {
+    const stolen = {
       ...values, 
       activitys: getArray(values.activitys)
     };
-    return wanted;
+    return stolen;
 
-    // if (wanted._id) {
-    //   dispatch(editMarketWanted(wanted._id, wanted));
+    // if (stolen._id) {
+    //   dispatch(editMarketStolen(stolen._id, stolen));
     // } else {
-    //   dispatch(createMarketWanted(wanted));
+    //   dispatch(createMarketStolen(stolen));
     // }
   }
 
@@ -323,7 +323,7 @@ const MarketWantedForm = ({ wanted }) => {
           </div>
           <div>
             <button className="btn btn-primary" type="submit">Save</button>
-            <Link className="btn btn-link" to="/kitbag/wanteds">Cancel</Link>
+            <Link className="btn btn-link" to="/kitbag/stolens">Cancel</Link>
           </div>
           </form>
         </div>
@@ -331,4 +331,4 @@ const MarketWantedForm = ({ wanted }) => {
   );
 }
 
-export default MarketWantedForm;
+export default MarketStolenForm;

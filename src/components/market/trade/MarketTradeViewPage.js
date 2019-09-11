@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { connect, } from 'react-redux';
 import { fetchMarketTrade } from '../../../actions/MarketTradeActions';
-import MarketTradeForm from './MarketTradeForm';
+import MarketTradeDetails from './MarketTradeDetails';
 import Title from '../../includes/Title';
 
 const mapStateToProps = state => ({
-  current: state.kitbag.trade.current
+  current: state.market.trade.current
 });
 
 const mapDispatchToProps = {
   fetchMarketTrade
 }
 
-const MarketTradeEditPage = (props) => {
-
-  const { current, fetchMarketTrade, match } = props;
+const MarketTradeViewPage = ({ current, fetchMarketTrade, match }) => {
 
   const tradeId = match.params.id;
 
@@ -22,22 +20,10 @@ const MarketTradeEditPage = (props) => {
     title: 'Loading requested item of trade ...',
     subtitle: '',
     description: '',
-    condition: 'Used',
+    condition: '',
     askingPrice: 0.00,
-    location: {
-      coordinates: ''
-    },
-    traded: {
-      tradedOn: '',
-      toUserId: '',
-      tradePrice: 0,
-      complete: false
-    },
     activitys: '',
-    groups: [],
     images: [],
-    sourceId: '',
-    userId: '',
     topImage: '/images/default.png'
   });
 
@@ -47,16 +33,7 @@ const MarketTradeEditPage = (props) => {
   
   useEffect(() => {
     if (current && current._id) {
-      const newTrade = {
-        ...current,
-        groups: current.groups.map(g => {
-          let group = {...g};
-          group.available = g.available ? g.available.toString().substring(0,10) : '';
-          return group;
-        }),
-        imagesToUpload: 0
-      };
-      setTrade(newTrade);  
+      setTrade(current);  
     }
   }, [current]);
   
@@ -65,7 +42,7 @@ const MarketTradeEditPage = (props) => {
       <Title title={!trade ? 'Loading...' : trade.title} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
-          <MarketTradeForm trade={trade} />
+          <MarketTradeDetails trade={trade} />
         </div>
       </section>
     </div>
@@ -73,4 +50,4 @@ const MarketTradeEditPage = (props) => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketTradeEditPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MarketTradeViewPage);

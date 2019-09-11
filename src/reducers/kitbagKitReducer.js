@@ -10,10 +10,6 @@ export default (state = initialState, action) => {
       return { ...state, current: action.payload, newImages: [] };
     case types.EDIT_KITBAG_KIT:
       return { ...state, current: action.payload, newImages: [] };
-    // case types.DELETE_KITBAG_KIT:
-    //   return _.omit(state, action.payload);  
-    // case types.FETCH_KITBAG_KITS:
-    //   return { ..._.mapKeys(action.payload.kits, '_id') };
     case types.FETCH_KITBAG_KITS:
       return { ...state, list: action.payload.kits, current: {}, newImages: [] };
     case types.ADD_IMAGE:

@@ -41,13 +41,13 @@ import StolenPage from './kitbag/stolen/StolenPage';
 import StolenDelete from './kitbag/stolen/StolenDelete';
 
 import MarketTrades from './market/trade/MarketTrades';
-import MarketTradeEditPage from './market/trade/MarketTradeEditPage';
+import MarketTradeViewPage from './market/trade/MarketTradeViewPage';
 
 import MarketWanteds from './market/wanted/MarketWanteds';
-import MarketWantedEditPage from './market/wanted/MarketWantedEditPage';
+import MarketWantedViewPage from './market/wanted/MarketWantedViewPage';
 
 import MarketStolens from './market/stolen/MarketStolens';
-import MarketStolenEditPage from './market/stolen/MarketStolenEditPage';
+import MarketStolenViewPage from './market/stolen/MarketStolenViewPage';
 
 class App extends React.Component {
   render() {
@@ -72,9 +72,16 @@ class App extends React.Component {
               <Route path="/auth/reset" exact component={Reset} />
               <Route path="/auth/newpassword/:key" exact component={NewPassword} />
               <Route path="/auth/logout" exact component={Logout} />
+
+              <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeViewPage} />
               <Route path="/market/trades" component={MarketTrades} />
+
+              <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedViewPage} />              
               <Route path="/market/wanteds" component={MarketWanteds} />
+
+              <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenViewPage} />
               <Route path="/market/stolens" component={MarketStolens} />
+              
               <PrivateRoute path="/purchase" exact component={Purchase} />
 
               <PrivateRoute path="/kitbag/kits/new" component={KitPage} />
@@ -100,9 +107,6 @@ class App extends React.Component {
               <PrivateRoute path="/kitbag/stolens/delete/:id" exact component={StolenDelete} />
               <PrivateRoute path="/kitbag/stolens" component={Stolens} />
 
-              <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeEditPage} />
-              <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedEditPage} />
-              <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenEditPage} />
               <PrivateRoute path="/settings/groups/new" exact component={GroupPage} />
               <PrivateRoute path="/settings/groups/view/:id" exact component={GroupPage} />
               <PrivateRoute path="/settings/groups/status/:id" exact component={GroupStatus} />

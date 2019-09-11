@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { connect, } from 'react-redux';
-import { fetchMarketStolen } from '../../../actions/MarketStolenActions';
-import MarketStolenForm from './MarketStolenForm';
+import { fetchMarketWanted } from '../../../actions/MarketWantedActions';
+import MarketWantedDetails from './MarketWantedDetails';
 import Title from '../../includes/Title';
 
 const mapStateToProps = state => ({
-  current: state.kitbag.stolen.current
+  current: state.kitbag.wanted.current
 });
 
 const mapDispatchToProps = {
-  fetchMarketStolen
+  fetchMarketWanted
 }
 
-const MarketStolenEditPage = (props) => {
+const MarketWantedViewPage = (props) => {
 
-  const { current, fetchMarketStolen, match } = props;
+  const { current, fetchMarketWanted, match } = props;
 
-  const stolenId = match.params.id;
+  const wantedId = match.params.id;
 
-  const [stolen, setStolen] = useState({
-    title: 'Loading requested item of stolen ...',
+  const [wanted, setWanted] = useState({
+    title: 'Loading requested item of wanted ...',
     subtitle: '',
     description: '',
     condition: 'Used',
@@ -27,10 +27,10 @@ const MarketStolenEditPage = (props) => {
     location: {
       coordinates: ''
     },
-    stolend: {
-      stolendOn: '',
+    wantedd: {
+      wanteddOn: '',
       toUserId: '',
-      stolenPrice: 0,
+      wantedPrice: 0,
       complete: false
     },
     activitys: '',
@@ -42,12 +42,12 @@ const MarketStolenEditPage = (props) => {
   });
 
   useEffect(() => {
-    fetchMarketStolen(stolenId);
-  }, [fetchMarketStolen, stolenId]);
+    fetchMarketWanted(wantedId);
+  }, [fetchMarketWanted, wantedId]);
   
   useEffect(() => {
     if (current && current._id) {
-      const newStolen = {
+      const newWanted = {
         ...current,
         groups: current.groups.map(g => {
           let group = {...g};
@@ -56,16 +56,16 @@ const MarketStolenEditPage = (props) => {
         }),
         imagesToUpload: 0
       };
-      setStolen(newStolen);  
+      setWanted(newWanted);  
     }
   }, [current]);
   
   return (
     <div>
-      <Title title={!stolen ? 'Loading...' : stolen.title} />
+      <Title title={!wanted ? 'Loading...' : wanted.title} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
-          <MarketStolenForm stolen={stolen} />
+          <MarketWantedDetails wanted={wanted} />
         </div>
       </section>
     </div>
@@ -73,4 +73,4 @@ const MarketStolenEditPage = (props) => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketStolenEditPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MarketWantedViewPage);
