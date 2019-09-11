@@ -15,7 +15,6 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
     }
   })
   .then(response => {
-    console.log('KIT', response.data);
     dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
     history.push(`/kitbag/kits?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
   })
