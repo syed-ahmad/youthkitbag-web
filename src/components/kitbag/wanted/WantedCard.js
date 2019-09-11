@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 class WantedCard extends React.Component {
 
-  totalQuantity = () => {
-    return 0;
+  renderNotificationCount = () => {
+    return `0`;
   }
 
   topImage = () => {
@@ -23,7 +23,7 @@ class WantedCard extends React.Component {
           <span className="icons-top-left">
             <Link to={ `/kitbag/wanteds/delete/${ _id }` }><span className="icon-tray-item fas fa-trash-alt"></span></Link>
           </span>
-          <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">{ this.totalQuantity() }</span>
+          <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">{ this.renderNotificationCount() }</span>
           <Link to={ `/kitbag/wanteds/edit/${ _id }` }>
             <img className="card-img-top" src={ this.topImage() } alt={ title } role="presentation" />
             <div className="card-body">

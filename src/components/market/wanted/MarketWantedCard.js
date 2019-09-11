@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 
 class MarketWantedCard extends React.Component {
 
-  totalQuantity = () => {
-    return 0;
+  renderOfferPrice = (offerPrice) => {
+    if (!offerPrice || offerPrice === 0)
+      return 'Free';
+    return `£${offerPrice.toFixed(2)}`;
   }
 
   topImage = () => {
@@ -20,7 +22,7 @@ class MarketWantedCard extends React.Component {
     return (
       <div className="col-6 col-md-4 col-lg-3 mb-3">
         <article className="card card-link card-b1">
-          <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">{`£${offerPrice}`}</span>
+          <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">{this.renderOfferPrice(offerPrice)}</span>
           <Link to={ `/market/wanteds/view/${ _id }` }>
             <img className="card-img-top" src={ this.topImage() } alt={ title } role="presentation" />
             <div className="card-body">

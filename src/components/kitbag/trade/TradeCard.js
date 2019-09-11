@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 class TradeCard extends React.Component {
 
-  totalQuantity = () => {
-    return 0;
+  renderNotificationCount = () => {
+    return `0`;
   }
 
   topImage = () => {
@@ -15,7 +15,7 @@ class TradeCard extends React.Component {
   };
 
   render() {
-    const { _id, title, subtitle, askingPrice } = this.props.trade;
+    const { _id, title, subtitle } = this.props.trade;
 
     return (
       <div className="col-6 col-md-4 col-lg-3 mb-3">
@@ -23,7 +23,7 @@ class TradeCard extends React.Component {
           <span className="icons-top-left">
             <Link to={ `/kitbag/trades/delete/${ _id }` }><span className="icon-tray-item fas fa-trash-alt"></span></Link>
           </span>
-          <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">£{askingPrice}</span>
+          <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">{ this.renderNotificationCount() }</span>
           <Link to={ `/kitbag/trades/edit/${ _id }` }>
             <img className="card-img-top" src={ this.topImage() } alt={ title } role="presentation" />
             <div className="card-body">
