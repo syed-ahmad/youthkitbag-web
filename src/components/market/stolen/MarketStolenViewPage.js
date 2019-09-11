@@ -5,39 +5,25 @@ import MarketStolenDetails from './MarketStolenDetails';
 import Title from '../../includes/Title';
 
 const mapStateToProps = state => ({
-  current: state.kitbag.stolen.current
+  current: state.market.stolen.current
 });
 
 const mapDispatchToProps = {
   fetchMarketStolen
 }
 
-const MarketStolenViewPage = (props) => {
-
-  const { current, fetchMarketStolen, match } = props;
+const MarketStolenViewPage = ({ current, fetchMarketStolen, match }) => {
 
   const stolenId = match.params.id;
 
   const [stolen, setStolen] = useState({
-    title: 'Loading requested item of stolen ...',
+    title: 'Loading requested stolen item ...',
     subtitle: '',
     description: '',
-    condition: 'Used',
-    askingPrice: 0.00,
-    location: {
-      coordinates: ''
-    },
-    stolend: {
-      stolendOn: '',
-      toUserId: '',
-      stolenPrice: 0,
-      complete: false
-    },
+    stolenOn: '',
     activitys: '',
-    groups: [],
+    security: '',
     images: [],
-    sourceId: '',
-    userId: '',
     topImage: '/images/default.png'
   });
 
@@ -47,22 +33,13 @@ const MarketStolenViewPage = (props) => {
   
   useEffect(() => {
     if (current && current._id) {
-      const newStolen = {
-        ...current,
-        groups: current.groups.map(g => {
-          let group = {...g};
-          group.available = g.available ? g.available.toString().substring(0,10) : '';
-          return group;
-        }),
-        imagesToUpload: 0
-      };
-      setStolen(newStolen);  
+      setStolen(current);  
     }
   }, [current]);
   
   return (
     <div>
-      <Title title={!stolen ? 'Loading...' : stolen.title} />
+      <Title title={`Stolen: ${!stolen ? 'Loading...' : stolen.title}`} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
           <MarketStolenDetails stolen={stolen} />

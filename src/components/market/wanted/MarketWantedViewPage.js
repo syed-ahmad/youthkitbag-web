@@ -38,7 +38,7 @@ const MarketWantedViewPage = ({ current, fetchMarketWanted, match }) => {
   
   return (
     <div>
-      <Title title={!wanted ? 'Loading...' : wanted.title} />
+      <Title title={`Wanted: ${!wanted ? 'Loading...' : wanted.title}`} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
           <MarketWantedDetails wanted={wanted} />

@@ -13,7 +13,6 @@ export const fetchMarketStolens = (search = '', by = 'all', page = 1, pagesize =
       history.push(`/market/stolens?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
     })
     .catch(err => {
-      console.log('ERROR',err);
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
