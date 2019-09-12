@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect, } from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchKitbagWanted, fetchKitbagWantedFromKit } from '../../../actions/KitbagWantedActions';
 import WantedForm from './WantedForm';
 import Title from '../../includes/Title';

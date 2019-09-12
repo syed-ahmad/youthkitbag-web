@@ -19,6 +19,8 @@ export const GET_USER = 'GET_USER'
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 
+export const FETCH_SUBSCRIPTION_PACKAGE = 'FETCH_SUBSCRIPTION_PACKAGE';
+
 export const SET_TOAST = 'SET_TOAST'
 export const RESET_TOAST = 'RESET_TOAST'
 export const SET_ERROR = 'SET_ERROR'

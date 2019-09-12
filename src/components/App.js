@@ -18,7 +18,7 @@ import Reset from './auth/ResetPage';
 import NewPassword from './auth/NewPasswordPage';
 import Logout from './auth/Logout';
 
-import Purchase from './Purchase';
+import PurchaseSubscriptionPage from './PurchaseSubscriptionPage';
 
 import Groups from './group/Groups';
 import GroupPage from './group/GroupPage';
@@ -67,23 +67,24 @@ class App extends React.Component {
               <Route path="/" exact component={Home} />
               <Route path="/features" exact component={Features} />
               <Route path="/pricing" exact component={Pricing} />
+
               <Route path="/auth/signup" exact component={SignUp} />
               <Route path="/auth/login" exact component={Login} />
               <Route path="/auth/reset" exact component={Reset} />
               <Route path="/auth/newpassword/:key" exact component={NewPassword} />
               <Route path="/auth/logout" exact component={Logout} />
 
+              <PrivateRoute path="/purchase/subscription/:id" exact component={PurchaseSubscriptionPage} />
+
               <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeViewPage} />
               <Route path="/market/trades" component={MarketTrades} />
 
-              <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedViewPage} />              
+              <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedViewPage} />
               <Route path="/market/wanteds" component={MarketWanteds} />
 
               <PrivateRoute path="/market/stolens/view/:id" exact component={MarketStolenViewPage} />
               <Route path="/market/stolens" component={MarketStolens} />
               
-              <PrivateRoute path="/purchase" exact component={Purchase} />
-
               <PrivateRoute path="/kitbag/kits/new" component={KitPage} />
               <PrivateRoute path="/kitbag/kits/edit/:id" exact component={KitPage} />
               <PrivateRoute path="/kitbag/kits/delete/:id" exact component={KitDelete} />

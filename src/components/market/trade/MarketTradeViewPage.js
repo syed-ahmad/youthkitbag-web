@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect, } from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchMarketTrade } from '../../../actions/MarketTradeActions';
 import MarketTradeDetails from './MarketTradeDetails';
 import Title from '../../includes/Title';

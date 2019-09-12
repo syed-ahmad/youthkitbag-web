@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect, } from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
 import KitForm from './KitForm';
 import Title from '../../includes/Title';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect, } from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchGroup } from '../../actions/GroupActions';
 import GroupForm from './GroupForm';
 import Title from '../includes/Title';

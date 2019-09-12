@@ -8,6 +8,7 @@ import marketReducer from './marketReducer';
 import filterReducer from './filterReducer';
 import paginationReducer from './paginationReducer';
 import toastReducer from './toastReducer';
+import subscriptionReducer from './subscriptionReducer';
 
 export default combineReducers({
   auth: authReducer, 
@@ -17,5 +18,6 @@ export default combineReducers({
   market: marketReducer,
   filter: filterReducer,
   pagination: paginationReducer,
-  toast: toastReducer
+  toast: toastReducer,
+  subscription: subscriptionReducer
 });

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Title from './includes/Title';
 
@@ -25,7 +26,7 @@ const Pricing = (props) => {
                             <p className="card-text text-center">Absolutely nothing</p>
                             <hr/>
                             <div className="d-flex">
-                                <a href="/signup" className="btn btn-primary mx-auto">Sign Up</a>
+                                <Link to="/auth/signup" className="btn btn-primary mx-auto">Sign Up</Link>
                             </div>
                         </div>
                     </article>
@@ -45,7 +46,7 @@ const Pricing = (props) => {
                             <p className="card-text text-center">£2 / month</p>
                             <hr/>
                             <div className="d-flex">
-                                <a href="/purchase/standard" className="btn btn-primary mx-auto">Purchase</a>
+                                <Link to="/purchase/subscription/standard" className="btn btn-primary mx-auto">Purchase</Link>
                             </div>
                         </div>
                     </article>
@@ -65,7 +66,7 @@ const Pricing = (props) => {
                             <p className="card-text text-center">£5 / month</p>
                             <hr/>
                             <div className="d-flex">
-                                <a href="/purchase/premium" className="btn btn-primary mx-auto">Purchase</a>
+                                <Link to="/purchase/subscription/premium" className="btn btn-primary mx-auto">Purchase</Link>
                             </div>
                         </div>
                     </article>
