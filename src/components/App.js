@@ -48,6 +48,7 @@ import MarketWantedEditPage from './market/wanted/MarketWantedEditPage';
 
 import MarketStolens from './market/stolen/MarketStolens';
 import MarketStolenEditPage from './market/stolen/MarketStolenEditPage';
+import StolenFormX from './kitbag/stolen/StolenFormX';
 
 class App extends React.Component {
   render() {
@@ -98,7 +99,7 @@ class App extends React.Component {
               <PrivateRoute path="/kitbag/stolens/add/:kit" exact component={StolenPage} />
               <PrivateRoute path="/kitbag/stolens/edit/:id" exact component={StolenPage} />
               <PrivateRoute path="/kitbag/stolens/delete/:id" exact component={StolenDelete} />
-              <PrivateRoute path="/kitbag/stolens" component={Stolens} />
+              <PrivateRoute path="/kitbag/stolens" component={StolenFormX} />
 
               <PrivateRoute path="/market/trades/view/:id" exact component={MarketTradeEditPage} />
               <PrivateRoute path="/market/wanteds/view/:id" exact component={MarketWantedEditPage} />

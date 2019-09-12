@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
+import useDate from '../../hooks/useDate';
 import { createKitbagStolen, editKitbagStolen } from '../../../actions/KitbagStolenActions';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './StolenFormValidationRules';
@@ -54,6 +55,9 @@ const StolenForm = ({ stolen }) => {
     setValues,
     errors
   } = useForm(initialValues, updateStolen, validate);
+
+  const [stolenOn, StolenOnDate, setStolenOnDate] = useDate('Stolen On', '');
+
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -169,8 +173,9 @@ const StolenForm = ({ stolen }) => {
     if (stolen) {
       stolen.topImage = stolen.images && stolen.images.filter(i => i.state !== 'D').length > 0 ? stolen.images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png';
       setValues(stolen);
+      setStolenOnDate(stolen.stolenOn);
     }
-  }, [stolen, setValues]);
+  }, [stolen, setValues, setStolenOnDate]);
 
   useEffect(() => {
     if (newImages && newImages.length > 0 && newImages.length === values.imagesToUpload) {
@@ -201,6 +206,20 @@ const StolenForm = ({ stolen }) => {
       dispatch(createKitbagStolen(stolen));
     }
   }
+
+
+  // this should happen when the Date control is changed by user - and we capture the change and set the values on useForm
+  // useEffect(() => {
+  //   console.log('CHNGING STOLENDATE', values.stolenOn);
+  //   setStolenOnDate(values.stolenOn);
+  // }, [values, setStolenOnDate]);
+
+  useEffect(() => {
+    if (stolenOn !== values.stolenOn) {
+      console.log('CHNGING DATE', stolenOn, values.stolenOn);
+      setChange('stolenOn', stolenOn);  
+    }
+  }, [stolenOn, setChange, values]);
 
   return (
       <div className="row">
@@ -251,9 +270,9 @@ const StolenForm = ({ stolen }) => {
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="stolenOn" className="col-sm-3 col-form-label">Stolen On</label>
+            <label className="col-sm-3 col-form-label">Stolen</label>
             <div className="col-sm-9">
-              <input className="form-control" name="stolenOn" type="text" onChange={handleChange} value={values.stolenOn} aria-describedby="stolenOn" />
+              <StolenOnDate />
             </div>
           </div>
           <div className="form-group row">

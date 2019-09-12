@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchKitbagStolen, fetchKitbagStolenFromKit } from '../../../actions/KitbagStolenActions';
-import StolenForm from './StolenForm';
+import StolenFormX from './StolenFormX';
 import Title from '../../includes/Title';
 
 const mapStateToProps = state => ({
@@ -77,7 +77,7 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, matc
       <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
-          <StolenForm stolen={stolen} />
+          <StolenFormX stolen={stolen} />
         </div>
       </section>
     </div>
