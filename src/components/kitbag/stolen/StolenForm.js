@@ -19,24 +19,7 @@ const StolenForm = ({ stolen }) => {
   const MAXHEIGHT = 720;
 
   // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
-  const initialValues = {
-    title: '',
-    subtitle: '',
-    description: '',
-    stolenOn: '',
-    location: {
-      coordinates: ''
-    },
-    tracking: '',
-    reportDetails: [],
-    activitys: '',
-    security: '',
-    images: [],
-    recovered: false,
-    sourceId: '',
-    userId: '',
-    topImage: '/images/default.png'
-  };
+
 
   const initialReport = {
     reportedOn: '2019-01-01',
@@ -54,7 +37,7 @@ const StolenForm = ({ stolen }) => {
     values,
     setValues,
     errors
-  } = useForm(initialValues, updateStolen, validate);
+  } = useForm(stolen, updateStolen, validate);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -251,7 +234,12 @@ const StolenForm = ({ stolen }) => {
               )}
             </div>
           </div>
-          <DateInput value={values.stolenOn} label="Date Stolen" field="stolenOn" setChange={setChange} />
+          <div className="form-group row">
+            <label htmlFor="stolenOn" className="col-sm-3 col-form-label">Date Stolen</label>
+            <div className="col-sm-9">
+              <DateInput value={values.stolenOn} label="Date Stolen" field="stolenOn" setChange={setChange} />
+            </div>
+          </div>
           <div className="form-group row">
             <label htmlFor="location" className="col-sm-3 col-form-label">Location</label>
             <div className="col-sm-9">

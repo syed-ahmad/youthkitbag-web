@@ -1,46 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const DateInput = ({ value, label, field, setChange }) => {
   
-  // example date received and to be sent back = 2019-02-18T00:00:00.000Z
-  let datetime = value.split('T');
-  let date = datetime[0].split('-');
-
+  const getDate = (value) => {
+    if(!value) {
+      const today = new Date();
+      return { day: today.getDate(), month: today.getMonth() + 1, year: today.getFullYear()};
+    }
+    const date = value.split('T')[0].split('-');
+    return { day: date[2], month: date[1], year: date[0] };
+  }
+  
+  const [ actualDate, setDate ] = useState(getDate(value));
+  
   const handleDayChange = (event) => {
-    date[2] = event.target.value;
-    updateDate();
+    updateDate({...actualDate, day: event.target.value });
   }
 
   const handleMonthChange = (event) => {
-    date[1] = event.target.value;
-    updateDate();
+    updateDate({...actualDate, month: event.target.value });
   }
 
   const handleYearChange = (event) => {
-    date[0] = event.target.value;
-    updateDate();
+    updateDate({...actualDate, year: event.target.value });
   }
 
-  // Date input control does not support time element change, and therefore should always pass 0 time element back
-  const updateDate = () => {
-    setChange(field, `${date.join('-')}T00:00:00.000Z`);
+  const updateDate = (newDate) => {
+    setChange(field, `${newDate.year}-${newDate.month}-${newDate.day}T00:00:00.000Z`);
   }
+
+  useEffect(() => {
+    console.log('=>', value);
+    if (value) {
+      setDate(getDate(value));
+    }
+  }, [value, setDate])
 
   return (
-    <div className="form-group row">
-      <label htmlFor={field} className="col-sm-3 col-form-label">{label}</label>
-      <div className="col-sm-9">
-        <div className="input-group">
-          <label className="sr-only" for={`${field}-day`}>{label} Day</label>
-          <input className="form-control input-w2" id={`${field}-day`} name={`${field}-day`} type="text" pattern="[0-9]*" onChange={e => handleDayChange(e)} value={date[2]} placeholder="Day" />
-          <label className="sr-only" for={`${field}-month`}>{label} Month</label>
-          <input className="form-control input-w2" id={`${field}-month`} name={`${field}-month`} type="text" pattern="[0-9]*" onChange={e => handleMonthChange(e)} value={date[1]} placeholder="Month" />
-          <label className="sr-only" for={`${field}-day`}>{label} Year</label>
-          <input className="form-control input-w4" id={`${field}-year`} name={`${field}-year`} type="text" pattern="[0-9]*" onChange={e => handleYearChange(e)} value={date[0]} placeholder="Year" />
-        </div>
+      <div className="input-group">
+        <label className="sr-only" htmlFor={`${field}-day`}>{label} Day</label>
+        <input className="form-control input-w2" key={`${field}-day`} id={`${field}-day`} name={`${field}-day`} 
+          type="text" pattern="[0-9]*" 
+          onChange={e => handleDayChange(e)} value={actualDate.day} placeholder="Day" />
+        <label className="sr-only" htmlFor={`${field}-month`}>{label} Month</label>
+        <input className="form-control input-w2" key={`${field}-month`} id={`${field}-month`} name={`${field}-month`} 
+          type="text" pattern="[0-9]*" 
+          onChange={e => handleMonthChange(e)} value={actualDate.month} placeholder="Month" />
+        <label className="sr-only" htmlFor={`${field}-day`}>{label} Year</label>
+        <input className="form-control input-w4" key={`${field}-year`} id={`${field}-year`} name={`${field}-year`} 
+          type="text" pattern="[0-9]*" 
+          onChange={e => handleYearChange(e)} value={actualDate.year} placeholder="Year" />
       </div>
-    </div>
   );
 }
 
 export default DateInput;
+
