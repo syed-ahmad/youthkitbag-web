@@ -41,20 +41,20 @@ const DateInput = ({ value, label, field, setChange }) => {
         <div className="col-2">
           <label className="sr-only" htmlFor={`${field}-day`}>{label} Day</label>
           <input className="form-control input-w2" key={`${field}-day`} id={`${field}-day`} name={`${field}-day`} 
-            type="text" pattern="[0-9]*" 
-            onChange={e => handleDayChange(e)} value={actualDate.day} placeholder="Day" />
+            type="text" pattern="[0-9]*" value={actualDate.day} placeholder="Day" 
+            onChange={e => handleDayChange(e)} onBlur={e => handleDayChange(e)} />
         </div>
         <div className="col-2">
           <label className="sr-only" htmlFor={`${field}-month`}>{label} Month</label>
           <input className="form-control input-w2" key={`${field}-month`} id={`${field}-month`} name={`${field}-month`} 
-            type="text" pattern="[0-9]*" 
-            onChange={e => handleMonthChange(e)} value={actualDate.month} placeholder="Month" />
+            type="text" pattern="[0-9]*" value={actualDate.month} placeholder="Month" 
+            onChange={e => handleMonthChange(e)} onBlur={e => handleMonthChange(e)} />
         </div>
         <div className="col-3 col-xs-2">
           <label className="sr-only" htmlFor={`${field}-day`}>{label} Year</label>
           <input className="form-control input-w4" key={`${field}-year`} id={`${field}-year`} name={`${field}-year`} 
-            type="text" pattern="[0-9]*" 
-            onChange={e => handleYearChange(e)} value={actualDate.year} placeholder="Year" />
+            type="text" pattern="[0-9]*" value={actualDate.year} placeholder="Year" 
+            onChange={e => handleYearChange(e)} onBlur={e => handleYearChange(e)} />
         </div>
       </div>
   );
