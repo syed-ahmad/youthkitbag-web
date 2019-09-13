@@ -37,19 +37,25 @@ const DateInput = ({ value, label, field, setChange }) => {
   }, [value, setDate])
 
   return (
-      <div className="input-group">
-        <label className="sr-only" htmlFor={`${field}-day`}>{label} Day</label>
-        <input className="form-control input-w2" key={`${field}-day`} id={`${field}-day`} name={`${field}-day`} 
-          type="text" pattern="[0-9]*" 
-          onChange={e => handleDayChange(e)} value={actualDate.day} placeholder="Day" />
-        <label className="sr-only" htmlFor={`${field}-month`}>{label} Month</label>
-        <input className="form-control input-w2" key={`${field}-month`} id={`${field}-month`} name={`${field}-month`} 
-          type="text" pattern="[0-9]*" 
-          onChange={e => handleMonthChange(e)} value={actualDate.month} placeholder="Month" />
-        <label className="sr-only" htmlFor={`${field}-day`}>{label} Year</label>
-        <input className="form-control input-w4" key={`${field}-year`} id={`${field}-year`} name={`${field}-year`} 
-          type="text" pattern="[0-9]*" 
-          onChange={e => handleYearChange(e)} value={actualDate.year} placeholder="Year" />
+      <div className="form-group row mb-0">
+        <div className="col-2">
+          <label className="sr-only" htmlFor={`${field}-day`}>{label} Day</label>
+          <input className="form-control input-w2" key={`${field}-day`} id={`${field}-day`} name={`${field}-day`} 
+            type="text" pattern="[0-9]*" 
+            onChange={e => handleDayChange(e)} value={actualDate.day} placeholder="Day" />
+        </div>
+        <div className="col-2">
+          <label className="sr-only" htmlFor={`${field}-month`}>{label} Month</label>
+          <input className="form-control input-w2" key={`${field}-month`} id={`${field}-month`} name={`${field}-month`} 
+            type="text" pattern="[0-9]*" 
+            onChange={e => handleMonthChange(e)} value={actualDate.month} placeholder="Month" />
+        </div>
+        <div className="col-3 col-xs-2">
+          <label className="sr-only" htmlFor={`${field}-day`}>{label} Year</label>
+          <input className="form-control input-w4" key={`${field}-year`} id={`${field}-year`} name={`${field}-year`} 
+            type="text" pattern="[0-9]*" 
+            onChange={e => handleYearChange(e)} value={actualDate.year} placeholder="Year" />
+        </div>
       </div>
   );
 }
