@@ -6,7 +6,7 @@ import { createKitbagStolen, editKitbagStolen } from '../../../actions/KitbagSto
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './StolenFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
-import DateControl from '../../includes/DateControl';
+import DateInput from '../../includes/controls/DateInput';
 
 const StolenForm = ({ stolen }) => {
 
@@ -251,7 +251,7 @@ const StolenForm = ({ stolen }) => {
               )}
             </div>
           </div>
-          <DateControl handleChange={handleChange} value={values.stolenOn} label="Date Stolen" field="stolenOn" setChange={setChange} />
+          <DateInput value={values.stolenOn} label="Date Stolen" field="stolenOn" setChange={setChange} />
           <div className="form-group row">
             <label htmlFor="location" className="col-sm-3 col-form-label">Location</label>
             <div className="col-sm-9">
