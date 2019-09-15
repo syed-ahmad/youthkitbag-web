@@ -40,8 +40,8 @@ const KitForm = ({ kit }) => {
   const initialPurchase = {
     from: '',
     quantity: 0,
-    ondate: '2001-01-01',
-    price: 0.01
+    ondate: '',
+    price: 0.00
   };
 
   const initialInbag = {
@@ -278,7 +278,7 @@ const KitForm = ({ kit }) => {
           <div>
             {values.purchases && values.purchases.map((item, index) => (
               <div className="form-row" key={index}>
-                <div className="form-group col-sm-4">
+                <div className="form-group col-sm-3">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Purchased from</label>
                   }
@@ -290,7 +290,7 @@ const KitForm = ({ kit }) => {
                   }
                   <input className="form-control" name={`purchases[${index}].quantity`} type="number" step="1" onChange={handleChange} value={values.purchases[index].quantity} />
                 </div>
-                <div className="form-group col-sm-3">
+                <div className="form-group col-sm-4">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">On</label>
                   }

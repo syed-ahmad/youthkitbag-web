@@ -110,11 +110,11 @@ footer {
     .youthkitbag .carousel-thumbnail .mini-img {
       max-height: 90px; }
   .youthkitbag .date-input {
-    width: 10rem; }
+    width: 13rem; }
     .youthkitbag .date-input .date-input-w2 {
-      width: 3rem; }
-    .youthkitbag .date-input .date-input-w4 {
       width: 4rem; }
+    .youthkitbag .date-input .date-input-w4 {
+      width: 5rem; }
   .youthkitbag .input-group .group-control-left {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0; }
