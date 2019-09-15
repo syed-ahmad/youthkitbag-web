@@ -122,3 +122,27 @@ a.sr-only { color: #004c9d; background-color: $white; }
   }
 }
 
+.date-input {
+  width: 13rem;
+  .date-input-w2 {
+    width: 4rem;
+  }
+  .date-input-w4 {
+    width: 5rem;
+  }
+}
+
+.input-group {
+  .group-control-left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .group-control-center {
+    border-radius: 0;
+  }
+  .group-control-right {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+

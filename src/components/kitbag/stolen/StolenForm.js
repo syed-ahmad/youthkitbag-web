@@ -235,9 +235,9 @@ const StolenForm = ({ stolen }) => {
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="stolenOn" className="col-sm-3 col-form-label">Date Stolen</label>
+            <label htmlFor="stolenOn" className="col-sm-3 col-form-label">Date Stolen (dd-mm-yyyy)</label>
             <div className="col-sm-9">
-              <DateInput value={values.stolenOn} label="Date Stolen" field="stolenOn" setChange={setChange} />
+              <DateInput value={values.stolenOn} field="stolenOn" setChange={setChange} />
             </div>
           </div>
           <div className="form-group row">

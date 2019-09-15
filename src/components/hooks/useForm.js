@@ -21,10 +21,16 @@ const useForm = (initiaValues, callback, validate) => {
 
   const getNameValue = (eventTarget) => {
     let { name, value, checked, type } = eventTarget;
+    value = (type === 'checkbox' ? checked : value);
+
     if (name.indexOf('[') < 0) {
-      return { name, value: (type === 'checkbox' ? checked : value) };
+      return { name, value };
     }
-    
+
+    return getArrayNameValue(name, value);
+  }
+
+  const getArrayNameValue = (name, value) => {
     const arrayName = name.substring(0, name.indexOf('['));
     const index = +name.substring(name.indexOf('[') + 1, name.indexOf(']'));
     const propertyName = name.substring(name.indexOf(']') + 2);
@@ -40,7 +46,13 @@ const useForm = (initiaValues, callback, validate) => {
   };
 
   const setChange = (name, value) => {
-    setValues(values => ({ ...values, [name]: value }));
+    if (name.indexOf('[') < 0) {
+      setValues(values => ({ ...values, [name]: value }));
+      return;
+    }
+
+    const array = getArrayNameValue(name, value);
+    setValues(values => ({ ...values, [array.name]: array.value }));
   };
 
   const addArrayItem = (arrayName, newItem) => {
