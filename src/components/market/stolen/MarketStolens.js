@@ -14,7 +14,7 @@ class MarketStolens extends React.Component {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
-    return `Found items in market for stolen (${this.props.pagination.totalItems})`;
+    return `Stolen kit (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {

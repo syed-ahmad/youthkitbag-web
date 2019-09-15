@@ -15,7 +15,7 @@ class Trades extends React.Component {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
-    return `Found items in kitbag for trade (${this.props.pagination.totalItems})`;
+    return `Your kit for trade (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {

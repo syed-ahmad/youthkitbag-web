@@ -14,7 +14,7 @@ class MarketWanteds extends React.Component {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
-    return `Market: Wanted items (${this.props.pagination.totalItems})`;
+    return `Wanted kit (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {

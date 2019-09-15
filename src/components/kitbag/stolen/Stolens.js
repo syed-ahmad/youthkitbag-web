@@ -15,7 +15,7 @@ class Stolens extends React.Component {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
-    return `Found items in kitbag for stolen (${this.props.pagination.totalItems})`;
+    return `Your stolen kit (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {

@@ -14,7 +14,7 @@ class MarketTrades extends React.Component {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
-    return `Found items in market for trade (${this.props.pagination.totalItems})`;
+    return `Kit for trade (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {

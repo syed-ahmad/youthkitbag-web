@@ -15,7 +15,7 @@ class KitBag extends React.Component {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
-    return `Found items in kitbag (${this.props.pagination.totalItems})`;
+    return `Your kit (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {
