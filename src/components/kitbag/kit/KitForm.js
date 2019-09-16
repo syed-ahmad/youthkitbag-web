@@ -7,6 +7,8 @@ import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './KitFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 import DateForm from '../../includes/forms/DateForm';
+import TextForm from '../../includes/forms/TextForm';
+import TextAreaForm from '../../includes/forms/TextAreaForm';
 
 const KitForm = ({ kit }) => {
 
@@ -230,34 +232,10 @@ const KitForm = ({ kit }) => {
           </div>
         </div>
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-        <form className="mb-3" onSubmit={handleSubmit}>
-          <div className="form-group row">
-            <label htmlFor="title" className="col-sm-3 col-form-label">Title</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.title && 'is-invalid'}`} name="title" type="text" onChange={handleChange} value={values.title} aria-describedby="title" />
-              {errors.title && (
-                <div className="invalid-feedback">{errors.title}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="subtitle" className="col-sm-3 col-form-label">Subtitle</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.subtitle && 'is-invalid'}`} name="subtitle" type="text" onChange={handleChange} value={values.subtitle} aria-describedby="subtitle" />
-              {errors.subtitle && (
-                <div className="invalid-feedback">{errors.subtitle}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="description" className="col-sm-3 col-form-label">Description</label>
-            <div className="col-sm-9">
-              <textarea className={`form-control ${errors.description && 'is-invalid'}`} name="description" rows="5" onChange={handleChange} value={values.description} aria-describedby="description"></textarea>
-              {errors.description && (
-                <div className="invalid-feedback">{errors.description}</div>
-              )}
-            </div>
-          </div>
+          <form className="mb-3" onSubmit={handleSubmit}>
+            <TextForm cols="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
+            <TextForm cols="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
+            <TextAreaForm cols="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
           <div className="form-group row">
             <label htmlFor="status" className="col-sm-3 col-form-label">Status</label>
             <div className="col-sm-9">
