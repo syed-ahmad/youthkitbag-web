@@ -208,94 +208,68 @@ const StolenForm = ({ stolen }) => {
           </div>
         </div>
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-        <form className="mb-3" onSubmit={handleSubmit}>
-          <TextForm cols="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
-          <TextForm cols="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
-          <TextAreaForm cols="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
-          <DateForm cols="3-9" label="Date Stolen" value={values.stolenOn} field="stolenOn" setChange={setChange} errors={errors} />
-          <TextForm cols="3-9" label="Location" value={values.location} field="location" handleChange={handleChange} error={errors.location} />
-          <TextForm cols="3-9" label="Tracking" value={values.tracking} field="tracking" handleChange={handleChange} error={errors.tracking} />
-          <hr />
-          <div>
-            {values.reportDetails && values.reportDetails.map((item, index) => (
-              <div className="form-row" key={index}>
-                <div className="form-group col-sm-5">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Reported On</label>
-                  }
-                  <input className="form-control" name={`reportDetails[${index}].reportedOn`} type="text" onChange={handleChange} value={values.reportDetails[index].reportedOn} />
+          <form className="mb-3" onSubmit={handleSubmit}>
+            <TextForm cols="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
+            <TextForm cols="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
+            <TextAreaForm cols="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
+            <DateForm cols="3-9" label="Date Stolen" value={values.stolenOn} field="stolenOn" setChange={setChange} errors={errors} />
+            <TextForm cols="3-9" label="Location" value={values.location} field="location" handleChange={handleChange} error={errors.location} />
+            <TextForm cols="3-9" label="Tracking" value={values.tracking} field="tracking" handleChange={handleChange} error={errors.tracking} />
+            <hr />
+            <div>
+              {values.reportDetails && values.reportDetails.map((item, index) => (
+                <div className="form-row" key={index}>
+                  <DateForm cols="a4" value={values.reportDetails[index].reportedOn} label="Reported On" field={`reportDetails[${index}].reportedOn`} setChange={setChange} index={index} />
+                  <TextForm cols="a6" value={values.reportDetails[index].details} label="Details" field={`reportDetails[${index}].details`} handleChange={handleChange} index={index} />
+                  <div className="form-group col-sm-1">
+                    { (index === 0) &&
+                      <label className="d-none d-sm-block">Rem</label>
+                    }
+                    <button className="btn btn-danger" type="button" title="Remove Report" onClick={() => removeArrayItem('reportDetails', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+                  </div>
                 </div>
-                <div className="form-group col-sm-6">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Details</label>
-                  }
-                  <input className="form-control" name={`reportDetails[${index}].details`} type="text" onChange={handleChange} value={values.reportDetails[index].details} />
+              ))}
+              <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('reportDetails', [initialReport])}>
+                Add a new report
+              </button>
+            </div>
+            <hr />
+            <TextForm cols="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
+            <TextForm cols="3-9" label="Security" value={values.security} field="security" handleChange={handleChange} error={errors.security} />
+            <div className="form-group row">
+              <label className="col-sm-3" htmlFor="recovered">Recovered</label>
+              <div className="col-1 col-sm-1">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" name="recovered" onChange={handleChange} checked={values.recovered} aria-describedby="recovered" />
                 </div>
-                <div className="form-group col-sm-1">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Rem</label>
-                  }
-                  <button className="btn btn-danger" type="button" title="Remove Report" onClick={() => removeArrayItem('reportDetails', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+              </div>
+              <div className="col-11 col-sm-8">
+                <div className="form-check">
+                  <small id="recoveredhelp" className="form-text text-muted form-control-help">This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search.</small>
                 </div>
               </div>
-            ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('reportDetails', [initialReport])}>
-              Add a new report
-            </button>
-          </div>
-          <hr />
-          <div className="form-group row">
-            <label htmlFor="activitys" className="col-sm-3 col-form-label">Activities</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.activitys && 'is-invalid'}`} name="activitys" type="text" onChange={handleChange} value={values.activitys} aria-describedby="activitys" />
-              {errors.activitys && (
-                <div className="invalid-feedback">{errors.activitys}</div>
-              )}
             </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="security" className="col-sm-3 col-form-label">Security</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.security && 'is-invalid'}`} name="security" type="text" onChange={handleChange} value={values.security} aria-describedby="security" />
-              {errors.security && (
-                <div className="invalid-feedback">{errors.security}</div>
-              )}
+            <hr />
+            <div>
+              {values.images && values.images.map((item, index) => (
+                <div key={`${item._id}-${index}`}>
+                  <input name={`images[${index}]._id`} type="hidden" value={values.images[index]._id} />
+                  <input name={`images[${index}].image`} type="hidden" value={values.images[index].image} />
+                  <input name={`images[${index}].imageUrl`} type="hidden" value={values.images[index].imageUrl} />
+                  <input name={`images[${index}].state`} type="hidden" value={values.images[index].state} />
+                  <input name={`images[${index}].photoId`} type="hidden" value={values.images[index].photoId} />
+                </div>
+              ))}
+              {values.deletedImages && values.deletedImages.map((item, index) => (
+                <div key={`${item._id}-${index}`}>
+                  <input name={`deletedImages[${index}]._id`} type="hidden" value={values.deletedImages[index]._id} />
+                </div>
+              ))}
             </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-3" htmlFor="recovered">Recovered</label>
-            <div className="col-1 col-sm-1">
-              <div className="form-check">
-                <input className="form-check-input" type="checkbox" name="recovered" onChange={handleChange} checked={values.recovered} aria-describedby="recovered" />
-              </div>
+            <div>
+              <button className="btn btn-primary" type="submit">Save</button>
+              <Link className="btn btn-link" to="/kitbag/stolens">Cancel</Link>
             </div>
-            <div className="col-11 col-sm-8">
-              <div className="form-check">
-                <small id="recoveredhelp" className="form-text text-muted form-control-help">This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search.</small>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div>
-            {values.images && values.images.map((item, index) => (
-              <div key={`${item._id}-${index}`}>
-                <input name={`images[${index}]._id`} type="hidden" value={values.images[index]._id} />
-                <input name={`images[${index}].image`} type="hidden" value={values.images[index].image} />
-                <input name={`images[${index}].imageUrl`} type="hidden" value={values.images[index].imageUrl} />
-                <input name={`images[${index}].state`} type="hidden" value={values.images[index].state} />
-                <input name={`images[${index}].photoId`} type="hidden" value={values.images[index].photoId} />
-              </div>
-            ))}
-            {values.deletedImages && values.deletedImages.map((item, index) => (
-              <div key={`${item._id}-${index}`}>
-                <input name={`deletedImages[${index}]._id`} type="hidden" value={values.deletedImages[index]._id} />
-              </div>
-            ))}
-          </div>
-          <div>
-            <button className="btn btn-primary" type="submit">Save</button>
-            <Link className="btn btn-link" to="/kitbag/stolens">Cancel</Link>
-          </div>
           </form>
         </div>
       </div>

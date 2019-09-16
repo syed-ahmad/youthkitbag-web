@@ -12,8 +12,12 @@ const TextForm = ({ cols, label, value, field, handleChange, index, error }) => 
           </div>
         </div>
       }
-      {(cols === 'a4') &&
-        <div className="form-group col-sm-4">
+      {(cols === 'a6') &&
+        <div className="form-group col-sm-6">
+          { (index === 0) &&
+            <label className="d-none d-sm-block">{label}</label>
+          }
+          <TextInput value={value} field={field} handleChange={handleChange} error={error} />
         </div>
       }
     </React.Fragment>
