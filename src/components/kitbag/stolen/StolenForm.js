@@ -6,7 +6,8 @@ import { createKitbagStolen, editKitbagStolen } from '../../../actions/KitbagSto
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './StolenFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
-import DateInput from '../../includes/controls/DateInput';
+import DateForm from '../../includes/forms/DateForm';
+import TextAreaForm from '../../includes/forms/TextAreaForm';
 
 const StolenForm = ({ stolen }) => {
 
@@ -225,21 +226,8 @@ const StolenForm = ({ stolen }) => {
               )}
             </div>
           </div>
-          <div className="form-group row">
-            <label htmlFor="description" className="col-sm-3 col-form-label">Description</label>
-            <div className="col-sm-9">
-              <textarea className={`form-control ${errors.description && 'is-invalid'}`} name="description" rows="5" onChange={handleChange} value={values.description} aria-describedby="description"></textarea>
-              {errors.description && (
-                <div className="invalid-feedback">{errors.description}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-          <label htmlFor="stolenOn" className="col-sm-3 col-form-label">Date Stolen</label>
-            <div className="col-sm-9">
-              <DateInput value={values.stolenOn} field="stolenOn" setChange={setChange} />
-            </div>
-          </div>
+          <TextAreaForm cols="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} errors={errors} />
+          <DateForm cols="3-9" label="Date Stolen" value={values.stolenOn} field="stolenOn" setChange={setChange} errors={errors} />
           <div className="form-group row">
             <label htmlFor="location" className="col-sm-3 col-form-label">Location</label>
             <div className="col-sm-9">

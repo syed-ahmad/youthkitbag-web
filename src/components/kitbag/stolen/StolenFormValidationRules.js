@@ -9,9 +9,9 @@ export default function validate(values) {
   //   errors.subtitle = 'Subtitle is required';
   // }
 
-  // if (!values.description) {
-  //   errors.description = 'Description is required';
-  // }
+  if (!values.description) {
+    errors.description = 'Description is required';
+  }
 
   // if (!values.security) {
   //   errors.security = 'Security is required';

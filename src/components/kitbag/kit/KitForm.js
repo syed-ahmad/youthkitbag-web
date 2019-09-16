@@ -6,7 +6,7 @@ import { createKitbagKit, editKitbagKit } from '../../../actions/KitbagKitAction
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './KitFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
-import DateInput from '../../includes/controls/DateInput';
+import DateForm from '../../includes/forms/DateForm';
 
 const KitForm = ({ kit }) => {
 
@@ -290,12 +290,7 @@ const KitForm = ({ kit }) => {
                   }
                   <input className="form-control" name={`purchases[${index}].quantity`} type="number" step="1" onChange={handleChange} value={values.purchases[index].quantity} />
                 </div>
-                <div className="form-group col-sm-4">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">On</label>
-                  }
-                  <DateInput value={values.purchases[index].ondate} label="Date Stolen" field={`purchases[${index}].ondate`} setChange={setChange} />
-                </div>
+                <DateForm cols="a4" value={values.purchases[index].ondate} label="On" field={`purchases[${index}].ondate`} setChange={setChange} index={index} />
                 <div className="form-group col-sm-2">
                   { (index === 0) &&
                     <label className="d-none d-sm-block">Price</label>
