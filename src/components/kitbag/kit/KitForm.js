@@ -9,6 +9,7 @@ import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 import DateForm from '../../includes/forms/DateForm';
 import TextForm from '../../includes/forms/TextForm';
 import TextAreaForm from '../../includes/forms/TextAreaForm';
+import SelectForm from '../../includes/forms/SelectForm';
 
 const KitForm = ({ kit }) => {
 
@@ -212,6 +213,8 @@ const KitForm = ({ kit }) => {
     }
   }
 
+  const statusItems = ["Owned", "Trade", "Sold", "Stolen", "Wanted", "Recycled", "Trashed", "Given Away", "Donated", "Other"];
+
   return (
       <div className="row">
         <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
@@ -236,22 +239,7 @@ const KitForm = ({ kit }) => {
             <TextForm cols="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
             <TextForm cols="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
             <TextAreaForm cols="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
-          <div className="form-group row">
-            <label htmlFor="status" className="col-sm-3 col-form-label">Status</label>
-            <div className="col-sm-9">
-              <select className="custom-select" name="status" onChange={handleChange} onBlur={handleChange} value={values.status} aria-describedby="status">
-                <option value="owned">Owned</option>
-                <option value="trade">Trade</option>
-                <option value="sold">Sold</option>
-                <option value="stolen">Stolen</option>
-                <option value="wanted">Wanted</option>
-                <option value="recycled">Recycled</option>
-                <option value="trashed">Trashed</option>
-                <option value="donated">Donated</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-          </div>
+            <SelectForm cols="3-9" label="Status" value={values.status} field="status" handleChange={handleChange} error={errors.status} items={statusItems} />
           <hr />
           <div>
             {values.purchases && values.purchases.map((item, index) => (

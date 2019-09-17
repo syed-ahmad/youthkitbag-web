@@ -9,6 +9,7 @@ import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 import DateForm from '../../includes/forms/DateForm';
 import TextForm from '../../includes/forms/TextForm';
 import TextAreaForm from '../../includes/forms/TextAreaForm';
+import CheckboxForm from '../../includes/forms/CheckboxForm';
 
 const StolenForm = ({ stolen }) => {
 
@@ -236,19 +237,8 @@ const StolenForm = ({ stolen }) => {
             <hr />
             <TextForm cols="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
             <TextForm cols="3-9" label="Security" value={values.security} field="security" handleChange={handleChange} error={errors.security} />
-            <div className="form-group row">
-              <label className="col-sm-3" htmlFor="recovered">Recovered</label>
-              <div className="col-1 col-sm-1">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" name="recovered" onChange={handleChange} checked={values.recovered} aria-describedby="recovered" />
-                </div>
-              </div>
-              <div className="col-11 col-sm-8">
-                <div className="form-check">
-                  <small id="recoveredhelp" className="form-text text-muted form-control-help">This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search.</small>
-                </div>
-              </div>
-            </div>
+            <CheckboxForm cols="3-1-8" label="Recovered" value={values.recovered} field="recovered" handleChange={handleChange} error={errors.recovered} 
+              help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search." />
             <hr />
             <div>
               {values.images && values.images.map((item, index) => (
