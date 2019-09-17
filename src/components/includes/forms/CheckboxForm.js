@@ -23,4 +23,4 @@ const CheckboxForm = ({cols, label, value, field, handleChange, index, error, he
   )
 }
 
-export default CheckboxForm;
+export {CheckboxForm};

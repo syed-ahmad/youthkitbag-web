@@ -6,11 +6,7 @@ import { createKitbagStolen, editKitbagStolen } from '../../../actions/KitbagSto
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './StolenFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
-import DateForm from '../../includes/forms/DateForm';
-import TextForm from '../../includes/forms/TextForm';
-import TextAreaForm from '../../includes/forms/TextAreaForm';
-import CheckboxForm from '../../includes/forms/CheckboxForm';
-import RemoveButtonForm from '../../includes/forms/RemoveButtonForm';
+import { DateForm, TextForm, TextAreaForm, CheckboxForm, RemoveButtonForm } from '../../includes/forms';
 
 const StolenForm = ({ stolen }) => {
 

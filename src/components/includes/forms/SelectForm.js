@@ -16,4 +16,4 @@ const SelectForm = ({cols, label, value, field, handleChange, index, error, item
   )
 }
 
-export default SelectForm;
+export {SelectForm};

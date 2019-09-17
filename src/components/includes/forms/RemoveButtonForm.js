@@ -16,4 +16,4 @@ const RemoveButtonForm = ({ cols, title, onclick, index }) => {
   )
 }
 
-export default RemoveButtonForm;
+export {RemoveButtonForm};

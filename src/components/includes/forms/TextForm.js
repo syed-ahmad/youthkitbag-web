@@ -24,4 +24,4 @@ const TextForm = ({ cols, label, value, field, handleChange, index, error }) => 
   );
 }
 
-export default TextForm;
+export {TextForm};

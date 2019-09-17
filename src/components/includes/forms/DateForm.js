@@ -24,4 +24,4 @@ const DateForm = ({ cols, label, value, field, setChange, index }) => {
   );
 }
 
-export default DateForm;
+export {DateForm};

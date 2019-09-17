@@ -20,4 +20,4 @@ const TextAreaForm = ({ cols, label, value, field, handleChange, index, error })
   );
 }
 
-export default TextAreaForm;
+export {TextAreaForm};

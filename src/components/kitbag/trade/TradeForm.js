@@ -6,9 +6,7 @@ import { createKitbagTrade, editKitbagTrade } from '../../../actions/KitbagTrade
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './TradeFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
-import DateForm from '../../includes/forms/DateForm';
-import TextForm from '../../includes/forms/TextForm';
-import TextAreaForm from '../../includes/forms/TextAreaForm';
+import { DateForm, TextForm, TextAreaForm } from '../../includes/forms';
 
 const TradeForm = ({ trade }) => {
 

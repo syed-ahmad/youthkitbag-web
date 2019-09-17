@@ -6,10 +6,7 @@ import { createKitbagKit, editKitbagKit } from '../../../actions/KitbagKitAction
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './KitFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
-import DateForm from '../../includes/forms/DateForm';
-import TextForm from '../../includes/forms/TextForm';
-import TextAreaForm from '../../includes/forms/TextAreaForm';
-import SelectForm from '../../includes/forms/SelectForm';
+import { DateForm, TextForm, TextAreaForm, SelectForm } from '../../includes/forms';
 
 const KitForm = ({ kit }) => {
 
