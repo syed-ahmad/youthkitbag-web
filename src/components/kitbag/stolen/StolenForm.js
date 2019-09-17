@@ -10,6 +10,7 @@ import DateForm from '../../includes/forms/DateForm';
 import TextForm from '../../includes/forms/TextForm';
 import TextAreaForm from '../../includes/forms/TextAreaForm';
 import CheckboxForm from '../../includes/forms/CheckboxForm';
+import RemoveButtonForm from '../../includes/forms/RemoveButtonForm';
 
 const StolenForm = ({ stolen }) => {
 
@@ -222,12 +223,7 @@ const StolenForm = ({ stolen }) => {
                 <div className="form-row" key={index}>
                   <DateForm cols="a4" value={values.reportDetails[index].reportedOn} label="Reported On" field={`reportDetails[${index}].reportedOn`} setChange={setChange} index={index} />
                   <TextForm cols="a6" value={values.reportDetails[index].details} label="Details" field={`reportDetails[${index}].details`} handleChange={handleChange} index={index} />
-                  <div className="form-group col-sm-1">
-                    { (index === 0) &&
-                      <label className="d-none d-sm-block">Rem</label>
-                    }
-                    <button className="btn btn-danger" type="button" title="Remove Report" onClick={() => removeArrayItem('reportDetails', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
-                  </div>
+                  <RemoveButtonForm cols="a1" title="Remove Report" onclick={() => removeArrayItem('reportDetails', index)} index={index} />
                 </div>
               ))}
               <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('reportDetails', [initialReport])}>
