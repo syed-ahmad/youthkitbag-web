@@ -1,7 +1,7 @@
 import React from 'react';
 import TextInput from '../controls/TextInput';
 
-const TextForm = ({ colFormat, label, type, value, field, step, min, max, handleChange, index, error }) => {
+const TextForm = ({ colFormat, label, type, value, field, step, min, max, readOnly, handleChange, index, error }) => {
   const columns = colFormat.split('-');
   return (
     <React.Fragment>
@@ -9,7 +9,7 @@ const TextForm = ({ colFormat, label, type, value, field, step, min, max, handle
           <div className="form-group row">
           <label htmlFor="{field}" className="col-sm-3 col-form-label">{label}</label>
           <div className="col-sm-9">
-            <TextInput type={type} value={value} field={field} step={step} min={min} max={max} handleChange={handleChange} error={error} />
+            <TextInput type={type} value={value} field={field} step={step} min={min} max={max} readOnly={readOnly} handleChange={handleChange} error={error} />
           </div>
         </div>
       }
@@ -18,7 +18,7 @@ const TextForm = ({ colFormat, label, type, value, field, step, min, max, handle
           { (index === 0) &&
             <label className="d-none d-sm-block">{label}</label>
           }
-          <TextInput type={type} value={value} field={field} step={step} min={min} max={max} handleChange={handleChange} error={error} />
+          <TextInput type={type} value={value} field={field} step={step} min={min} max={max} readOnly={readOnly} handleChange={handleChange} error={error} />
         </div>
       }
     </React.Fragment>

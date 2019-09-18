@@ -172,13 +172,15 @@ const GroupForm = ({ group }) => {
     if (group._id) {
       dispatch(editGroup(group._id, group));
     } else {
+      console.log('CREATE');
       dispatch(createGroup(group));
     }
   }
 
-  // function isReadOnly() {
-  //   return (!values._id || values.appAdmin) ? false : true;
-  // }
+  function isReadOnly() {
+    const readonly = (!values._id || values.appAdmin) ? false : true;
+    return readonly;
+  }
 
   return (
     <div className="row">
@@ -201,7 +203,7 @@ const GroupForm = ({ group }) => {
       </div>
       <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
-          <TextForm colFormat="3-9" label="Name" value={values.name} field="name" handleChange={handleChange} error={errors.name} />
+          <TextForm colFormat="3-9" label="Name" value={values.name} field="name" readOnly={isReadOnly()} handleChange={handleChange} error={errors.name} />
           <TextForm colFormat="3-9" label="Tagline" value={values.tagline} field="tagline" handleChange={handleChange} error={errors.tagline} />
           <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
           <TextForm colFormat="3-9" type="email" label="Email" value={values.email} field="email" handleChange={handleChange} error={errors.email} />
