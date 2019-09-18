@@ -75,10 +75,12 @@ const GroupForm = ({ group }) => {
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
           { images[i].state !== 'D' && 
             <React.Fragment>
-              <span className="icons-top-left">
-                <span className="icon-tray-item fas fa-trash-alt img-delete" onClick={deleteImage.bind(null, images[i]._id)}></span>
-                <span className="icon-tray-item fas fa-star img-primary" onClick={setPrimaryImage.bind(null, images[i]._id)}></span>
-              </span>
+              {!isReadOnly &&
+                <span className="icons-top-left">
+                  <span className="icon-tray-item fas fa-trash-alt img-delete" onClick={deleteImage.bind(null, images[i]._id)}></span>
+                  <span className="icon-tray-item fas fa-star img-primary" onClick={setPrimaryImage.bind(null, images[i]._id)}></span>
+                </span>
+              }
               <img className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, images[i].imageUrl)} />
             </React.Fragment>
           }
@@ -191,26 +193,28 @@ const GroupForm = ({ group }) => {
         <div>
           {renderSecondaryImages()}
         </div>
-        <div className="form-group row">
-          <label className="col-sm-3 col-form-label">Images</label>
-          <div className="col-sm-9">
-            <div className="custom-file">
-              <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
-              <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
+        {!isReadOnly() &&
+          <div className="form-group row">
+            <label className="col-sm-3 col-form-label">Images</label>
+            <div className="col-sm-9">
+              <div className="custom-file">
+                <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
+                <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
+              </div>
             </div>
           </div>
-        </div>
+        }
       </div>
       <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
           <TextForm colFormat="3-9" label="Name" value={values.name} field="name" readOnly={isReadOnly()} handleChange={handleChange} error={errors.name} />
-          <TextForm colFormat="3-9" label="Tagline" value={values.tagline} field="tagline" handleChange={handleChange} error={errors.tagline} />
-          <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
-          <TextForm colFormat="3-9" type="email" label="Email" value={values.email} field="email" handleChange={handleChange} error={errors.email} />
-          <TextForm colFormat="3-9" label="Website" value={values.website} field="website" handleChange={handleChange} error={errors.website} />
-          <TextForm colFormat="3-9" label="Location" value={values.location} field="location" handleChange={handleChange} error={errors.location} />
+          <TextForm colFormat="3-9" label="Tagline" value={values.tagline} field="tagline" readOnly={isReadOnly()} handleChange={handleChange} error={errors.tagline} />
+          <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" readOnly={isReadOnly()} handleChange={handleChange} error={errors.description} />
+          <TextForm colFormat="3-9" type="email" label="Email" value={values.email} field="email" readOnly={isReadOnly()} handleChange={handleChange} error={errors.email} />
+          <TextForm colFormat="3-9" label="Website" value={values.website} field="website" readOnly={isReadOnly()} handleChange={handleChange} error={errors.website} />
+          <TextForm colFormat="3-9" label="Location" value={values.location} field="location" readOnly={isReadOnly()} handleChange={handleChange} error={errors.location} />
           <hr />
-          <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
+          <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" readOnly={isReadOnly()} handleChange={handleChange} error={errors.activitys} /> 
           <hr />
           <div>
             {values.images && values.images.map((item, index) => (
