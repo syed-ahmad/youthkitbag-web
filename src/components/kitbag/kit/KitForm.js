@@ -6,49 +6,15 @@ import { createKitbagKit, editKitbagKit } from '../../../actions/KitbagKitAction
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './KitFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
-import { DateForm, TextForm, TextAreaForm, SelectForm } from '../../includes/forms';
+import { DateForm, TextForm, TextAreaForm, SelectForm, AddArrayButtonForm, RemoveArrayButtonForm, CheckboxForm } from '../../includes/forms';
 
 const KitForm = ({ kit }) => {
 
-  // ?? still using redux
-  const dispatch = useDispatch();
-  const newImages = useSelector(state => state.kitbag.kit.newImages);
+  const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.00 };
+  const initialInbag = { location: '', condition: 'used', quantity: 0 };
 
-  // ?? using hard coded constants for image sizes - should this be in image helper
-  const MAXWIDTH = 720;
-  const MAXHEIGHT = 720;
-
-  // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
-  const initialValues = {
-    title: '',
-    subtitle: '',
-    description: '',
-    status: 'owned',
-    purchases: [],
-    inbag: [],
-    warning: 0,
-    activitys: '',
-    tags: '',
-    security: '',
-    active: 'on',
-    images: [],
-    topImage: '/images/default.png',
-    imagesToUpload: 0
-  };
-
-  // ?? default settings for the block array items
-  const initialPurchase = {
-    from: '',
-    quantity: 0,
-    ondate: '',
-    price: 0.00
-  };
-
-  const initialInbag = {
-    location: '',
-    condition: 'used',
-    quantity: 0
-  };
+  const statusItems = ["Owned", "Trade", "Sold", "Stolen", "Wanted", "Recycled", "Trashed", "Given Away", "Donated", "Other"];
+  const conditionItems = ["Used", "New", "Almost New", "Other"];
 
   const {
     setChange,
@@ -59,7 +25,14 @@ const KitForm = ({ kit }) => {
     values,
     setValues,
     errors
-  } = useForm(initialValues, updateKit, validate);
+  } = useForm(kit, updateKit, validate);
+
+  const dispatch = useDispatch();
+  const newImages = useSelector(state => state.kitbag.kit.newImages);
+
+  // ?? using hard coded constants for image sizes - should this be in image helper
+  const MAXWIDTH = 720;
+  const MAXHEIGHT = 720;
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -210,8 +183,6 @@ const KitForm = ({ kit }) => {
     }
   }
 
-  const statusItems = ["Owned", "Trade", "Sold", "Stolen", "Wanted", "Recycled", "Trashed", "Given Away", "Donated", "Other"];
-
   return (
       <div className="row">
         <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
@@ -233,137 +204,45 @@ const KitForm = ({ kit }) => {
         </div>
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
           <form className="mb-3" onSubmit={handleSubmit}>
-            <TextForm cols="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
-            <TextForm cols="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
-            <TextAreaForm cols="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
-            <SelectForm cols="3-9" label="Status" value={values.status} field="status" handleChange={handleChange} error={errors.status} items={statusItems} />
+            <TextForm colFormat="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
+            <TextForm colFormat="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
+            <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
+            <SelectForm colFormat="3-9" label="Status" value={values.status} field="status" handleChange={handleChange} error={errors.status} items={statusItems} />
           <hr />
           <div>
             {values.purchases && values.purchases.map((item, index) => (
               <div className="form-row" key={index}>
-                <div className="form-group col-sm-3">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Purchased from</label>
-                  }
-                  <input className="form-control" name={`purchases[${index}].from`} type="text" onChange={handleChange} value={values.purchases[index].from} />
-                </div>
-                <div className="form-group col-sm-2">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Quantity</label>
-                  }
-                  <input className="form-control" name={`purchases[${index}].quantity`} type="number" step="1" onChange={handleChange} value={values.purchases[index].quantity} />
-                </div>
-                <DateForm cols="a4" value={values.purchases[index].ondate} label="On" field={`purchases[${index}].ondate`} setChange={setChange} index={index} />
-                <div className="form-group col-sm-2">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Price</label>
-                  }
-                  <input className="form-control" name={`purchases[${index}].price`} type="number" step=".01" onChange={handleChange} value={values.purchases[index].price} />
-                </div>
-                <div className="form-group col-sm-1">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Rem</label>
-                  }
-                  <button className="btn btn-danger" type="button" title="Remove Purchase" onClick={() => removeArrayItem('purchases', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
-                </div>
+                <TextForm colFormat="a-3" value={values.purchases[index].from} label="Purchased from" field={`purchases[${index}].from`} handleChange={handleChange} index={index} />
+                <TextForm colFormat="a-2" type="number" value={values.purchases[index].quantity} label="Quantity" field={`purchases[${index}].quantity`} step="1" min="0" max="9999" handleChange={handleChange} index={index} />
+                <DateForm colFormat="a-4" value={values.purchases[index].ondate} label="On" field={`purchases[${index}].ondate`} setChange={setChange} index={index} />
+                <TextForm colFormat="a-2" type="number" value={values.purchases[index].price} label="Price" field={`purchases[${index}].price`} step=".01" min="0.00" max="99999.99"  handleChange={handleChange} index={index} />
+                <RemoveArrayButtonForm colFormat="a-1" title="Remove Purchase" onClick={() => removeArrayItem('purchases', index)} index={index} />
               </div>
             ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('purchases', [initialPurchase])}>
-              Add a new purchase
-            </button>
+            <AddArrayButtonForm label="Add a new purchase" onClick={() => addArrayItem('purchases', [initialPurchase])} />
           </div>
           <hr />
           <div>
             {values.inbag && values.inbag.map((item, index) => (
               <div className="form-row" key={index}>
-                <div className="form-group col-sm-4">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Storage location</label>
-                  }
-                  <input className="form-control" name={`inbag[${index}].location`} type="text" onChange={handleChange} value={values.inbag[index].location} />
-                </div>
-                <div className="form-group col-sm-4">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Condition</label>
-                  }
-                  <select className="custom-select" name={`inbag[${index}].condition`} onChange={handleChange} onBlur={handleChange} value={values.inbag[index].condition}>
-                    <option value="used" >Used</option>
-                    <option value="new" >New</option>
-                    <option value="almostnew" >Almost New</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div className="form-group col-sm-3">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Quantity</label>
-                  }
-                  <input className="form-control" name={`inbag[${index}].quantity`} type="number" onChange={handleChange} value={values.inbag[index].quantity} />
-                </div>
-                <div className="form-group col-sm-1">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Rem</label>
-                  }
-                  <button className="btn btn-danger" type="button" title="Remove Inbag" onClick={() => removeArrayItem('inbag', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
-                </div>
+                <TextForm colFormat="a-4" value={values.inbag[index].location} label="Storage location" field={`inbag[${index}].location`} handleChange={handleChange} index={index} />
+                <SelectForm colFormat="a-4" label="Condition" value={values.inbag[index].condition} field={`inbag[${index}].condition`} handleChange={handleChange} items={conditionItems} index={index} />
+                <TextForm colFormat="a-3" type="number" value={values.inbag[index].quantity} label="Quantity" field={`inbag[${index}].quantity`} step="1" min="0" max="9999" handleChange={handleChange} index={index} />
+                <RemoveArrayButtonForm colFormat="a-1" title="Remove Inbag" onClick={() => removeArrayItem('inbag', index)} index={index} />
               </div>
             ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('inbag', [initialInbag])}>
-              Add a new storage location
-            </button>
+            <AddArrayButtonForm label="Add a new storage location" onClick={() => addArrayItem('inbag', [initialInbag])} />
           </div>
           <hr />
-          <div className="form-group row">
-            <label htmlFor="warning" className="col-sm-3 col-form-label">Warning Level</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.warning && 'is-invalid'}`} name="warning" type="number" step="1" onChange={handleChange} value={values.warning} aria-describedby="warning" />
-              {errors.warning && (
-                <div className="invalid-feedback">{errors.warning}</div>
-              )}
-            </div>
-          </div>
+          <TextForm colFormat="3-9" type="number" value={values.warning} label="Warning Level" field="warning" step="1" min="0" max="9999" handleChange={handleChange} error={errors.warning} />
           <hr />
           <h3 className="h6">Categorise/Security (all optional)</h3>
           <small id="categoryhelp" className="form-text text-muted form-control-help mb-3">You can add activity names, personal tags and security numbers to your kit. Enter names separate by commas. (e.g. football, cycling)</small>
-          <div className="form-group row">
-            <label htmlFor="activitys" className="col-sm-3 col-form-label">Activities</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.activitys && 'is-invalid'}`} name="activitys" type="text" onChange={handleChange} value={values.activitys} aria-describedby="activitys" />
-              {errors.activitys && (
-                <div className="invalid-feedback">{errors.activitys}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="tags" className="col-sm-3 col-form-label">Tags</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.tags && 'is-invalid'}`} name="tags" type="text" onChange={handleChange} value={values.tags} aria-describedby="tags" />
-              {errors.tags && (
-                <div className="invalid-feedback">{errors.tags}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="security" className="col-sm-3 col-form-label">Security</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.security && 'is-invalid'}`} name="security" type="text" onChange={handleChange} value={values.security} aria-describedby="security" />
-              {errors.security && (
-                <div className="invalid-feedback">{errors.security}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-3" htmlFor="active">Active</label>
-            <div className="col-1 col-sm-1">
-              <div className="form-check">
-                <input className="form-check-input" type="checkbox" name="active" onChange={handleChange} checked={values.active} aria-describedby="active" />
-              </div>
-            </div>
-            <div className="col-11 col-sm-8">
-              <div className="form-check">
-                <small id="activehelp" className="form-text text-muted form-control-help">This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search.</small>
-              </div>
-            </div>
-          </div>
+          <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
+          <TextForm colFormat="3-9" label="Tags" value={values.tags} field="tags" handleChange={handleChange} error={errors.tags} /> 
+          <TextForm colFormat="3-9" label="Security" value={values.security} field="security" handleChange={handleChange} error={errors.security} />
+          <CheckboxForm colFormat="3-1-8" label="Active" value={values.active} field="active" handleChange={handleChange} error={errors.active} 
+              help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search." />
           <hr />
           <div>
             {values.images && values.images.map((item, index) => (

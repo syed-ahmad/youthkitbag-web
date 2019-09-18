@@ -14,8 +14,8 @@ const mapDispatchToProps = {
 
 const GroupPage = ({ current, fetchGroup, match }) => {
 
-  const itemId = match.params.id;
-  const [item, setItem] = useState({
+  const groupId = match.params.id;
+  const [group, setGroup] = useState({
     name: '',
     tagline: '',
     description: '',
@@ -31,31 +31,31 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   });
 
   useEffect(() => {
-    if (itemId) {
-      fetchGroup(itemId);
+    if (groupId) {
+      fetchGroup(groupId);
     }
-  }, [fetchGroup, itemId]);
+  }, [fetchGroup, groupId]);
   
   useEffect(() => {
     if (current && current._id) {
-      const newItem = {
+      const newGroup = {
         ...current,
         imagesToUpload: 0
       };
-      setItem(newItem);  
+      setGroup(newGroup);  
     }
   }, [current]);
 
-  function itemIsLoding() {
-    return itemId && !item._id;
+  function groupIsLoding() {
+    return groupId && !group._id;
   }
 
   function getTitle() {
-    if (itemIsLoding()) {
+    if (groupIsLoding()) {
       return 'Loading ...';
     }
 
-    return item._id ? item.name : 'Create new item';
+    return group._id ? group.name : 'Create new group';
   }
   
   return (
@@ -63,7 +63,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
       <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
-          <GroupForm item={item} />
+          <GroupForm group={group} />
         </div>
       </section>
     </div>

@@ -6,21 +6,10 @@ import { createKitbagStolen, editKitbagStolen } from '../../../actions/KitbagSto
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './StolenFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
-import { DateForm, TextForm, TextAreaForm, CheckboxForm, RemoveButtonForm } from '../../includes/forms';
+import { DateForm, TextForm, TextAreaForm, CheckboxForm, AddArrayButtonForm, RemoveArrayButtonForm } from '../../includes/forms';
 
 const StolenForm = ({ stolen }) => {
-
-  // ?? still using redux
-  const dispatch = useDispatch();
-  const newImages = useSelector(state => state.kitbag.stolen.newImages);
-
-  // ?? using hard coded constants for image sizes - should this be in image helper
-  const MAXWIDTH = 720;
-  const MAXHEIGHT = 720;
-
-  // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
-
-
+  
   const initialReport = {
     reportedOn: '2019-01-01',
     fromUserId: '',
@@ -38,6 +27,16 @@ const StolenForm = ({ stolen }) => {
     setValues,
     errors
   } = useForm(stolen, updateStolen, validate);
+
+  // ?? still using redux
+  const dispatch = useDispatch();
+  const newImages = useSelector(state => state.kitbag.stolen.newImages);
+
+  // ?? using hard coded constants for image sizes - should this be in image helper
+  const MAXWIDTH = 720;
+  const MAXHEIGHT = 720;
+
+  // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -207,29 +206,27 @@ const StolenForm = ({ stolen }) => {
         </div>
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
           <form className="mb-3" onSubmit={handleSubmit}>
-            <TextForm cols="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
-            <TextForm cols="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
-            <TextAreaForm cols="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
-            <DateForm cols="3-9" label="Date Stolen" value={values.stolenOn} field="stolenOn" setChange={setChange} errors={errors} />
-            <TextForm cols="3-9" label="Location" value={values.location} field="location" handleChange={handleChange} error={errors.location} />
-            <TextForm cols="3-9" label="Tracking" value={values.tracking} field="tracking" handleChange={handleChange} error={errors.tracking} />
+            <TextForm colFormat="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
+            <TextForm colFormat="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
+            <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
+            <DateForm colFormat="3-9" label="Date Stolen" value={values.stolenOn} field="stolenOn" setChange={setChange} errors={errors} />
+            <TextForm colFormat="3-9" label="Location" value={values.location} field="location" handleChange={handleChange} error={errors.location} />
+            <TextForm colFormat="3-9" label="Tracking" value={values.tracking} field="tracking" handleChange={handleChange} error={errors.tracking} />
             <hr />
             <div>
               {values.reportDetails && values.reportDetails.map((item, index) => (
                 <div className="form-row" key={index}>
-                  <DateForm cols="a4" value={values.reportDetails[index].reportedOn} label="Reported On" field={`reportDetails[${index}].reportedOn`} setChange={setChange} index={index} />
-                  <TextForm cols="a6" value={values.reportDetails[index].details} label="Details" field={`reportDetails[${index}].details`} handleChange={handleChange} index={index} />
-                  <RemoveButtonForm cols="a1" title="Remove Report" onclick={() => removeArrayItem('reportDetails', index)} index={index} />
+                  <DateForm colFormat="a-4" value={values.reportDetails[index].reportedOn} label="Reported On" field={`reportDetails[${index}].reportedOn`} setChange={setChange} index={index} />
+                  <TextForm colFormat="a-6" value={values.reportDetails[index].details} label="Details" field={`reportDetails[${index}].details`} handleChange={handleChange} index={index} />
+                  <RemoveArrayButtonForm colFormat="a-1" title="Remove Report" onClick={() => removeArrayItem('reportDetails', index)} index={index} />
                 </div>
               ))}
-              <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('reportDetails', [initialReport])}>
-                Add a new report
-              </button>
+              <AddArrayButtonForm label="Add a new report" onClick={() => addArrayItem('reportDetails', [initialReport])} />
             </div>
             <hr />
-            <TextForm cols="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
-            <TextForm cols="3-9" label="Security" value={values.security} field="security" handleChange={handleChange} error={errors.security} />
-            <CheckboxForm cols="3-1-8" label="Recovered" value={values.recovered} field="recovered" handleChange={handleChange} error={errors.recovered} 
+            <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
+            <TextForm colFormat="3-9" label="Security" value={values.security} field="security" handleChange={handleChange} error={errors.security} />
+            <CheckboxForm colFormat="3-1-8" label="Recovered" value={values.recovered} field="recovered" handleChange={handleChange} error={errors.recovered} 
               help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search." />
             <hr />
             <div>

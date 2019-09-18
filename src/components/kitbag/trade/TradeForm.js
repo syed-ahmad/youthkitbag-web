@@ -201,9 +201,9 @@ const TradeForm = ({ trade }) => {
         </div>
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
           <form className="mb-3" onSubmit={handleSubmit}>
-            <TextForm cols="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
-            <TextForm cols="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
-            <TextAreaForm cols="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
+            <TextForm colFormat="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
+            <TextForm colFormat="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
+            <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
             <div className="form-group row">
               <label htmlFor="condition" className="col-sm-3 col-form-label">Condition</label>
               <div className="col-sm-9">
@@ -223,8 +223,8 @@ const TradeForm = ({ trade }) => {
             <div>
               {values.groups && values.groups.map((item, index) => (
                 <div className="form-row" key={index}>
-                  <TextForm cols="a6" value={values.groups[index].title} label="Name" field={`groups[${index}].title`} handleChange={handleChange} index={index} />
-                  <DateForm cols="a4" value={values.groups[index].available} label="Available" field={`groups[${index}].available`} setChange={setChange} index={index} />
+                  <TextForm colFormat="a-6" value={values.groups[index].title} label="Name" field={`groups[${index}].title`} handleChange={handleChange} index={index} />
+                  <DateForm colFormat="a-4" value={values.groups[index].available} label="Available" field={`groups[${index}].available`} setChange={setChange} index={index} />
                   <div className="form-group col-sm-1">
                     { (index === 0) &&
                       <label className="d-none d-sm-block">Rem</label>
@@ -238,7 +238,7 @@ const TradeForm = ({ trade }) => {
               </button>
             </div>
             <hr />
-            <TextForm cols="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
+            <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
             <hr />
             <div>
               {values.images && values.images.map((item, index) => (

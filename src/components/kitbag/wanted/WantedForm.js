@@ -6,6 +6,7 @@ import { createKitbagWanted, editKitbagWanted } from '../../../actions/KitbagWan
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './WantedFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
+import { DateForm, TextForm, TextAreaForm, CheckboxForm, AddArrayButtonForm, RemoveArrayButtonForm } from '../../includes/forms';
 
 const WantedForm = ({ wanted }) => {
 
@@ -16,26 +17,6 @@ const WantedForm = ({ wanted }) => {
   // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
-
-  // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
-  const initialValues = {
-    title: '',
-    subtitle: '',
-    description: '',
-    offerPrice: 0.00,
-    location: {
-      coordinates: ''
-    },
-    tracking: '',
-    offerDetails: [],
-    activitys: '',
-    security: '',
-    images: [],
-    obtained: false,
-    sourceId: '',
-    userId: '',
-    topImage: '/images/default.png'
-  };
 
   const initialOffer = {
     offeredOn: '2019-01-01',
@@ -53,7 +34,7 @@ const WantedForm = ({ wanted }) => {
     values,
     setValues,
     errors
-  } = useForm(initialValues, updateWanted, validate);
+  } = useForm(wanted, updateWanted, validate);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -222,118 +203,48 @@ const WantedForm = ({ wanted }) => {
           </div>
         </div>
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-        <form className="mb-3" onSubmit={handleSubmit}>
-          <div className="form-group row">
-            <label htmlFor="title" className="col-sm-3 col-form-label">Title</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.title && 'is-invalid'}`} name="title" type="text" onChange={handleChange} value={values.title} aria-describedby="title" />
-              {errors.title && (
-                <div className="invalid-feedback">{errors.title}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="subtitle" className="col-sm-3 col-form-label">Subtitle</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.subtitle && 'is-invalid'}`} name="subtitle" type="text" onChange={handleChange} value={values.subtitle} aria-describedby="subtitle" />
-              {errors.subtitle && (
-                <div className="invalid-feedback">{errors.subtitle}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="description" className="col-sm-3 col-form-label">Description</label>
-            <div className="col-sm-9">
-              <textarea className={`form-control ${errors.description && 'is-invalid'}`} name="description" rows="5" onChange={handleChange} value={values.description} aria-describedby="description"></textarea>
-              {errors.description && (
-                <div className="invalid-feedback">{errors.description}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="offerPrice" className="col-sm-3 col-form-label">Offer Price</label>
-            <div className="col-sm-9">
-              <input className="form-control" name="offerPrice" type="number" step="0.01" onChange={handleChange} value={values.offerPrice} aria-describedby="offerPrice" />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="location" className="col-sm-3 col-form-label">Location</label>
-            <div className="col-sm-9">
-              <input className="form-control" name="location" type="text" onChange={handleChange} value={values.location} aria-describedby="location" />
-            </div>
-          </div>
-          <hr />
-          <div>
-            {values.offerDetails && values.offerDetails.map((item, index) => (
-              <div className="form-row" key={index}>
-                <div className="form-group col-sm-5">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Offered On</label>
-                  }
-                  <input className="form-control" name={`offerDetails[${index}].offeredOn`} type="text" onChange={handleChange} value={values.offerDetails[index].offeredOn} />
+          <form className="mb-3" onSubmit={handleSubmit}>
+            <TextForm colFormat="3-9" label="Title" value={values.title} field="title" handleChange={handleChange} error={errors.title} />
+            <TextForm colFormat="3-9" label="Subtitle" value={values.subtitle} field="subtitle" handleChange={handleChange} error={errors.subtitle} />
+            <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
+            <TextForm colFormat="3-9" type="number" label="Offer Price" value={values.offerPrice} field="offerPrice" step=".01" min="0" max="99999.99" handleChange={handleChange} error={errors.offerPrice} />
+            <TextForm colFormat="3-9" label="Location" value={values.location} field="location" handleChange={handleChange} error={errors.location} />
+            <hr />
+            <div>
+              {values.offerDetails && values.offerDetails.map((item, index) => (
+                <div className="form-row" key={index}>
+                  <DateForm colFormat="a-4" value={values.offerDetails[index].offeredOn} label="Offered On" field={`offerDetails[${index}].offeredOn`} setChange={setChange} index={index} />
+                  <TextForm colFormat="a-2" type="number" value={values.offerDetails[index].askingPrice} label="Asking Price" field={`offerDetails[${index}].askingPrice`} step=".01" min="0.00" max="99999.99"  handleChange={handleChange} index={index} />
+                  <RemoveArrayButtonForm colFormat="a-1" title="Remove Offer" onClick={() => removeArrayItem('offerDetails', index)} index={index} />
                 </div>
-                <div className="form-group col-sm-6">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Asking Price</label>
-                  }
-                  <input className="form-control" name={`offerDetails[${index}].askingPrice`} type="text" onChange={handleChange} value={values.offerDetails[index].askingPrice} />
+              ))}
+              <AddArrayButtonForm label="Add a new offer" onClick={() => addArrayItem('offerDetails', [initialOffer])} />
+            </div>
+            <hr />
+            <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
+            <CheckboxForm colFormat="3-1-8" label="Obtained" value={values.obtained} field="obtained" handleChange={handleChange} error={errors.obtained} 
+              help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search." />
+            <hr />
+            <div>
+              {values.images && values.images.map((item, index) => (
+                <div key={`${item._id}-${index}`}>
+                  <input name={`images[${index}]._id`} type="hidden" value={values.images[index]._id} />
+                  <input name={`images[${index}].image`} type="hidden" value={values.images[index].image} />
+                  <input name={`images[${index}].imageUrl`} type="hidden" value={values.images[index].imageUrl} />
+                  <input name={`images[${index}].state`} type="hidden" value={values.images[index].state} />
+                  <input name={`images[${index}].photoId`} type="hidden" value={values.images[index].photoId} />
                 </div>
-                <div className="form-group col-sm-1">
-                  { (index === 0) &&
-                    <label className="d-none d-sm-block">Rem</label>
-                  }
-                  <button className="btn btn-danger" type="button" title="Remove Offer" onClick={() => removeArrayItem('offerDetails', index)}><span className="icon-tray-item fas fa-trash-alt"></span></button>
+              ))}
+              {values.deletedImages && values.deletedImages.map((item, index) => (
+                <div key={`${item._id}-${index}`}>
+                  <input name={`deletedImages[${index}]._id`} type="hidden" value={values.deletedImages[index]._id} />
                 </div>
-              </div>
-            ))}
-            <button className="btn btn-secondary" type="button" onClick={() => addArrayItem('offerDetails', [initialOffer])}>
-              Add a new offer
-            </button>
-          </div>
-          <hr />
-          <div className="form-group row">
-            <label htmlFor="activitys" className="col-sm-3 col-form-label">Activities</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.activitys && 'is-invalid'}`} name="activitys" type="text" onChange={handleChange} value={values.activitys} aria-describedby="activitys" />
-              {errors.activitys && (
-                <div className="invalid-feedback">{errors.activitys}</div>
-              )}
+              ))}
             </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-3" htmlFor="obtained">Obtained</label>
-            <div className="col-1 col-sm-1">
-              <div className="form-check">
-                <input className="form-check-input" type="checkbox" name="obtained" onChange={handleChange} checked={values.obtained} aria-describedby="obtained" />
-              </div>
+            <div>
+              <button className="btn btn-primary" type="submit">Save</button>
+              <Link className="btn btn-link" to="/kitbag/wanteds">Cancel</Link>
             </div>
-            <div className="col-11 col-sm-8">
-              <div className="form-check">
-                <small id="obtainedhelp" className="form-text text-muted form-control-help">This item is automatically switched off when status is changed to Sold, Wanted, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search.</small>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div>
-            {values.images && values.images.map((item, index) => (
-              <div key={`${item._id}-${index}`}>
-                <input name={`images[${index}]._id`} type="hidden" value={values.images[index]._id} />
-                <input name={`images[${index}].image`} type="hidden" value={values.images[index].image} />
-                <input name={`images[${index}].imageUrl`} type="hidden" value={values.images[index].imageUrl} />
-                <input name={`images[${index}].state`} type="hidden" value={values.images[index].state} />
-                <input name={`images[${index}].photoId`} type="hidden" value={values.images[index].photoId} />
-              </div>
-            ))}
-            {values.deletedImages && values.deletedImages.map((item, index) => (
-              <div key={`${item._id}-${index}`}>
-                <input name={`deletedImages[${index}]._id`} type="hidden" value={values.deletedImages[index]._id} />
-              </div>
-            ))}
-          </div>
-          <div>
-            <button className="btn btn-primary" type="submit">Save</button>
-            <Link className="btn btn-link" to="/kitbag/wanteds">Cancel</Link>
-          </div>
           </form>
         </div>
       </div>

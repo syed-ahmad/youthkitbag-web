@@ -6,6 +6,7 @@ import { createGroup, editGroup } from '../../actions/GroupActions';
 import { addImage, clearNewImages } from '../../actions/ImageActions';
 import validate from './GroupFormValidationRules';
 import { resize, dataURItoBlob } from '../../helpers/imageResize';
+import { TextForm, TextAreaForm } from '../includes/forms';
 
 const GroupForm = ({ group }) => {
 
@@ -17,7 +18,6 @@ const GroupForm = ({ group }) => {
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
-  // ?? set initial values - but props overrides on edit, but two new parameters of topImage and imagesToUpload
   const initialValues = { ...group, groupAdmin: true, exists: false };
 
   const {
@@ -176,95 +176,39 @@ const GroupForm = ({ group }) => {
     }
   }
 
-  function isReadOnly() {
-    return (!values._id || values.appAdmin) ? false : true;
-  }
+  // function isReadOnly() {
+  //   return (!values._id || values.appAdmin) ? false : true;
+  // }
 
   return (
-      <div className="row">
-        <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
-          <div>
-            <img id="preview" name="preview" className="img-fluid mb-3" src={values.topImage} alt="" role="presentation" />
-          </div>
-          <div>
-            {renderSecondaryImages()}
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-3 col-form-label">Images</label>
-            <div className="col-sm-9">
-              <div className="custom-file">
-                <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
-                <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
-              </div>
+    <div className="row">
+      <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
+        <div>
+          <img id="preview" name="preview" className="img-fluid mb-3" src={values.topImage} alt="" role="presentation" />
+        </div>
+        <div>
+          {renderSecondaryImages()}
+        </div>
+        <div className="form-group row">
+          <label className="col-sm-3 col-form-label">Images</label>
+          <div className="col-sm-9">
+            <div className="custom-file">
+              <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
+              <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
             </div>
           </div>
         </div>
-        <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
+      </div>
+      <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
-          <div className="form-group row">
-            <label htmlFor="name" className="col-sm-3 col-form-label">Name</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.name && 'is-invalid'}`} name="name" type="text" readOnly={isReadOnly()} onChange={handleChange} value={values.name} aria-describedby="name" />
-              {errors.name && (
-                <div className="invalid-feedback">{errors.name}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="tagline" className="col-sm-3 col-form-label">Tagline</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.tagline && 'is-invalid'}`} name="tagline" type="text" readOnly={isReadOnly()} onChange={handleChange} value={values.tagline} aria-describedby="tagline" />
-              {errors.tagline && (
-                <div className="invalid-feedback">{errors.tagline}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="description" className="col-sm-3 col-form-label">Description</label>
-            <div className="col-sm-9">
-              <textarea className={`form-control ${errors.description && 'is-invalid'}`} name="description" rows="5" readOnly={isReadOnly()} onChange={handleChange} value={values.description} aria-describedby="description"></textarea>
-              {errors.description && (
-                <div className="invalid-feedback">{errors.description}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="email" className="col-sm-3 col-form-label">Email</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.email && 'is-invalid'}`} name="email" type="email" readOnly={isReadOnly()} onChange={handleChange} value={values.email} aria-describedby="email" />
-              {errors.email && (
-                <div className="invalid-feedback">{errors.email}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="website" className="col-sm-3 col-form-label">Website</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.website && 'is-invalid'}`} name="website" type="website" readOnly={isReadOnly()} onChange={handleChange} value={values.website} aria-describedby="website" />
-              {errors.website && (
-                <div className="invalid-feedback">{errors.website}</div>
-              )}
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="location" className="col-sm-3 col-form-label">Location</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.location && 'is-invalid'}`} name="location" type="location" readOnly={isReadOnly()} onChange={handleChange} value={values.location} aria-describedby="location" />
-              {errors.location && (
-                <div className="invalid-feedback">{errors.location}</div>
-              )}
-            </div>
-          </div>
+          <TextForm colFormat="3-9" label="Name" value={values.name} field="name" handleChange={handleChange} error={errors.name} />
+          <TextForm colFormat="3-9" label="Tagline" value={values.tagline} field="tagline" handleChange={handleChange} error={errors.tagline} />
+          <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" handleChange={handleChange} error={errors.description} />
+          <TextForm colFormat="3-9" type="email" label="Email" value={values.email} field="email" handleChange={handleChange} error={errors.email} />
+          <TextForm colFormat="3-9" label="Website" value={values.website} field="website" handleChange={handleChange} error={errors.website} />
+          <TextForm colFormat="3-9" label="Location" value={values.location} field="location" handleChange={handleChange} error={errors.location} />
           <hr />
-          <div className="form-group row">
-            <label htmlFor="activitys" className="col-sm-3 col-form-label">Activities</label>
-            <div className="col-sm-9">
-              <input className={`form-control ${errors.activitys && 'is-invalid'}`} name="activitys" type="text" readOnly={isReadOnly()} onChange={handleChange} value={values.activitys} aria-describedby="activitys" />
-              {errors.activitys && (
-                <div className="invalid-feedback">{errors.activitys}</div>
-              )}
-            </div>
-          </div>
+          <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
           <hr />
           <div>
             {values.images && values.images.map((item, index) => (

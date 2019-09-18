@@ -1,10 +1,10 @@
 import React from 'react';
 import CheckboxInput from '../controls/CheckboxInput';
 
-const CheckboxForm = ({cols, label, value, field, handleChange, index, error, help}) => {
+const CheckboxForm = ({colFormat, label, value, field, handleChange, index, error, help}) => {
   return (
     <React.Fragment>
-      {(cols === '3-1-8') &&
+      {(colFormat === '3-1-8') &&
         <div className="form-group row">
           <label className="col-sm-3" htmlFor={field}>{label}</label>
           <div className="col-1 col-sm-1">
