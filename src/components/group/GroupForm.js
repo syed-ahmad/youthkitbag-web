@@ -187,8 +187,7 @@ const GroupForm = ({ group }) => {
   }
 
   function isReadOnly() {
-    const readonly = (!values._id || values.appAdmin) ? false : true;
-    return readonly;
+    return (!values._id || values.appAdmin) ? false : true;
   }
 
   return (

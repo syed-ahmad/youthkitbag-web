@@ -10,6 +10,8 @@ import { DateForm, TextForm, TextAreaForm, SelectForm, AddArrayButtonForm, Remov
 
 const KitForm = ({ kit }) => {
 
+  const newErrors = useSelector(state => state.toast.currentError.errors);
+
   const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.00 };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };
 
@@ -24,8 +26,15 @@ const KitForm = ({ kit }) => {
     removeArrayItem,
     values,
     setValues,
-    errors
+    errors,
+    setErrors
   } = useForm(kit, updateKit, validate);
+
+  useEffect(() => {
+    if (newErrors) {
+      setErrors(newErrors);
+    }
+  }, [newErrors, setErrors]);
 
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.kitbag.kit.newImages);
