@@ -8,6 +8,7 @@ import Title from '../includes/Title';
 import GroupCard from './GroupCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
+import Alert from '../includes/Alert';
 
 class Groups extends React.Component {
 
@@ -52,11 +53,9 @@ class Groups extends React.Component {
     return (
       <div>
         <Title title={this.getTitle()} />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features">
+        <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
+            <Alert />
             <div className="row">
               <div className="col-12 col-sm-9">
                 <SearchForm search={this.props.location.search} callback={fetchGroups} />

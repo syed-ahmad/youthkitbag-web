@@ -17,6 +17,7 @@ export const login = (email, password) => dispatch => {
       localStorage.setItem('user', data.userId);
       localStorage.setItem('isloggedin', true);
       dispatch({ type: types.LOGIN_SUCCESS, payload: data });
+      dispatch({ type: types.RESET_ERROR });
       dispatch(getUser());
       history.push('/kitbag/kits');
     })

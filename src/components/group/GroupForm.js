@@ -174,7 +174,6 @@ const GroupForm = ({ group }) => {
     if (group._id) {
       dispatch(editGroup(group._id, group));
     } else {
-      console.log('CREATE');
       dispatch(createGroup(group));
     }
   }
