@@ -16,8 +16,6 @@ export default (state = initialState, action) => {
       return { ...state, newImages: [...state.newImages, action.payload.photo] };
     case types.CLEAR_NEW_IMAGES:
       return { ...state, newImages: [] };
-    case types.API_KITBAG_ERROR:
-      return { ...state, error: action.payload };
     case types.LOGOUT:
       return initialState;
     default:

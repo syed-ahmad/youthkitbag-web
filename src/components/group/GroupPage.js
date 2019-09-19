@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { resetError } from '../../actions/ToastActions';
 import { fetchGroup } from '../../actions/GroupActions';
+import { resetError } from '../../actions/ToastActions';
 import GroupForm from './GroupForm';
 import Title from '../includes/Title';
 import Alert from '../includes/Alert';

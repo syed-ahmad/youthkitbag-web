@@ -12,6 +12,8 @@ export default (state = initialState, action) => {
       return { ...state, currentError: action.payload.data };
     case types.RESET_ERROR: 
       return { ...state, currentError: {} };
+    case types.API_KITBAG_ERROR:
+      return { ...state, currentError: action.payload.data };
     case types.LOGOUT:
       return initialState;
     default:

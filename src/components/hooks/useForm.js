@@ -74,7 +74,8 @@ const useForm = (initiaValues, callback, validate) => {
     removeArrayItem,
     values,
     setValues,
-    errors
+    errors,
+    setErrors
   }
 };
 

@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchSubscriptionPackage } from '../actions/SubscriptionActions';
+import { resetError } from '../actions/ToastActions';
 import Title from './includes/Title';
+import Alert from './includes/Alert';
 
 const mapStateToProps = state => ({
   selected: state.subscription.selected
 })
 
 const mapDispatchToProps = {
-  fetchSubscriptionPackage
+  fetchSubscriptionPackage, resetError
 }
 
-const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, match }) => {
+const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, resetError, match }) => {
   
   const subscriptionId = match.params.id;
 
@@ -23,6 +25,10 @@ const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, match })
     price: 0.00
   })
 
+  useEffect(() => {
+    resetError();
+  },[resetError]);
+  
   useEffect(() => {
     fetchSubscriptionPackage(subscriptionId);
   }, [fetchSubscriptionPackage, subscriptionId]);
@@ -38,6 +44,7 @@ const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, match })
       <Title title="Purchase subscription" />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
+          <Alert />
           <div className="row">
             <div className="col-12">
               <h4>Purchase { subscription.title } subscription</h4>

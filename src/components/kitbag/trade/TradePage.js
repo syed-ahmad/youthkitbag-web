@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchKitbagTrade, fetchKitbagTradeFromKit } from '../../../actions/KitbagTradeActions';
+import { resetError } from '../../../actions/ToastActions';
 import TradeForm from './TradeForm';
 import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.kitbag.trade.current
 });
 
 const mapDispatchToProps = {
-  fetchKitbagTrade, fetchKitbagTradeFromKit
+  fetchKitbagTrade, fetchKitbagTradeFromKit, resetError
 }
 
-const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }) => {
+const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, resetError, match }) => {
 
   const tradeId = match.params.id;
   const kitId = match.params.kit;
@@ -41,6 +43,10 @@ const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }
     topImage: '/images/default.png',
     imagesToUpload: 0
   });
+
+  useEffect(() => {
+    resetError();
+  },[resetError]);
 
   useEffect(() => {
     if (tradeId) {
@@ -86,6 +92,7 @@ const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }
       <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
+          <Alert />
           <TradeForm trade={trade} />
         </div>
       </section>

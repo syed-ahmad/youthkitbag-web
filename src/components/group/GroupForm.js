@@ -13,6 +13,7 @@ const GroupForm = ({ group }) => {
   // ?? still using redux
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.group.newImages);
+  const newErrors = useSelector(state => state.toast.currentError.errors);
 
   // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
@@ -27,8 +28,15 @@ const GroupForm = ({ group }) => {
     addArrayItem,
     values,
     setValues,
-    errors
+    errors,
+    setErrors
   } = useForm(initialValues, updateGroup, validate);
+
+  useEffect(() => {
+    if (newErrors) {
+      setErrors(newErrors);
+    }
+  }, [newErrors, setErrors]);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {

@@ -1,9 +1,9 @@
 export default function validate(values) {
   const errors = [];
 
-  if (!values.name) {
-    errors.name = 'Name is required';
-  }
+  // if (!values.name) {
+  //   errors.name = 'Name is required';
+  // }
 
   // if (!values.tagline) {
   //   errors.tagline = 'Tagline is required';

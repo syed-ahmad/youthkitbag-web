@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchKitbagStolen, fetchKitbagStolenFromKit } from '../../../actions/KitbagStolenActions';
+import { resetError } from '../../../actions/ToastActions';
 import StolenForm from './StolenForm';
 import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.kitbag.stolen.current
 });
 
 const mapDispatchToProps = {
-  fetchKitbagStolen, fetchKitbagStolenFromKit
+  fetchKitbagStolen, fetchKitbagStolenFromKit, resetError
 }
 
-const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, match }) => {
+const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, resetError, match }) => {
 
   const stolenId = match.params.id;
   const kitId = match.params.kit;
@@ -38,6 +40,10 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, matc
     imagesToUpload: 0
   });
 
+  useEffect(() => {
+    resetError();
+  },[resetError]);
+  
   useEffect(() => {
     if (stolenId) {
       fetchKitbagStolen(stolenId);
@@ -77,6 +83,7 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, matc
       <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
+          <Alert />
           <StolenForm stolen={stolen} />
         </div>
       </section>

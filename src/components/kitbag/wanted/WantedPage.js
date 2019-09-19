@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchKitbagWanted, fetchKitbagWantedFromKit } from '../../../actions/KitbagWantedActions';
+import { resetError } from '../../../actions/ToastActions';
 import WantedForm from './WantedForm';
 import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.kitbag.wanted.current
 });
 
 const mapDispatchToProps = {
-  fetchKitbagWanted, fetchKitbagWantedFromKit
+  fetchKitbagWanted, fetchKitbagWantedFromKit, resetError
 }
 
-const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, match }) => {
+const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, resetError, match }) => {
 
   const wantedId = match.params.id;
   const kitId = match.params.kit;
@@ -36,6 +38,10 @@ const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, matc
     imagesToUpload: 0
   });
 
+  useEffect(() => {
+    resetError();
+  },[resetError]);
+  
   useEffect(() => {
     if (wantedId) {
       fetchKitbagWanted(wantedId);
@@ -86,6 +92,7 @@ const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, matc
       <Title title={getTitle()} />
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
+          <Alert />
           <WantedForm wanted={wanted} />
         </div>
       </section>
