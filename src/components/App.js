@@ -109,8 +109,8 @@ class App extends React.Component {
               <PrivateRoute path="/kitbag/stolens" component={Stolens} />
 
               <PrivateRoute path="/settings/groups/new" exact component={GroupPage} />
-              <PrivateRoute path="/settings/groups/view/:id" exact component={GroupPage} />
-              <PrivateRoute path="/settings/groups/status/:id" exact component={GroupStatus} />
+              <PrivateRoute path="/settings/groups/status/:groupId" exact component={GroupStatus} />
+              <PrivateRoute path="/settings/groups/:groupId" exact component={GroupPage} />
               <PrivateRoute path="/settings/groups" component={Groups} />
             </Switch>
           </main>

@@ -27,9 +27,9 @@ const KitPage = ({ current, fetchKitbagKit, resetError, match }) => {
     inbag: [],
     security: [],
     warning: 0,
-    activitys: '',
+    activitys: [],
     tags: '',
-    active: 'on',
+    active: true,
     images: [],
     topImage: '/images/default.png',
     imagesToUpload: 0

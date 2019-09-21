@@ -16,7 +16,7 @@ const mapDispatchToProps = {
 
 const GroupPage = ({ current, resetError, fetchGroup, match }) => {
 
-  const groupId = match.params.id;
+  const { groupId } = match.params;
   const [group, setGroup] = useState({
     name: '',
     tagline: '',

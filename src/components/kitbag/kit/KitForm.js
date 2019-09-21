@@ -60,13 +60,13 @@ const KitForm = ({ kit }) => {
     return;
   }
 
-  // ?? be more explicit in naming and push into utility
-  function getArray(field) {
-    if (Array.isArray(field)) {
-      return field;
-    }
-    return field ? field.split(',') : []
-  }
+  // // ?? be more explicit in naming and push into utility
+  // function getArray(field) {
+  //   //if (Array.isArray(field)) {
+  //     return field;
+  //   //}
+  //   //return field ? field.split(',') : []
+  // }
 
   // ?? part of images component
   // ?? need to provide revert for delete
@@ -177,18 +177,10 @@ const KitForm = ({ kit }) => {
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
   function updateKit() {
-    const kit = {
-      ...values, 
-      tags: getArray(values.tags), 
-      activitys: getArray(values.activitys),
-      security: getArray(values.security),
-      active: values.active === "on" || values.active
-    };
-
-    if (kit._id) {
-      dispatch(editKitbagKit(kit._id, kit));
+    if (values._id) {
+      dispatch(editKitbagKit(values._id, values));
     } else {
-      dispatch(createKitbagKit(kit));
+      dispatch(createKitbagKit(values));
     }
   }
 
@@ -250,7 +242,7 @@ const KitForm = ({ kit }) => {
           <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
           <TextForm colFormat="3-9" label="Tags" value={values.tags} field="tags" handleChange={handleChange} error={errors.tags} /> 
           <TextForm colFormat="3-9" label="Security" value={values.security} field="security" handleChange={handleChange} error={errors.security} />
-          <CheckboxForm colFormat="3-1-8" label="Active" value={values.active} field="active" handleChange={handleChange} error={errors.active} 
+          <CheckboxForm colFormat="3-1-8" label="Active" value={values.active} field="active" onChange={handleChange} error={errors.active} 
               help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search." />
           <hr />
           <div>

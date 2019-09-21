@@ -39,7 +39,7 @@ class GroupCard extends React.Component {
             )}
           </span>
           <span className={`badge badge-pill badge-dark badge-fullsize badge-top-right`}>{ memberCount }</span>
-          <Link to={ `/settings/groups/view/${ _id }` }>
+          <Link to={ `/settings/groups/${ _id }` }>
             <img className="card-img-top" src={ this.topImage() } alt={ name } role="presentation" />
             <div className="card-body">
               <h3 className="card-title h6 ellipsis">{ name }</h3>

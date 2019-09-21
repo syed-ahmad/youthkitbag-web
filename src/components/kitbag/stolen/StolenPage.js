@@ -28,7 +28,7 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, rese
     },
     images: [],
     activitys: '',
-    security: '',
+    security: [],
     stolenOn: '',
     tracking: '',
     recovered: false,

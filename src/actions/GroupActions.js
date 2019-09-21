@@ -99,7 +99,7 @@ export const editGroup = (groupId, formValues) =>  dispatch => {
 
 export const editGroupStatus = (groupId, status) =>  dispatch => {
   const token = localStorage.getItem('token');
-  axios.put(`${baseUrl}/group/status/${groupId}`, { approval: status }, {
+  axios.put(`${baseUrl}/group/${groupId}/status`, { approval: status }, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',
