@@ -10,7 +10,6 @@ import { TextForm, TextAreaForm } from '../includes/forms';
 
 const GroupForm = ({ group }) => {
 
-  // ?? still using redux
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.group.newImages);
   const newErrors = useSelector(state => state.toast.currentError.errors);
@@ -246,7 +245,7 @@ const GroupForm = ({ group }) => {
           }
           {(values.groupAdmin && values.exists) && 
             <div>
-              <Link className="btn btn-primary" to={`/settings/groups/members/${values._id}`}>Members</Link>
+              <Link className="btn btn-primary" to={`/settings/groups/${values._id}/members`}>Members</Link>
             </div>
           }
           </form>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_GROUPS, CREATE_GROUP, FETCH_GROUP, EDIT_GROUP, API_KITBAG_ERROR } from './types';
+import { FETCH_GROUPS, CREATE_GROUP, FETCH_GROUP, EDIT_GROUP, FETCH_GROUP_MEMBERS, API_KITBAG_ERROR } from './types';
 import history from '../helpers/history';
 import * as types from './types';
 
@@ -117,6 +117,31 @@ export const editGroupStatus = (groupId, status) =>  dispatch => {
       history.push('/auth/login?return=/settings/groups');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  });
+};
+
+export const fetchGroupMembers = (groupId, search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
+  console.log('REQ', groupId, search, by, page, pagesize);
+  const token = localStorage.getItem('token');
+  axios.get(`${baseUrl}/group/${groupId}/members`, {
+    params: { search, by, page, pagesize },
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json'
+    }
+  })
+  .then(response => {
+    dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
+    history.push(`/settings/group/${groupId}/members?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/settings/group/${groupId}/members');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: response });
   });
 };
 

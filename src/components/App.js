@@ -23,6 +23,7 @@ import PurchaseSubscriptionPage from './PurchaseSubscriptionPage';
 import Groups from './group/Groups';
 import GroupPage from './group/GroupPage';
 import GroupStatus from './group/GroupStatus';
+import GroupMembers from './group/GroupMembers';
 
 import KitBag from './kitbag/kit/KitBag';
 import KitPage from './kitbag/kit/KitPage';
@@ -110,6 +111,7 @@ class App extends React.Component {
 
               <PrivateRoute path="/settings/groups/new" exact component={GroupPage} />
               <PrivateRoute path="/settings/groups/status/:groupId" exact component={GroupStatus} />
+              <PrivateRoute path="/settings/groups/:groupId/members" exact component={GroupMembers} />
               <PrivateRoute path="/settings/groups/:groupId" exact component={GroupPage} />
               <PrivateRoute path="/settings/groups" component={Groups} />
             </Switch>

@@ -1,18 +1,20 @@
-import * as types from '../actions/types';
+import { FETCH_GROUPS, FETCH_GROUP, FETCH_GROUP_MEMBERS, ADD_IMAGE, LOGOUT, CREATE_GROUP, EDIT_GROUP } from '../actions/types';
 
-const initialState = { current: {}, newImages: [], list: [] };
+const initialState = { current: {}, newImages: [], list: [], members: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_GROUPS:
-      return { ...state, list: action.payload.groups, current: {}, newImages: [] };
-    case types.CREATE_GROUP:
-    case types.EDIT_GROUP:
-    case types.FETCH_GROUP:
-      return { ...state, current: action.payload, newImages: [] };
-    case types.ADD_IMAGE:
+    case FETCH_GROUPS:
+      return { list: action.payload.groups };
+    case CREATE_GROUP:
+    case EDIT_GROUP:
+    case FETCH_GROUP:
+        return { current: action.payload };
+    case FETCH_GROUP_MEMBERS:
+      return { ...state, members: action.payload };
+    case ADD_IMAGE:
       return { ...state, newImages: [...state.newImages, action.payload.photo] };
-    case types.LOGOUT:
+    case LOGOUT:
       return initialState;
     default:
       return state;
