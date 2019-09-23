@@ -1,20 +1,21 @@
-import * as types from '../actions/types';
+import { SET_SUCCESS, SET_WARNING, SET_ERROR, API_KITBAG_ERROR, RESET_TOAST, LOGOUT, CREATE_GROUP } from '../actions/types';
 
-const initialState = { currentToast: {}, currentError: {} };
+const initialState = { currentMessage: '' };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.SET_TOAST: 
-      return { ...state, ...action.payload };
-    case types.RESET_TOAST: 
-      return { ...state, currentToast: {} };
-    case types.SET_ERROR: 
-      return { ...state, currentError: action.payload.data };
-    case types.RESET_ERROR: 
-      return { ...state, currentError: {} };
-    case types.API_KITBAG_ERROR:
-      return { ...state, currentError: action.payload.data };
-    case types.LOGOUT:
+    case CREATE_GROUP: 
+      return { currentMessage: action.payload.message, currentStyle: 'success' };
+    case SET_SUCCESS: 
+      return { currentMessage: action.payload.data, currentStyle: 'success' };
+    case SET_WARNING: 
+      return { currentMessage: action.payload.data, currentStyle: 'warning' };
+    case API_KITBAG_ERROR:
+      return { currentMessage: action.payload.data.message, currentStyle: 'error' };
+    case SET_ERROR: 
+      return { currentMessage: action.payload.data, currentStyle: 'error' };
+    case RESET_TOAST: 
+    case LOGOUT:
       return initialState;
     default:
       return state;

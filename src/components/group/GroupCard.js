@@ -14,8 +14,8 @@ class GroupCard extends React.Component {
     return this.props.group.images.length > 0 ? this.props.group.images[0].imageUrl : '/images/default.png'
   };
 
-  approvalIcon = (approval) => {
-    switch (approval) {
+  statusIcon = (status) => {
+    switch (status) {
       case 'approved':
         return 'fas fa-check-circle text-success';
       case 'blocked':
@@ -26,16 +26,16 @@ class GroupCard extends React.Component {
   }
 
   render() {
-    const { _id, name, activitys, approval, memberCount, appAdmin } = this.props.group;
+    const { _id, name, activitys, status, memberCount, appAdmin } = this.props.group;
 
     return (
       <div className="col-6 col-md-4 col-lg-3 mb-3">
         <article className="card card-link card-b1">
         <span className="icons-top-left">
             {appAdmin ? (
-              <Link to={`/settings/groups/status/${ _id }`}><span className={`icon-tray-item ${this.approvalIcon(approval)}`}></span></Link>
+              <Link to={`/settings/groups/status/${ _id }`}><span className={`icon-tray-item ${this.statusIcon(status)}`}></span></Link>
             ) : (
-              <span className={`icon-tray-item ${this.approvalIcon(approval)}`}></span>
+              <span className={`icon-tray-item ${this.statusIcon(status)}`}></span>
             )}
           </span>
           <span className={`badge badge-pill badge-dark badge-fullsize badge-top-right`}>{ memberCount }</span>

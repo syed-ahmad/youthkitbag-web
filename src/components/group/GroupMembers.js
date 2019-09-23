@@ -20,7 +20,6 @@ class GroupMembers extends React.Component {
   }
 
   componentDidMount() {
-    console.log('DID MOUNT');
     var by = 'all';
     var search = '';
     var page = 1;

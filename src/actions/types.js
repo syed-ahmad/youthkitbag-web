@@ -21,10 +21,11 @@ export const SIGN_OUT = 'SIGN_OUT';
 
 export const FETCH_SUBSCRIPTION_PACKAGE = 'FETCH_SUBSCRIPTION_PACKAGE';
 
-export const SET_TOAST = 'SET_TOAST'
 export const RESET_TOAST = 'RESET_TOAST'
+export const SET_TOAST = 'SET_TOAST'
+export const SET_SUCCESS = 'SET_SUCCESS'
+export const SET_WARNING = 'SET_WARNING'
 export const SET_ERROR = 'SET_ERROR'
-export const RESET_ERROR = 'RESET_ERROR'
 
 export const CREATE_KITBAG_KIT = 'CREATE_KITBAG_KIT';
 export const FETCH_KITBAG_KITS = 'FETCH_KITBAG_KITS';
@@ -69,3 +70,4 @@ export const FETCH_GROUP = 'FETCH_GROUP';
 export const FETCH_GROUP_MEMBERS = 'FETCH_GROUP_MEMBERS';
 export const CREATE_GROUP = 'CREATE_GROUP';
 export const EDIT_GROUP = 'EDIT_GROUP';
+export const EDIT_GROUP_STATUS = 'EDIT_GROUP_STATUS';

@@ -1,5 +1,5 @@
-import { RESET_ERROR } from './types';
+import { RESET_TOAST } from './types';
 
 export const resetError = () => dispatch => {
-  dispatch({ type: RESET_ERROR });
+  dispatch({ type: RESET_TOAST });
 };

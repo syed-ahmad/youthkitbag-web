@@ -5,11 +5,12 @@ const initialState = { current: {}, newImages: [], list: [], members: [] };
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_GROUPS:
-      return { list: action.payload.groups };
+      return { ...state, list: action.payload.groups };
     case CREATE_GROUP:
+      return { ...state, current: { _id: action.payload._id } };
     case EDIT_GROUP:
     case FETCH_GROUP:
-        return { current: action.payload };
+      return { ...state, current: action.payload };
     case FETCH_GROUP_MEMBERS:
       return { ...state, members: action.payload };
     case ADD_IMAGE:

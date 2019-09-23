@@ -12,7 +12,7 @@ const GroupForm = ({ group }) => {
 
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.group.newImages);
-  const newErrors = useSelector(state => state.toast.currentError.errors);
+  const newErrors = useSelector(state => state.toast.currentMessage.errors);
 
   // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
@@ -173,15 +173,10 @@ const GroupForm = ({ group }) => {
   }, [newImages, addArrayItem, setChange, values, dispatch])
 
   function updateGroup() {
-    const group = {
-      ...values, 
-      activitys: getArray(values.activitys)
-    };
-
     if (group._id) {
-      dispatch(editGroup(group._id, group));
+      dispatch(editGroup(values._id, values));
     } else {
-      dispatch(createGroup(group));
+      dispatch(createGroup(values));
     }
   }
 

@@ -6,7 +6,7 @@ import history from './../../helpers/history';
 
 class GroupStatus extends React.Component {
   componentDidMount() {
-    this.props.fetchGroup(this.props.match.params.id);
+    this.props.fetchGroup(this.props.match.params.groupId);
   }
 
   renderTitle() {
@@ -24,7 +24,7 @@ class GroupStatus extends React.Component {
   }
 
   renderActions() {
-    const groupId = this.props.match.params.id;
+    const { groupId } = this.props.match.params;
     return (
       <React.Fragment>
         <button type="button" className="btn btn-danger" onClick={() => this.props.editGroupStatus(groupId, 'blocked')}>Block</button>
@@ -45,7 +45,7 @@ class GroupStatus extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { group: state.group[ownProps.match.params.id] }
+  return { group: state.group[ownProps.match.params.groupId] }
 };
 
 export default connect(mapStateToProps, { fetchGroup, editGroupStatus })(GroupStatus);
