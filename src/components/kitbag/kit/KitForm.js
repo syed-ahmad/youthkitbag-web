@@ -10,7 +10,7 @@ import { DateForm, TextForm, TextAreaForm, SelectForm, AddArrayButtonForm, Remov
 
 const KitForm = ({ kit }) => {
 
-  const newErrors = useSelector(state => state.toast.currentMessage.errors);
+  const newErrors = useSelector(state => state.toast.errors);
 
   const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.00 };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };

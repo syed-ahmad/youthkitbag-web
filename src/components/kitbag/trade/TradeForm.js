@@ -10,7 +10,8 @@ import { DateForm, TextForm, TextAreaForm } from '../../includes/forms';
 
 const TradeForm = ({ trade }) => {
 
-  // ?? still using redux
+  const newErrors = useSelector(state => state.toast.errors);
+
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.kitbag.trade.newImages);
 
@@ -31,8 +32,16 @@ const TradeForm = ({ trade }) => {
     removeArrayItem,
     values,
     setValues,
-    errors
+    errors,
+    setErrors
   } = useForm(trade, updateTrade, validate);
+
+
+  useEffect(() => {
+    if (newErrors) {
+      setErrors(newErrors);
+    }
+  }, [newErrors, setErrors]);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -213,12 +222,7 @@ const TradeForm = ({ trade }) => {
                 </select>
               </div>
             </div>
-            <div className="form-group row">
-              <label htmlFor="askingPrice" className="col-sm-3 col-form-label">Asking Price</label>
-              <div className="col-sm-9">
-                <input className="form-control" name="askingPrice" type="number" step=".01" onChange={handleChange} value={values.askingPrice} aria-describedby="askingPrice" />
-              </div>
-            </div>
+            <TextForm colFormat="3-9" type="number" label="Asking Price" value={values.askingPrice} field="askingPrice" step=".01" min="0" max="99999.99" handleChange={handleChange} error={errors.askingPrice} />
             <hr />
             <div>
               {values.groups && values.groups.map((item, index) => (

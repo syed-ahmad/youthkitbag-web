@@ -12,7 +12,7 @@ const GroupForm = ({ group }) => {
 
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.group.newImages);
-  const newErrors = useSelector(state => state.toast.currentMessage.errors);
+  const newErrors = useSelector(state => state.toast.errors);
 
   // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
