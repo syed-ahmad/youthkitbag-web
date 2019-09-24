@@ -10,6 +10,8 @@ import { DateForm, TextForm, TextAreaForm, CheckboxForm, AddArrayButtonForm, Rem
 
 const WantedForm = ({ wanted }) => {
 
+  const newErrors = useSelector(state => state.toast.errors);
+
   // ?? still using redux
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.kitbag.wanted.newImages);
@@ -33,8 +35,15 @@ const WantedForm = ({ wanted }) => {
     removeArrayItem,
     values,
     setValues,
-    errors
+    errors,
+    setErrors
   } = useForm(wanted, updateWanted, validate);
+
+  useEffect(() => {
+    if (newErrors) {
+      setErrors(newErrors);
+    }
+  }, [newErrors, setErrors]);
 
   // ?? should this all be part of another component that deals with images
   function onFileChanged(event) {
@@ -222,7 +231,7 @@ const WantedForm = ({ wanted }) => {
             </div>
             <hr />
             <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
-            <CheckboxForm colFormat="3-1-8" label="Obtained" value={values.obtained} field="obtained" handleChange={handleChange} error={errors.obtained} 
+            <CheckboxForm colFormat="3-1-8" label="Obtained" value={values.obtained} field="obtained" onChange={handleChange} error={errors.obtained} 
               help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search." />
             <hr />
             <div>

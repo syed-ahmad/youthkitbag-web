@@ -54,14 +54,6 @@ const GroupForm = ({ group }) => {
     return;
   }
 
-  // ?? be more explicit in naming and push into utility
-  function getArray(field) {
-    if (Array.isArray(field)) {
-      return field;
-    }
-    return field ? field.split(',') : []
-  }
-
   // ?? part of images component
   // ?? need to provide revert for delete
   // ?? need to provide hover action

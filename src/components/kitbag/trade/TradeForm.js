@@ -19,10 +19,11 @@ const TradeForm = ({ trade }) => {
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
-  const initialGroup = {
-    title: '',
-    available: '2019-01-01'
-  };
+  const initialGroup = { name: '', available: '2019-01-01' };
+  //const initialTradeDetails = { tradedOn: '', toUserId: '', tradePrice: 0.00, complete: false, legit: true, messages: [] };
+  const initialValues = { ...trade };
+
+  console.log('INITIAL VALUES', initialValues);
 
   const {
     setChange,
@@ -34,7 +35,7 @@ const TradeForm = ({ trade }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(trade, updateTrade, validate);
+  } = useForm(initialValues, updateTrade, validate);
 
 
   useEffect(() => {
@@ -185,7 +186,9 @@ const TradeForm = ({ trade }) => {
     if (trade._id) {
       dispatch(editKitbagTrade(trade._id, trade));
     } else {
+      console.log('DISPATCH', trade);
       dispatch(createKitbagTrade(trade));
+      console.log('DISPATCHBACK', trade);
     }
   }
 

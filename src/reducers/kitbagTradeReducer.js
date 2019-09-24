@@ -1,26 +1,22 @@
-import * as types from '../actions/types';
+import { FETCH_KITBAG_TRADE, CREATE_KITBAG_TRADE, EDIT_KITBAG_TRADE, ADD_IMAGE, CLEAR_NEW_IMAGES, LOGOUT, FETCH_KITBAG_TRADES } from '../actions/types';
 
 const initialState = {current: {}, newImages: [], list: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_KITBAG_TRADE:
+    case FETCH_KITBAG_TRADE:
       return { ...state, current: action.payload, newImages: [] };
-    case types.CREATE_KITBAG_TRADE:
+    case CREATE_KITBAG_TRADE:
+      return { ...state, current: action.payload.trade };
+    case EDIT_KITBAG_TRADE:
       return { ...state, current: action.payload, newImages: [] };
-    case types.EDIT_KITBAG_TRADE:
-      return { ...state, current: action.payload, newImages: [] };
-    // case types.DELETE_KITBAG_TRADE:
-    //   return _.omit(state, action.payload);  
-    // case types.FETCH_KITBAG_TRADES:
-    //   return { ..._.mapKeys(action.payload.kits, '_id') };
-    case types.FETCH_KITBAG_TRADES:
+    case FETCH_KITBAG_TRADES:
       return { ...state, list: action.payload.trades, current: {}, newImages: [] };
-    case types.ADD_IMAGE:
+    case ADD_IMAGE:
       return { ...state, newImages: [...state.newImages, action.payload.photo] };
-    case types.CLEAR_NEW_IMAGES:
+    case CLEAR_NEW_IMAGES:
       return { ...state, newImages: [] };
-    case types.LOGOUT:
+    case LOGOUT:
       return initialState;
     default:
       return state;

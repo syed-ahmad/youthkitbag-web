@@ -16,8 +16,7 @@ const mapDispatchToProps = {
 
 const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, resetError, match }) => {
 
-  const wantedId = match.params.id;
-  const kitId = match.params.kit;
+  const { wantedId, kitId } = match.params;
 
   const [wanted, setWanted] = useState({
     title: '',
@@ -58,17 +57,6 @@ const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, rese
     if (current && (current._id || current.sourceId)) {
       const newWanted = {
         ...current,
-        wantedOn: current.wantedOn ? current.wantedOn.toString().substring(0,10) : '',
-        offerDetails: current.offerDetails.map(o => {
-          let offer = {...o};
-          offer.offeredOn = o.offeredOn ? o.offeredOn.toString().substring(0,10) : '';
-          return offer;
-        }),
-        groups: current.groups.map(g => {
-          let group = {...g};
-          group.available = g.available ? g.available.toString().substring(0,10) : '';
-          return group;
-        }),
         imagesToUpload: 0
       };
       setWanted(newWanted);  

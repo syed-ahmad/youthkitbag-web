@@ -1,19 +1,19 @@
-import * as types from '../actions/types';
+import { FETCH_KITBAG_KITS, FETCH_KITBAG_TRADES, FETCH_KITBAG_WANTEDS, FETCH_KITBAG_STOLENS, FETCH_MARKET_TRADES, FETCH_MARKET_WANTEDS, FETCH_MARKET_STOLENS, FETCH_GROUPS, LOGOUT } from '../actions/types';
 
 const initialState = { by: 'all', search: '', options: [ { key: 'all', value: 'All' } ] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_KITBAG_KITS:
-    case types.FETCH_KITBAG_TRADES:
-    case types.FETCH_KITBAG_WANTEDS:
-    case types.FETCH_KITBAG_STOLENS:
-    case types.FETCH_MARKET_TRADES:
-    case types.FETCH_MARKET_WANTEDS:
-    case types.FETCH_MARKET_STOLENS:
-    case types.FETCH_GROUPS:
+    case FETCH_KITBAG_KITS:
+    case FETCH_KITBAG_TRADES:
+    case FETCH_KITBAG_WANTEDS:
+    case FETCH_KITBAG_STOLENS:
+    case FETCH_MARKET_TRADES:
+    case FETCH_MARKET_WANTEDS:
+    case FETCH_MARKET_STOLENS:
+    case FETCH_GROUPS:
       return { ...state, ...action.payload.filter };
-    case types.LOGOUT:
+    case LOGOUT:
       return initialState;
     default:
       return state;

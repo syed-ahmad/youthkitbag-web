@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, EDIT_KITBAG_KIT, DELETE_KITBAG_KIT, API_KITBAG_ERROR } from './types';
+import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, EDIT_KITBAG_KIT, DELETE_KITBAG_KIT, API_KITBAG_ERROR, RESET_TOAST, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
-import * as types from '../actions/types';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
@@ -22,7 +21,7 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/kits');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: response });
@@ -30,6 +29,7 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
 };
 
 export const fetchKitbagKit = (kitId) => dispatch => {
+  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/kit/${kitId}`, {
     headers: {
@@ -44,7 +44,7 @@ export const fetchKitbagKit = (kitId) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/kits');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -67,7 +67,7 @@ export const createKitbagKit = (formValues) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/kits');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -90,7 +90,7 @@ export const editKitbagKit = (kitId, formValues) =>  dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/kits');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -113,7 +113,7 @@ export const deleteKitbagKit = (kitId) => dispatch => {
     const { response } = err;
     if (response.status === 401) {
       window.localStorage.clear();
-      dispatch({ type: types.GETALL_FAILURE, payload: response});
+      dispatch({ type: GETALL_FAILURE, payload: response});
       history.push('/auth/login?return=/kitbag/kits');
     }
     dispatch({ type: API_KITBAG_ERROR, payload: err.response });

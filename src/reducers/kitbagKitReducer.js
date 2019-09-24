@@ -1,22 +1,22 @@
-import * as types from '../actions/types';
+import { FETCH_KITBAG_KIT, CREATE_KITBAG_KIT, EDIT_KITBAG_KIT, FETCH_KITBAG_KITS, ADD_IMAGE, CLEAR_NEW_IMAGES, LOGOUT } from '../actions/types';
 
 const initialState = {current: {}, newImages: [], list: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_KITBAG_KIT:
+    case FETCH_KITBAG_KIT:
       return { ...state, current: action.payload, newImages: [] };
-    case types.CREATE_KITBAG_KIT:
+    case CREATE_KITBAG_KIT:
       return { ...state, current: action.payload, newImages: [] };
-    case types.EDIT_KITBAG_KIT:
+    case EDIT_KITBAG_KIT:
       return { ...state, current: action.payload, newImages: [] };
-    case types.FETCH_KITBAG_KITS:
+    case FETCH_KITBAG_KITS:
       return { ...state, list: action.payload.kits, current: {}, newImages: [] };
-    case types.ADD_IMAGE:
+    case ADD_IMAGE:
       return { ...state, newImages: [...state.newImages, action.payload.photo] };
-    case types.CLEAR_NEW_IMAGES:
+    case CLEAR_NEW_IMAGES:
       return { ...state, newImages: [] };
-    case types.LOGOUT:
+    case LOGOUT:
       return initialState;
     default:
       return state;

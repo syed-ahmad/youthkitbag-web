@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { ADD_IMAGE, CLEAR_NEW_IMAGES, API_KITBAG_ERROR } from './types';
+import { ADD_IMAGE, CLEAR_NEW_IMAGES, API_KITBAG_ERROR, RESET_TOAST } from './types';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const addImage = (formData) => dispatch => {
+  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.post(`${baseUrl}/image/add`, formData, {
     headers: {

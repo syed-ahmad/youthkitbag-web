@@ -23,23 +23,18 @@ const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, resetEr
     title: '',
     subtitle: '',
     description: '',
-    condition: 'Used',
-    askingPrice: 0.00,
     location: {
       coordinates: ''
     },
-    tradeDetails: {
-      tradedOn: '',
-      toUserId: '',
-      tradePrice: 0,
-      complete: false
-    },
-    traded: false,
-    activitys: '',
-    groups: [],
     images: [],
+    activitys: '',
+    condition: 'used',
+    askingPrice: 0.00,
+    traded: false,
     sourceId: '',
     userId: '',
+    groups: [],
+    tradeDetails: [],
     topImage: '/images/default.png',
     imagesToUpload: 0
   });
@@ -64,11 +59,6 @@ const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, resetEr
     if (current && (current._id || current.sourceId)) {
       const newTrade = {
         ...current,
-        groups: current.groups.map(g => {
-          let group = {...g};
-          group.available = g.available ? g.available.toString().substring(0,10) : '';
-          return group;
-        }),
         imagesToUpload: 0
       };
       setTrade(newTrade);  

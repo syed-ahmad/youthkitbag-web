@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_KITBAG_WANTED, FETCH_KITBAG_WANTEDS, FETCH_KITBAG_WANTED, EDIT_KITBAG_WANTED, DELETE_KITBAG_WANTED, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
+import { CREATE_KITBAG_WANTED, FETCH_KITBAG_WANTEDS, FETCH_KITBAG_WANTED, EDIT_KITBAG_WANTED, DELETE_KITBAG_WANTED, API_KITBAG_ERROR, GETALL_FAILURE, RESET_TOAST } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
@@ -29,6 +29,7 @@ export const fetchKitbagWanteds = (search = '', by = 'all', page = 1, pagesize =
 };
 
 export const fetchKitbagWanted = (wantedId) => dispatch => {
+  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/wanted/${wantedId}`, {
     headers: {
@@ -51,6 +52,7 @@ export const fetchKitbagWanted = (wantedId) => dispatch => {
 };
 
 export const fetchKitbagWantedFromKit = (kitId) => dispatch => {
+  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/wanted/add/${kitId}`, {
     headers: {
@@ -73,6 +75,7 @@ export const fetchKitbagWantedFromKit = (kitId) => dispatch => {
 };
 
 export const createKitbagWanted = (formValues) => dispatch => {
+  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.post(`${baseUrl}/kitbag/wanted`, {...formValues}, {
     headers: {
@@ -81,8 +84,9 @@ export const createKitbagWanted = (formValues) => dispatch => {
     }
   })
   .then(response => {
+    console.log('CREATE', response);
     dispatch({ type: CREATE_KITBAG_WANTED, payload: response.data });
-    history.push('/kitbag/wanteds');
+    history.push('/kitbag/wanteds?search=&by=&page=1&pagesize=24');
   })
   .catch(err => {
     const { response } = err;
@@ -96,6 +100,7 @@ export const createKitbagWanted = (formValues) => dispatch => {
 }
 
 export const editKitbagWanted = (wantedId, formValues) =>  dispatch => {
+  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.put(`${baseUrl}/kitbag/wanted/${wantedId}`, {...formValues}, {
     headers: {
@@ -119,6 +124,7 @@ export const editKitbagWanted = (wantedId, formValues) =>  dispatch => {
 };
 
 export const deleteKitbagWanted = (wantedId) => dispatch => {
+  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.delete(`${baseUrl}/kitbag/wanted/${wantedId}`, {
     headers: {

@@ -8,6 +8,7 @@ import Title from '../../includes/Title';
 import StolenCard from './StolenCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
+import Alert from '../../includes/Alert';
 
 class Stolens extends React.Component {
 
@@ -54,6 +55,7 @@ class Stolens extends React.Component {
         <Title title={this.getTitle()} />
         <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
+            <Alert />
             <div className="row">
               <div className="col-12 col-sm-9">
                 <SearchForm search={this.props.location.search} callback={fetchKitbagStolens} />

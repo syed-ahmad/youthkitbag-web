@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagWanteds } from '../../../actions';
 import queryString from 'query-string';
-
 import Title from '../../includes/Title';
 import WantedCard from './WantedCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
+import Alert from '../../includes/Alert';
 
 class Wanteds extends React.Component {
 
@@ -54,6 +54,7 @@ class Wanteds extends React.Component {
         <Title title={this.getTitle()} />
         <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
+            <Alert />
             <div className="row">
               <div className="col-12 col-sm-9">
                 <SearchForm search={this.props.location.search} callback={fetchKitbagWanteds} />

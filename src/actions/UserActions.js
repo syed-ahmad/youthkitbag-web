@@ -1,9 +1,10 @@
-import * as types from './types'
+import { RESET_TOAST, GETALL_SUCCESS, GET_USER } from './types'
 import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const getUser = () => dispatch => {
+  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   const userId = localStorage.getItem('user');
 
@@ -13,8 +14,8 @@ export const getUser = () => dispatch => {
     }})
     .then(response => {
       const { data } = response;
-      dispatch({ type: types.GETALL_SUCCESS });
-      dispatch({ type: types.GET_USER, payload: data });
+      dispatch({ type: GETALL_SUCCESS });
+      dispatch({ type: GET_USER, payload: data });
     })
     .catch(err => {
     });

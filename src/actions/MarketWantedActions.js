@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_MARKET_WANTEDS, FETCH_MARKET_WANTED, API_MARKET_ERROR, GETALL_FAILURE } from './types';
+import { FETCH_MARKET_WANTEDS, FETCH_MARKET_WANTED, API_MARKET_ERROR, GETALL_FAILURE, RESET_TOAST } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
@@ -24,6 +24,7 @@ export const fetchMarketWanteds = (search = '', by = 'all', page = 1, pagesize =
 };
 
 export const fetchMarketWanted = (wantedId) => dispatch => {
+  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/market/wanted/${wantedId}`, {
     headers: {

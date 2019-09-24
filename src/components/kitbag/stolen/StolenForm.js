@@ -10,6 +10,8 @@ import { DateForm, TextForm, TextAreaForm, CheckboxForm, AddArrayButtonForm, Rem
 
 const StolenForm = ({ stolen }) => {
   
+  const newErrors = useSelector(state => state.toast.errors);
+
   const initialReport = {
     reportedOn: '2019-01-01',
     fromUserId: '',
@@ -25,8 +27,15 @@ const StolenForm = ({ stolen }) => {
     removeArrayItem,
     values,
     setValues,
-    errors
+    errors,
+    setErrors
   } = useForm(stolen, updateStolen, validate);
+
+  useEffect(() => {
+    if (newErrors) {
+      setErrors(newErrors);
+    }
+  }, [newErrors, setErrors]);
 
   // ?? still using redux
   const dispatch = useDispatch();
@@ -226,7 +235,7 @@ const StolenForm = ({ stolen }) => {
             <hr />
             <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} /> 
             <TextForm colFormat="3-9" label="Security" value={values.security} field="security" handleChange={handleChange} error={errors.security} />
-            <CheckboxForm colFormat="3-1-8" label="Recovered" value={values.recovered} field="recovered" handleChange={handleChange} error={errors.recovered} 
+            <CheckboxForm colFormat="3-1-8" label="Recovered" value={values.recovered} field="recovered" onChange={handleChange} error={errors.recovered} 
               help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search." />
             <hr />
             <div>
