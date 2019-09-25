@@ -12,7 +12,7 @@ class GroupMember extends React.Component {
 
   isRequested() {
     if (this.props.member.state === 'requested') return 'text-info';
-    return 'text-muted';
+    return 'text-light';
   }
 
   isApproved() {
