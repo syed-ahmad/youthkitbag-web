@@ -1,23 +1,10 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { resetError } from '../../actions/ToastActions';
 import Title from '../includes/Title';
 import Alert from '../includes/Alert';
 import LoginForm from './LoginForm';
 
-const mapStateToProps = state => ({
-});
-
-const mapDispatchToProps = {
-  resetError
-}
-
-const Login = ({ resetError }) => {
-
-  useEffect(() => {
-    resetError();
-  },[resetError]);
+const Login = () => {
 
   return (
     <div>
@@ -37,4 +24,4 @@ const Login = ({ resetError }) => {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

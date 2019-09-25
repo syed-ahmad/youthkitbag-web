@@ -7,7 +7,7 @@ export default (state = initialState, action) => {
     case FETCH_KITBAG_TRADE:
       return { ...state, current: action.payload, newImages: [] };
     case CREATE_KITBAG_TRADE:
-      return { ...state, current: action.payload.trade };
+      return { current: action.payload.trade, newImages: [], list: [] };
     case EDIT_KITBAG_TRADE:
       return { ...state, current: action.payload, newImages: [] };
     case FETCH_KITBAG_TRADES:

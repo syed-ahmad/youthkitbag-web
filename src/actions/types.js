@@ -1,8 +1,8 @@
-export const LOGIN_REQUEST = 'USERS_LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'USERS_LOGIN_SUCCESS'
-export const LOGIN_FAILURE = 'USERS_LOGIN_FAILURE'
+export const LOGIN_REQUEST = 'LOGIN_REQUEST'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 
-export const LOGOUT = 'USERS_LOGOUT'
+export const LOGOUT = 'LOGOUT'
 
 export const SIGNUP_SUCCESS = 'USERS_SIGNUP_SUCCESS'
 export const SIGNUP_FAILURE = 'USERS_SIGNUP_FAILURE'
@@ -22,9 +22,9 @@ export const SIGN_OUT = 'SIGN_OUT';
 export const FETCH_SUBSCRIPTION_PACKAGE = 'FETCH_SUBSCRIPTION_PACKAGE';
 
 export const RESET_TOAST = 'RESET_TOAST'
+export const SHOWN_TOAST = 'SHOWN_TOAST';
+export const FLAG_TOAST = 'FLAG_TOAST';
 export const SET_TOAST = 'SET_TOAST'
-export const SET_SUCCESS = 'SET_SUCCESS'
-export const SET_WARNING = 'SET_WARNING'
 export const SET_ERROR = 'SET_ERROR'
 
 export const CREATE_KITBAG_KIT = 'CREATE_KITBAG_KIT';

@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, EDIT_KITBAG_KIT, DELETE_KITBAG_KIT, API_KITBAG_ERROR, RESET_TOAST, GETALL_FAILURE } from './types';
+import { CREATE_KITBAG_KIT, FETCH_KITBAG_KITS, FETCH_KITBAG_KIT, EDIT_KITBAG_KIT, DELETE_KITBAG_KIT, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
+  
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/kit`, {
     params: { search, by, page, pagesize },
@@ -29,7 +30,6 @@ export const fetchKitbagKits = (search = '', by = 'all', page = 1, pagesize = 24
 };
 
 export const fetchKitbagKit = (kitId) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/kit/${kitId}`, {
     headers: {
@@ -105,8 +105,8 @@ export const deleteKitbagKit = (kitId) => dispatch => {
       'content-type': 'application/json',
     }
   })
-  .then(() => {
-    dispatch({ type: DELETE_KITBAG_KIT, payload: kitId });
+  .then(response => {
+    dispatch({ type: DELETE_KITBAG_KIT, payload: response.data });
     history.push('/kitbag/kits');
   })
   .catch(err => {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
-import { resetError } from '../../../actions/ToastActions';
 import KitForm from './KitForm';
 import Title from '../../includes/Title';
 import Alert from '../../includes/Alert';
@@ -12,10 +11,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchKitbagKit, resetError
+  fetchKitbagKit
 }
 
-const KitPage = ({ current, fetchKitbagKit, resetError, match }) => {
+const KitPage = ({ current, fetchKitbagKit, match }) => {
 
   const kitId = match.params.id;
   const [kit, setKit] = useState({
@@ -34,10 +33,6 @@ const KitPage = ({ current, fetchKitbagKit, resetError, match }) => {
     topImage: '/images/default.png',
     imagesToUpload: 0
   });
-
-  useEffect(() => {
-    resetError();
-  },[resetError]);
 
   useEffect(() => {
     if (kitId) {

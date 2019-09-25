@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchKitbagTrade, fetchKitbagTradeFromKit } from '../../../actions/KitbagTradeActions';
-import { resetError } from '../../../actions/ToastActions';
 import TradeForm from './TradeForm';
 import Title from '../../includes/Title';
 import Alert from '../../includes/Alert';
@@ -11,10 +10,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchKitbagTrade, fetchKitbagTradeFromKit, resetError
+  fetchKitbagTrade, fetchKitbagTradeFromKit
 }
 
-const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, resetError, match }) => {
+const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }) => {
 
   const tradeId = match.params.id;
   const kitId = match.params.kit;
@@ -38,10 +37,6 @@ const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, resetEr
     topImage: '/images/default.png',
     imagesToUpload: 0
   });
-
-  useEffect(() => {
-    resetError();
-  },[resetError]);
 
   useEffect(() => {
     if (tradeId) {

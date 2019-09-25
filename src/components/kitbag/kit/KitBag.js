@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchKitbagKits } from '../../../actions';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-
+import Alert from '../../includes/Alert';
 import Title from '../../includes/Title';
 import KitCard from './KitCard';
 import SearchForm from '../../includes/SearchForm';
@@ -52,11 +52,9 @@ class KitBag extends React.Component {
     return (
       <div>
         <Title title={this.getTitle()} />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features">
+        <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
           <div className="container">
+            <Alert />
             <div className="row">
               <div className="col-12 col-sm-9">
                 <SearchForm search={this.props.location.search} callback={fetchKitbagKits}/>

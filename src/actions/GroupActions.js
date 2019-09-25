@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_GROUPS, CREATE_GROUP, FETCH_GROUP, EDIT_GROUP, EDIT_GROUP_STATUS, FETCH_GROUP_MEMBERS, API_KITBAG_ERROR, GETALL_FAILURE, RESET_TOAST } from './types';
+import { FETCH_GROUPS, CREATE_GROUP, FETCH_GROUP, EDIT_GROUP, EDIT_GROUP_STATUS, FETCH_GROUP_MEMBERS, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
@@ -29,7 +29,6 @@ export const fetchGroups = (search = '', by = 'all', page = 1, pagesize = 24) =>
 };
 
 export const fetchGroup = (groupId) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/group/${groupId}`, {
     headers: {
@@ -52,7 +51,6 @@ export const fetchGroup = (groupId) => dispatch => {
 };
 
 export const createGroup = (formValues) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.post(`${baseUrl}/group`, {...formValues}, {
     headers: {
@@ -76,7 +74,6 @@ export const createGroup = (formValues) => dispatch => {
 }
 
 export const editGroup = (groupId, formValues) =>  dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.put(`${baseUrl}/group/${groupId}`, {...formValues}, {
     headers: {
@@ -100,7 +97,6 @@ export const editGroup = (groupId, formValues) =>  dispatch => {
 };
 
 export const editGroupStatus = (groupId, status) =>  dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.put(`${baseUrl}/group/${groupId}/status`, { status: status }, {
     headers: {
@@ -123,11 +119,9 @@ export const editGroupStatus = (groupId, status) =>  dispatch => {
   });
 };
 
-export const fetchGroupMembers = (groupId, search = '', by = 'all', page = 1, pagesize = 24) => dispatch => {
-  dispatch({ type: RESET_TOAST });
+export const fetchGroupMembers = (groupId) => dispatch => {
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/group/${groupId}/members`, {
-    params: { search, by, page, pagesize },
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json'
@@ -135,7 +129,7 @@ export const fetchGroupMembers = (groupId, search = '', by = 'all', page = 1, pa
   })
   .then(response => {
     dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
-    history.push(`/settings/group/${groupId}/members?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`);
+    history.push(`/settings/groups/${groupId}/members`);
   })
   .catch(err => {
     const { response } = err;

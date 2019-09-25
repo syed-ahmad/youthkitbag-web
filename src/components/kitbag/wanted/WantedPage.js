@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchKitbagWanted, fetchKitbagWantedFromKit } from '../../../actions/KitbagWantedActions';
-import { resetError } from '../../../actions/ToastActions';
 import WantedForm from './WantedForm';
 import Title from '../../includes/Title';
 import Alert from '../../includes/Alert';
@@ -11,10 +10,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchKitbagWanted, fetchKitbagWantedFromKit, resetError
+  fetchKitbagWanted, fetchKitbagWantedFromKit
 }
 
-const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, resetError, match }) => {
+const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, match }) => {
 
   const { wantedId, kitId } = match.params;
 
@@ -36,10 +35,6 @@ const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, rese
     topImage: '/images/default.png',
     imagesToUpload: 0
   });
-
-  useEffect(() => {
-    resetError();
-  },[resetError]);
   
   useEffect(() => {
     if (wantedId) {

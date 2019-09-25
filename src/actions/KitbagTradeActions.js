@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_KITBAG_TRADE, FETCH_KITBAG_TRADES, FETCH_KITBAG_TRADE, EDIT_KITBAG_TRADE, DELETE_KITBAG_TRADE, API_KITBAG_ERROR, GETALL_FAILURE, RESET_TOAST } from './types';
+import { CREATE_KITBAG_TRADE, FETCH_KITBAG_TRADES, FETCH_KITBAG_TRADE, EDIT_KITBAG_TRADE, DELETE_KITBAG_TRADE, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
@@ -29,7 +29,6 @@ export const fetchKitbagTrades = (search = '', by = 'all', page = 1, pagesize = 
 };
 
 export const fetchKitbagTrade = (tradeId) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/trade/${tradeId}`, {
     headers: {
@@ -52,7 +51,6 @@ export const fetchKitbagTrade = (tradeId) => dispatch => {
 };
 
 export const fetchKitbagTradeFromKit = (kitId) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/trade/add/${kitId}`, {
     headers: {
@@ -75,7 +73,6 @@ export const fetchKitbagTradeFromKit = (kitId) => dispatch => {
 };
 
 export const createKitbagTrade = (formValues) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.post(`${baseUrl}/kitbag/trade`, {...formValues}, {
     headers: {
@@ -99,7 +96,6 @@ export const createKitbagTrade = (formValues) => dispatch => {
 }
 
 export const editKitbagTrade = (tradeId, formValues) =>  dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.put(`${baseUrl}/kitbag/trade/${tradeId}`, {...formValues}, {
     headers: {
@@ -123,7 +119,6 @@ export const editKitbagTrade = (tradeId, formValues) =>  dispatch => {
 };
 
 export const deleteKitbagTrade = (tradeId) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.delete(`${baseUrl}/kitbag/trade/${tradeId}`, {
     headers: {

@@ -224,13 +224,13 @@ const GroupForm = ({ group }) => {
               </div>
             ))}
           </div>
-          {(values.appAdmin || !values.exists) && 
+          {(values.appAdmin || values.groupAdmin) && 
             <div>
               <button className="btn btn-primary" type="submit">Save</button>
               <Link className="btn btn-link" to="/settings/groups">Cancel</Link>
             </div>
           }
-          {(values.groupAdmin && values.exists) && 
+          {((values.appAdmin || values.groupAdmin) && values._id) && 
             <div>
               <Link className="btn btn-primary" to={`/settings/groups/${values._id}/members`}>Members</Link>
             </div>

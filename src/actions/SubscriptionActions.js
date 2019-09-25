@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { FETCH_SUBSCRIPTION_PACKAGE, API_KITBAG_ERROR, GETALL_FAILURE, RESET_TOAST } from './types';
+import { FETCH_SUBSCRIPTION_PACKAGE, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchSubscriptionPackage = (subscriptionId) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/subscription/${subscriptionId}`, {
     headers: {

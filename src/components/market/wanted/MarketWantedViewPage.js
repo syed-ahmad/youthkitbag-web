@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchMarketWanted } from '../../../actions/MarketWantedActions';
-import { resetError } from '../../../actions/ToastActions';
 import MarketWantedDetails from './MarketWantedDetails';
 import Title from '../../includes/Title';
 import Alert from '../../includes/Alert';
@@ -11,10 +10,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchMarketWanted, resetError
+  fetchMarketWanted
 }
 
-const MarketWantedViewPage = ({ current, fetchMarketWanted, resetError, match }) => {
+const MarketWantedViewPage = ({ current, fetchMarketWanted, match }) => {
 
   const wantedId = match.params.id;
 
@@ -27,10 +26,6 @@ const MarketWantedViewPage = ({ current, fetchMarketWanted, resetError, match })
     images: [],
     topImage: '/images/default.png'
   });
-
-  useEffect(() => {
-    resetError();
-  },[resetError]);
 
   useEffect(() => {
     fetchMarketWanted(wantedId);

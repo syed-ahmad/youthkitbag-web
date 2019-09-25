@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchKitbagStolen, fetchKitbagStolenFromKit } from '../../../actions/KitbagStolenActions';
-import { resetError } from '../../../actions/ToastActions';
 import StolenForm from './StolenForm';
 import Title from '../../includes/Title';
 import Alert from '../../includes/Alert';
@@ -11,10 +10,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchKitbagStolen, fetchKitbagStolenFromKit, resetError
+  fetchKitbagStolen, fetchKitbagStolenFromKit
 }
 
-const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, resetError, match }) => {
+const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, match }) => {
 
   const stolenId = match.params.id;
   const kitId = match.params.kit;
@@ -39,10 +38,6 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, rese
     topImage: '/images/default.png',
     imagesToUpload: 0
   });
-
-  useEffect(() => {
-    resetError();
-  },[resetError]);
   
   useEffect(() => {
     if (stolenId) {

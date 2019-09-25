@@ -7,7 +7,7 @@ export default (state = initialState, action) => {
     case FETCH_KITBAG_STOLEN:
         return { ...state, current: action.payload, newImages: [] };
     case CREATE_KITBAG_STOLEN:
-      return { ...state, current: action.payload, newImages: [] };
+      return { current: action.payload.stolen, newImages: [], list: [] };
     case EDIT_KITBAG_STOLEN:
       return { ...state, current: action.payload, newImages: [] };
     case DELETE_KITBAG_STOLEN:

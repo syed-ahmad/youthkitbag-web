@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchGroup } from '../../actions/GroupActions';
-import { resetError } from '../../actions/ToastActions';
 import GroupForm from './GroupForm';
 import Title from '../includes/Title';
 import Alert from '../includes/Alert';
@@ -11,10 +10,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchGroup, resetError
+  fetchGroup
 }
 
-const GroupPage = ({ current, resetError, fetchGroup, match }) => {
+const GroupPage = ({ current, fetchGroup, match }) => {
 
   const { groupId } = match.params;
   const [group, setGroup] = useState({
@@ -31,10 +30,6 @@ const GroupPage = ({ current, resetError, fetchGroup, match }) => {
     topImage: '/images/default.png',
     imagesToUpload: 0
   });
-
-  useEffect(() => {
-    resetError();
-  },[resetError]);
 
   useEffect(() => {
     if (groupId) {

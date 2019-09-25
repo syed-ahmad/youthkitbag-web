@@ -1,5 +1,9 @@
-import { RESET_TOAST } from './types';
+import { RESET_TOAST, SHOWN_TOAST } from './types';
 
-export const resetError = () => dispatch => {
+export const resetToast = () => dispatch => {
   dispatch({ type: RESET_TOAST });
+};
+
+export const shownToast = () => dispatch => {
+  dispatch({ type: SHOWN_TOAST });
 };

@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, RESET_TOAST, LOGIN_FAILURE, SET_ERROR, SIGNUP_SUCCESS, LOGOUT, RESET_REQUESTED, SIGNUP_FAILURE, PASSWORD_RESET } from './types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, SET_ERROR, SIGNUP_SUCCESS, LOGOUT, RESET_REQUESTED, SIGNUP_FAILURE, PASSWORD_RESET } from './types';
 import axios from 'axios';
 import history from '../helpers/history';
 import { getUser } from './UserActions';
@@ -7,7 +7,6 @@ const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const login = (email, password) => dispatch => {
   window.localStorage.clear();
-  dispatch({ type: RESET_TOAST });
   axios.post(`${baseUrl}/auth/login`, { email, password }, {
       'content-type': 'application/json',
     })
@@ -21,14 +20,12 @@ export const login = (email, password) => dispatch => {
       history.push('/kitbag/kits');
     })
     .catch(err => {
-      dispatch({ type: LOGIN_FAILURE });
-      dispatch({ type: SET_ERROR, payload: err.response });
+      dispatch({ type: LOGIN_FAILURE, payload: err.response });
     });
 }
 
 export const signup = (email, password, confirmPassword) => dispatch => {
   window.localStorage.clear();
-  dispatch({ type: RESET_TOAST });
   axios.post(`${baseUrl}/auth/signup`, { email, password, confirmPassword }, {
     'content-type': 'application/json',
   })
@@ -45,8 +42,7 @@ export const signup = (email, password, confirmPassword) => dispatch => {
 export const logout = () => async (dispatch) => {
   try {
     window.localStorage.clear();
-    dispatch({ type: RESET_TOAST });
-    dispatch({ type: LOGOUT })
+      dispatch({ type: LOGOUT })
     history.push('/')
   } catch (err) {
     if (err.response.status === 401) {
@@ -57,7 +53,6 @@ export const logout = () => async (dispatch) => {
 
 export const reset = (email) => dispatch => {
   window.localStorage.clear();
-  dispatch({ type: RESET_TOAST });
   axios.post(`${baseUrl}/auth/reset`, { email }, {
     'content-type': 'application/json',
   })
@@ -73,7 +68,6 @@ export const reset = (email) => dispatch => {
 
 export const newPassword = (password, userId, token) => dispatch => {
   window.localStorage.clear();
-  dispatch({ type: RESET_TOAST });
   axios.post(`${baseUrl}/auth/new-password`, { password, userId, token }, {
     'content-type': 'application/json',
   })

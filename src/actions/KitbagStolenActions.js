@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_KITBAG_STOLEN, FETCH_KITBAG_STOLENS, FETCH_KITBAG_STOLEN, EDIT_KITBAG_STOLEN, DELETE_KITBAG_STOLEN, API_KITBAG_ERROR, GETALL_FAILURE, RESET_TOAST } from './types';
+import { CREATE_KITBAG_STOLEN, FETCH_KITBAG_STOLENS, FETCH_KITBAG_STOLEN, EDIT_KITBAG_STOLEN, DELETE_KITBAG_STOLEN, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
@@ -29,7 +29,6 @@ export const fetchKitbagStolens = (search = '', by = 'all', page = 1, pagesize =
 };
 
 export const fetchKitbagStolen = (stolenId) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/stolen/${stolenId}`, {
     headers: {
@@ -52,7 +51,6 @@ export const fetchKitbagStolen = (stolenId) => dispatch => {
 };
 
 export const fetchKitbagStolenFromKit = (kitId) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.get(`${baseUrl}/kitbag/stolen/add/${kitId}`, {
     headers: {
@@ -75,7 +73,6 @@ export const fetchKitbagStolenFromKit = (kitId) => dispatch => {
 };
 
 export const createKitbagStolen = (formValues) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.post(`${baseUrl}/kitbag/stolen`, {...formValues}, {
     headers: {
@@ -99,7 +96,6 @@ export const createKitbagStolen = (formValues) => dispatch => {
 }
 
 export const editKitbagStolen = (stolenId, formValues) =>  dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.put(`${baseUrl}/kitbag/stolen/${stolenId}`, {...formValues}, {
     headers: {
@@ -123,7 +119,6 @@ export const editKitbagStolen = (stolenId, formValues) =>  dispatch => {
 };
 
 export const deleteKitbagStolen = (stolenId) => dispatch => {
-  dispatch({ type: RESET_TOAST });
   const token = localStorage.getItem('token');
   axios.delete(`${baseUrl}/kitbag/stolen/${stolenId}`, {
     headers: {

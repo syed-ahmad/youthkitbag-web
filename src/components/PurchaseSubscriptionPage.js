@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchSubscriptionPackage } from '../actions/SubscriptionActions';
-import { resetError } from '../actions/ToastActions';
 import Title from './includes/Title';
 import Alert from './includes/Alert';
 
@@ -11,10 +10,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchSubscriptionPackage, resetError
+  fetchSubscriptionPackage
 }
 
-const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, resetError, match }) => {
+const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, match }) => {
   
   const subscriptionId = match.params.id;
 
@@ -24,10 +23,6 @@ const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, resetErr
     details: [],
     price: 0.00
   })
-
-  useEffect(() => {
-    resetError();
-  },[resetError]);
   
   useEffect(() => {
     fetchSubscriptionPackage(subscriptionId);

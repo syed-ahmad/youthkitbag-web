@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchMarketStolen } from '../../../actions/MarketStolenActions';
-import { resetError } from '../../../actions/ToastActions';
 import MarketStolenDetails from './MarketStolenDetails';
 import Title from '../../includes/Title';
 import Alert from '../../includes/Alert';
@@ -11,10 +10,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchMarketStolen, resetError
+  fetchMarketStolen
 }
 
-const MarketStolenViewPage = ({ current, fetchMarketStolen, resetError, match }) => {
+const MarketStolenViewPage = ({ current, fetchMarketStolen, match }) => {
 
   const stolenId = match.params.id;
 
@@ -28,10 +27,6 @@ const MarketStolenViewPage = ({ current, fetchMarketStolen, resetError, match })
     images: [],
     topImage: '/images/default.png'
   });
-
-  useEffect(() => {
-    resetError();
-  },[resetError]);
   
   useEffect(() => {
     fetchMarketStolen(stolenId);
