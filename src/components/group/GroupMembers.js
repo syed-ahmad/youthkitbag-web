@@ -3,25 +3,23 @@ import { connect } from 'react-redux';
 import { fetchGroupMembers } from '../../actions';
 import Title from '../includes/Title';
 import Alert from '../includes/Alert';
+import GroupMember from './GroupMember';
 
 class GroupMembers extends React.Component {
 
   getTitle = () => {
-    console.log('display');
-    if (!this.props.members) {
+    if (!this.props.memberList.members) {
       return 'Loading ...';
     }
-    return `Found members (${this.props.members.length})`;
+    return `${this.props.memberList.name} - members (${this.props.memberList.members.length})`;
   }
 
   componentDidMount() {
-    console.log('GMBR did');
     const groupId = this.props.match.params.groupId;
     this.props.fetchGroupMembers(groupId);
   }
 
   componentDidUpdate(prevProps) {
-    console.log('GMBR upd');
     if (this.props.location.search !== prevProps.location.search) {
       const groupId = this.props.match.params.groupId;
       this.props.fetchGroupMembers(groupId);
@@ -29,15 +27,15 @@ class GroupMembers extends React.Component {
   } 
 
   renderList() {
-    console.log('display members');
-    return this.props.members.map((item, index) => {
-      return <p key={`${item._id}-${index}`}>{JSON.stringify(item)}</p>
-//      return <GroupCard key={`${item._id}-${index}`} group={item}/>
+    if (!this.props.memberList.members) return null;
+
+    return this.props.memberList.members.map((member, index) => {
+      return <GroupMember key={`${member._id}-${index}`} member={member} groupId={this.props.memberList._id} />
     })
   }
 
   render() {
-    console.log('display');
+    if (!this.props.memberList) return <div>Loading</div>;
     return (
       <div>
         <Title title={this.getTitle()} />
@@ -45,7 +43,7 @@ class GroupMembers extends React.Component {
           <div className="container">
             <Alert />
             <div className="row">
-            {this.renderList()}
+              {this.renderList()}
             </div>
           </div>
         </section>
@@ -55,7 +53,7 @@ class GroupMembers extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { members: Object.values(state.group.members) };
+  return { memberList: state.group.memberList };
 }
 
 export default connect(mapStateToProps, { fetchGroupMembers })(GroupMembers);

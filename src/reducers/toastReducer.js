@@ -1,4 +1,4 @@
-import { RESET_TOAST, API_KITBAG_ERROR, LOGOUT, CREATE_GROUP, CREATE_KITBAG_WANTED, CREATE_KITBAG_STOLEN, CREATE_KITBAG_TRADE, CREATE_KITBAG_KIT, DELETE_KITBAG_TRADE, DELETE_KITBAG_KIT, LOGIN_FAILURE, SHOWN_TOAST, EDIT_GROUP_STATUS } from '../actions/types';
+import { RESET_TOAST, API_KITBAG_ERROR, LOGOUT, CREATE_GROUP, CREATE_KITBAG_WANTED, CREATE_KITBAG_STOLEN, CREATE_KITBAG_TRADE, CREATE_KITBAG_KIT, DELETE_KITBAG_TRADE, DELETE_KITBAG_KIT, LOGIN_FAILURE, SHOWN_TOAST, EDIT_GROUP_STATUS, EDIT_GROUP_MEMBER_STATE } from '../actions/types';
 
 const initialState = { currentMessage: '', currentStyle: '', errors: [], hasShown: false };
 
@@ -10,6 +10,7 @@ export default (state = initialState, action) => {
     case CREATE_KITBAG_WANTED: 
     case CREATE_KITBAG_STOLEN:
     case EDIT_GROUP_STATUS:
+    case EDIT_GROUP_MEMBER_STATE:
       return { currentMessage: action.payload.message, currentStyle: 'success', hasShown: false };
     case DELETE_KITBAG_KIT:
     case DELETE_KITBAG_TRADE:

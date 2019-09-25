@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_GROUPS, CREATE_GROUP, FETCH_GROUP, EDIT_GROUP, EDIT_GROUP_STATUS, FETCH_GROUP_MEMBERS, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
+import { FETCH_GROUPS, CREATE_GROUP, FETCH_GROUP, EDIT_GROUP, EDIT_GROUP_STATUS, FETCH_GROUP_MEMBERS, EDIT_GROUP_MEMBER_STATE, API_KITBAG_ERROR, GETALL_FAILURE } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
@@ -141,3 +141,26 @@ export const fetchGroupMembers = (groupId) => dispatch => {
     dispatch({ type: API_KITBAG_ERROR, payload: response });
   });
 };
+
+export const editGroupMemberState = (groupId, memberId, state) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios.put(`${baseUrl}/group/${groupId}/members/${memberId}/${state}`, {}, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }
+  })
+  .then(response => {
+    dispatch({ type: EDIT_GROUP_MEMBER_STATE, payload: response.data });
+    history.push(`/settings/groups/${groupId}/members`);
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: GETALL_FAILURE, payload: response});
+      history.push(`/auth/login?return=/settings/group/${groupId}/members`);
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  })
+}

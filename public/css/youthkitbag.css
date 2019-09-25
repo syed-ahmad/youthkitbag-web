@@ -197,6 +197,8 @@ footer {
       position: absolute;
       padding-right: 0.5rem;
       top: -0.25rem; }
+  .youthkitbag span.icons-bottom-left {
+    font-size: 2.2rem; }
   .youthkitbag .img-link {
     cursor: pointer; }
   .youthkitbag .form-group .valid-feedback {
