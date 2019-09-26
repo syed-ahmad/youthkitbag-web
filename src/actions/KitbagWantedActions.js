@@ -81,7 +81,6 @@ export const createKitbagWanted = (formValues) => dispatch => {
     }
   })
   .then(response => {
-    console.log('CREATE', response);
     dispatch({ type: CREATE_KITBAG_WANTED, payload: response.data });
     history.push('/kitbag/wanteds?search=&by=&page=1&pagesize=24');
   })

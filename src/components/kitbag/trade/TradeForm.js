@@ -23,8 +23,6 @@ const TradeForm = ({ trade }) => {
   //const initialTradeDetails = { tradedOn: '', toUserId: '', tradePrice: 0.00, complete: false, legit: true, messages: [] };
   const initialValues = { ...trade };
 
-  console.log('INITIAL VALUES', initialValues);
-
   const {
     setChange,
     handleChange,
@@ -186,9 +184,7 @@ const TradeForm = ({ trade }) => {
     if (trade._id) {
       dispatch(editKitbagTrade(trade._id, trade));
     } else {
-      console.log('DISPATCH', trade);
       dispatch(createKitbagTrade(trade));
-      console.log('DISPATCHBACK', trade);
     }
   }
 
