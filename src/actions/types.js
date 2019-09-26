@@ -15,6 +15,7 @@ export const RESET_REQUESTED = 'RESET_REQUESTED'
 export const PASSWORD_RESET = 'PASSWORD_RESET'
 
 export const GET_USER = 'GET_USER'
+export const EDIT_USER_PROFILE = 'EDIT_USER_PROFILE';
 
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
@@ -72,3 +73,4 @@ export const CREATE_GROUP = 'CREATE_GROUP';
 export const EDIT_GROUP = 'EDIT_GROUP';
 export const EDIT_GROUP_STATUS = 'EDIT_GROUP_STATUS';
 export const EDIT_GROUP_MEMBER_STATE = 'EDIT_GROUP_MEMBER_STATE';
+

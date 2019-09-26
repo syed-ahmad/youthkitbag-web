@@ -1,5 +1,6 @@
-import { GETALL_SUCCESS, GET_USER } from './types'
+import { GETALL_SUCCESS, GET_USER, EDIT_USER_PROFILE, API_KITBAG_ERROR, GETALL_FAILURE } from './types'
 import axios from 'axios';
+import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
@@ -19,3 +20,26 @@ export const getUser = () => dispatch => {
     .catch(err => {
     });
 }
+
+export const editProfile = (formValues) =>  dispatch => {
+  const token = localStorage.getItem('token');
+  axios.put(`${baseUrl}/user/profile`, {...formValues}, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'content-type': 'application/json',
+    }
+  })
+  .then(response => {
+    dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
+    history.push('/settings/account/profile');
+  })
+  .catch(err => {
+    const { response } = err;
+    if (response.status === 401) {
+      window.localStorage.clear();
+      dispatch({ type: GETALL_FAILURE, payload: response});
+      history.push('/auth/login?return=/settings/account/profile');
+    }
+    dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+  });
+};
