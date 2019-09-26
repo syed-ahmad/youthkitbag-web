@@ -22,9 +22,7 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, matc
     title: '',
     subtitle: '',
     description: '',
-    location: {
-      coordinates: ''
-    },
+    location: '',
     images: [],
     activitys: '',
     security: [],

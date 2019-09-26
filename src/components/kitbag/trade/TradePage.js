@@ -22,9 +22,7 @@ const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }
     title: '',
     subtitle: '',
     description: '',
-    location: {
-      coordinates: ''
-    },
+    location: '',
     images: [],
     activitys: '',
     condition: 'used',

@@ -22,9 +22,7 @@ const WantedPage = ({ current, fetchKitbagWanted, fetchKitbagWantedFromKit, matc
     subtitle: '',
     description: '',
     offerPrice: 0.00,
-    location: {
-      coordinates: ''
-    },
+    location: '',
     offerDetails: [],
     obtained: false,
     activitys: '',
