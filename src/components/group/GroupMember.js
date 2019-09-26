@@ -40,7 +40,7 @@ class GroupMember extends React.Component {
             <img className="card-img-top img-thumbnail rounded-circle p-0" src={this.getThumbnail() } alt="" role="presentation" />
           </div>
           <div className="card-body">
-            <h3 className="card-title h4 ellipsis">{user.fullname ? user.fullname : 'Name ?'}</h3>
+            <h3 className="card-title h4 ellipsis">{user.lastname ? `${user.lastname.toUpperCase()}, ${user.firstname}` : 'UNKNOWN'}</h3>
             <h4 className="card-title h5 ellipsis">{user.username ? user.username : 'Username ?'}</h4>
             <p className="card-text">{permission.length > 0 ? permission.join(', ') : '-'}</p>
             <span className="icons-bottom-left">
