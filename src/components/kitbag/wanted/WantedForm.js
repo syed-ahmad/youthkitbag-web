@@ -100,14 +100,30 @@ const WantedForm = ({ wanted }) => {
           {images[i].state !== 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
-                <span
-                  className="icon-tray-item fas fa-trash-alt img-delete"
+                <button
+                  aria-label="Delete image"
+                  className="btn btn-link p-0 icon-tray-item"
+                  href="#"
                   onClick={deleteImage.bind(null, images[i]._id)}
-                ></span>
-                <span
-                  className="icon-tray-item fas fa-star img-primary"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="fas fa-trash"
+                    title="Delete this image?"
+                  ></i>
+                </button>
+                <button
+                  aria-label="Set as primary image"
+                  className="btn btn-link p-0 icon-tray-item"
+                  href="#"
                   onClick={setPrimaryImage.bind(null, images[i]._id)}
-                ></span>
+                >
+                  <i
+                    aria-hidden="true"
+                    className="fas fa-star"
+                    title="Set as primary image"
+                  ></i>
+                </button>
               </span>
               <img
                 className="img-fluid mb-3 img-link mini-img mr-1"
@@ -121,10 +137,18 @@ const WantedForm = ({ wanted }) => {
           {images[i].state === 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
-                <span
-                  className="icon-tray-item fas fa-undo img-delete"
+                <button
+                  aria-label="Undo image deletion"
+                  className="btn btn-link p-0 icon-tray-item"
+                  href="#"
                   onClick={reinstateImage.bind(null, images[i]._id)}
-                ></span>
+                >
+                  <i
+                    aria-hidden="true"
+                    className="fas fa-undo"
+                    title="Undo image deletion"
+                  ></i>
+                </button>
               </span>
               <img
                 className="img-fluid mb-3 img-link mini-img mr-1"
@@ -251,7 +275,9 @@ const WantedForm = ({ wanted }) => {
         </div>
         <div>{renderSecondaryImages()}</div>
         <div className="form-group row">
-          <label className="col-sm-3 col-form-label">Images</label>
+          <label className="col-sm-3 col-form-label" htmlFor="photos">
+            Images
+          </label>
           <div className="col-sm-9">
             <div className="custom-file">
               <input

@@ -14,7 +14,7 @@ const mapDispatchToProps = {
 };
 
 const MarketStolenViewPage = ({ current, fetchMarketStolen, match }) => {
-  const stolenId = match.params.id;
+  const stolenId = match.params.stolenId;
 
   const [stolen, setStolen] = useState({
     title: 'Loading requested stolen item ...',

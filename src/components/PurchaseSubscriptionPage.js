@@ -18,7 +18,7 @@ const PurchaseSubscriptionPage = ({
   fetchSubscriptionPackage,
   match
 }) => {
-  const subscriptionId = match.params.id;
+  const subscriptionId = match.params.subscriptionId;
 
   const [subscription, setSubscription] = useState({
     title: 'Loading subscription details ...',

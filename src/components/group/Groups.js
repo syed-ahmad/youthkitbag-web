@@ -11,12 +11,12 @@ import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
 
 class Groups extends React.Component {
-  getTitle = () => {
+  getTitle() {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
     return `Found groups (${this.props.pagination.totalItems})`;
-  };
+  }
 
   componentDidMount() {
     var by = '';

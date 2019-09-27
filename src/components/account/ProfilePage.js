@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   current: state.user.profile
 });
 
-const ProfilePage = ({ current, fetchProfile, match }) => {
+const ProfilePage = ({ current, match }) => {
   const { profileId } = match.params;
   const [profile, setProfile] = useState({
     firstname: '',

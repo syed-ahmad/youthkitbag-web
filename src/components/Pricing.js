@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Title from './includes/Title';
 
-const Pricing = props => {
+const Pricing = () => {
   return (
     <div>
       <Title title="Pricing" />

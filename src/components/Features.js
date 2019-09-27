@@ -2,7 +2,7 @@ import React from 'react';
 
 import Title from './includes/Title';
 
-const Features = props => {
+const Features = () => {
   return (
     <div>
       <Title title="Features" />
@@ -33,14 +33,14 @@ const Features = props => {
                 But there is no single place where you can easily keep track of
                 your kit, sell to a group, post wanted kit posters, or get
                 automatically told when kit you own may be of interest to
-                someone else when you're no longer needing it or if you might
-                need it.
+                someone else when you&apos;re no longer needing it or if you
+                might need it.
               </p>
               <p>
                 Now there is! YouthKitbag. This is a parents kit tracker,
                 seller, watcher - all in one - to make your life easier, and
                 hopefully help you reclaim some of the money you spent on the
-                kit when it's no longer needed.
+                kit when it&apos;s no longer needed.
               </p>
             </div>
           </div>

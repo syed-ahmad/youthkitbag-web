@@ -80,7 +80,7 @@ export const reset = email => dispatch => {
         'content-type': 'application/json'
       }
     )
-    .then(response => {
+    .then(() => {
       dispatch({ type: RESET_REQUESTED });
       history.push('/auth/login');
     })
@@ -100,7 +100,7 @@ export const newPassword = (password, userId, token) => dispatch => {
         'content-type': 'application/json'
       }
     )
-    .then(response => {
+    .then(() => {
       dispatch({ type: PASSWORD_RESET });
       history.push('/auth/login');
     })

@@ -1,16 +1,7 @@
 import React from 'react';
 import CheckboxInput from '../controls/CheckboxInput';
 
-const CheckboxForm = ({
-  colFormat,
-  label,
-  value,
-  field,
-  onChange,
-  index,
-  error,
-  help
-}) => {
+const CheckboxForm = ({ colFormat, label, value, field, onChange, help }) => {
   return (
     <React.Fragment>
       {colFormat === '3-1-8' && (

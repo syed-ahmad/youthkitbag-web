@@ -26,7 +26,7 @@ export const getUser = () => dispatch => {
       dispatch({ type: GETALL_SUCCESS });
       dispatch({ type: GET_USER, payload: data });
     })
-    .catch(err => {});
+    .catch(() => {});
 };
 
 export const editProfile = (userId, formValues) => dispatch => {

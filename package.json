@@ -16,7 +16,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "format": "prettier s\"rc/**/*.{js,html}\" --write",
+    "format": "prettier \"src/**/*.{js,html}\" --write",
+    "lint": "eslint \"src/**/*.{js,jsx}\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -40,7 +41,13 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
+    "babel-eslint": "^10.0.3",
     "bootstrap": "^4.3.1",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
     "jquery": "^3.4.1",
     "prettier": "^1.18.2"
   }

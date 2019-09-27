@@ -87,27 +87,27 @@ class App extends React.Component {
               <Route path="/auth/logout" exact component={Logout} />
 
               <PrivateRoute
-                path="/purchase/subscription/:id"
+                path="/purchase/subscription/:subscriptionId"
                 exact
                 component={PurchaseSubscriptionPage}
               />
 
               <PrivateRoute
-                path="/market/trades/view/:id"
+                path="/market/trades/view/:tradeId"
                 exact
                 component={MarketTradeViewPage}
               />
               <Route path="/market/trades" component={MarketTrades} />
 
               <PrivateRoute
-                path="/market/wanteds/view/:id"
+                path="/market/wanteds/view/:wantedId"
                 exact
                 component={MarketWantedViewPage}
               />
               <Route path="/market/wanteds" component={MarketWanteds} />
 
               <PrivateRoute
-                path="/market/stolens/view/:id"
+                path="/market/stolens/view/:stolenId"
                 exact
                 component={MarketStolenViewPage}
               />
@@ -115,12 +115,12 @@ class App extends React.Component {
 
               <PrivateRoute path="/kitbag/kits/new" component={KitPage} />
               <PrivateRoute
-                path="/kitbag/kits/edit/:id"
+                path="/kitbag/kits/edit/:kitId"
                 exact
                 component={KitPage}
               />
               <PrivateRoute
-                path="/kitbag/kits/delete/:id"
+                path="/kitbag/kits/delete/:kitId"
                 exact
                 component={KitDelete}
               />
@@ -132,17 +132,17 @@ class App extends React.Component {
                 component={TradePage}
               />
               <PrivateRoute
-                path="/kitbag/trades/add/:kit"
+                path="/kitbag/trades/add/:kitId"
                 exact
                 component={TradePage}
               />
               <PrivateRoute
-                path="/kitbag/trades/edit/:id"
+                path="/kitbag/trades/edit/:tradeId"
                 exact
                 component={TradePage}
               />
               <PrivateRoute
-                path="/kitbag/trades/delete/:id"
+                path="/kitbag/trades/delete/:tradeId"
                 exact
                 component={TradeDelete}
               />
@@ -154,17 +154,17 @@ class App extends React.Component {
                 component={WantedPage}
               />
               <PrivateRoute
-                path="/kitbag/wanteds/add/:kit"
+                path="/kitbag/wanteds/add/:kitId"
                 exact
                 component={WantedPage}
               />
               <PrivateRoute
-                path="/kitbag/wanteds/edit/:id"
+                path="/kitbag/wanteds/edit/:wantedId"
                 exact
                 component={WantedPage}
               />
               <PrivateRoute
-                path="/kitbag/wanteds/delete/:id"
+                path="/kitbag/wanteds/delete/:wantedId"
                 exact
                 component={WantedDelete}
               />
@@ -176,17 +176,17 @@ class App extends React.Component {
                 component={StolenPage}
               />
               <PrivateRoute
-                path="/kitbag/stolens/add/:kit"
+                path="/kitbag/stolens/add/:kitId"
                 exact
                 component={StolenPage}
               />
               <PrivateRoute
-                path="/kitbag/stolens/edit/:id"
+                path="/kitbag/stolens/edit/:stolenId"
                 exact
                 component={StolenPage}
               />
               <PrivateRoute
-                path="/kitbag/stolens/delete/:id"
+                path="/kitbag/stolens/delete/:stolenId"
                 exact
                 component={StolenDelete}
               />

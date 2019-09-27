@@ -28,7 +28,7 @@ class KitDelete extends React.Component {
   }
 
   renderActions() {
-    const kitId = this.props.match.params.id;
+    const kitId = this.props.match.params.kitId;
     return (
       <React.Fragment>
         <Link

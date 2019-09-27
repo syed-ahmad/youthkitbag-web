@@ -15,7 +15,7 @@ const Login = () => {
       >
         <div className="container">
           <p className="lead">
-            If you don't have an account already,{' '}
+            If you don&apos;t have an account already,{' '}
             <Link to="/auth/signup">then sign up for an account</Link>. Or for
             the forgetful,{' '}
             <Link to="/auth/reset">then reset your password</Link>.

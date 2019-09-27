@@ -28,7 +28,7 @@ class WantedDelete extends React.Component {
   }
 
   renderActions() {
-    const wantedId = this.props.match.params.id;
+    const wantedId = this.props.match.params.wantedId;
     return (
       <React.Fragment>
         <Link

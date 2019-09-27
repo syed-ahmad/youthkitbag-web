@@ -189,20 +189,16 @@ footer {
     right: 0.5rem; }
   .youthkitbag span.icons-top-left {
     color: #1f79d49c;
-    font-size: 1.5rem;
     position: absolute;
-    top: 0.5rem;
     left: 0.5rem; }
     .youthkitbag span.icons-top-left .icon-tray-item {
-      position: absolute;
-      padding-right: 0.5rem;
-      top: -0.25rem; }
+      font-size: 1.5rem; }
   .youthkitbag span.icons-bottom-left {
     font-size: 2.2rem; }
   .youthkitbag .img-link {
     cursor: pointer; }
   .youthkitbag .form-group .valid-feedback {
-    color: #1D7631 !important;
+    color: #1d7631 !important;
     font-size: 100%; }
   .youthkitbag .form-group .invalid-feedback {
     font-size: 100%; }

@@ -28,7 +28,7 @@ class TradeDelete extends React.Component {
   }
 
   renderActions() {
-    const tradeId = this.props.match.params.id;
+    const tradeId = this.props.match.params.tradeId;
     return (
       <React.Fragment>
         <Link

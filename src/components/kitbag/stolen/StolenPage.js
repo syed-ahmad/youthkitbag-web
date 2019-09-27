@@ -23,8 +23,8 @@ const StolenPage = ({
   fetchKitbagStolenFromKit,
   match
 }) => {
-  const stolenId = match.params.id;
-  const kitId = match.params.kit;
+  const stolenId = match.params.stolenId;
+  const kitId = match.params.kitId;
 
   const [stolen, setStolen] = useState({
     title: '',

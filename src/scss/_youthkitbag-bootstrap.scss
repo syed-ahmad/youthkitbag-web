@@ -16,10 +16,10 @@
   margin-bottom: 1rem;
   //background-color: $gallery;
   border: 1rem;
-  border-bottom: .25rem solid $silver;
+  border-bottom: 0.25rem solid $silver;
   &.card-b1 {
     border: 1px solid $silver;
-    border-bottom: .25rem solid $silver;
+    border-bottom: 0.25rem solid $silver;
   }
   &.card-cta {
     border: 0rem;
@@ -35,11 +35,11 @@
     }
     &.card-top {
       .card-body {
-        background-color: rgba(31,32,37,0.9);
+        background-color: rgba(31, 32, 37, 0.9);
         color: $white;
       }
     }
-    @media only screen and (min-width: 576px)  {
+    @media only screen and (min-width: 576px) {
       &.card-top {
         .card-img-top {
           position: relative;
@@ -55,13 +55,13 @@
   }
   .card-title {
     &.ellipsis {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2; /* number of lines to show */
-        line-height: 1.4; /* fallback */
-        max-height: 1.4*2; /* fallback */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; /* number of lines to show */
+      line-height: 1.4; /* fallback */
+      max-height: 1.4 * 2; /* fallback */
     }
   }
   .card-text {
@@ -72,7 +72,7 @@
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3; /* number of lines to show */
       line-height: 1.5; /* fallback */
-      max-height: 1.5*3; /* fallback */
+      max-height: 1.5 * 3; /* fallback */
     }
   }
 }
@@ -91,14 +91,10 @@
 span {
   &.icons-top-left {
     color: #1f79d49c;
-    font-size: 1.5rem;
     position: absolute;
-    top: 0.5rem;
     left: 0.5rem;
     .icon-tray-item {
-      position: absolute;
-      padding-right: 0.5rem;
-      top: -0.25rem;
+      font-size: 1.5rem;
     }
   }
 }
@@ -115,7 +111,7 @@ span {
 
 .form-group {
   .valid-feedback {
-    color: #1D7631 !important;
+    color: #1d7631 !important;
     font-size: 100%;
   }
   .invalid-feedback {

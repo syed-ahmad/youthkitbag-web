@@ -14,7 +14,7 @@ const mapDispatchToProps = {
 };
 
 const MarketWantedViewPage = ({ current, fetchMarketWanted, match }) => {
-  const wantedId = match.params.id;
+  const wantedId = match.params.wantedId;
 
   const [wanted, setWanted] = useState({
     title: 'Loading requested wanted item ...',

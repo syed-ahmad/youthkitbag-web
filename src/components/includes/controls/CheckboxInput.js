@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CheckboxInput = ({ value, field, onChange, error }) => {
+const CheckboxInput = ({ value, field, onChange }) => {
   return (
     <React.Fragment>
       <input

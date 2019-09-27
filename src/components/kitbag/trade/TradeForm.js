@@ -9,7 +9,12 @@ import {
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import validate from './TradeFormValidationRules';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
-import { DateForm, TextForm, TextAreaForm } from '../../includes/forms';
+import {
+  DateForm,
+  TextForm,
+  TextAreaForm,
+  RemoveArrayButtonForm
+} from '../../includes/forms';
 
 const TradeForm = ({ trade }) => {
   const newErrors = useSelector(state => state.toast.errors);
@@ -89,14 +94,30 @@ const TradeForm = ({ trade }) => {
           {images[i].state !== 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
-                <span
-                  className="icon-tray-item fas fa-trash-alt img-delete"
+                <button
+                  aria-label="Delete image"
+                  className="btn btn-link p-0 icon-tray-item"
+                  href="#"
                   onClick={deleteImage.bind(null, images[i]._id)}
-                ></span>
-                <span
-                  className="icon-tray-item fas fa-star img-primary"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="fas fa-trash"
+                    title="Delete this image?"
+                  ></i>
+                </button>
+                <button
+                  aria-label="Set as primary image"
+                  className="btn btn-link p-0 icon-tray-item"
+                  href="#"
                   onClick={setPrimaryImage.bind(null, images[i]._id)}
-                ></span>
+                >
+                  <i
+                    aria-hidden="true"
+                    className="fas fa-star"
+                    title="Set as primary image"
+                  ></i>
+                </button>
               </span>
               <img
                 className="img-fluid mb-3 img-link mini-img mr-1"
@@ -110,10 +131,18 @@ const TradeForm = ({ trade }) => {
           {images[i].state === 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
-                <span
-                  className="icon-tray-item fas fa-undo img-delete"
+                <button
+                  aria-label="Undo image deletion"
+                  className="btn btn-link p-0 icon-tray-item"
+                  href="#"
                   onClick={reinstateImage.bind(null, images[i]._id)}
-                ></span>
+                >
+                  <i
+                    aria-hidden="true"
+                    className="fas fa-undo"
+                    title="Undo image deletion"
+                  ></i>
+                </button>
               </span>
               <img
                 className="img-fluid mb-3 img-link mini-img mr-1"
@@ -239,7 +268,9 @@ const TradeForm = ({ trade }) => {
         </div>
         <div>{renderSecondaryImages()}</div>
         <div className="form-group row">
-          <label className="col-sm-3 col-form-label">Images</label>
+          <label className="col-sm-3 col-form-label" htmlFor="photos">
+            Images
+          </label>
           <div className="col-sm-9">
             <div className="custom-file">
               <input
@@ -334,19 +365,12 @@ const TradeForm = ({ trade }) => {
                     setChange={setChange}
                     index={index}
                   />
-                  <div className="form-group col-sm-1">
-                    {index === 0 && (
-                      <label className="d-none d-sm-block">Rem</label>
-                    )}
-                    <button
-                      className="btn btn-danger"
-                      type="button"
-                      title="Remove Group"
-                      onClick={() => removeArrayItem('groups', index)}
-                    >
-                      <span className="icon-tray-item fas fa-trash-alt"></span>
-                    </button>
-                  </div>
+                  <RemoveArrayButtonForm
+                    colFormat="a-1"
+                    title="Remove Purchase"
+                    onClick={() => removeArrayItem('groups', index)}
+                    index={index}
+                  />
                 </div>
               ))}
             <button

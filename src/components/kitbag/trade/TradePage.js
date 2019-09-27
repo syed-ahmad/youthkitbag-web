@@ -23,8 +23,8 @@ const TradePage = ({
   fetchKitbagTradeFromKit,
   match
 }) => {
-  const tradeId = match.params.id;
-  const kitId = match.params.kit;
+  const tradeId = match.params.tradeId;
+  const kitId = match.params.kitId;
 
   const [trade, setTrade] = useState({
     title: '',

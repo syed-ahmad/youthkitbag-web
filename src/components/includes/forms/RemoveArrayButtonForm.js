@@ -5,9 +5,17 @@ const RemoveArrayButtonForm = ({ colFormat, title, onClick, index }) => {
     <React.Fragment>
       {colFormat === 'a-1' && (
         <div className="form-group col-sm-1">
-          {index === 0 && <label className="d-none d-sm-block">Rem</label>}
+          {index === 0 && (
+            <label
+              className="d-none d-sm-block"
+              htmlFor={`remove-btn-${title}-${index}`}
+            >
+              Rem
+            </label>
+          )}
           <button
             className="btn btn-danger"
+            id={`remove-btn-${title}-${index}`}
             type="button"
             title={title}
             onClick={onClick}

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Title from './includes/Title';
 
-const Error500 = props => {
+const Error500 = () => {
   return (
     <div>
       <Title title="Error 500" />
@@ -15,8 +15,8 @@ const Error500 = props => {
           <div className="row">
             <div className="col-12">
               <p className="h3">
-                We're very sorry for the inconvenience. We're working on
-                resolving the issue.
+                We&apos;re very sorry for the inconvenience. We&apos;re working
+                on resolving the issue.
               </p>
             </div>
           </div>

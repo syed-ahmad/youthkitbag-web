@@ -15,7 +15,7 @@ const mapDispatchToProps = {
 };
 
 const KitPage = ({ current, fetchKitbagKit, match }) => {
-  const kitId = match.params.id;
+  const kitId = match.params.kitId;
   const [kit, setKit] = useState({
     title: '',
     subtitle: '',

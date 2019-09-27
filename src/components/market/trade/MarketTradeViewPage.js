@@ -13,7 +13,7 @@ const mapDispatchToProps = {
 };
 
 const MarketTradeViewPage = ({ current, fetchMarketTrade, match }) => {
-  const tradeId = match.params.id;
+  const tradeId = match.params.tradeId;
 
   const [trade, setTrade] = useState({
     title: 'Loading requested item of trade ...',
