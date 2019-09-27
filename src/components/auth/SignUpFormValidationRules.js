@@ -19,9 +19,13 @@ export default function validate(values) {
     errors.confirmPassword = 'Please re-confirm your password';
   }
 
-  if (values.password && values.confirmPassword && values.password !== values.confirmPassword) {
+  if (
+    values.password &&
+    values.confirmPassword &&
+    values.password !== values.confirmPassword
+  ) {
     errors.confirmPassword = 'Confirm password must match password';
   }
-  
+
   return errors;
-};
+}

@@ -9,13 +9,12 @@ import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 
 class MarketTrades extends React.Component {
-
   getTitle = () => {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
     return `Kit for trade (${this.props.pagination.totalItems})`;
-  }
+  };
 
   componentDidMount() {
     var by = '';
@@ -39,28 +38,33 @@ class MarketTrades extends React.Component {
       const page = values.page ? values.page : '';
       this.props.fetchMarketTrades(search, by, page, 24);
     }
-  } 
+  }
 
   renderList() {
     return this.props.items.map((item, index) => {
-      return <MarketTradeCard key={`${item._id}-${index}`} trade={item}/>
-    })
+      return <MarketTradeCard key={`${item._id}-${index}`} trade={item} />;
+    });
   }
 
   render() {
     return (
       <div>
         <Title title={this.getTitle()} />
-        <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+        <section
+          id="main"
+          className="container-fluid"
+          aria-label="main body of content plus related links and features"
+        >
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9">
-                <SearchForm search={this.props.location.search} callback={fetchMarketTrades} />
+                <SearchForm
+                  search={this.props.location.search}
+                  callback={fetchMarketTrades}
+                />
               </div>
             </div>
-            <div className="row">
-            {this.renderList()}
-            </div>
+            <div className="row">{this.renderList()}</div>
             <Pagination />
           </div>
         </section>
@@ -69,8 +73,15 @@ class MarketTrades extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { items: Object.values(state.market.trade.list), filter: state.filter, pagination: state.pagination };
-}
+const mapStateToProps = state => {
+  return {
+    items: Object.values(state.market.trade.list),
+    filter: state.filter,
+    pagination: state.pagination
+  };
+};
 
-export default connect(mapStateToProps, { fetchMarketTrades })(MarketTrades);
+export default connect(
+  mapStateToProps,
+  { fetchMarketTrades }
+)(MarketTrades);

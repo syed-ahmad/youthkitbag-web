@@ -13,12 +13,15 @@ class User extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ getUser }, dispatch),
-})
+  actions: bindActionCreators({ getUser }, dispatch)
+});
 
 const mapStateToProps = state => ({
   user: state.user,
   auth: state.auth
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(User)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(User);

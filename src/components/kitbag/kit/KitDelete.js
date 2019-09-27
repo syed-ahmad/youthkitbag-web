@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchKitbagKit, deleteKitbagKit } from '../../../actions/KitbagKitActions'
+import {
+  fetchKitbagKit,
+  deleteKitbagKit
+} from '../../../actions/KitbagKitActions';
 import Modal from '../../includes/Modal';
 import history from '../../../helpers/history';
 
@@ -28,25 +31,41 @@ class KitDelete extends React.Component {
     const kitId = this.props.match.params.id;
     return (
       <React.Fragment>
-        <Link to="/kitbag/kits" className="btn btn-outline-secondary" data-dismiss="modal">Cancel</Link>
-        <button type="button" className="btn btn-danger" onClick={() => this.props.deleteKitbagKit(kitId)}>Delete</button>
+        <Link
+          to="/kitbag/kits"
+          className="btn btn-outline-secondary"
+          data-dismiss="modal"
+        >
+          Cancel
+        </Link>
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => this.props.deleteKitbagKit(kitId)}
+        >
+          Delete
+        </button>
       </React.Fragment>
     );
   }
 
   render() {
     return (
-      <Modal 
+      <Modal
         title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => history.push('/kitbag/kits')} />
+        onDismiss={() => history.push('/kitbag/kits')}
+      />
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { kit: state.kitbag.kit[ownProps.match.params.id] }
+  return { kit: state.kitbag.kit[ownProps.match.params.id] };
 };
 
-export default connect(mapStateToProps, { fetchKitbagKit, deleteKitbagKit })(KitDelete);
+export default connect(
+  mapStateToProps,
+  { fetchKitbagKit, deleteKitbagKit }
+)(KitDelete);

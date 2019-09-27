@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchKitbagStolen, fetchKitbagStolenFromKit } from '../../../actions/KitbagStolenActions';
+import {
+  fetchKitbagStolen,
+  fetchKitbagStolenFromKit
+} from '../../../actions/KitbagStolenActions';
 import StolenForm from './StolenForm';
 import Title from '../../includes/Title';
 import Alert from '../../includes/Alert';
@@ -10,11 +13,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchKitbagStolen, fetchKitbagStolenFromKit
-}
+  fetchKitbagStolen,
+  fetchKitbagStolenFromKit
+};
 
-const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, match }) => {
-
+const StolenPage = ({
+  current,
+  fetchKitbagStolen,
+  fetchKitbagStolenFromKit,
+  match
+}) => {
   const stolenId = match.params.id;
   const kitId = match.params.kit;
 
@@ -36,7 +44,7 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, matc
     topImage: '/images/default.png',
     imagesToUpload: 0
   });
-  
+
   useEffect(() => {
     if (stolenId) {
       fetchKitbagStolen(stolenId);
@@ -48,17 +56,17 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, matc
       fetchKitbagStolenFromKit(kitId);
     }
   }, [fetchKitbagStolenFromKit, kitId]);
-  
+
   useEffect(() => {
     if (current && (current._id || current.sourceId)) {
       const newStolen = {
-         ...current,
-         imagesToUpload: 0
-       };
-      setStolen(newStolen);  
+        ...current,
+        imagesToUpload: 0
+      };
+      setStolen(newStolen);
     }
   }, [current]);
-  
+
   function itemIsLoding() {
     return stolenId && !stolen._id;
   }
@@ -70,11 +78,15 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, matc
 
     return stolen._id ? stolen.title : 'Report a new stolen item';
   }
-  
+
   return (
     <div>
       <Title title={getTitle()} />
-      <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+      <section
+        id="main"
+        className="container-fluid"
+        aria-label="main body of content plus related links and features"
+      >
         <div className="container">
           <Alert />
           <StolenForm stolen={stolen} />
@@ -82,7 +94,9 @@ const StolenPage = ({ current, fetchKitbagStolen, fetchKitbagStolenFromKit, matc
       </section>
     </div>
   );
+};
 
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StolenPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StolenPage);

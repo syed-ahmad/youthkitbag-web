@@ -11,10 +11,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchGroup
-}
+};
 
 const GroupPage = ({ current, fetchGroup, match }) => {
-
   const { groupId } = match.params;
   const [group, setGroup] = useState({
     name: '',
@@ -34,14 +33,14 @@ const GroupPage = ({ current, fetchGroup, match }) => {
       fetchGroup(groupId);
     }
   }, [fetchGroup, groupId]);
-  
+
   useEffect(() => {
     if (current && current._id) {
       const newGroup = {
         ...current,
         imagesToUpload: 0
       };
-      setGroup(newGroup);  
+      setGroup(newGroup);
     }
   }, [current]);
 
@@ -56,11 +55,15 @@ const GroupPage = ({ current, fetchGroup, match }) => {
 
     return group._id ? group.name : 'Create new group';
   }
-  
+
   return (
     <div>
       <Title title={getTitle()} />
-      <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+      <section
+        id="main"
+        className="container-fluid"
+        aria-label="main body of content plus related links and features"
+      >
         <div className="container">
           <Alert />
           <GroupForm group={group} />
@@ -68,7 +71,9 @@ const GroupPage = ({ current, fetchGroup, match }) => {
       </section>
     </div>
   );
+};
 
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GroupPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GroupPage);

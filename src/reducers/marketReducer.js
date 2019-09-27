@@ -7,5 +7,5 @@ import marketStolenReducer from './marketStolenReducer';
 export default combineReducers({
   trade: marketTradeReducer,
   wanted: marketWantedReducer,
-  stolen: marketStolenReducer 
+  stolen: marketStolenReducer
 });

@@ -5,7 +5,6 @@ import validate from './FormEmptyValidationRules';
 import queryString from 'query-string';
 
 const SearchForm = props => {
-
   const qsvalues = queryString.parse(props.search);
   const search = qsvalues.search ? qsvalues.search : '';
   const by = qsvalues.by ? qsvalues.by : '';
@@ -18,15 +17,14 @@ const SearchForm = props => {
   const initialValues = {
     by: by,
     search: search
-  }
+  };
 
-  const {
-    setValues,
-    handleChange,
-    handleSubmit,
-    values
-  } = useForm(initialValues, searchItems, validate);
-  
+  const { setValues, handleChange, handleSubmit, values } = useForm(
+    initialValues,
+    searchItems,
+    validate
+  );
+
   function searchItems() {
     const { by, search } = values;
     dispatch(props.callback(search, by, 1, pagination.itemsPerPage));
@@ -50,20 +48,46 @@ const SearchForm = props => {
         <div className="form-group mr-3">
           <div className="input-group">
             <div className="input-group-prepend">
-              <select name="by" className="custom-select" onChange={handleChange} onBlur={handleChange} value={values.by}>
-                {filter.options.map(o => (<option key={o.key} value={o.key}>{o.value}</option>))}
+              <select
+                name="by"
+                className="custom-select"
+                onChange={handleChange}
+                onBlur={handleChange}
+                value={values.by}
+              >
+                {filter.options.map(o => (
+                  <option key={o.key} value={o.key}>
+                    {o.value}
+                  </option>
+                ))}
               </select>
             </div>
-            <input name="search" className="form-control" type="text" onChange={handleChange} value={values.search} id="search" arialabel="Search by text" />
+            <input
+              name="search"
+              className="form-control"
+              type="text"
+              onChange={handleChange}
+              value={values.search}
+              id="search"
+              arialabel="Search by text"
+            />
             <div className="input-group-append">
-              <button className="btn btn-outline-primary" type="submit">Search</button>
-              <button className="btn btn-outline-secondary" type="button" onClick={clearSearch}>Clear</button>
+              <button className="btn btn-outline-primary" type="submit">
+                Search
+              </button>
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={clearSearch}
+              >
+                Clear
+              </button>
             </div>
           </div>
         </div>
       </form>
     </div>
   );
-}
+};
 
 export default SearchForm;

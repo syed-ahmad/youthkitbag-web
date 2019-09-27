@@ -11,7 +11,7 @@ import toastReducer from './toastReducer';
 import subscriptionReducer from './subscriptionReducer';
 
 export default combineReducers({
-  auth: authReducer, 
+  auth: authReducer,
   user: userReducer,
   group: groupReducer,
   kitbag: kitbagReducer,

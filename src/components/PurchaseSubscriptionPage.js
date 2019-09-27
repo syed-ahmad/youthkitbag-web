@@ -7,23 +7,26 @@ import Alert from './includes/Alert';
 
 const mapStateToProps = state => ({
   selected: state.subscription.selected
-})
+});
 
 const mapDispatchToProps = {
   fetchSubscriptionPackage
-}
+};
 
-const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, match }) => {
-  
+const PurchaseSubscriptionPage = ({
+  selected,
+  fetchSubscriptionPackage,
+  match
+}) => {
   const subscriptionId = match.params.id;
 
   const [subscription, setSubscription] = useState({
     title: 'Loading subscription details ...',
     description: '',
     details: [],
-    price: 0.00
-  })
-  
+    price: 0.0
+  });
+
   useEffect(() => {
     fetchSubscriptionPackage(subscriptionId);
   }, [fetchSubscriptionPackage, subscriptionId]);
@@ -37,19 +40,25 @@ const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, match })
   return (
     <div>
       <Title title="Purchase subscription" />
-      <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+      <section
+        id="main"
+        className="container-fluid"
+        aria-label="main body of content plus related links and features"
+      >
         <div className="container">
           <Alert />
           <div className="row">
             <div className="col-12">
-              <h4>Purchase { subscription.title } subscription</h4>
+              <h4>Purchase {subscription.title} subscription</h4>
             </div>
           </div>
-          <h3>Total Price: £{ Number(subscription.price).toFixed(2) }</h3>
+          <h3>Total Price: £{Number(subscription.price).toFixed(2)}</h3>
           <hr />
           <div className="row pb-3">
             <div className="col-12 d-flex justify-content-end">
-              <Link to="/pricing" className="btn btn-secondary mr-3">Cancel and Return to Shop</Link>
+              <Link to="/pricing" className="btn btn-secondary mr-3">
+                Cancel and Return to Shop
+              </Link>
               {/* <form onSubmit={this.onFormSubmit}>
                 <script
                     src="https://checkout.stripe.com/checkout.js" className="stripe-button"
@@ -68,6 +77,9 @@ const PurchaseSubscriptionPage = ({ selected, fetchSubscriptionPackage, match })
       </section>
     </div>
   );
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(PurchaseSubscriptionPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PurchaseSubscriptionPage);

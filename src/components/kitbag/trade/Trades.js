@@ -11,13 +11,12 @@ import Pagination from '../../includes/Pagination';
 import Alert from '../../includes/Alert';
 
 class Trades extends React.Component {
-
   getTitle = () => {
     if (!this.props.pagination) {
       return 'Loading ...';
     }
     return `Your kit for trade (${this.props.pagination.totalItems})`;
-  }
+  };
 
   componentDidMount() {
     var by = '';
@@ -41,32 +40,39 @@ class Trades extends React.Component {
       const page = values.page ? values.page : '';
       this.props.fetchKitbagTrades(search, by, page, 24);
     }
-  } 
+  }
 
   renderList() {
     return this.props.items.map((item, index) => {
-      return <TradeCard key={`${item._id}-${index}`} trade={item}/>
-    })
+      return <TradeCard key={`${item._id}-${index}`} trade={item} />;
+    });
   }
 
   render() {
     return (
       <div>
         <Title title={this.getTitle()} />
-        <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+        <section
+          id="main"
+          className="container-fluid"
+          aria-label="main body of content plus related links and features"
+        >
           <div className="container">
             <Alert />
             <div className="row">
               <div className="col-12 col-sm-9">
-                <SearchForm search={this.props.location.search} callback={fetchKitbagTrades} />
+                <SearchForm
+                  search={this.props.location.search}
+                  callback={fetchKitbagTrades}
+                />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <Link to="/kitbag/trades/new" className="btn btn-primary">Add new trade</Link>
+                <Link to="/kitbag/trades/new" className="btn btn-primary">
+                  Add new trade
+                </Link>
               </div>
             </div>
-            <div className="row">
-            {this.renderList()}
-            </div>
+            <div className="row">{this.renderList()}</div>
             <Pagination />
           </div>
         </section>
@@ -75,8 +81,15 @@ class Trades extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { items: Object.values(state.kitbag.trade.list), filter: state.filter, pagination: state.pagination };
-}
+const mapStateToProps = state => {
+  return {
+    items: Object.values(state.kitbag.trade.list),
+    filter: state.filter,
+    pagination: state.pagination
+  };
+};
 
-export default connect(mapStateToProps, { fetchKitbagTrades })(Trades);
+export default connect(
+  mapStateToProps,
+  { fetchKitbagTrades }
+)(Trades);

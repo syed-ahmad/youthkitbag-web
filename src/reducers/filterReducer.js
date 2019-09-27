@@ -1,6 +1,20 @@
-import { FETCH_KITBAG_KITS, FETCH_KITBAG_TRADES, FETCH_KITBAG_WANTEDS, FETCH_KITBAG_STOLENS, FETCH_MARKET_TRADES, FETCH_MARKET_WANTEDS, FETCH_MARKET_STOLENS, FETCH_GROUPS, LOGOUT } from '../actions/types';
+import {
+  FETCH_KITBAG_KITS,
+  FETCH_KITBAG_TRADES,
+  FETCH_KITBAG_WANTEDS,
+  FETCH_KITBAG_STOLENS,
+  FETCH_MARKET_TRADES,
+  FETCH_MARKET_WANTEDS,
+  FETCH_MARKET_STOLENS,
+  FETCH_GROUPS,
+  LOGOUT
+} from '../actions/types';
 
-const initialState = { by: 'all', search: '', options: [ { key: 'all', value: 'All' } ] };
+const initialState = {
+  by: 'all',
+  search: '',
+  options: [{ key: 'all', value: 'All' }]
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -18,4 +32,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-} 
+};

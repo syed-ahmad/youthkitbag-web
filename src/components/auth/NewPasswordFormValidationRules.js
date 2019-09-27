@@ -6,4 +6,4 @@ export default function validate(values) {
   }
 
   return errors;
-};
+}

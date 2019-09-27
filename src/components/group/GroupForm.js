@@ -9,7 +9,6 @@ import { resize, dataURItoBlob } from '../../helpers/imageResize';
 import { TextForm, TextAreaForm } from '../includes/forms';
 
 const GroupForm = ({ group }) => {
-
   const dispatch = useDispatch();
   const newImages = useSelector(state => state.group.newImages);
   const newErrors = useSelector(state => state.toast.errors);
@@ -45,7 +44,7 @@ const GroupForm = ({ group }) => {
     }
     setChange('imagesToUpload', files.length);
     for (let i = 0; i < files.length; i++) {
-      resize(files[i], MAXWIDTH, MAXHEIGHT, function (resizedDataUrl) {
+      resize(files[i], MAXWIDTH, MAXHEIGHT, function(resizedDataUrl) {
         let formData = new FormData();
         formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
         dispatch(addImage(formData));
@@ -66,40 +65,56 @@ const GroupForm = ({ group }) => {
     }
 
     const { images } = values;
-    const items = []
-  
+    const items = [];
+
     // ?? use .map
     for (let i = 0; i < images.length; i++) {
       items.push(
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
-          { images[i].state !== 'D' && 
+          {images[i].state !== 'D' && (
             <React.Fragment>
-              {!isReadOnly &&
+              {!isReadOnly && (
                 <span className="icons-top-left">
-                  <span className="icon-tray-item fas fa-trash-alt img-delete" onClick={deleteImage.bind(null, images[i]._id)}></span>
-                  <span className="icon-tray-item fas fa-star img-primary" onClick={setPrimaryImage.bind(null, images[i]._id)}></span>
+                  <span
+                    className="icon-tray-item fas fa-trash-alt img-delete"
+                    onClick={deleteImage.bind(null, images[i]._id)}
+                  ></span>
+                  <span
+                    className="icon-tray-item fas fa-star img-primary"
+                    onClick={setPrimaryImage.bind(null, images[i]._id)}
+                  ></span>
                 </span>
-              }
-              <img className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, images[i].imageUrl)} />
+              )}
+              <img
+                className="img-fluid mb-3 img-link mini-img mr-1"
+                src={images[i].imageUrl}
+                alt=""
+                role="presentation"
+                onClick={renderTopImage.bind(null, images[i].imageUrl)}
+              />
             </React.Fragment>
-          }
-          { images[i].state === 'D' && 
+          )}
+          {images[i].state === 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
-                <span className="icon-tray-item fas fa-undo img-delete" onClick={reinstateImage.bind(null, images[i]._id)}></span>
+                <span
+                  className="icon-tray-item fas fa-undo img-delete"
+                  onClick={reinstateImage.bind(null, images[i]._id)}
+                ></span>
               </span>
-              <img className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" />
+              <img
+                className="img-fluid mb-3 img-link mini-img mr-1"
+                src={images[i].imageUrl}
+                alt=""
+                role="presentation"
+              />
             </React.Fragment>
-          }
+          )}
         </div>
-      )
+      );
     }
-  
-    return (
-      <div>
-        {items}
-      </div>
-    )
+
+    return <div>{items}</div>;
   }
 
   function renderTopImage(src) {
@@ -110,12 +125,17 @@ const GroupForm = ({ group }) => {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state ='D';
+          i.state = 'D';
         }
         return i;
       });
       setChange('images', images);
-      setChange('topImage', images && images.filter(i => i.state !== 'D').length > 0 ? images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png');
+      setChange(
+        'topImage',
+        images && images.filter(i => i.state !== 'D').length > 0
+          ? images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png'
+      );
     }
   }
 
@@ -123,7 +143,7 @@ const GroupForm = ({ group }) => {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state ='N';
+          i.state = 'N';
         }
         return i;
       });
@@ -137,32 +157,46 @@ const GroupForm = ({ group }) => {
       const otherImages = values.images.filter(i => i._id !== id);
       const images = primaryImage.concat(otherImages);
       setChange('images', images);
-      setChange('topImage', images && images.filter(i => i.state !== 'D').length > 0 ? images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png');
+      setChange(
+        'topImage',
+        images && images.filter(i => i.state !== 'D').length > 0
+          ? images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png'
+      );
     }
   }
 
   useEffect(() => {
     if (group) {
-      group.topImage = group.images && group.images.filter(i => i.state !== 'D').length > 0 ? group.images.filter(i => i.state !== 'D')[0].imageUrl : '/images/default.png';
+      group.topImage =
+        group.images && group.images.filter(i => i.state !== 'D').length > 0
+          ? group.images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png';
       setValues(group);
     }
   }, [group, setValues]);
 
   useEffect(() => {
-    if (newImages && newImages.length > 0 && newImages.length === values.imagesToUpload) {
-      const imagesToAdd = [...newImages.map(i => {
-        let image = {};
-        image._id = i._id;
-        image.image = i.image;
-        image.imageUrl = i.imageUrl;
-        image.state = 'N';
-        return image;
-      })];
+    if (
+      newImages &&
+      newImages.length > 0 &&
+      newImages.length === values.imagesToUpload
+    ) {
+      const imagesToAdd = [
+        ...newImages.map(i => {
+          let image = {};
+          image._id = i._id;
+          image.image = i.image;
+          image.imageUrl = i.imageUrl;
+          image.state = 'N';
+          return image;
+        })
+      ];
       dispatch(clearNewImages());
       addArrayItem('images', imagesToAdd);
       setChange('imagesToUpload', 0);
     }
-  }, [newImages, addArrayItem, setChange, values, dispatch])
+  }, [newImages, addArrayItem, setChange, values, dispatch]);
 
   function updateGroup() {
     if (group._id) {
@@ -173,72 +207,178 @@ const GroupForm = ({ group }) => {
   }
 
   function isReadOnly() {
-    return (!values._id || values.appAdmin) ? false : true;
+    return !values._id || values.appAdmin ? false : true;
   }
 
   return (
     <div className="row">
       <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
         <div>
-          <img id="preview" name="preview" className="img-fluid mb-3" src={values.topImage} alt="" role="presentation" />
+          <img
+            id="preview"
+            name="preview"
+            className="img-fluid mb-3"
+            src={values.topImage}
+            alt=""
+            role="presentation"
+          />
         </div>
-        <div>
-          {renderSecondaryImages()}
-        </div>
-        {!isReadOnly() &&
+        <div>{renderSecondaryImages()}</div>
+        {!isReadOnly() && (
           <div className="form-group row">
             <label className="col-sm-3 col-form-label">Images</label>
             <div className="col-sm-9">
               <div className="custom-file">
-                <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
-                <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
+                <input
+                  type="file"
+                  multiple
+                  className="custom-file-input"
+                  id="photos"
+                  aria-describedby="photos"
+                  onChange={e => onFileChanged(e)}
+                />
+                <label className="custom-file-label" htmlFor="photos">
+                  Choose image(s)
+                </label>
               </div>
             </div>
           </div>
-        }
+        )}
       </div>
       <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
-          <TextForm colFormat="3-9" label="Name" value={values.name} field="name" readOnly={isReadOnly()} handleChange={handleChange} error={errors.name} />
-          <TextForm colFormat="3-9" label="Tagline" value={values.tagline} field="tagline" readOnly={isReadOnly()} handleChange={handleChange} error={errors.tagline} />
-          <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" readOnly={isReadOnly()} handleChange={handleChange} error={errors.description} />
-          <TextForm colFormat="3-9" type="email" label="Email" value={values.email} field="email" readOnly={isReadOnly()} handleChange={handleChange} error={errors.email} />
-          <TextForm colFormat="3-9" label="Website" value={values.website} field="website" readOnly={isReadOnly()} handleChange={handleChange} error={errors.website} />
-          <TextForm colFormat="3-9" label="Location" value={values.location} field="location" readOnly={isReadOnly()} handleChange={handleChange} error={errors.location} />
+          <TextForm
+            colFormat="3-9"
+            label="Name"
+            value={values.name}
+            field="name"
+            readOnly={isReadOnly()}
+            handleChange={handleChange}
+            error={errors.name}
+          />
+          <TextForm
+            colFormat="3-9"
+            label="Tagline"
+            value={values.tagline}
+            field="tagline"
+            readOnly={isReadOnly()}
+            handleChange={handleChange}
+            error={errors.tagline}
+          />
+          <TextAreaForm
+            colFormat="3-9"
+            label="Description"
+            value={values.description}
+            field="description"
+            readOnly={isReadOnly()}
+            handleChange={handleChange}
+            error={errors.description}
+          />
+          <TextForm
+            colFormat="3-9"
+            type="email"
+            label="Email"
+            value={values.email}
+            field="email"
+            readOnly={isReadOnly()}
+            handleChange={handleChange}
+            error={errors.email}
+          />
+          <TextForm
+            colFormat="3-9"
+            label="Website"
+            value={values.website}
+            field="website"
+            readOnly={isReadOnly()}
+            handleChange={handleChange}
+            error={errors.website}
+          />
+          <TextForm
+            colFormat="3-9"
+            label="Location"
+            value={values.location}
+            field="location"
+            readOnly={isReadOnly()}
+            handleChange={handleChange}
+            error={errors.location}
+          />
           <hr />
-          <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" readOnly={isReadOnly()} handleChange={handleChange} error={errors.activitys} /> 
+          <TextForm
+            colFormat="3-9"
+            label="Activities"
+            value={values.activitys}
+            field="activitys"
+            readOnly={isReadOnly()}
+            handleChange={handleChange}
+            error={errors.activitys}
+          />
           <hr />
           <div>
-            {values.images && values.images.map((item, index) => (
-              <div key={`${item._id}-${index}`}>
-                <input name={`images[${index}]._id`} type="hidden" value={values.images[index]._id} />
-                <input name={`images[${index}].image`} type="hidden" value={values.images[index].image} />
-                <input name={`images[${index}].imageUrl`} type="hidden" value={values.images[index].imageUrl} />
-                <input name={`images[${index}].state`} type="hidden" value={values.images[index].state} />
-                <input name={`images[${index}].photoId`} type="hidden" value={values.images[index].photoId} />
-              </div>
-            ))}
-            {values.deletedImages && values.deletedImages.map((item, index) => (
-              <div key={`${item._id}-${index}`}>
-                <input name={`deletedImages[${index}]._id`} type="hidden" value={values.deletedImages[index]._id} />
-              </div>
-            ))}
+            {values.images &&
+              values.images.map((item, index) => (
+                <div key={`${item._id}-${index}`}>
+                  <input
+                    name={`images[${index}]._id`}
+                    type="hidden"
+                    value={values.images[index]._id}
+                  />
+                  <input
+                    name={`images[${index}].image`}
+                    type="hidden"
+                    value={values.images[index].image}
+                  />
+                  <input
+                    name={`images[${index}].imageUrl`}
+                    type="hidden"
+                    value={values.images[index].imageUrl}
+                  />
+                  <input
+                    name={`images[${index}].state`}
+                    type="hidden"
+                    value={values.images[index].state}
+                  />
+                  <input
+                    name={`images[${index}].photoId`}
+                    type="hidden"
+                    value={values.images[index].photoId}
+                  />
+                </div>
+              ))}
+            {values.deletedImages &&
+              values.deletedImages.map((item, index) => (
+                <div key={`${item._id}-${index}`}>
+                  <input
+                    name={`deletedImages[${index}]._id`}
+                    type="hidden"
+                    value={values.deletedImages[index]._id}
+                  />
+                </div>
+              ))}
           </div>
-          {(values.appAdmin || values.groupAdmin) && 
+          {(values.appAdmin || values.groupAdmin) && (
             <div>
-              <button className="btn btn-primary" type="submit">Save</button>
-              <Link className="btn btn-link" to="/settings/groups">Cancel</Link>
+              <button className="btn btn-primary" type="submit">
+                Save
+              </button>
+              <Link className="btn btn-link" to="/settings/groups">
+                Cancel
+              </Link>
             </div>
-          }
-          {((values.appAdmin || values.groupAdmin) && values._id) && 
+          )}
+          {(values.appAdmin || values.groupAdmin) && values._id && (
             <div>
-              <Link className="btn btn-primary" to={`/settings/groups/${values._id}/members`}>Members</Link>
+              <Link
+                className="btn btn-primary"
+                to={`/settings/groups/${values._id}/members`}
+              >
+                Members
+              </Link>
             </div>
-          }
-          </form>
-        </div>
+          )}
+        </form>
       </div>
+    </div>
   );
-}
+};
 
 export default GroupForm;

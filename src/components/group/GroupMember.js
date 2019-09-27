@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class GroupMember extends React.Component {
-
   getThumbnail() {
     if (this.props.member.user.imageUrl) {
       return this.props.member.user.imageUrl;
@@ -37,23 +36,56 @@ class GroupMember extends React.Component {
       <div className="col-6 col-sm-4 col-lg-3 col-xl-2 mb-3">
         <article className="card card-b1">
           <div className="p-2">
-            <img className="card-img-top img-thumbnail rounded-circle p-0" src={this.getThumbnail() } alt="" role="presentation" />
+            <img
+              className="card-img-top img-thumbnail rounded-circle p-0"
+              src={this.getThumbnail()}
+              alt=""
+              role="presentation"
+            />
           </div>
           <div className="card-body">
-            <h3 className="card-title h4 ellipsis">{user.fullname ? user.fullname : 'Name ?'}</h3>
-            <h4 className="card-title h5 ellipsis">{user.username ? user.username : 'Username ?'}</h4>
-            <p className="card-text">{permission.length > 0 ? permission.join(', ') : '-'}</p>
+            <h3 className="card-title h4 ellipsis">
+              {user.lastname
+                ? `${user.lastname.toUpperCase()}, ${user.firstname}`
+                : 'UNKNOWN'}
+            </h3>
+            <h4 className="card-title h5 ellipsis">
+              {user.username ? user.username : 'Username ?'}
+            </h4>
+            <p className="card-text">
+              {permission.length > 0 ? permission.join(', ') : '-'}
+            </p>
             <span className="icons-bottom-left">
-              <span className={`fas fa-meh w-25 text-center ${this.isRequested()}`}></span>
-              <Link to={ `/settings/groups/${groupId}/members/${user._id}/approved` }><span className={`fas fa-laugh w-25 text-center ${this.isApproved()}`}></span></Link>
-              <Link to={ `/settings/groups/${groupId}/members/${user._id}/rejected` }><span className={`fas fa-sad-tear w-25 text-center ${this.isRejected()}`}></span></Link>
-              <Link to={ `/settings/groups/${groupId}/members/${user._id}/suspended` }><span className={`fas fa-meh-blank w-25 text-center ${this.isSuspended()}`}></span></Link>
+              <span
+                className={`fas fa-meh w-25 text-center ${this.isRequested()}`}
+              ></span>
+              <Link
+                to={`/settings/groups/${groupId}/members/${user._id}/approved`}
+              >
+                <span
+                  className={`fas fa-laugh w-25 text-center ${this.isApproved()}`}
+                ></span>
+              </Link>
+              <Link
+                to={`/settings/groups/${groupId}/members/${user._id}/rejected`}
+              >
+                <span
+                  className={`fas fa-sad-tear w-25 text-center ${this.isRejected()}`}
+                ></span>
+              </Link>
+              <Link
+                to={`/settings/groups/${groupId}/members/${user._id}/suspended`}
+              >
+                <span
+                  className={`fas fa-meh-blank w-25 text-center ${this.isSuspended()}`}
+                ></span>
+              </Link>
             </span>
           </div>
         </article>
       </div>
-    )
-  };
+    );
+  }
 }
 
 export default GroupMember;
