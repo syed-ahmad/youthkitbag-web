@@ -1,38 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchKitbagTrade, fetchKitbagTradeFromKit } from '../../../actions/KitbagTradeActions';
-import TradeForm from './TradeForm';
-import Title from '../../includes/Title';
-import Alert from '../../includes/Alert';
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import {
+  fetchKitbagTrade,
+  fetchKitbagTradeFromKit
+} from "../../../actions/KitbagTradeActions";
+import TradeForm from "./TradeForm";
+import Title from "../../includes/Title";
+import Alert from "../../includes/Alert";
 
 const mapStateToProps = state => ({
   current: state.kitbag.trade.current
 });
 
 const mapDispatchToProps = {
-  fetchKitbagTrade, fetchKitbagTradeFromKit
-}
+  fetchKitbagTrade,
+  fetchKitbagTradeFromKit
+};
 
-const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }) => {
-
+const TradePage = ({
+  current,
+  fetchKitbagTrade,
+  fetchKitbagTradeFromKit,
+  match
+}) => {
   const tradeId = match.params.id;
   const kitId = match.params.kit;
 
   const [trade, setTrade] = useState({
-    title: '',
-    subtitle: '',
-    description: '',
-    location: '',
+    title: "",
+    subtitle: "",
+    description: "",
+    location: "",
     images: [],
-    activitys: '',
-    condition: 'used',
-    askingPrice: 0.00,
+    activitys: "",
+    condition: "used",
+    askingPrice: 0.0,
     traded: false,
-    sourceId: '',
-    userId: '',
+    sourceId: "",
+    userId: "",
     groups: [],
     tradeDetails: [],
-    topImage: '/images/default.png',
+    topImage: "/images/default.png",
     imagesToUpload: 0
   });
 
@@ -47,33 +55,37 @@ const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }
       fetchKitbagTradeFromKit(kitId);
     }
   }, [fetchKitbagTradeFromKit, kitId]);
-  
+
   useEffect(() => {
     if (current && (current._id || current.sourceId)) {
       const newTrade = {
         ...current,
         imagesToUpload: 0
       };
-      setTrade(newTrade);  
+      setTrade(newTrade);
     }
   }, [current]);
-  
+
   function itemIsLoding() {
     return tradeId && !trade._id;
   }
 
   function getTitle() {
     if (itemIsLoding()) {
-      return 'Loading ...';
+      return "Loading ...";
     }
 
-    return trade._id ? trade.title : 'Create a new item for trade';
+    return trade._id ? trade.title : "Create a new item for trade";
   }
-  
+
   return (
     <div>
       <Title title={getTitle()} />
-      <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+      <section
+        id="main"
+        className="container-fluid"
+        aria-label="main body of content plus related links and features"
+      >
         <div className="container">
           <Alert />
           <TradeForm trade={trade} />
@@ -81,7 +93,9 @@ const TradePage = ({ current, fetchKitbagTrade, fetchKitbagTradeFromKit, match }
       </section>
     </div>
   );
+};
 
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TradePage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TradePage);

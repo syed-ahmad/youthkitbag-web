@@ -1,27 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 
-import Title from '../includes/Title';
-import Alert from '../includes/Alert';
-import ProfileForm from './ProfileForm';
+import Title from "../includes/Title";
+import Alert from "../includes/Alert";
+import ProfileForm from "./ProfileForm";
 
 const mapStateToProps = state => ({
   current: state.user.profile
 });
 
 const ProfilePage = ({ current, fetchProfile, match }) => {
-
   const { profileId } = match.params;
   const [profile, setProfile] = useState({
-    firstname: '',
-    lastname: '',
-    username: '',
-    location: '',
-    activitys: '',
+    firstname: "",
+    lastname: "",
+    username: "",
+    location: "",
+    activitys: "",
     images: [],
     groups: [],
     badges: [],
-    topImage: '/images/default.png',
+    topImage: "/images/default.png",
     imagesToUpload: 0,
     newImages: []
   });
@@ -32,7 +31,7 @@ const ProfilePage = ({ current, fetchProfile, match }) => {
         ...current,
         imagesToUpload: 0
       };
-      setProfile(newProfile);  
+      setProfile(newProfile);
     }
   }, [current]);
 
@@ -42,16 +41,20 @@ const ProfilePage = ({ current, fetchProfile, match }) => {
 
   function getTitle() {
     if (profileIsLoding()) {
-      return 'Loading ...';
+      return "Loading ...";
     }
 
-    return profile._id ? profile.name : 'Update profile';
+    return profile._id ? profile.name : "Update profile";
   }
-  
+
   return (
     <div>
       <Title title={getTitle()} />
-      <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+      <section
+        id="main"
+        className="container-fluid"
+        aria-label="main body of content plus related links and features"
+      >
         <div className="container">
           <Alert />
           <ProfileForm />
@@ -59,7 +62,9 @@ const ProfilePage = ({ current, fetchProfile, match }) => {
       </section>
     </div>
   );
+};
 
-}
-
-export default connect(mapStateToProps, null)(ProfilePage);
+export default connect(
+  mapStateToProps,
+  null
+)(ProfilePage);

@@ -1,9 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchKitbagTrade, deleteKitbagTrade } from '../../../actions/KitbagTradeActions'
-import Modal from '../../includes/Modal';
-import history from '../../../helpers/history';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+  fetchKitbagTrade,
+  deleteKitbagTrade
+} from "../../../actions/KitbagTradeActions";
+import Modal from "../../includes/Modal";
+import history from "../../../helpers/history";
 
 class TradeDelete extends React.Component {
   componentDidMount() {
@@ -12,14 +15,14 @@ class TradeDelete extends React.Component {
 
   renderTitle() {
     if (!this.props.trade) {
-      return 'Delete item of trade';
+      return "Delete item of trade";
     }
     return `Delete "${this.props.trade.title}"`;
   }
 
   renderContent() {
     if (!this.props.trade) {
-      return 'Are you sure you want to delete this item from your trading catalog?';
+      return "Are you sure you want to delete this item from your trading catalog?";
     }
     return `Are you sure you want to delete "${this.props.trade.title}" from your trading catalog?`;
   }
@@ -28,25 +31,41 @@ class TradeDelete extends React.Component {
     const tradeId = this.props.match.params.id;
     return (
       <React.Fragment>
-        <Link to="/kitbag/trades" className="btn btn-outline-secondary" data-dismiss="modal">Cancel</Link>
-        <button type="button" className="btn btn-danger" onClick={() => this.props.deleteKitbagTrade(tradeId)}>Delete</button>
+        <Link
+          to="/kitbag/trades"
+          className="btn btn-outline-secondary"
+          data-dismiss="modal"
+        >
+          Cancel
+        </Link>
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => this.props.deleteKitbagTrade(tradeId)}
+        >
+          Delete
+        </button>
       </React.Fragment>
     );
   }
 
   render() {
     return (
-      <Modal 
+      <Modal
         title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => history.push('/kitbag/trades')} />
+        onDismiss={() => history.push("/kitbag/trades")}
+      />
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return { trade: state.kitbag.trade.current }
+const mapStateToProps = state => {
+  return { trade: state.kitbag.trade.current };
 };
 
-export default connect(mapStateToProps, { fetchKitbagTrade, deleteKitbagTrade })(TradeDelete);
+export default connect(
+  mapStateToProps,
+  { fetchKitbagTrade, deleteKitbagTrade }
+)(TradeDelete);

@@ -1,18 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchGroupMembers } from '../../actions';
-import Title from '../includes/Title';
-import Alert from '../includes/Alert';
-import GroupMember from './GroupMember';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchGroupMembers } from "../../actions";
+import Title from "../includes/Title";
+import Alert from "../includes/Alert";
+import GroupMember from "./GroupMember";
 
 class GroupMembers extends React.Component {
-
   getTitle = () => {
     if (!this.props.memberList.members) {
-      return 'Loading ...';
+      return "Loading ...";
     }
     return `${this.props.memberList.name} - members (${this.props.memberList.members.length})`;
-  }
+  };
 
   componentDidMount() {
     const groupId = this.props.match.params.groupId;
@@ -24,14 +23,20 @@ class GroupMembers extends React.Component {
       const groupId = this.props.match.params.groupId;
       this.props.fetchGroupMembers(groupId);
     }
-  } 
+  }
 
   renderList() {
     if (!this.props.memberList.members) return null;
 
     return this.props.memberList.members.map((member, index) => {
-      return <GroupMember key={`${member._id}-${index}`} member={member} groupId={this.props.memberList._id} />
-    })
+      return (
+        <GroupMember
+          key={`${member._id}-${index}`}
+          member={member}
+          groupId={this.props.memberList._id}
+        />
+      );
+    });
   }
 
   render() {
@@ -39,12 +44,14 @@ class GroupMembers extends React.Component {
     return (
       <div>
         <Title title={this.getTitle()} />
-        <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+        <section
+          id="main"
+          className="container-fluid"
+          aria-label="main body of content plus related links and features"
+        >
           <div className="container">
             <Alert />
-            <div className="row">
-              {this.renderList()}
-            </div>
+            <div className="row">{this.renderList()}</div>
           </div>
         </section>
       </div>
@@ -52,8 +59,11 @@ class GroupMembers extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return { memberList: state.group.memberList };
-}
+};
 
-export default connect(mapStateToProps, { fetchGroupMembers })(GroupMembers);
+export default connect(
+  mapStateToProps,
+  { fetchGroupMembers }
+)(GroupMembers);

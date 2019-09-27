@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import Title from './includes/Title';
+import Title from "./includes/Title";
 
 class Home extends React.Component {
   render() {
@@ -29,7 +29,7 @@ class Home extends React.Component {
           <i className="fas fa-cocktail    "></i>
         </h1>
       </div>
-    )
+    );
   }
 }
 

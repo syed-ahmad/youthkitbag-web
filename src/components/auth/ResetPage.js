@@ -1,15 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import Title from '../includes/Title';
-import Alert from '../includes/Alert';
-import ResetForm from './ResetForm';
+import Title from "../includes/Title";
+import Alert from "../includes/Alert";
+import ResetForm from "./ResetForm";
 
 const ResetPage = () => {
-  
   return (
     <div>
       <Title title="Reset your password" />
-      <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
+      <section
+        id="main"
+        className="container-fluid"
+        aria-label="main body of content plus related links and features"
+      >
         <div className="container">
           <div className="row">
             <div className="col-12 col-md-6 mb-3 mx-auto">
@@ -21,7 +24,6 @@ const ResetPage = () => {
       </section>
     </div>
   );
-
-}
+};
 
 export default ResetPage;

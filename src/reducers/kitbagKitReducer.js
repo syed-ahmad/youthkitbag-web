@@ -1,4 +1,12 @@
-import { FETCH_KITBAG_KIT, CREATE_KITBAG_KIT, EDIT_KITBAG_KIT, FETCH_KITBAG_KITS, ADD_IMAGE, CLEAR_NEW_IMAGES, LOGOUT } from '../actions/types';
+import {
+  FETCH_KITBAG_KIT,
+  CREATE_KITBAG_KIT,
+  EDIT_KITBAG_KIT,
+  FETCH_KITBAG_KITS,
+  ADD_IMAGE,
+  CLEAR_NEW_IMAGES,
+  LOGOUT
+} from "../actions/types";
 
 const initialState = { current: {}, newImages: [], list: [] };
 
@@ -12,7 +20,10 @@ export default (state = initialState, action) => {
     case EDIT_KITBAG_KIT:
       return { current: action.payload.kit, newImages: [], list: [] };
     case ADD_IMAGE:
-      return { ...state, newImages: [...state.newImages, action.payload.photo] };
+      return {
+        ...state,
+        newImages: [...state.newImages, action.payload.photo]
+      };
     case CLEAR_NEW_IMAGES:
       return { ...state, newImages: [] };
     case LOGOUT:
