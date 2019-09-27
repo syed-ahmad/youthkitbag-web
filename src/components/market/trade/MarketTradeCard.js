@@ -1,19 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class MarketTradeCard extends React.Component {
   renderAskingPrice = askingPrice => {
-    if (!askingPrice || askingPrice === 0) return "Free";
+    if (!askingPrice || askingPrice === 0) return 'Free';
     return `£${askingPrice.toFixed(2)}`;
   };
 
   topImage = () => {
     if (!this.props.trade.images) {
-      return "/images/default.png";
+      return '/images/default.png';
     }
     return this.props.trade.images.length > 0
       ? this.props.trade.images[0].imageUrl
-      : "/images/default.png";
+      : '/images/default.png';
   };
 
   render() {

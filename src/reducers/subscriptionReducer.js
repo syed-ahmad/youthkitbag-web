@@ -1,4 +1,4 @@
-import { FETCH_SUBSCRIPTION_PACKAGE, LOGOUT } from "../actions/types";
+import { FETCH_SUBSCRIPTION_PACKAGE, LOGOUT } from '../actions/types';
 
 const initialState = { selected: {} };
 

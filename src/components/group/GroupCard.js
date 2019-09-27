@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class GroupCard extends React.Component {
   totalQuantity = () => {
@@ -8,21 +8,21 @@ class GroupCard extends React.Component {
 
   topImage = () => {
     if (!this.props.group.images) {
-      return "/images/default.png";
+      return '/images/default.png';
     }
     return this.props.group.images.length > 0
       ? this.props.group.images[0].imageUrl
-      : "/images/default.png";
+      : '/images/default.png';
   };
 
   statusIcon = status => {
     switch (status) {
-      case "approved":
-        return "fas fa-check-circle text-success";
-      case "blocked":
-        return "fas fa-times-circle text-danger";
+      case 'approved':
+        return 'fas fa-check-circle text-success';
+      case 'blocked':
+        return 'fas fa-times-circle text-danger';
       default:
-        return "fas fa-question-circle text-warning";
+        return 'fas fa-question-circle text-warning';
     }
   };
 
@@ -67,7 +67,7 @@ class GroupCard extends React.Component {
             <div className="card-body">
               <h3 className="card-title h6 ellipsis">{name}</h3>
               {activitys && (
-                <p className="card-text ellipsis">{activitys.join(", ")}</p>
+                <p className="card-text ellipsis">{activitys.join(', ')}</p>
               )}
             </div>
           </Link>

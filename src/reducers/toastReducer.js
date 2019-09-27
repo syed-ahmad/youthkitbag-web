@@ -13,11 +13,11 @@ import {
   SHOWN_TOAST,
   EDIT_GROUP_STATUS,
   EDIT_GROUP_MEMBER_STATE
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = {
-  currentMessage: "",
-  currentStyle: "",
+  currentMessage: '',
+  currentStyle: '',
   errors: [],
   hasShown: false
 };
@@ -33,27 +33,27 @@ export default (state = initialState, action) => {
     case EDIT_GROUP_MEMBER_STATE:
       return {
         currentMessage: action.payload.message,
-        currentStyle: "success",
+        currentStyle: 'success',
         hasShown: false
       };
     case DELETE_KITBAG_KIT:
     case DELETE_KITBAG_TRADE:
       return {
         currentMessage: action.payload.message,
-        currentStyle: "warning",
+        currentStyle: 'warning',
         hasShown: false
       };
     case API_KITBAG_ERROR:
       return {
         currentMessage: action.payload.data.message,
-        currentStyle: "error",
+        currentStyle: 'error',
         errors: action.payload.data.errors,
         hasShown: true
       };
     case LOGIN_FAILURE:
       return {
         currentMessage: action.payload.data.message,
-        currentStyle: "error",
+        currentStyle: 'error',
         hasShown: true
       };
     case SHOWN_TOAST:

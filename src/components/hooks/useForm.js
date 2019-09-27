@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const useForm = (initiaValues, callback, validate) => {
   const [values, setValues] = useState(initiaValues);
@@ -20,9 +20,9 @@ const useForm = (initiaValues, callback, validate) => {
 
   const getNameValue = eventTarget => {
     let { name, value, checked, type } = eventTarget;
-    value = type === "checkbox" ? checked : value;
+    value = type === 'checkbox' ? checked : value;
 
-    if (name.indexOf("[") < 0) {
+    if (name.indexOf('[') < 0) {
       return { name, value };
     }
 
@@ -30,9 +30,9 @@ const useForm = (initiaValues, callback, validate) => {
   };
 
   const getArrayNameValue = (name, value) => {
-    const arrayName = name.substring(0, name.indexOf("["));
-    const index = +name.substring(name.indexOf("[") + 1, name.indexOf("]"));
-    const propertyName = name.substring(name.indexOf("]") + 2);
+    const arrayName = name.substring(0, name.indexOf('['));
+    const index = +name.substring(name.indexOf('[') + 1, name.indexOf(']'));
+    const propertyName = name.substring(name.indexOf(']') + 2);
     const newItem = { ...values[arrayName][index], [propertyName]: value };
     const array = values[arrayName].map(function(item, i) {
       return i === index ? newItem : item;
@@ -47,7 +47,7 @@ const useForm = (initiaValues, callback, validate) => {
   };
 
   const setChange = (name, value) => {
-    if (name.indexOf("[") < 0) {
+    if (name.indexOf('[') < 0) {
       setValues(values => ({ ...values, [name]: value }));
       return;
     }

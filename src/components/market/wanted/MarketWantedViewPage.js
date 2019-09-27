@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchMarketWanted } from "../../../actions/MarketWantedActions";
-import MarketWantedDetails from "./MarketWantedDetails";
-import Title from "../../includes/Title";
-import Alert from "../../includes/Alert";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchMarketWanted } from '../../../actions/MarketWantedActions';
+import MarketWantedDetails from './MarketWantedDetails';
+import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.market.wanted.current
@@ -17,13 +17,13 @@ const MarketWantedViewPage = ({ current, fetchMarketWanted, match }) => {
   const wantedId = match.params.id;
 
   const [wanted, setWanted] = useState({
-    title: "Loading requested wanted item ...",
-    subtitle: "",
-    description: "",
+    title: 'Loading requested wanted item ...',
+    subtitle: '',
+    description: '',
     offerPrice: 0.0,
-    activitys: "",
+    activitys: '',
     images: [],
-    topImage: "/images/default.png"
+    topImage: '/images/default.png'
   });
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const MarketWantedViewPage = ({ current, fetchMarketWanted, match }) => {
 
   return (
     <div>
-      <Title title={`Wanted: ${!wanted ? "Loading..." : wanted.title}`} />
+      <Title title={`Wanted: ${!wanted ? 'Loading...' : wanted.title}`} />
       <section
         id="main"
         className="container-fluid"

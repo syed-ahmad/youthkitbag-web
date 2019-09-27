@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import useForm from "../../hooks/useForm";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import useForm from '../../hooks/useForm';
 import {
   createKitbagKit,
   editKitbagKit
-} from "../../../actions/KitbagKitActions";
-import { addImage, clearNewImages } from "../../../actions/ImageActions";
-import validate from "./KitFormValidationRules";
-import { resize, dataURItoBlob } from "../../../helpers/imageResize";
+} from '../../../actions/KitbagKitActions';
+import { addImage, clearNewImages } from '../../../actions/ImageActions';
+import validate from './KitFormValidationRules';
+import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 import {
   DateForm,
   TextForm,
@@ -17,27 +17,27 @@ import {
   AddArrayButtonForm,
   RemoveArrayButtonForm,
   CheckboxForm
-} from "../../includes/forms";
+} from '../../includes/forms';
 
 const KitForm = ({ kit }) => {
   const newErrors = useSelector(state => state.toast.errors);
 
-  const initialPurchase = { from: "", quantity: 0, ondate: "", price: 0.0 };
-  const initialInbag = { location: "", condition: "used", quantity: 0 };
+  const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.0 };
+  const initialInbag = { location: '', condition: 'used', quantity: 0 };
 
   const statusItems = [
-    "Owned",
-    "Trade",
-    "Sold",
-    "Stolen",
-    "Wanted",
-    "Recycled",
-    "Trashed",
-    "Given Away",
-    "Donated",
-    "Other"
+    'Owned',
+    'Trade',
+    'Sold',
+    'Stolen',
+    'Wanted',
+    'Recycled',
+    'Trashed',
+    'Given Away',
+    'Donated',
+    'Other'
   ];
-  const conditionItems = ["Used", "New", "Almost New", "Other"];
+  const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
 
   const {
     setChange,
@@ -70,11 +70,11 @@ const KitForm = ({ kit }) => {
     if (!files.length) {
       return;
     }
-    setChange("imagesToUpload", files.length);
+    setChange('imagesToUpload', files.length);
     for (let i = 0; i < files.length; i++) {
       resize(files[i], MAXWIDTH, MAXHEIGHT, function(resizedDataUrl) {
         let formData = new FormData();
-        formData.append("photo", dataURItoBlob(resizedDataUrl), files[i].name);
+        formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
         dispatch(addImage(formData));
       });
     }
@@ -107,7 +107,7 @@ const KitForm = ({ kit }) => {
     for (let i = 0; i < images.length; i++) {
       items.push(
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
-          {images[i].state !== "D" && (
+          {images[i].state !== 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
                 <span
@@ -128,7 +128,7 @@ const KitForm = ({ kit }) => {
               />
             </React.Fragment>
           )}
-          {images[i].state === "D" && (
+          {images[i].state === 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
                 <span
@@ -152,23 +152,23 @@ const KitForm = ({ kit }) => {
   }
 
   function renderTopImage(src) {
-    setChange("topImage", src);
+    setChange('topImage', src);
   }
 
   function deleteImage(id) {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state = "D";
+          i.state = 'D';
         }
         return i;
       });
-      setChange("images", images);
+      setChange('images', images);
       setChange(
-        "topImage",
-        images && images.filter(i => i.state !== "D").length > 0
-          ? images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png"
+        'topImage',
+        images && images.filter(i => i.state !== 'D').length > 0
+          ? images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png'
       );
     }
   }
@@ -177,11 +177,11 @@ const KitForm = ({ kit }) => {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state = "N";
+          i.state = 'N';
         }
         return i;
       });
-      setChange("images", images);
+      setChange('images', images);
     }
   }
 
@@ -190,12 +190,12 @@ const KitForm = ({ kit }) => {
       const primaryImage = values.images.filter(i => i._id === id);
       const otherImages = values.images.filter(i => i._id !== id);
       const images = primaryImage.concat(otherImages);
-      setChange("images", images);
+      setChange('images', images);
       setChange(
-        "topImage",
-        images && images.filter(i => i.state !== "D").length > 0
-          ? images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png"
+        'topImage',
+        images && images.filter(i => i.state !== 'D').length > 0
+          ? images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png'
       );
     }
   }
@@ -203,9 +203,9 @@ const KitForm = ({ kit }) => {
   useEffect(() => {
     if (kit) {
       kit.topImage =
-        kit.images && kit.images.filter(i => i.state !== "D").length > 0
-          ? kit.images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png";
+        kit.images && kit.images.filter(i => i.state !== 'D').length > 0
+          ? kit.images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png';
       setValues(kit);
     }
   }, [kit, setValues]);
@@ -222,13 +222,13 @@ const KitForm = ({ kit }) => {
           image._id = i._id;
           image.image = i.image;
           image.imageUrl = i.imageUrl;
-          image.state = "N";
+          image.state = 'N';
           return image;
         })
       ];
       dispatch(clearNewImages());
-      addArrayItem("images", imagesToAdd);
-      setChange("imagesToUpload", 0);
+      addArrayItem('images', imagesToAdd);
+      setChange('imagesToUpload', 0);
     }
   }, [newImages, addArrayItem, setChange, values, dispatch]);
 
@@ -356,14 +356,14 @@ const KitForm = ({ kit }) => {
                   <RemoveArrayButtonForm
                     colFormat="a-1"
                     title="Remove Purchase"
-                    onClick={() => removeArrayItem("purchases", index)}
+                    onClick={() => removeArrayItem('purchases', index)}
                     index={index}
                   />
                 </div>
               ))}
             <AddArrayButtonForm
               label="Add a new purchase"
-              onClick={() => addArrayItem("purchases", [initialPurchase])}
+              onClick={() => addArrayItem('purchases', [initialPurchase])}
             />
           </div>
           <hr />
@@ -403,14 +403,14 @@ const KitForm = ({ kit }) => {
                   <RemoveArrayButtonForm
                     colFormat="a-1"
                     title="Remove Inbag"
-                    onClick={() => removeArrayItem("inbag", index)}
+                    onClick={() => removeArrayItem('inbag', index)}
                     index={index}
                   />
                 </div>
               ))}
             <AddArrayButtonForm
               label="Add a new storage location"
-              onClick={() => addArrayItem("inbag", [initialInbag])}
+              onClick={() => addArrayItem('inbag', [initialInbag])}
             />
           </div>
           <hr />

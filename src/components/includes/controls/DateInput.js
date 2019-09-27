@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const DateInput = ({ value, field, setChange }) => {
   const getDate = value => {
@@ -10,7 +10,7 @@ const DateInput = ({ value, field, setChange }) => {
         year: today.getFullYear()
       };
     }
-    const date = value.split("T")[0].split("-");
+    const date = value.split('T')[0].split('-');
     return { day: +date[2], month: +date[1], year: +date[0] };
   };
 
@@ -19,7 +19,7 @@ const DateInput = ({ value, field, setChange }) => {
   const handleDayChange = event => {
     const { value } = event.target;
     if (!value) {
-      return updateDate({ ...actualDate, day: "" });
+      return updateDate({ ...actualDate, day: '' });
     }
     const dd = +value;
     if (dd >= 0 && dd <= 31) {
@@ -30,7 +30,7 @@ const DateInput = ({ value, field, setChange }) => {
   const handleMonthChange = event => {
     const { value } = event.target;
     if (!value) {
-      return updateDate({ ...actualDate, month: "" });
+      return updateDate({ ...actualDate, month: '' });
     }
     const mm = +value;
     if (mm >= 0 && mm <= 12) {
@@ -41,7 +41,7 @@ const DateInput = ({ value, field, setChange }) => {
   const handleYearChange = event => {
     const { value } = event.target;
     if (!value) {
-      return updateDate({ ...actualDate, year: "" });
+      return updateDate({ ...actualDate, year: '' });
     }
     const yy = +value;
     if (yy >= 0 && yy <= 2025) {

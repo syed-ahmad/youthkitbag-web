@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchSubscriptionPackage } from "../actions/SubscriptionActions";
-import Title from "./includes/Title";
-import Alert from "./includes/Alert";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchSubscriptionPackage } from '../actions/SubscriptionActions';
+import Title from './includes/Title';
+import Alert from './includes/Alert';
 
 const mapStateToProps = state => ({
   selected: state.subscription.selected
@@ -21,8 +21,8 @@ const PurchaseSubscriptionPage = ({
   const subscriptionId = match.params.id;
 
   const [subscription, setSubscription] = useState({
-    title: "Loading subscription details ...",
-    description: "",
+    title: 'Loading subscription details ...',
+    description: '',
     details: [],
     price: 0.0
   });

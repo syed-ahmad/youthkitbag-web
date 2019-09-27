@@ -6,7 +6,7 @@ import {
   CLEAR_NEW_IMAGES,
   LOGOUT,
   FETCH_KITBAG_WANTEDS
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = { current: {}, newImages: [], list: [] };
 

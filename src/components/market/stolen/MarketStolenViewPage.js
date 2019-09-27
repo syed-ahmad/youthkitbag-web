@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchMarketStolen } from "../../../actions/MarketStolenActions";
-import MarketStolenDetails from "./MarketStolenDetails";
-import Title from "../../includes/Title";
-import Alert from "../../includes/Alert";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchMarketStolen } from '../../../actions/MarketStolenActions';
+import MarketStolenDetails from './MarketStolenDetails';
+import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.market.stolen.current
@@ -17,14 +17,14 @@ const MarketStolenViewPage = ({ current, fetchMarketStolen, match }) => {
   const stolenId = match.params.id;
 
   const [stolen, setStolen] = useState({
-    title: "Loading requested stolen item ...",
-    subtitle: "",
-    description: "",
-    stolenOn: "",
-    activitys: "",
-    security: "",
+    title: 'Loading requested stolen item ...',
+    subtitle: '',
+    description: '',
+    stolenOn: '',
+    activitys: '',
+    security: '',
     images: [],
-    topImage: "/images/default.png"
+    topImage: '/images/default.png'
   });
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const MarketStolenViewPage = ({ current, fetchMarketStolen, match }) => {
 
   return (
     <div>
-      <Title title={`Stolen: ${!stolen ? "Loading..." : stolen.title}`} />
+      <Title title={`Stolen: ${!stolen ? 'Loading...' : stolen.title}`} />
       <section
         id="main"
         className="container-fluid"

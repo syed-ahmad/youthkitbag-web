@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import Title from "./includes/Title";
+import Title from './includes/Title';
 
 const Error500 = props => {
   return (

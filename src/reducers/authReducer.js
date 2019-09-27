@@ -6,10 +6,10 @@ import {
   GETALL_SUCCESS,
   GETALL_FAILURE,
   LOGOUT
-} from "../actions/types";
+} from '../actions/types';
 
 const isLogin = !!(
-  localStorage.getItem("token") && localStorage.getItem("authentication")
+  localStorage.getItem('token') && localStorage.getItem('authentication')
 );
 const initialState = isLogin ? { loggedIn: true } : { loggedIn: false };
 

@@ -2,7 +2,7 @@ import {
   FETCH_MARKET_WANTEDS,
   FETCH_MARKET_WANTED,
   LOGOUT
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = { list: [], current: {} };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const TextInput = ({
   type,
@@ -14,9 +14,9 @@ const TextInput = ({
   return (
     <React.Fragment>
       <input
-        className={`form-control ${error && "is-invalid"}`}
+        className={`form-control ${error && 'is-invalid'}`}
         name={field}
-        type={type ? type : "text"}
+        type={type ? type : 'text'}
         step={step}
         min={min}
         max={max}

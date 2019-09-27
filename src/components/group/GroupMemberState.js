@@ -1,17 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { editGroupMemberState } from "../../actions/GroupActions";
-import Modal from "../includes/Modal";
-import history from "../../helpers/history";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { editGroupMemberState } from '../../actions/GroupActions';
+import Modal from '../includes/Modal';
+import history from '../../helpers/history';
 
 class GroupMemberState extends React.Component {
   renderTitle() {
-    return "Change status of member";
+    return 'Change status of member';
   }
 
   renderContent() {
-    return "Are you sure you want to change the status of this member?";
+    return 'Are you sure you want to change the status of this member?';
   }
 
   renderActions() {

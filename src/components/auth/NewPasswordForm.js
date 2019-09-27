@@ -1,14 +1,14 @@
-import React from "react";
-import useForm from "../hooks/useForm";
-import { newPassword } from "../../actions/AuthActions";
-import validate from "./ResetFormValidationRules";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import useForm from '../hooks/useForm';
+import { newPassword } from '../../actions/AuthActions';
+import validate from './ResetFormValidationRules';
+import { useDispatch } from 'react-redux';
 
 const NewPasswordForm = () => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    password: ""
+    password: ''
   };
 
   const { values, handleChange, handleSubmit, errors } = useForm(
@@ -26,7 +26,7 @@ const NewPasswordForm = () => {
       <div className="form-group">
         <label htmlFor="password">New Password</label>
         <input
-          className={`form-control ${errors.email && "is-invalid"}`}
+          className={`form-control ${errors.email && 'is-invalid'}`}
           name="password"
           type="password"
           onChange={handleChange}

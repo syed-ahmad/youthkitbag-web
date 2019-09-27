@@ -6,7 +6,7 @@ import {
   LOGOUT,
   CREATE_GROUP,
   EDIT_GROUP
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = { current: {}, newImages: [], list: [], memberList: [] };
 

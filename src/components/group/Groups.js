@@ -1,32 +1,32 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchGroups } from "../../actions";
-import { Link } from "react-router-dom";
-import queryString from "query-string";
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchGroups } from '../../actions';
+import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 
-import Title from "../includes/Title";
-import GroupCard from "./GroupCard";
-import SearchForm from "../includes/SearchForm";
-import Pagination from "../includes/Pagination";
-import Alert from "../includes/Alert";
+import Title from '../includes/Title';
+import GroupCard from './GroupCard';
+import SearchForm from '../includes/SearchForm';
+import Pagination from '../includes/Pagination';
+import Alert from '../includes/Alert';
 
 class Groups extends React.Component {
   getTitle = () => {
     if (!this.props.pagination) {
-      return "Loading ...";
+      return 'Loading ...';
     }
     return `Found groups (${this.props.pagination.totalItems})`;
   };
 
   componentDidMount() {
-    var by = "";
-    var search = "";
-    var page = "";
+    var by = '';
+    var search = '';
+    var page = '';
     if (this.props.location.search) {
       const values = queryString.parse(this.props.location.search);
-      search = values.search ? values.search : "";
-      by = values.by ? values.by : "";
-      page = values.page ? values.page : "";
+      search = values.search ? values.search : '';
+      by = values.by ? values.by : '';
+      page = values.page ? values.page : '';
     }
 
     this.props.fetchGroups(search, by, page, 24);
@@ -35,9 +35,9 @@ class Groups extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
       const values = queryString.parse(this.props.location.search);
-      const search = values.search ? values.search : "";
-      const by = values.by ? values.by : "";
-      const page = values.page ? values.page : "";
+      const search = values.search ? values.search : '';
+      const by = values.by ? values.by : '';
+      const page = values.page ? values.page : '';
       this.props.fetchGroups(search, by, page, 24);
     }
   }

@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Title from "../includes/Title";
-import Alert from "../includes/Alert";
-import LoginForm from "./LoginForm";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Title from '../includes/Title';
+import Alert from '../includes/Alert';
+import LoginForm from './LoginForm';
 
 const Login = () => {
   return (
@@ -15,9 +15,9 @@ const Login = () => {
       >
         <div className="container">
           <p className="lead">
-            If you don't have an account already,{" "}
+            If you don't have an account already,{' '}
             <Link to="/auth/signup">then sign up for an account</Link>. Or for
-            the forgetful,{" "}
+            the forgetful,{' '}
             <Link to="/auth/reset">then reset your password</Link>.
           </p>
           <div className="row">

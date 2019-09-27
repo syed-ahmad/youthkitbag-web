@@ -1,5 +1,5 @@
-import React from "react";
-import CheckboxInput from "../controls/CheckboxInput";
+import React from 'react';
+import CheckboxInput from '../controls/CheckboxInput';
 
 const CheckboxForm = ({
   colFormat,
@@ -13,7 +13,7 @@ const CheckboxForm = ({
 }) => {
   return (
     <React.Fragment>
-      {colFormat === "3-1-8" && (
+      {colFormat === '3-1-8' && (
         <div className="form-group row">
           <label className="col-sm-3" htmlFor={field}>
             {label}

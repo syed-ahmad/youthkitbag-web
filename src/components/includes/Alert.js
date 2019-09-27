@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { resetToast, shownToast } from "../../actions/ToastActions";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { resetToast, shownToast } from '../../actions/ToastActions';
 
 const mapStateToProps = state => {
   return { toast: state.toast };
@@ -23,12 +23,12 @@ class Alert extends React.Component {
   alertStyle = () => {
     const style = this.props.toast.currentStyle;
     switch (style) {
-      case "error":
-        return "alert-danger";
-      case "warning":
-        return "alert-warning";
+      case 'error':
+        return 'alert-danger';
+      case 'warning':
+        return 'alert-warning';
       default:
-        return "alert-success";
+        return 'alert-success';
     }
   };
 

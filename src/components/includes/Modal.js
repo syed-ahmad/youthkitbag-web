@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const Modal = props => {
   return ReactDOM.createPortal(
@@ -37,7 +37,7 @@ const Modal = props => {
         </div>
       </div>
     </div>,
-    document.querySelector("#modal")
+    document.querySelector('#modal')
   );
 };
 

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchGroup } from "../../actions/GroupActions";
-import GroupForm from "./GroupForm";
-import Title from "../includes/Title";
-import Alert from "../includes/Alert";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchGroup } from '../../actions/GroupActions';
+import GroupForm from './GroupForm';
+import Title from '../includes/Title';
+import Alert from '../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.group.current
@@ -16,15 +16,15 @@ const mapDispatchToProps = {
 const GroupPage = ({ current, fetchGroup, match }) => {
   const { groupId } = match.params;
   const [group, setGroup] = useState({
-    name: "",
-    tagline: "",
-    description: "",
-    email: "",
-    website: "",
-    location: "",
-    activitys: "",
+    name: '',
+    tagline: '',
+    description: '',
+    email: '',
+    website: '',
+    location: '',
+    activitys: '',
     images: [],
-    topImage: "/images/default.png",
+    topImage: '/images/default.png',
     imagesToUpload: 0
   });
 
@@ -50,10 +50,10 @@ const GroupPage = ({ current, fetchGroup, match }) => {
 
   function getTitle() {
     if (groupIsLoding()) {
-      return "Loading ...";
+      return 'Loading ...';
     }
 
-    return group._id ? group.name : "Create new group";
+    return group._id ? group.name : 'Create new group';
   }
 
   return (

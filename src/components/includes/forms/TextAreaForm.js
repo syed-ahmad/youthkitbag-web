@@ -1,5 +1,5 @@
-import React from "react";
-import TextAreaInput from "../controls/TextAreaInput";
+import React from 'react';
+import TextAreaInput from '../controls/TextAreaInput';
 
 const TextAreaForm = ({
   colFormat,
@@ -13,7 +13,7 @@ const TextAreaForm = ({
 }) => {
   return (
     <React.Fragment>
-      {colFormat === "3-9" && (
+      {colFormat === '3-9' && (
         <div className="form-group row">
           <label htmlFor="{field}" className="col-sm-3 col-form-label">
             {label}
@@ -29,7 +29,7 @@ const TextAreaForm = ({
           </div>
         </div>
       )}
-      {colFormat === "a-4" && <div className="form-group col-sm-4"></div>}
+      {colFormat === 'a-4' && <div className="form-group col-sm-4"></div>}
     </React.Fragment>
   );
 };

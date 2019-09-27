@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import useForm from "../hooks/useForm";
-import { createGroup, editGroup } from "../../actions/GroupActions";
-import { addImage, clearNewImages } from "../../actions/ImageActions";
-import validate from "./GroupFormValidationRules";
-import { resize, dataURItoBlob } from "../../helpers/imageResize";
-import { TextForm, TextAreaForm } from "../includes/forms";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import useForm from '../hooks/useForm';
+import { createGroup, editGroup } from '../../actions/GroupActions';
+import { addImage, clearNewImages } from '../../actions/ImageActions';
+import validate from './GroupFormValidationRules';
+import { resize, dataURItoBlob } from '../../helpers/imageResize';
+import { TextForm, TextAreaForm } from '../includes/forms';
 
 const GroupForm = ({ group }) => {
   const dispatch = useDispatch();
@@ -42,11 +42,11 @@ const GroupForm = ({ group }) => {
     if (!files.length) {
       return;
     }
-    setChange("imagesToUpload", files.length);
+    setChange('imagesToUpload', files.length);
     for (let i = 0; i < files.length; i++) {
       resize(files[i], MAXWIDTH, MAXHEIGHT, function(resizedDataUrl) {
         let formData = new FormData();
-        formData.append("photo", dataURItoBlob(resizedDataUrl), files[i].name);
+        formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
         dispatch(addImage(formData));
       });
     }
@@ -71,7 +71,7 @@ const GroupForm = ({ group }) => {
     for (let i = 0; i < images.length; i++) {
       items.push(
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
-          {images[i].state !== "D" && (
+          {images[i].state !== 'D' && (
             <React.Fragment>
               {!isReadOnly && (
                 <span className="icons-top-left">
@@ -94,7 +94,7 @@ const GroupForm = ({ group }) => {
               />
             </React.Fragment>
           )}
-          {images[i].state === "D" && (
+          {images[i].state === 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
                 <span
@@ -118,23 +118,23 @@ const GroupForm = ({ group }) => {
   }
 
   function renderTopImage(src) {
-    setChange("topImage", src);
+    setChange('topImage', src);
   }
 
   function deleteImage(id) {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state = "D";
+          i.state = 'D';
         }
         return i;
       });
-      setChange("images", images);
+      setChange('images', images);
       setChange(
-        "topImage",
-        images && images.filter(i => i.state !== "D").length > 0
-          ? images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png"
+        'topImage',
+        images && images.filter(i => i.state !== 'D').length > 0
+          ? images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png'
       );
     }
   }
@@ -143,11 +143,11 @@ const GroupForm = ({ group }) => {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state = "N";
+          i.state = 'N';
         }
         return i;
       });
-      setChange("images", images);
+      setChange('images', images);
     }
   }
 
@@ -156,12 +156,12 @@ const GroupForm = ({ group }) => {
       const primaryImage = values.images.filter(i => i._id === id);
       const otherImages = values.images.filter(i => i._id !== id);
       const images = primaryImage.concat(otherImages);
-      setChange("images", images);
+      setChange('images', images);
       setChange(
-        "topImage",
-        images && images.filter(i => i.state !== "D").length > 0
-          ? images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png"
+        'topImage',
+        images && images.filter(i => i.state !== 'D').length > 0
+          ? images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png'
       );
     }
   }
@@ -169,9 +169,9 @@ const GroupForm = ({ group }) => {
   useEffect(() => {
     if (group) {
       group.topImage =
-        group.images && group.images.filter(i => i.state !== "D").length > 0
-          ? group.images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png";
+        group.images && group.images.filter(i => i.state !== 'D').length > 0
+          ? group.images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png';
       setValues(group);
     }
   }, [group, setValues]);
@@ -188,13 +188,13 @@ const GroupForm = ({ group }) => {
           image._id = i._id;
           image.image = i.image;
           image.imageUrl = i.imageUrl;
-          image.state = "N";
+          image.state = 'N';
           return image;
         })
       ];
       dispatch(clearNewImages());
-      addArrayItem("images", imagesToAdd);
-      setChange("imagesToUpload", 0);
+      addArrayItem('images', imagesToAdd);
+      setChange('imagesToUpload', 0);
     }
   }, [newImages, addArrayItem, setChange, values, dispatch]);
 

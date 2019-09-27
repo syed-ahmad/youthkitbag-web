@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   CREATE_KITBAG_TRADE,
   FETCH_KITBAG_TRADES,
@@ -7,24 +7,24 @@ import {
   DELETE_KITBAG_TRADE,
   API_KITBAG_ERROR,
   GETALL_FAILURE
-} from "./types";
-import history from "../helpers/history";
+} from './types';
+import history from '../helpers/history';
 
-const baseUrl = process.env.REACT_APP_YKBAPI || "http://localhost:8080";
+const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchKitbagTrades = (
-  search = "",
-  by = "all",
+  search = '',
+  by = 'all',
   page = 1,
   pagesize = 24
 ) => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/trade`, {
       params: { search, by, page, pagesize },
       headers: {
         Authorization: `bearer ${token}`,
-        "content-type": "application/json"
+        'content-type': 'application/json'
       }
     })
     .then(response => {
@@ -38,19 +38,19 @@ export const fetchKitbagTrades = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push("/auth/login?return=/kitbag/trades");
+        history.push('/auth/login?return=/kitbag/trades');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
 };
 
 export const fetchKitbagTrade = tradeId => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/trade/${tradeId}`, {
       headers: {
         Authorization: `bearer ${token}`,
-        "content-type": "application/json"
+        'content-type': 'application/json'
       }
     })
     .then(response => {
@@ -61,19 +61,19 @@ export const fetchKitbagTrade = tradeId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push("/auth/login?return=/kitbag/trades");
+        history.push('/auth/login?return=/kitbag/trades');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
 };
 
 export const fetchKitbagTradeFromKit = kitId => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/trade/add/${kitId}`, {
       headers: {
         Authorization: `bearer ${token}`,
-        "content-type": "application/json"
+        'content-type': 'application/json'
       }
     })
     .then(response => {
@@ -84,14 +84,14 @@ export const fetchKitbagTradeFromKit = kitId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push("/auth/login?return=/kitbag/trades");
+        history.push('/auth/login?return=/kitbag/trades');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
 };
 
 export const createKitbagTrade = formValues => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .post(
       `${baseUrl}/kitbag/trade`,
@@ -99,13 +99,13 @@ export const createKitbagTrade = formValues => dispatch => {
       {
         headers: {
           Authorization: `bearer ${token}`,
-          "content-type": "application/json"
+          'content-type': 'application/json'
         }
       }
     )
     .then(response => {
       dispatch({ type: CREATE_KITBAG_TRADE, payload: response.data });
-      history.push("/kitbag/trades?search=&by=&page=1&pagesize=24");
+      history.push('/kitbag/trades?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -113,7 +113,7 @@ export const createKitbagTrade = formValues => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          "/auth/login?return=/kitbag/trades?search=&by=&page=1&pagesize=24"
+          '/auth/login?return=/kitbag/trades?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -121,7 +121,7 @@ export const createKitbagTrade = formValues => dispatch => {
 };
 
 export const editKitbagTrade = (tradeId, formValues) => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .put(
       `${baseUrl}/kitbag/trade/${tradeId}`,
@@ -129,13 +129,13 @@ export const editKitbagTrade = (tradeId, formValues) => dispatch => {
       {
         headers: {
           Authorization: `bearer ${token}`,
-          "content-type": "application/json"
+          'content-type': 'application/json'
         }
       }
     )
     .then(response => {
       dispatch({ type: EDIT_KITBAG_TRADE, payload: response.data });
-      history.push("/kitbag/trades?search=&by=&page=1&pagesize=24");
+      history.push('/kitbag/trades?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -143,7 +143,7 @@ export const editKitbagTrade = (tradeId, formValues) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          "/auth/login?return=/kitbag/trades?search=&by=&page=1&pagesize=24"
+          '/auth/login?return=/kitbag/trades?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -151,17 +151,17 @@ export const editKitbagTrade = (tradeId, formValues) => dispatch => {
 };
 
 export const deleteKitbagTrade = tradeId => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .delete(`${baseUrl}/kitbag/trade/${tradeId}`, {
       headers: {
         Authorization: `bearer ${token}`,
-        "content-type": "application/json"
+        'content-type': 'application/json'
       }
     })
     .then(response => {
       dispatch({ type: DELETE_KITBAG_TRADE, payload: response.data });
-      history.push("/kitbag/trades?search=&by=&page=1&pagesize=24");
+      history.push('/kitbag/trades?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -169,7 +169,7 @@ export const deleteKitbagTrade = tradeId => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          "/auth/login?return=/kitbag/trades?search=&by=&page=1&pagesize=24"
+          '/auth/login?return=/kitbag/trades?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   FETCH_GROUPS,
   CREATE_GROUP,
@@ -9,24 +9,24 @@ import {
   EDIT_GROUP_MEMBER_STATE,
   API_KITBAG_ERROR,
   GETALL_FAILURE
-} from "./types";
-import history from "../helpers/history";
+} from './types';
+import history from '../helpers/history';
 
-const baseUrl = process.env.REACT_APP_YKBAPI || "http://localhost:8080";
+const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchGroups = (
-  search = "",
-  by = "all",
+  search = '',
+  by = 'all',
   page = 1,
   pagesize = 24
 ) => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/group/search`, {
       params: { search, by, page, pagesize },
       headers: {
         Authorization: `bearer ${token}`,
-        "content-type": "application/json"
+        'content-type': 'application/json'
       }
     })
     .then(response => {
@@ -40,19 +40,19 @@ export const fetchGroups = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push("/auth/login?return=/settings/groups");
+        history.push('/auth/login?return=/settings/groups');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
 };
 
 export const fetchGroup = groupId => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/group/${groupId}`, {
       headers: {
         Authorization: `bearer ${token}`,
-        "content-type": "application/json"
+        'content-type': 'application/json'
       }
     })
     .then(response => {
@@ -63,14 +63,14 @@ export const fetchGroup = groupId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push("/auth/login?return=/settings/groups/view");
+        history.push('/auth/login?return=/settings/groups/view');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
 };
 
 export const createGroup = formValues => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .post(
       `${baseUrl}/group`,
@@ -78,13 +78,13 @@ export const createGroup = formValues => dispatch => {
       {
         headers: {
           Authorization: `bearer ${token}`,
-          "content-type": "application/json"
+          'content-type': 'application/json'
         }
       }
     )
     .then(response => {
       dispatch({ type: CREATE_GROUP, payload: response.data });
-      history.push("/settings/groups?search=&by=&page=1&pagesize=24");
+      history.push('/settings/groups?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -92,7 +92,7 @@ export const createGroup = formValues => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          "/auth/login?return=/settings/groups?search=&by=&page=1&pagesize=24"
+          '/auth/login?return=/settings/groups?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -100,7 +100,7 @@ export const createGroup = formValues => dispatch => {
 };
 
 export const editGroup = (groupId, formValues) => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .put(
       `${baseUrl}/group/${groupId}`,
@@ -108,13 +108,13 @@ export const editGroup = (groupId, formValues) => dispatch => {
       {
         headers: {
           Authorization: `bearer ${token}`,
-          "content-type": "application/json"
+          'content-type': 'application/json'
         }
       }
     )
     .then(response => {
       dispatch({ type: EDIT_GROUP, payload: response.data });
-      history.push("/settings/groups?search=&by=&page=1&pagesize=24");
+      history.push('/settings/groups?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -122,7 +122,7 @@ export const editGroup = (groupId, formValues) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          "/auth/login?return=/settings/groups?search=&by=&page=1&pagesize=24"
+          '/auth/login?return=/settings/groups?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -130,7 +130,7 @@ export const editGroup = (groupId, formValues) => dispatch => {
 };
 
 export const editGroupStatus = (groupId, status) => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .put(
       `${baseUrl}/group/${groupId}/status`,
@@ -138,13 +138,13 @@ export const editGroupStatus = (groupId, status) => dispatch => {
       {
         headers: {
           Authorization: `bearer ${token}`,
-          "content-type": "application/json"
+          'content-type': 'application/json'
         }
       }
     )
     .then(response => {
       dispatch({ type: EDIT_GROUP_STATUS, payload: response.data });
-      history.push("/settings/groups?search=&by=&page=1&pagesize=24");
+      history.push('/settings/groups?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -152,7 +152,7 @@ export const editGroupStatus = (groupId, status) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          "/auth/login?return=/settings/groups?search=&by=&page=1&pagesize=24"
+          '/auth/login?return=/settings/groups?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -160,12 +160,12 @@ export const editGroupStatus = (groupId, status) => dispatch => {
 };
 
 export const fetchGroupMembers = groupId => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/group/${groupId}/members`, {
       headers: {
         Authorization: `bearer ${token}`,
-        "content-type": "application/json"
+        'content-type': 'application/json'
       }
     })
     .then(response => {
@@ -184,7 +184,7 @@ export const fetchGroupMembers = groupId => dispatch => {
 };
 
 export const editGroupMemberState = (groupId, memberId, state) => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .put(
       `${baseUrl}/group/${groupId}/members/${memberId}/${state}`,
@@ -192,7 +192,7 @@ export const editGroupMemberState = (groupId, memberId, state) => dispatch => {
       {
         headers: {
           Authorization: `bearer ${token}`,
-          "content-type": "application/json"
+          'content-type': 'application/json'
         }
       }
     )

@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import Title from "../includes/Title";
-import Alert from "../includes/Alert";
-import NewPasswordForm from "./NewPasswordForm";
+import Title from '../includes/Title';
+import Alert from '../includes/Alert';
+import NewPasswordForm from './NewPasswordForm';
 
 const NewPasswordPage = () => {
   return (

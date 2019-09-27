@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Footer extends React.Component {
   render() {
@@ -92,7 +92,7 @@ class Footer extends React.Component {
                 <div className="d-flex flex-column flex-md-row">
                   <div className="p-2">
                     <Link to="/corporate/terms-and-conditions/index">
-                      Terms &amp; conditions{" "}
+                      Terms &amp; conditions{' '}
                     </Link>
                   </div>
                   <div className="p-2">

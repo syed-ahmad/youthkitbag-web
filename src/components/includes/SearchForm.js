@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import useForm from "../hooks/useForm";
-import validate from "./FormEmptyValidationRules";
-import queryString from "query-string";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import useForm from '../hooks/useForm';
+import validate from './FormEmptyValidationRules';
+import queryString from 'query-string';
 
 const SearchForm = props => {
   const qsvalues = queryString.parse(props.search);
-  const search = qsvalues.search ? qsvalues.search : "";
-  const by = qsvalues.by ? qsvalues.by : "";
+  const search = qsvalues.search ? qsvalues.search : '';
+  const by = qsvalues.by ? qsvalues.by : '';
 
   const dispatch = useDispatch();
   const filter = useSelector(state => state.filter);
@@ -31,7 +31,7 @@ const SearchForm = props => {
   }
 
   function clearSearch() {
-    setValues({ by: "", search: "" });
+    setValues({ by: '', search: '' });
     setIsClearing(true);
   }
 

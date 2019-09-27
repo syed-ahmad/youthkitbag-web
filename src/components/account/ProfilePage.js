@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
-import Title from "../includes/Title";
-import Alert from "../includes/Alert";
-import ProfileForm from "./ProfileForm";
+import Title from '../includes/Title';
+import Alert from '../includes/Alert';
+import ProfileForm from './ProfileForm';
 
 const mapStateToProps = state => ({
   current: state.user.profile
@@ -12,15 +12,15 @@ const mapStateToProps = state => ({
 const ProfilePage = ({ current, fetchProfile, match }) => {
   const { profileId } = match.params;
   const [profile, setProfile] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    location: "",
-    activitys: "",
+    firstname: '',
+    lastname: '',
+    username: '',
+    location: '',
+    activitys: '',
     images: [],
     groups: [],
     badges: [],
-    topImage: "/images/default.png",
+    topImage: '/images/default.png',
     imagesToUpload: 0,
     newImages: []
   });
@@ -41,10 +41,10 @@ const ProfilePage = ({ current, fetchProfile, match }) => {
 
   function getTitle() {
     if (profileIsLoding()) {
-      return "Loading ...";
+      return 'Loading ...';
     }
 
-    return profile._id ? profile.name : "Update profile";
+    return profile._id ? profile.name : 'Update profile';
   }
 
   return (

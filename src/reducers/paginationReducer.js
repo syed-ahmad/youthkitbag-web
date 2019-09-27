@@ -8,7 +8,7 @@ import {
   FETCH_MARKET_STOLENS,
   FETCH_GROUPS,
   LOGOUT
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = { totalItems: 0, itemsPerPage: 24, currentPage: 1 };
 

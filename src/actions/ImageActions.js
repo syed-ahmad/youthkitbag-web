@@ -1,15 +1,15 @@
-import axios from "axios";
-import { ADD_IMAGE, CLEAR_NEW_IMAGES, API_KITBAG_ERROR } from "./types";
+import axios from 'axios';
+import { ADD_IMAGE, CLEAR_NEW_IMAGES, API_KITBAG_ERROR } from './types';
 
-const baseUrl = process.env.REACT_APP_YKBAPI || "http://localhost:8080";
+const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const addImage = formData => dispatch => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   axios
     .post(`${baseUrl}/image/add`, formData, {
       headers: {
         Authorization: `bearer ${token}`,
-        "content-type": "application/json"
+        'content-type': 'application/json'
       }
     })
     .then(response => {

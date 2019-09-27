@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import {
   fetchKitbagTrade,
   fetchKitbagTradeFromKit
-} from "../../../actions/KitbagTradeActions";
-import TradeForm from "./TradeForm";
-import Title from "../../includes/Title";
-import Alert from "../../includes/Alert";
+} from '../../../actions/KitbagTradeActions';
+import TradeForm from './TradeForm';
+import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.kitbag.trade.current
@@ -27,20 +27,20 @@ const TradePage = ({
   const kitId = match.params.kit;
 
   const [trade, setTrade] = useState({
-    title: "",
-    subtitle: "",
-    description: "",
-    location: "",
+    title: '',
+    subtitle: '',
+    description: '',
+    location: '',
     images: [],
-    activitys: "",
-    condition: "used",
+    activitys: '',
+    condition: 'used',
     askingPrice: 0.0,
     traded: false,
-    sourceId: "",
-    userId: "",
+    sourceId: '',
+    userId: '',
     groups: [],
     tradeDetails: [],
-    topImage: "/images/default.png",
+    topImage: '/images/default.png',
     imagesToUpload: 0
   });
 
@@ -72,10 +72,10 @@ const TradePage = ({
 
   function getTitle() {
     if (itemIsLoding()) {
-      return "Loading ...";
+      return 'Loading ...';
     }
 
-    return trade._id ? trade.title : "Create a new item for trade";
+    return trade._id ? trade.title : 'Create a new item for trade';
   }
 
   return (

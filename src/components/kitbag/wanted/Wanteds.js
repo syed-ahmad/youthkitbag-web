@@ -1,31 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchKitbagWanteds } from "../../../actions";
-import queryString from "query-string";
-import Title from "../../includes/Title";
-import WantedCard from "./WantedCard";
-import SearchForm from "../../includes/SearchForm";
-import Pagination from "../../includes/Pagination";
-import Alert from "../../includes/Alert";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchKitbagWanteds } from '../../../actions';
+import queryString from 'query-string';
+import Title from '../../includes/Title';
+import WantedCard from './WantedCard';
+import SearchForm from '../../includes/SearchForm';
+import Pagination from '../../includes/Pagination';
+import Alert from '../../includes/Alert';
 
 class Wanteds extends React.Component {
   getTitle = () => {
     if (!this.props.pagination) {
-      return "Loading ...";
+      return 'Loading ...';
     }
     return `Your wanted kit (${this.props.pagination.totalItems})`;
   };
 
   componentDidMount() {
-    var by = "";
-    var search = "";
-    var page = "";
+    var by = '';
+    var search = '';
+    var page = '';
     if (this.props.location.search) {
       const values = queryString.parse(this.props.location.search);
-      search = values.search ? values.search : "";
-      by = values.by ? values.by : "";
-      page = values.page ? values.page : "";
+      search = values.search ? values.search : '';
+      by = values.by ? values.by : '';
+      page = values.page ? values.page : '';
     }
 
     this.props.fetchKitbagWanteds(search, by, page, 24);
@@ -34,9 +34,9 @@ class Wanteds extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
       const values = queryString.parse(this.props.location.search);
-      const search = values.search ? values.search : "";
-      const by = values.by ? values.by : "";
-      const page = values.page ? values.page : "";
+      const search = values.search ? values.search : '';
+      const by = values.by ? values.by : '';
+      const page = values.page ? values.page : '';
       this.props.fetchKitbagWanteds(search, by, page, 24);
     }
   }

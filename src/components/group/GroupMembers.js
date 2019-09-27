@@ -1,14 +1,14 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchGroupMembers } from "../../actions";
-import Title from "../includes/Title";
-import Alert from "../includes/Alert";
-import GroupMember from "./GroupMember";
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchGroupMembers } from '../../actions';
+import Title from '../includes/Title';
+import Alert from '../includes/Alert';
+import GroupMember from './GroupMember';
 
 class GroupMembers extends React.Component {
   getTitle = () => {
     if (!this.props.memberList.members) {
-      return "Loading ...";
+      return 'Loading ...';
     }
     return `${this.props.memberList.name} - members (${this.props.memberList.members.length})`;
   };

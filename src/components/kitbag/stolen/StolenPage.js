@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import {
   fetchKitbagStolen,
   fetchKitbagStolenFromKit
-} from "../../../actions/KitbagStolenActions";
-import StolenForm from "./StolenForm";
-import Title from "../../includes/Title";
-import Alert from "../../includes/Alert";
+} from '../../../actions/KitbagStolenActions';
+import StolenForm from './StolenForm';
+import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.kitbag.stolen.current
@@ -27,21 +27,21 @@ const StolenPage = ({
   const kitId = match.params.kit;
 
   const [stolen, setStolen] = useState({
-    title: "",
-    subtitle: "",
-    description: "",
-    location: "",
+    title: '',
+    subtitle: '',
+    description: '',
+    location: '',
     images: [],
-    activitys: "",
+    activitys: '',
     security: [],
-    stolenOn: "",
-    tracking: "",
+    stolenOn: '',
+    tracking: '',
     recovered: false,
-    sourceId: "",
-    userId: "",
+    sourceId: '',
+    userId: '',
     groups: [],
     reportDetails: [],
-    topImage: "/images/default.png",
+    topImage: '/images/default.png',
     imagesToUpload: 0
   });
 
@@ -73,10 +73,10 @@ const StolenPage = ({
 
   function getTitle() {
     if (itemIsLoding()) {
-      return "Loading ...";
+      return 'Loading ...';
     }
 
-    return stolen._id ? stolen.title : "Report a new stolen item";
+    return stolen._id ? stolen.title : 'Report a new stolen item';
   }
 
   return (

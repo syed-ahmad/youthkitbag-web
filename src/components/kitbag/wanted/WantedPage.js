@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import {
   fetchKitbagWanted,
   fetchKitbagWantedFromKit
-} from "../../../actions/KitbagWantedActions";
-import WantedForm from "./WantedForm";
-import Title from "../../includes/Title";
-import Alert from "../../includes/Alert";
+} from '../../../actions/KitbagWantedActions';
+import WantedForm from './WantedForm';
+import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.kitbag.wanted.current
@@ -26,19 +26,19 @@ const WantedPage = ({
   const { wantedId, kitId } = match.params;
 
   const [wanted, setWanted] = useState({
-    title: "",
-    subtitle: "",
-    description: "",
+    title: '',
+    subtitle: '',
+    description: '',
     offerPrice: 0.0,
-    location: "",
+    location: '',
     offerDetails: [],
     obtained: false,
-    activitys: "",
+    activitys: '',
     groups: [],
     images: [],
-    sourceId: "",
-    userId: "",
-    topImage: "/images/default.png",
+    sourceId: '',
+    userId: '',
+    topImage: '/images/default.png',
     imagesToUpload: 0
   });
 
@@ -70,10 +70,10 @@ const WantedPage = ({
 
   function getTitle() {
     if (itemIsLoding()) {
-      return "Loading ...";
+      return 'Loading ...';
     }
 
-    return wanted._id ? wanted.title : "Create a new item that you want";
+    return wanted._id ? wanted.title : 'Create a new item that you want';
   }
 
   return (

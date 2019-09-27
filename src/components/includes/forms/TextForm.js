@@ -1,5 +1,5 @@
-import React from "react";
-import TextInput from "../controls/TextInput";
+import React from 'react';
+import TextInput from '../controls/TextInput';
 
 const TextForm = ({
   colFormat,
@@ -15,10 +15,10 @@ const TextForm = ({
   index,
   error
 }) => {
-  const columns = colFormat.split("-");
+  const columns = colFormat.split('-');
   return (
     <React.Fragment>
-      {colFormat === "3-9" && (
+      {colFormat === '3-9' && (
         <div className="form-group row">
           <label htmlFor="{field}" className="col-sm-3 col-form-label">
             {label}
@@ -38,7 +38,7 @@ const TextForm = ({
           </div>
         </div>
       )}
-      {colFormat.startsWith("a") && (
+      {colFormat.startsWith('a') && (
         <div className={`form-group col-sm-${columns[1]}`}>
           {index === 0 && <label className="d-none d-sm-block">{label}</label>}
           <TextInput

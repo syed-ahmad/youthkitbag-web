@@ -1,12 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   fetchKitbagWanted,
   deleteKitbagWanted
-} from "../../../actions/KitbagWantedActions";
-import Modal from "../../includes/Modal";
-import history from "../../../helpers/history";
+} from '../../../actions/KitbagWantedActions';
+import Modal from '../../includes/Modal';
+import history from '../../../helpers/history';
 
 class WantedDelete extends React.Component {
   componentDidMount() {
@@ -15,14 +15,14 @@ class WantedDelete extends React.Component {
 
   renderTitle() {
     if (!this.props.wanted) {
-      return "Delete item of wanted";
+      return 'Delete item of wanted';
     }
     return `Delete "${this.props.wanted.title}"`;
   }
 
   renderContent() {
     if (!this.props.wanted) {
-      return "Are you sure you want to delete this wanted?";
+      return 'Are you sure you want to delete this wanted?';
     }
     return `Are you sure you want to delete this wanted titled "${this.props.wanted.title}"?`;
   }
@@ -55,7 +55,7 @@ class WantedDelete extends React.Component {
         title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => history.push("/kitbag/wanteds")}
+        onDismiss={() => history.push('/kitbag/wanteds')}
       />
     );
   }

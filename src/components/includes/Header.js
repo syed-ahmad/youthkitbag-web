@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
   render() {
@@ -178,7 +178,7 @@ class Header extends React.Component {
                       <span
                         className="fas fa-sign-in-alt"
                         aria-hidden="true"
-                      ></span>{" "}
+                      ></span>{' '}
                       Login
                     </Link>
                   </li>
@@ -193,7 +193,7 @@ class Header extends React.Component {
                       <span
                         className="fas fa-sign-out-alt"
                         aria-hidden="true"
-                      ></span>{" "}
+                      ></span>{' '}
                       Logout
                     </Link>
                   </li>

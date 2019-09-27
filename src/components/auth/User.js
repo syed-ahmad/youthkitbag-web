@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { getUser } from "../../actions/UserActions";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getUser } from '../../actions/UserActions';
 
 class User extends React.Component {
   componentDidMount() {

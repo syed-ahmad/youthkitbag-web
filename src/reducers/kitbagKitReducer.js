@@ -6,7 +6,7 @@ import {
   ADD_IMAGE,
   CLEAR_NEW_IMAGES,
   LOGOUT
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = { current: {}, newImages: [], list: [] };
 

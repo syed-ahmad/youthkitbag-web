@@ -1,19 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class MarketWantedCard extends React.Component {
   renderOfferPrice = offerPrice => {
-    if (!offerPrice || offerPrice === 0) return "Free";
+    if (!offerPrice || offerPrice === 0) return 'Free';
     return `£${offerPrice.toFixed(2)}`;
   };
 
   topImage = () => {
     if (!this.props.wanted.images) {
-      return "/images/default.png";
+      return '/images/default.png';
     }
     return this.props.wanted.images.length > 0
       ? this.props.wanted.images[0].imageUrl
-      : "/images/default.png";
+      : '/images/default.png';
   };
 
   render() {

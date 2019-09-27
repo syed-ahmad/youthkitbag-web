@@ -8,12 +8,12 @@ import {
   FETCH_MARKET_STOLENS,
   FETCH_GROUPS,
   LOGOUT
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = {
-  by: "all",
-  search: "",
-  options: [{ key: "all", value: "All" }]
+  by: 'all',
+  search: '',
+  options: [{ key: 'all', value: 'All' }]
 };
 
 export default (state = initialState, action) => {

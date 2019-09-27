@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import useForm from "../../hooks/useForm";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import useForm from '../../hooks/useForm';
 import {
   createKitbagTrade,
   editKitbagTrade
-} from "../../../actions/KitbagTradeActions";
-import { addImage, clearNewImages } from "../../../actions/ImageActions";
-import validate from "./TradeFormValidationRules";
-import { resize, dataURItoBlob } from "../../../helpers/imageResize";
-import { DateForm, TextForm, TextAreaForm } from "../../includes/forms";
+} from '../../../actions/KitbagTradeActions';
+import { addImage, clearNewImages } from '../../../actions/ImageActions';
+import validate from './TradeFormValidationRules';
+import { resize, dataURItoBlob } from '../../../helpers/imageResize';
+import { DateForm, TextForm, TextAreaForm } from '../../includes/forms';
 
 const TradeForm = ({ trade }) => {
   const newErrors = useSelector(state => state.toast.errors);
@@ -21,7 +21,7 @@ const TradeForm = ({ trade }) => {
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
-  const initialGroup = { name: "", available: "2019-01-01" };
+  const initialGroup = { name: '', available: '2019-01-01' };
   //const initialTradeDetails = { tradedOn: '', toUserId: '', tradePrice: 0.00, complete: false, legit: true, messages: [] };
   const initialValues = { ...trade };
 
@@ -49,11 +49,11 @@ const TradeForm = ({ trade }) => {
     if (!files.length) {
       return;
     }
-    setChange("imagesToUpload", files.length);
+    setChange('imagesToUpload', files.length);
     for (let i = 0; i < files.length; i++) {
       resize(files[i], MAXWIDTH, MAXHEIGHT, function(resizedDataUrl) {
         let formData = new FormData();
-        formData.append("photo", dataURItoBlob(resizedDataUrl), files[i].name);
+        formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
         dispatch(addImage(formData));
       });
     }
@@ -65,7 +65,7 @@ const TradeForm = ({ trade }) => {
     if (Array.isArray(field)) {
       return field;
     }
-    return field ? field.split(",") : [];
+    return field ? field.split(',') : [];
   }
 
   // ?? part of images component
@@ -86,7 +86,7 @@ const TradeForm = ({ trade }) => {
     for (let i = 0; i < images.length; i++) {
       items.push(
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
-          {images[i].state !== "D" && (
+          {images[i].state !== 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
                 <span
@@ -107,7 +107,7 @@ const TradeForm = ({ trade }) => {
               />
             </React.Fragment>
           )}
-          {images[i].state === "D" && (
+          {images[i].state === 'D' && (
             <React.Fragment>
               <span className="icons-top-left">
                 <span
@@ -131,23 +131,23 @@ const TradeForm = ({ trade }) => {
   }
 
   function renderTopImage(src) {
-    setChange("topImage", src);
+    setChange('topImage', src);
   }
 
   function deleteImage(id) {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state = "D";
+          i.state = 'D';
         }
         return i;
       });
-      setChange("images", images);
+      setChange('images', images);
       setChange(
-        "topImage",
-        images && images.filter(i => i.state !== "D").length > 0
-          ? images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png"
+        'topImage',
+        images && images.filter(i => i.state !== 'D').length > 0
+          ? images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png'
       );
     }
   }
@@ -156,11 +156,11 @@ const TradeForm = ({ trade }) => {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state = "N";
+          i.state = 'N';
         }
         return i;
       });
-      setChange("images", images);
+      setChange('images', images);
     }
   }
 
@@ -169,12 +169,12 @@ const TradeForm = ({ trade }) => {
       const primaryImage = values.images.filter(i => i._id === id);
       const otherImages = values.images.filter(i => i._id !== id);
       const images = primaryImage.concat(otherImages);
-      setChange("images", images);
+      setChange('images', images);
       setChange(
-        "topImage",
-        images && images.filter(i => i.state !== "D").length > 0
-          ? images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png"
+        'topImage',
+        images && images.filter(i => i.state !== 'D').length > 0
+          ? images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png'
       );
     }
   }
@@ -182,9 +182,9 @@ const TradeForm = ({ trade }) => {
   useEffect(() => {
     if (trade) {
       trade.topImage =
-        trade.images && trade.images.filter(i => i.state !== "D").length > 0
-          ? trade.images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png";
+        trade.images && trade.images.filter(i => i.state !== 'D').length > 0
+          ? trade.images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png';
       setValues(trade);
     }
   }, [trade, setValues]);
@@ -201,13 +201,13 @@ const TradeForm = ({ trade }) => {
           image._id = i._id;
           image.image = i.image;
           image.imageUrl = i.imageUrl;
-          image.state = "N";
+          image.state = 'N';
           return image;
         })
       ];
       dispatch(clearNewImages());
-      addArrayItem("images", imagesToAdd);
-      setChange("imagesToUpload", 0);
+      addArrayItem('images', imagesToAdd);
+      setChange('imagesToUpload', 0);
     }
   }, [newImages, addArrayItem, setChange, values, dispatch]);
 
@@ -342,7 +342,7 @@ const TradeForm = ({ trade }) => {
                       className="btn btn-danger"
                       type="button"
                       title="Remove Group"
-                      onClick={() => removeArrayItem("groups", index)}
+                      onClick={() => removeArrayItem('groups', index)}
                     >
                       <span className="icon-tray-item fas fa-trash-alt"></span>
                     </button>
@@ -352,7 +352,7 @@ const TradeForm = ({ trade }) => {
             <button
               className="btn btn-secondary"
               type="button"
-              onClick={() => addArrayItem("groups", [initialGroup])}
+              onClick={() => addArrayItem('groups', [initialGroup])}
             >
               Add a new group
             </button>

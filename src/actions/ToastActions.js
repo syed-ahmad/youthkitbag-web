@@ -1,4 +1,4 @@
-import { RESET_TOAST, SHOWN_TOAST } from "./types";
+import { RESET_TOAST, SHOWN_TOAST } from './types';
 
 export const resetToast = () => dispatch => {
   dispatch({ type: RESET_TOAST });

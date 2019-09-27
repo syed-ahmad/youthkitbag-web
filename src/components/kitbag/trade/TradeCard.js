@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class TradeCard extends React.Component {
   renderNotificationCount = () => {
@@ -8,11 +8,11 @@ class TradeCard extends React.Component {
 
   topImage = () => {
     if (!this.props.trade.images) {
-      return "/images/default.png";
+      return '/images/default.png';
     }
     return this.props.trade.images.length > 0
       ? this.props.trade.images[0].imageUrl
-      : "/images/default.png";
+      : '/images/default.png';
   };
 
   render() {

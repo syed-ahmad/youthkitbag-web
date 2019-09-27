@@ -3,7 +3,7 @@ import {
   LOGOUT,
   ADD_IMAGE,
   EDIT_USER_PROFILE
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = { newImages: [] };
 

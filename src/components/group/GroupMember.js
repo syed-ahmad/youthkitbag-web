@@ -1,32 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class GroupMember extends React.Component {
   getThumbnail() {
     if (this.props.member.user.imageUrl) {
       return this.props.member.user.imageUrl;
     }
-    return "/images/defaultthumb.png";
+    return '/images/defaultthumb.png';
   }
 
   isRequested() {
-    if (this.props.member.state === "requested") return "text-info";
-    return "text-light";
+    if (this.props.member.state === 'requested') return 'text-info';
+    return 'text-light';
   }
 
   isApproved() {
-    if (this.props.member.state === "approved") return "text-success";
-    return "text-muted";
+    if (this.props.member.state === 'approved') return 'text-success';
+    return 'text-muted';
   }
 
   isRejected() {
-    if (this.props.member.state === "rejected") return "text-warning";
-    return "text-muted";
+    if (this.props.member.state === 'rejected') return 'text-warning';
+    return 'text-muted';
   }
 
   isSuspended() {
-    if (this.props.member.state === "suspended") return "text-danger";
-    return "text-muted";
+    if (this.props.member.state === 'suspended') return 'text-danger';
+    return 'text-muted';
   }
 
   render() {
@@ -47,13 +47,13 @@ class GroupMember extends React.Component {
             <h3 className="card-title h4 ellipsis">
               {user.lastname
                 ? `${user.lastname.toUpperCase()}, ${user.firstname}`
-                : "UNKNOWN"}
+                : 'UNKNOWN'}
             </h3>
             <h4 className="card-title h5 ellipsis">
-              {user.username ? user.username : "Username ?"}
+              {user.username ? user.username : 'Username ?'}
             </h4>
             <p className="card-text">
-              {permission.length > 0 ? permission.join(", ") : "-"}
+              {permission.length > 0 ? permission.join(', ') : '-'}
             </p>
             <span className="icons-bottom-left">
               <span

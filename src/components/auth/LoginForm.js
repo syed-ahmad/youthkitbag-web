@@ -1,15 +1,15 @@
-import React from "react";
-import useForm from "../hooks/useForm";
-import { login } from "../../actions/AuthActions";
-import validate from "./LoginFormValidationRules";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import useForm from '../hooks/useForm';
+import { login } from '../../actions/AuthActions';
+import validate from './LoginFormValidationRules';
+import { useDispatch } from 'react-redux';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   };
 
   const { values, handleChange, handleSubmit, errors } = useForm(
@@ -27,7 +27,7 @@ const LoginForm = () => {
       <div className="form-group">
         <label htmlFor="email">Email</label>
         <input
-          className={`form-control ${errors.email && "is-invalid"}`}
+          className={`form-control ${errors.email && 'is-invalid'}`}
           name="email"
           type="email"
           onChange={handleChange}
@@ -41,7 +41,7 @@ const LoginForm = () => {
       <div className="form-group">
         <label htmlFor="password">Password</label>
         <input
-          className={`form-control ${errors.email && "is-invalid"}`}
+          className={`form-control ${errors.email && 'is-invalid'}`}
           name="password"
           type="password"
           onChange={handleChange}

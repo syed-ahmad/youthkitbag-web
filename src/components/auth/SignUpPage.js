@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import Title from "../includes/Title";
-import Alert from "../includes/Alert";
-import SignUpForm from "./SignUpForm";
+import Title from '../includes/Title';
+import Alert from '../includes/Alert';
+import SignUpForm from './SignUpForm';
 
 const SignUpPage = () => {
   return (
@@ -16,7 +16,7 @@ const SignUpPage = () => {
       >
         <div className="container">
           <p className="lead">
-            If you already have an account,{" "}
+            If you already have an account,{' '}
             <Link to="/auth/login">then login to access your account</Link>.
           </p>
           <div className="row">

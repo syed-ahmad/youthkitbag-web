@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const CheckboxInput = ({ value, field, handleChange, items, error }) => {
   return (
@@ -12,7 +12,7 @@ const CheckboxInput = ({ value, field, handleChange, items, error }) => {
         aria-describedby={field}
       >
         {items.map(item => {
-          const id = item.replace(" ", "").toLowerCase();
+          const id = item.replace(' ', '').toLowerCase();
           return (
             <option key={id} value={id}>
               {item}

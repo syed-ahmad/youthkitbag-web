@@ -1,57 +1,57 @@
-import React from "react";
-import { Link, Router, Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
-import PrivateRoute from "../helpers/privateRoute";
-import history from "../helpers/history";
+import React from 'react';
+import { Link, Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PrivateRoute from '../helpers/privateRoute';
+import history from '../helpers/history';
 
-import User from "./auth/User";
-import Header from "./includes/Header";
-import Footer from "./includes/Footer";
+import User from './auth/User';
+import Header from './includes/Header';
+import Footer from './includes/Footer';
 
-import Home from "./Home";
-import Features from "./Features";
-import Pricing from "./Pricing";
+import Home from './Home';
+import Features from './Features';
+import Pricing from './Pricing';
 
-import SignUp from "./auth/SignUpPage";
-import Login from "./auth/LoginPage";
-import Reset from "./auth/ResetPage";
-import NewPassword from "./auth/NewPasswordPage";
-import Logout from "./auth/Logout";
+import SignUp from './auth/SignUpPage';
+import Login from './auth/LoginPage';
+import Reset from './auth/ResetPage';
+import NewPassword from './auth/NewPasswordPage';
+import Logout from './auth/Logout';
 
-import PurchaseSubscriptionPage from "./PurchaseSubscriptionPage";
+import PurchaseSubscriptionPage from './PurchaseSubscriptionPage';
 
-import Groups from "./group/Groups";
-import GroupPage from "./group/GroupPage";
-import GroupStatus from "./group/GroupStatus";
-import GroupMembers from "./group/GroupMembers";
-import GroupMemberState from "./group/GroupMemberState";
+import Groups from './group/Groups';
+import GroupPage from './group/GroupPage';
+import GroupStatus from './group/GroupStatus';
+import GroupMembers from './group/GroupMembers';
+import GroupMemberState from './group/GroupMemberState';
 
-import ProfilePage from "./account/ProfilePage";
+import ProfilePage from './account/ProfilePage';
 
-import KitBag from "./kitbag/kit/KitBag";
-import KitPage from "./kitbag/kit/KitPage";
-import KitDelete from "./kitbag/kit/KitDelete";
+import KitBag from './kitbag/kit/KitBag';
+import KitPage from './kitbag/kit/KitPage';
+import KitDelete from './kitbag/kit/KitDelete';
 
-import Trades from "./kitbag/trade/Trades";
-import TradePage from "./kitbag/trade/TradePage";
-import TradeDelete from "./kitbag/trade/TradeDelete";
+import Trades from './kitbag/trade/Trades';
+import TradePage from './kitbag/trade/TradePage';
+import TradeDelete from './kitbag/trade/TradeDelete';
 
-import Wanteds from "./kitbag/wanted/Wanteds";
-import WantedPage from "./kitbag/wanted/WantedPage";
-import WantedDelete from "./kitbag/wanted/WantedDelete";
+import Wanteds from './kitbag/wanted/Wanteds';
+import WantedPage from './kitbag/wanted/WantedPage';
+import WantedDelete from './kitbag/wanted/WantedDelete';
 
-import Stolens from "./kitbag/stolen/Stolens";
-import StolenPage from "./kitbag/stolen/StolenPage";
-import StolenDelete from "./kitbag/stolen/StolenDelete";
+import Stolens from './kitbag/stolen/Stolens';
+import StolenPage from './kitbag/stolen/StolenPage';
+import StolenDelete from './kitbag/stolen/StolenDelete';
 
-import MarketTrades from "./market/trade/MarketTrades";
-import MarketTradeViewPage from "./market/trade/MarketTradeViewPage";
+import MarketTrades from './market/trade/MarketTrades';
+import MarketTradeViewPage from './market/trade/MarketTradeViewPage';
 
-import MarketWanteds from "./market/wanted/MarketWanteds";
-import MarketWantedViewPage from "./market/wanted/MarketWantedViewPage";
+import MarketWanteds from './market/wanted/MarketWanteds';
+import MarketWantedViewPage from './market/wanted/MarketWantedViewPage';
 
-import MarketStolens from "./market/stolen/MarketStolens";
-import MarketStolenViewPage from "./market/stolen/MarketStolenViewPage";
+import MarketStolens from './market/stolen/MarketStolens';
+import MarketStolenViewPage from './market/stolen/MarketStolenViewPage';
 
 class App extends React.Component {
   render() {

@@ -1,14 +1,14 @@
-import React from "react";
-import useForm from "../hooks/useForm";
-import { reset } from "../../actions/AuthActions";
-import validate from "./ResetFormValidationRules";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import useForm from '../hooks/useForm';
+import { reset } from '../../actions/AuthActions';
+import validate from './ResetFormValidationRules';
+import { useDispatch } from 'react-redux';
 
 const ResetForm = () => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    email: ""
+    email: ''
   };
 
   const { values, handleChange, handleSubmit, errors } = useForm(
@@ -26,7 +26,7 @@ const ResetForm = () => {
       <div className="form-group">
         <label htmlFor="email">Email</label>
         <input
-          className={`form-control ${errors.email && "is-invalid"}`}
+          className={`form-control ${errors.email && 'is-invalid'}`}
           name="email"
           type="email"
           onChange={handleChange}

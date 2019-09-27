@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class MarketStolenCard extends React.Component {
   topImage = () => {
     if (!this.props.stolen.images) {
-      return "/images/default.png";
+      return '/images/default.png';
     }
     return this.props.stolen.images.length > 0
       ? this.props.stolen.images[0].imageUrl
-      : "/images/default.png";
+      : '/images/default.png';
   };
 
   render() {

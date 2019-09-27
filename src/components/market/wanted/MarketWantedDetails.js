@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import useForm from "../../hooks/useForm";
+import React, { useEffect } from 'react';
+import useForm from '../../hooks/useForm';
 
 const MarketWantedDetails = ({ wanted }) => {
   const { setChange, values, setValues } = useForm(wanted);
@@ -32,15 +32,15 @@ const MarketWantedDetails = ({ wanted }) => {
   }
 
   function renderTopImage(src) {
-    setChange("topImage", src);
+    setChange('topImage', src);
   }
 
   useEffect(() => {
     if (wanted) {
       wanted.topImage =
-        wanted.images && wanted.images.filter(i => i.state !== "D").length > 0
-          ? wanted.images.filter(i => i.state !== "D")[0].imageUrl
-          : "/images/default.png";
+        wanted.images && wanted.images.filter(i => i.state !== 'D').length > 0
+          ? wanted.images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png';
       setValues(wanted);
     }
   }, [wanted, setValues]);

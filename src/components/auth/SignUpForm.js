@@ -1,16 +1,16 @@
-import React from "react";
-import useForm from "../hooks/useForm";
-import { signup } from "../../actions/AuthActions";
-import validate from "./SignUpFormValidationRules";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import useForm from '../hooks/useForm';
+import { signup } from '../../actions/AuthActions';
+import validate from './SignUpFormValidationRules';
+import { useDispatch } from 'react-redux';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    email: "",
-    password: "",
-    confirmPassword: ""
+    email: '',
+    password: '',
+    confirmPassword: ''
   };
 
   const { values, handleChange, handleSubmit, errors } = useForm(
@@ -29,7 +29,7 @@ const SignUpForm = () => {
       <div className="form-group">
         <label htmlFor="email">Email</label>
         <input
-          className={`form-control ${errors.email && "is-invalid"}`}
+          className={`form-control ${errors.email && 'is-invalid'}`}
           name="email"
           type="email"
           onChange={handleChange}
@@ -43,7 +43,7 @@ const SignUpForm = () => {
       <div className="form-group">
         <label htmlFor="password">Password</label>
         <input
-          className={`form-control ${errors.email && "is-invalid"}`}
+          className={`form-control ${errors.email && 'is-invalid'}`}
           name="password"
           type="password"
           onChange={handleChange}
@@ -59,7 +59,7 @@ const SignUpForm = () => {
       <div className="form-group">
         <label htmlFor="confirmPassword">Password</label>
         <input
-          className={`form-control ${errors.confirmPassword && "is-invalid"}`}
+          className={`form-control ${errors.confirmPassword && 'is-invalid'}`}
           name="confirmPassword"
           type="password"
           onChange={handleChange}

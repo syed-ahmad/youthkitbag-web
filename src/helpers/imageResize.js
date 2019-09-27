@@ -1,9 +1,9 @@
 export const dataURItoBlob = dataURI => {
-  const byteString = atob(dataURI.split(",")[1]);
+  const byteString = atob(dataURI.split(',')[1]);
   const mimeString = dataURI
-    .split(",")[0]
-    .split(":")[1]
-    .split(";")[0];
+    .split(',')[0]
+    .split(':')[1]
+    .split(';')[0];
 
   const arrayBuffer = new ArrayBuffer(byteString.length);
   let uint8array = new Uint8Array(arrayBuffer);
@@ -30,7 +30,7 @@ export const resize = (file, maxWidth, maxHeight, fn) => {
 };
 
 function resizeImage(image, maxWidth, maxHeight, quality) {
-  let canvas = document.createElement("canvas");
+  let canvas = document.createElement('canvas');
 
   let width = image.width;
   let height = image.height;
@@ -50,11 +50,11 @@ function resizeImage(image, maxWidth, maxHeight, quality) {
   canvas.width = width;
   canvas.height = height;
 
-  let context = canvas.getContext("2d");
+  let context = canvas.getContext('2d');
   context.ImageSmoothingEnabled = false;
   context.webkitImageSmoothingEnabled = false;
   context.mozImageSmoothingEnabled = false;
 
   context.drawImage(image, 0, 0, width, height);
-  return canvas.toDataURL("image/jpeg", quality);
+  return canvas.toDataURL('image/jpeg', quality);
 }

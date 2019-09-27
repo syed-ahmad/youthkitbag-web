@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchKitbagKit } from "../../../actions/KitbagKitActions";
-import KitForm from "./KitForm";
-import Title from "../../includes/Title";
-import Alert from "../../includes/Alert";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
+import KitForm from './KitForm';
+import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.kitbag.kit.current
@@ -17,19 +17,19 @@ const mapDispatchToProps = {
 const KitPage = ({ current, fetchKitbagKit, match }) => {
   const kitId = match.params.id;
   const [kit, setKit] = useState({
-    title: "",
-    subtitle: "",
-    description: "",
-    status: "owned",
+    title: '',
+    subtitle: '',
+    description: '',
+    status: 'owned',
     purchases: [],
     inbag: [],
     security: [],
     warning: 0,
     activitys: [],
-    tags: "",
+    tags: '',
     active: true,
     images: [],
-    topImage: "/images/default.png",
+    topImage: '/images/default.png',
     imagesToUpload: 0
   });
 
@@ -55,10 +55,10 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
 
   function getTitle() {
     if (itemIsLoding()) {
-      return "Loading ...";
+      return 'Loading ...';
     }
 
-    return kit._id ? kit.title : "Create new kit";
+    return kit._id ? kit.title : 'Create new kit';
   }
 
   return (

@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Pagination extends React.Component {
   getPaginationLink = page => {
@@ -8,18 +8,18 @@ class Pagination extends React.Component {
   };
 
   isFirstPageDisabled = () =>
-    this.props.pagination.currentPage === 1 ? "disabled" : "";
+    this.props.pagination.currentPage === 1 ? 'disabled' : '';
 
   isPreviousPageDisabled = () =>
-    !this.props.pagination.hasPreviousPage ? "disabled" : "";
+    !this.props.pagination.hasPreviousPage ? 'disabled' : '';
 
   isNextPageDisabled = () =>
-    !this.props.pagination.hasNextPage ? "disabled" : "";
+    !this.props.pagination.hasNextPage ? 'disabled' : '';
 
   isLastPageDisabled = () =>
     this.props.pagination.lastPage === this.props.pagination.currentPage
-      ? "disabled"
-      : "";
+      ? 'disabled'
+      : '';
 
   render() {
     if (!this.props.pagination || this.props.pagination.totalItems === 0) {
