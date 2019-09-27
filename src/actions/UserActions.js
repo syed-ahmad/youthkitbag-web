@@ -21,9 +21,9 @@ export const getUser = () => dispatch => {
     });
 }
 
-export const editProfile = (formValues) =>  dispatch => {
+export const editProfile = (userId, formValues) =>  dispatch => {
   const token = localStorage.getItem('token');
-  axios.put(`${baseUrl}/user/profile`, {...formValues}, {
+  axios.put(`${baseUrl}/user/${userId}/profile`, {...formValues}, {
     headers: {
       Authorization: `bearer ${token}`,
       'content-type': 'application/json',

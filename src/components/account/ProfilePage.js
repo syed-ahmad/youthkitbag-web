@@ -22,7 +22,8 @@ const ProfilePage = ({ current, fetchProfile, match }) => {
     groups: [],
     badges: [],
     topImage: '/images/default.png',
-    imagesToUpload: 0
+    imagesToUpload: 0,
+    newImages: []
   });
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const ProfilePage = ({ current, fetchProfile, match }) => {
       <section id="main" className="container-fluid" aria-label="main body of content plus related links and features">
         <div className="container">
           <Alert />
-          <ProfileForm profile={profile} />
+          <ProfileForm />
         </div>
       </section>
     </div>

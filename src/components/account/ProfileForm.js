@@ -6,19 +6,21 @@ import { editProfile } from '../../actions/UserActions';
 import { addImage, clearNewImages } from '../../actions/ImageActions';
 import validate from './ProfileFormValidationRules';
 import { resize, dataURItoBlob } from '../../helpers/imageResize';
-import { TextForm, TextAreaForm } from '../includes/forms';
+import { TextForm } from '../includes/forms';
 
-const ProfileForm = ({ profile }) => {
+const ProfileForm = () => {
 
   const dispatch = useDispatch();
-  const newImages = useSelector(state => state.profile.newImages);
+  const profile = useSelector(state => state.user.profile);
+  const newImages = useSelector(state => state.user.newImages);
   const newErrors = useSelector(state => state.toast.errors);
 
   // ?? using hard coded constants for image sizes - should this be in image helper
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
-  const initialValues = { ...profile, profileAdmin: true, exists: false };
+  const initialValues = { ...profile };
+  console.log('INIT', initialValues);
 
   const {
     setChange,
@@ -67,23 +69,21 @@ const ProfileForm = ({ profile }) => {
 
     const { images } = values;
     const items = []
-  
+
     // ?? use .map
     for (let i = 0; i < images.length; i++) {
       items.push(
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
-          { images[i].state !== 'D' && 
+          {images[i].state !== 'D' &&
             <React.Fragment>
-              {!isReadOnly &&
-                <span className="icons-top-left">
-                  <span className="icon-tray-item fas fa-trash-alt img-delete" onClick={deleteImage.bind(null, images[i]._id)}></span>
-                  <span className="icon-tray-item fas fa-star img-primary" onClick={setPrimaryImage.bind(null, images[i]._id)}></span>
-                </span>
-              }
+              <span className="icons-top-left">
+                <span className="icon-tray-item fas fa-trash-alt img-delete" onClick={deleteImage.bind(null, images[i]._id)}></span>
+                <span className="icon-tray-item fas fa-star img-primary" onClick={setPrimaryImage.bind(null, images[i]._id)}></span>
+              </span>
               <img className="img-fluid mb-3 img-link mini-img mr-1" src={images[i].imageUrl} alt="" role="presentation" onClick={renderTopImage.bind(null, images[i].imageUrl)} />
             </React.Fragment>
           }
-          { images[i].state === 'D' && 
+          {images[i].state === 'D' &&
             <React.Fragment>
               <span className="icons-top-left">
                 <span className="icon-tray-item fas fa-undo img-delete" onClick={reinstateImage.bind(null, images[i]._id)}></span>
@@ -94,7 +94,7 @@ const ProfileForm = ({ profile }) => {
         </div>
       )
     }
-  
+
     return (
       <div>
         {items}
@@ -110,7 +110,7 @@ const ProfileForm = ({ profile }) => {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state ='D';
+          i.state = 'D';
         }
         return i;
       });
@@ -123,7 +123,7 @@ const ProfileForm = ({ profile }) => {
     if (id && values.images) {
       let images = values.images.map(i => {
         if (i._id === id) {
-          i.state ='N';
+          i.state = 'N';
         }
         return i;
       });
@@ -168,10 +168,6 @@ const ProfileForm = ({ profile }) => {
     dispatch(editProfile(values._id, values));
   }
 
-  function isReadOnly() {
-    return (!values._id || values.appAdmin) ? false : true;
-  }
-
   return (
     <div className="row">
       <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
@@ -181,28 +177,24 @@ const ProfileForm = ({ profile }) => {
         <div>
           {renderSecondaryImages()}
         </div>
-        {!isReadOnly() &&
-          <div className="form-profile row">
-            <label className="col-sm-3 col-form-label">Images</label>
-            <div className="col-sm-9">
-              <div className="custom-file">
-                <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
-                <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
-              </div>
+        <div className="form-profile row">
+          <label className="col-sm-3 col-form-label">Images</label>
+          <div className="col-sm-9">
+            <div className="custom-file">
+              <input type="file" multiple className="custom-file-input" id="photos" aria-describedby="photos" onChange={(e) => onFileChanged(e)} />
+              <label className="custom-file-label" htmlFor="photos">Choose image(s)</label>
             </div>
           </div>
-        }
+        </div>
       </div>
       <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
-          <TextForm colFormat="3-9" label="Name" value={values.name} field="name" readOnly={isReadOnly()} handleChange={handleChange} error={errors.name} />
-          <TextForm colFormat="3-9" label="Tagline" value={values.tagline} field="tagline" readOnly={isReadOnly()} handleChange={handleChange} error={errors.tagline} />
-          <TextAreaForm colFormat="3-9" label="Description" value={values.description} field="description" readOnly={isReadOnly()} handleChange={handleChange} error={errors.description} />
-          <TextForm colFormat="3-9" type="email" label="Email" value={values.email} field="email" readOnly={isReadOnly()} handleChange={handleChange} error={errors.email} />
-          <TextForm colFormat="3-9" label="Website" value={values.website} field="website" readOnly={isReadOnly()} handleChange={handleChange} error={errors.website} />
-          <TextForm colFormat="3-9" label="Location" value={values.location} field="location" readOnly={isReadOnly()} handleChange={handleChange} error={errors.location} />
+          <TextForm colFormat="3-9" label="Last Name" value={values.lastname} field="lastname" handleChange={handleChange} error={errors.lastname} />
+          <TextForm colFormat="3-9" label="First Name" value={values.firstname} field="firstname" handleChange={handleChange} error={errors.firstname} />
+          <TextForm colFormat="3-9" label="Username" value={values.username} field="username" handleChange={handleChange} error={errors.usernamee} />
+          <TextForm colFormat="3-9" label="Location" value={values.location} field="location" handleChange={handleChange} error={errors.location} />
           <hr />
-          <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" readOnly={isReadOnly()} handleChange={handleChange} error={errors.activitys} /> 
+          <TextForm colFormat="3-9" label="Activities" value={values.activitys} field="activitys" handleChange={handleChange} error={errors.activitys} />
           <hr />
           <div>
             {values.images && values.images.map((item, index) => (
@@ -220,20 +212,13 @@ const ProfileForm = ({ profile }) => {
               </div>
             ))}
           </div>
-          {(values.appAdmin || values.profileAdmin) && 
-            <div>
-              <button className="btn btn-primary" type="submit">Save</button>
-              <Link className="btn btn-link" to="/settings/profiles">Cancel</Link>
-            </div>
-          }
-          {((values.appAdmin || values.profileAdmin) && values._id) && 
-            <div>
-              <Link className="btn btn-primary" to={`/settings/profiles/${values._id}/members`}>Members</Link>
-            </div>
-          }
-          </form>
-        </div>
+          <div>
+            <button className="btn btn-primary" type="submit">Save</button>
+            <Link className="btn btn-link" to="/settings/user">Cancel</Link>
+          </div>
+        </form>
       </div>
+    </div>
   );
 }
 
