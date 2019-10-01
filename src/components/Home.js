@@ -27,6 +27,7 @@ class Home extends React.Component {
           <i className="fas fa-coffee    "></i>
           <i className="fas fa-beer    "></i>
           <i className="fas fa-cocktail    "></i>
+          <i className="fas fa-users    "></i>
         </h1>
       </div>
     );

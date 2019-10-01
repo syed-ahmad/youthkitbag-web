@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 class GroupMember extends React.Component {
   getThumbnail() {
-    if (this.props.member.user.imageUrl) {
-      return this.props.member.user.imageUrl;
+    if (this.props.member.user.images.length) {
+      return this.props.member.user.images[0].imageUrl;
     }
     return '/images/defaultthumb.png';
   }

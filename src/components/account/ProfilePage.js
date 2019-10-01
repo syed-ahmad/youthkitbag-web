@@ -21,8 +21,7 @@ const ProfilePage = ({ current, match }) => {
     groups: [],
     badges: [],
     topImage: '/images/default.png',
-    imagesToUpload: 0,
-    newImages: []
+    imagesToUpload: 0
   });
 
   useEffect(() => {

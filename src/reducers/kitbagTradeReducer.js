@@ -2,36 +2,26 @@ import {
   FETCH_KITBAG_TRADE,
   CREATE_KITBAG_TRADE,
   EDIT_KITBAG_TRADE,
-  ADD_IMAGE,
-  CLEAR_NEW_IMAGES,
   LOGOUT,
   FETCH_KITBAG_TRADES
 } from '../actions/types';
 
-const initialState = { current: {}, newImages: [], list: [] };
+const initialState = { current: {}, list: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_KITBAG_TRADE:
-      return { ...state, current: action.payload, newImages: [] };
+      return { ...state, current: action.payload };
     case CREATE_KITBAG_TRADE:
-      return { current: action.payload.trade, newImages: [], list: [] };
+      return { current: action.payload.trade, list: [] };
     case EDIT_KITBAG_TRADE:
-      return { ...state, current: action.payload, newImages: [] };
+      return { ...state, current: action.payload };
     case FETCH_KITBAG_TRADES:
       return {
         ...state,
         list: action.payload.trades,
-        current: {},
-        newImages: []
+        current: {}
       };
-    case ADD_IMAGE:
-      return {
-        ...state,
-        newImages: [...state.newImages, action.payload.photo]
-      };
-    case CLEAR_NEW_IMAGES:
-      return { ...state, newImages: [] };
     case LOGOUT:
       return initialState;
     default:

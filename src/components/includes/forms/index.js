@@ -5,3 +5,4 @@ export * from './CheckboxForm';
 export * from './AddArrayButtonForm';
 export * from './RemoveArrayButtonForm';
 export * from './SelectForm';
+export * from './ImagesForm';

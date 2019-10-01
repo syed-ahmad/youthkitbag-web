@@ -2,36 +2,26 @@ import {
   FETCH_KITBAG_WANTED,
   CREATE_KITBAG_WANTED,
   EDIT_KITBAG_WANTED,
-  ADD_IMAGE,
-  CLEAR_NEW_IMAGES,
   LOGOUT,
   FETCH_KITBAG_WANTEDS
 } from '../actions/types';
 
-const initialState = { current: {}, newImages: [], list: [] };
+const initialState = { current: {}, list: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_KITBAG_WANTED:
-      return { ...state, current: action.payload, newImages: [] };
+      return { ...state, current: action.payload };
     case CREATE_KITBAG_WANTED:
-      return { current: action.payload.wanted, newImages: [], list: [] };
+      return { current: action.payload.wanted, list: [] };
     case EDIT_KITBAG_WANTED:
-      return { ...state, current: action.payload, newImages: [] };
+      return { ...state, current: action.payload };
     case FETCH_KITBAG_WANTEDS:
       return {
         ...state,
         list: action.payload.wanteds,
-        current: {},
-        newImages: []
+        current: {}
       };
-    case ADD_IMAGE:
-      return {
-        ...state,
-        newImages: [...state.newImages, action.payload.photo]
-      };
-    case CLEAR_NEW_IMAGES:
-      return { ...state, newImages: [] };
     case LOGOUT:
       return initialState;
     default:
