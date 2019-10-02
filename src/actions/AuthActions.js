@@ -31,7 +31,7 @@ export const login = (email, password) => dispatch => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      history.push('/kitbag/kits');
+      history.push('/kitbag/kit');
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILURE, payload: err.response });

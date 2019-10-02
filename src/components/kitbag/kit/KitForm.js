@@ -324,7 +324,7 @@ const KitForm = ({ kit }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/kitbag/kits">
+            <Link className="btn btn-link" to="/kitbag/kit">
               Cancel
             </Link>
           </div>
