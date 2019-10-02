@@ -121,20 +121,20 @@ class Header extends React.Component {
                       aria-labelledby="kitbagDropdown"
                     >
                       <Link className="dropdown-item" to="/kitbag/kit">
-                        View Kitbag
+                        Your kit
                       </Link>
                       <Link className="dropdown-item" to="/kitbag/kit/new">
-                        Add Kit
+                        Add new kit
                       </Link>
                       <hr />
                       <Link className="dropdown-item" to="/kitbag/trades">
-                        Trades
+                        Your trades
                       </Link>
                       <Link className="dropdown-item" to="/kitbag/wanteds">
-                        Want
+                        Your wanted items
                       </Link>
                       <Link className="dropdown-item" to="/kitbag/stolens">
-                        Stolen
+                        Your stolen items
                       </Link>
                     </div>
                   </li>
