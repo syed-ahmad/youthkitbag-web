@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 import Title from '../includes/Title';
 import Alert from '../includes/Alert';
-import ProfileForm from './ProfileForm';
+import ProfileView from './ProfileView';
 
 const mapStateToProps = state => ({
   current: state.user.profile
 });
 
-const ProfilePage = ({ current, match }) => {
+const AccountPage = ({ current, match }) => {
   const { profileId } = match.params;
   const [profile, setProfile] = useState({
     firstname: '',
@@ -43,9 +43,7 @@ const ProfilePage = ({ current, match }) => {
       return 'Loading ...';
     }
 
-    return profile._id
-      ? `${profile.lastname.toUpperCase()}, ${profile.firstname}`
-      : 'Update profile';
+    return 'Account (at a glance)';
   }
 
   return (
@@ -58,7 +56,7 @@ const ProfilePage = ({ current, match }) => {
       >
         <div className="container">
           <Alert />
-          <ProfileForm />
+          <ProfileView />
         </div>
       </section>
     </div>
@@ -68,4 +66,4 @@ const ProfilePage = ({ current, match }) => {
 export default connect(
   mapStateToProps,
   null
-)(ProfilePage);
+)(AccountPage);

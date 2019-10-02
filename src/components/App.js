@@ -52,6 +52,9 @@ import MarketWantedViewPage from './market/wanted/MarketWantedViewPage';
 
 import MarketStolens from './market/stolen/MarketStolens';
 import MarketStolenViewPage from './market/stolen/MarketStolenViewPage';
+import AccountPage from './account/AccountPage';
+import PackagePage from './account/PackagePage';
+import BadgesPage from './account/BadgesPage';
 
 class App extends React.Component {
   render() {
@@ -220,9 +223,24 @@ class App extends React.Component {
               <PrivateRoute path="/settings/groups" component={Groups} />
 
               <PrivateRoute
+                path="/settings/account"
+                exact
+                component={AccountPage}
+              />
+              <PrivateRoute
                 path="/settings/account/profile"
                 exact
                 component={ProfilePage}
+              />
+              <PrivateRoute
+                path="/settings/account/package"
+                exact
+                component={PackagePage}
+              />
+              <PrivateRoute
+                path="/settings/account/badges"
+                exact
+                component={BadgesPage}
               />
             </Switch>
           </main>

@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   current: state.user.profile
 });
 
-const ProfilePage = ({ current, match }) => {
+const BadgesPage = ({ current, match }) => {
   const { profileId } = match.params;
   const [profile, setProfile] = useState({
     firstname: '',
@@ -68,4 +68,4 @@ const ProfilePage = ({ current, match }) => {
 export default connect(
   mapStateToProps,
   null
-)(ProfilePage);
+)(BadgesPage);
