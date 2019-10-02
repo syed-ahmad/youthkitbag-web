@@ -43,9 +43,9 @@ const SearchForm = props => {
   }, [isClearing, handleSubmit]);
 
   return (
-    <div className="d-inline-block">
+    <div>
       <form onSubmit={handleSubmit}>
-        <div className="form-group mr-3">
+        <div className="form-group">
           <div className="input-group">
             <div className="input-group-prepend">
               <select

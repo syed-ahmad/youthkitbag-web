@@ -5,7 +5,12 @@ html {
   font-size: 14px; }
 
 body {
-  height: 100% !important; }
+  height: 100% !important;
+  min-width: 320px;
+  /* Suppose you want minimum width of 1000px */
+  width: auto !important;
+  /* Firefox will set width as auto */
+  width: 320px; }
 
 #root {
   height: 100% !important; }
