@@ -228,7 +228,7 @@ const StolenForm = ({ stolen }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/kitbag/stolens">
+            <Link className="btn btn-link" to="/kitbag/stolen">
               Cancel
             </Link>
           </div>

@@ -22,7 +22,7 @@ export const fetchMarketStolens = (
     .then(response => {
       dispatch({ type: FETCH_MARKET_STOLENS, payload: response.data });
       history.push(
-        `/market/stolens?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/market/stolen?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
     .catch(err => {
@@ -30,7 +30,7 @@ export const fetchMarketStolens = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/stolens');
+        history.push('/auth/login?return=/market/stolen');
       }
       dispatch({ type: API_MARKET_ERROR, payload: response });
     });
@@ -53,7 +53,7 @@ export const fetchMarketStolen = stolenId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/stolens');
+        history.push('/auth/login?return=/market/stolen');
       }
       dispatch({ type: API_MARKET_ERROR, payload: err.response });
     });

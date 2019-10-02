@@ -22,7 +22,7 @@ export const fetchMarketWanteds = (
     .then(response => {
       dispatch({ type: FETCH_MARKET_WANTEDS, payload: response.data });
       history.push(
-        `/market/wanteds?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/market/wanted?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
     .catch(err => {
@@ -30,7 +30,7 @@ export const fetchMarketWanteds = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/wanteds');
+        history.push('/auth/login?return=/market/wanted');
       }
       dispatch({ type: API_MARKET_ERROR, payload: response });
     });
@@ -53,7 +53,7 @@ export const fetchMarketWanted = wantedId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/wanteds');
+        history.push('/auth/login?return=/market/wanted');
       }
       dispatch({ type: API_MARKET_ERROR, payload: err.response });
     });

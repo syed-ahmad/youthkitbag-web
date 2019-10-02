@@ -30,7 +30,7 @@ export const fetchKitbagTrades = (
     .then(response => {
       dispatch({ type: FETCH_KITBAG_TRADES, payload: response.data });
       history.push(
-        `/kitbag/trades?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/kitbag/trade?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
     .catch(err => {
@@ -38,7 +38,7 @@ export const fetchKitbagTrades = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/kitbag/trades');
+        history.push('/auth/login?return=/kitbag/trade');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
@@ -61,7 +61,7 @@ export const fetchKitbagTrade = tradeId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/kitbag/trades');
+        history.push('/auth/login?return=/kitbag/trade');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -84,7 +84,7 @@ export const fetchKitbagTradeFromKit = kitId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/kitbag/trades');
+        history.push('/auth/login?return=/kitbag/trade');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -105,7 +105,7 @@ export const createKitbagTrade = formValues => dispatch => {
     )
     .then(response => {
       dispatch({ type: CREATE_KITBAG_TRADE, payload: response.data });
-      history.push('/kitbag/trades?search=&by=&page=1&pagesize=24');
+      history.push('/kitbag/trade?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -113,7 +113,7 @@ export const createKitbagTrade = formValues => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/kitbag/trades?search=&by=&page=1&pagesize=24'
+          '/auth/login?return=/kitbag/trade?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -135,7 +135,7 @@ export const editKitbagTrade = (tradeId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_KITBAG_TRADE, payload: response.data });
-      history.push('/kitbag/trades?search=&by=&page=1&pagesize=24');
+      history.push('/kitbag/trade?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -143,7 +143,7 @@ export const editKitbagTrade = (tradeId, formValues) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/kitbag/trades?search=&by=&page=1&pagesize=24'
+          '/auth/login?return=/kitbag/trade?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -161,7 +161,7 @@ export const deleteKitbagTrade = tradeId => dispatch => {
     })
     .then(response => {
       dispatch({ type: DELETE_KITBAG_TRADE, payload: response.data });
-      history.push('/kitbag/trades?search=&by=&page=1&pagesize=24');
+      history.push('/kitbag/trade?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -169,7 +169,7 @@ export const deleteKitbagTrade = tradeId => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/kitbag/trades?search=&by=&page=1&pagesize=24'
+          '/auth/login?return=/kitbag/trade?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });

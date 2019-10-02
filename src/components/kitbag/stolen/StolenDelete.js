@@ -32,7 +32,7 @@ class StolenDelete extends React.Component {
     return (
       <React.Fragment>
         <Link
-          to="/kitbag/stolens"
+          to="/kitbag/stolen"
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
@@ -55,7 +55,7 @@ class StolenDelete extends React.Component {
         title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => history.push('/kitbag/stolens')}
+        onDismiss={() => history.push('/kitbag/stolen')}
       />
     );
   }

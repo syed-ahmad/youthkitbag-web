@@ -25,7 +25,7 @@ class MarketTradeCard extends React.Component {
           <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
             {this.renderAskingPrice(askingPrice)}
           </span>
-          <Link to={`/market/trades/view/${_id}`}>
+          <Link to={`/market/trade/view/${_id}`}>
             <img
               className="card-img-top"
               src={this.topImage()}

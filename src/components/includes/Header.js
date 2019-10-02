@@ -90,13 +90,13 @@ class Header extends React.Component {
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="marketDropdown"
                   >
-                    <Link className="dropdown-item" to="/market/trades">
+                    <Link className="dropdown-item" to="/market/trade">
                       Trade
                     </Link>
-                    <Link className="dropdown-item" to="/market/wanteds">
+                    <Link className="dropdown-item" to="/market/wanted">
                       Wanted
                     </Link>
-                    <Link className="dropdown-item" to="/market/stolens">
+                    <Link className="dropdown-item" to="/market/stolen">
                       Stolen
                     </Link>
                   </div>
@@ -127,13 +127,13 @@ class Header extends React.Component {
                         Add new kit
                       </Link>
                       <hr />
-                      <Link className="dropdown-item" to="/kitbag/trades">
+                      <Link className="dropdown-item" to="/kitbag/trade">
                         Your trades
                       </Link>
-                      <Link className="dropdown-item" to="/kitbag/wanteds">
+                      <Link className="dropdown-item" to="/kitbag/wanted">
                         Your wanted items
                       </Link>
-                      <Link className="dropdown-item" to="/kitbag/stolens">
+                      <Link className="dropdown-item" to="/kitbag/stolen">
                         Your stolen items
                       </Link>
                     </div>

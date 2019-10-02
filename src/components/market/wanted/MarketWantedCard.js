@@ -25,7 +25,7 @@ class MarketWantedCard extends React.Component {
           <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
             {this.renderOfferPrice(offerPrice)}
           </span>
-          <Link to={`/market/wanteds/view/${_id}`}>
+          <Link to={`/market/wanted/view/${_id}`}>
             <img
               className="card-img-top"
               src={this.topImage()}

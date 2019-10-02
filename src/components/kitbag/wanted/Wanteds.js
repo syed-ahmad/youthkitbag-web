@@ -66,7 +66,7 @@ class Wanteds extends React.Component {
                 />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <Link to="/kitbag/wanteds/new" className="btn btn-primary">
+                <Link to="/kitbag/wanted/new" className="btn btn-primary">
                   Add new wanted
                 </Link>
               </div>

@@ -32,7 +32,7 @@ class WantedDelete extends React.Component {
     return (
       <React.Fragment>
         <Link
-          to="/kitbag/wanteds"
+          to="/kitbag/wanted"
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
@@ -55,7 +55,7 @@ class WantedDelete extends React.Component {
         title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => history.push('/kitbag/wanteds')}
+        onDismiss={() => history.push('/kitbag/wanted')}
       />
     );
   }

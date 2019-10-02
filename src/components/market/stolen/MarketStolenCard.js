@@ -17,7 +17,7 @@ class MarketStolenCard extends React.Component {
     return (
       <div className="col-6 col-md-4 col-lg-3 mb-3">
         <article className="card card-link card-b1">
-          <Link to={`/market/stolens/view/${_id}`}>
+          <Link to={`/market/stolen/view/${_id}`}>
             <img
               className="card-img-top"
               src={this.topImage()}

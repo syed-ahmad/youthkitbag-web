@@ -32,7 +32,7 @@ class TradeDelete extends React.Component {
     return (
       <React.Fragment>
         <Link
-          to="/kitbag/trades"
+          to="/kitbag/trade"
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
@@ -55,7 +55,7 @@ class TradeDelete extends React.Component {
         title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => history.push('/kitbag/trades')}
+        onDismiss={() => history.push('/kitbag/trade')}
       />
     );
   }

@@ -93,25 +93,25 @@ class App extends React.Component {
               />
 
               <PrivateRoute
-                path="/market/trades/view/:tradeId"
+                path="/market/trade/view/:tradeId"
                 exact
                 component={MarketTradeViewPage}
               />
-              <Route path="/market/trades" component={MarketTrades} />
+              <Route path="/market/trade" component={MarketTrades} />
 
               <PrivateRoute
-                path="/market/wanteds/view/:wantedId"
+                path="/market/wanted/view/:wantedId"
                 exact
                 component={MarketWantedViewPage}
               />
-              <Route path="/market/wanteds" component={MarketWanteds} />
+              <Route path="/market/wanted" component={MarketWanteds} />
 
               <PrivateRoute
-                path="/market/stolens/view/:stolenId"
+                path="/market/stolen/view/:stolenId"
                 exact
                 component={MarketStolenViewPage}
               />
-              <Route path="/market/stolens" component={MarketStolens} />
+              <Route path="/market/stolen" component={MarketStolens} />
 
               <PrivateRoute path="/kitbag/kit/new" component={KitPage} />
               <PrivateRoute
@@ -127,70 +127,70 @@ class App extends React.Component {
               <PrivateRoute path="/kitbag/kit" component={KitBag} />
 
               <PrivateRoute
-                path="/kitbag/trades/new"
+                path="/kitbag/trade/new"
                 exact
                 component={TradePage}
               />
               <PrivateRoute
-                path="/kitbag/trades/add/:kitId"
+                path="/kitbag/trade/add/:kitId"
                 exact
                 component={TradePage}
               />
               <PrivateRoute
-                path="/kitbag/trades/edit/:tradeId"
+                path="/kitbag/trade/edit/:tradeId"
                 exact
                 component={TradePage}
               />
               <PrivateRoute
-                path="/kitbag/trades/delete/:tradeId"
+                path="/kitbag/trade/delete/:tradeId"
                 exact
                 component={TradeDelete}
               />
-              <PrivateRoute path="/kitbag/trades" component={Trades} />
+              <PrivateRoute path="/kitbag/trade" component={Trades} />
 
               <PrivateRoute
-                path="/kitbag/wanteds/new"
+                path="/kitbag/wanted/new"
                 exact
                 component={WantedPage}
               />
               <PrivateRoute
-                path="/kitbag/wanteds/add/:kitId"
+                path="/kitbag/wanted/add/:kitId"
                 exact
                 component={WantedPage}
               />
               <PrivateRoute
-                path="/kitbag/wanteds/edit/:wantedId"
+                path="/kitbag/wanted/edit/:wantedId"
                 exact
                 component={WantedPage}
               />
               <PrivateRoute
-                path="/kitbag/wanteds/delete/:wantedId"
+                path="/kitbag/wanted/delete/:wantedId"
                 exact
                 component={WantedDelete}
               />
-              <PrivateRoute path="/kitbag/wanteds" component={Wanteds} />
+              <PrivateRoute path="/kitbag/wanted" component={Wanteds} />
 
               <PrivateRoute
-                path="/kitbag/stolens/new"
+                path="/kitbag/stolen/new"
                 exact
                 component={StolenPage}
               />
               <PrivateRoute
-                path="/kitbag/stolens/add/:kitId"
+                path="/kitbag/stolen/add/:kitId"
                 exact
                 component={StolenPage}
               />
               <PrivateRoute
-                path="/kitbag/stolens/edit/:stolenId"
+                path="/kitbag/stolen/edit/:stolenId"
                 exact
                 component={StolenPage}
               />
               <PrivateRoute
-                path="/kitbag/stolens/delete/:stolenId"
+                path="/kitbag/stolen/delete/:stolenId"
                 exact
                 component={StolenDelete}
               />
-              <PrivateRoute path="/kitbag/stolens" component={Stolens} />
+              <PrivateRoute path="/kitbag/stolen" component={Stolens} />
 
               <PrivateRoute
                 path="/settings/groups/new"

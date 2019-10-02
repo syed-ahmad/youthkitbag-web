@@ -22,7 +22,7 @@ export const fetchMarketTrades = (
     .then(response => {
       dispatch({ type: FETCH_MARKET_TRADES, payload: response.data });
       history.push(
-        `/market/trades?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/market/trade?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
     .catch(err => {
@@ -30,7 +30,7 @@ export const fetchMarketTrades = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/trades');
+        history.push('/auth/login?return=/market/trade');
       }
       dispatch({ type: API_MARKET_ERROR, payload: response });
     });
@@ -53,7 +53,7 @@ export const fetchMarketTrade = tradeId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/trades');
+        history.push('/auth/login?return=/market/trade');
       }
       dispatch({ type: API_MARKET_ERROR, payload: err.response });
     });

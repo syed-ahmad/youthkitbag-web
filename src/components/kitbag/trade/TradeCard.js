@@ -22,14 +22,14 @@ class TradeCard extends React.Component {
       <div className="col-6 col-md-4 col-lg-3 mb-3">
         <article className="card card-link card-b1">
           <span className="icons-top-left pt-1">
-            <Link to={`/kitbag/trades/delete/${_id}`}>
+            <Link to={`/kitbag/trade/delete/${_id}`}>
               <span className="icon-tray-item fas fa-trash-alt"></span>
             </Link>
           </span>
           <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
             {this.renderNotificationCount()}
           </span>
-          <Link to={`/kitbag/trades/edit/${_id}`}>
+          <Link to={`/kitbag/trade/edit/${_id}`}>
             <img
               className="card-img-top"
               src={this.topImage()}

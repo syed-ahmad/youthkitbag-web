@@ -214,7 +214,7 @@ const TradeForm = ({ trade }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/kitbag/trades">
+            <Link className="btn btn-link" to="/kitbag/trade">
               Cancel
             </Link>
           </div>

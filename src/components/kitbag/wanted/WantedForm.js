@@ -220,7 +220,7 @@ const WantedForm = ({ wanted }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/kitbag/wanteds">
+            <Link className="btn btn-link" to="/kitbag/wanted">
               Cancel
             </Link>
           </div>

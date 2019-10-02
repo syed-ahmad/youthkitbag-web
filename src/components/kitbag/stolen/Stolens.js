@@ -67,7 +67,7 @@ class Stolens extends React.Component {
                 />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <Link to="/kitbag/stolens/new" className="btn btn-primary">
+                <Link to="/kitbag/stolen/new" className="btn btn-primary">
                   Add new stolen
                 </Link>
               </div>
