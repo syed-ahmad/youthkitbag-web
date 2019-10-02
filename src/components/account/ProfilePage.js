@@ -43,7 +43,9 @@ const ProfilePage = ({ current, match }) => {
       return 'Loading ...';
     }
 
-    return profile._id ? profile.name : 'Update profile';
+    return profile._id
+      ? `${profile.lastname.toUpperCase()}, ${profile.firstname}`
+      : 'Update profile';
   }
 
   return (
