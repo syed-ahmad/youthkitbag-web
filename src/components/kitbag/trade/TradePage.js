@@ -75,7 +75,7 @@ const TradePage = ({
       return 'Loading ...';
     }
 
-    return trade._id ? trade.title : 'Create a new item for trade';
+    return trade._id ? `Trade: ${trade.title}` : 'Create a new item for trade';
   }
 
   return (

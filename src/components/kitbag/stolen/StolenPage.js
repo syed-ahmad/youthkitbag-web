@@ -76,7 +76,7 @@ const StolenPage = ({
       return 'Loading ...';
     }
 
-    return stolen._id ? stolen.title : 'Report a new stolen item';
+    return stolen._id ? `Stolen: ${stolen.title}` : 'Report a new stolen item';
   }
 
   return (

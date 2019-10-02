@@ -73,7 +73,9 @@ const WantedPage = ({
       return 'Loading ...';
     }
 
-    return wanted._id ? wanted.title : 'Create a new item that you want';
+    return wanted._id
+      ? `Wanted: ${wanted.title}`
+      : 'Create a new item that you want';
   }
 
   return (

@@ -58,7 +58,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
       return 'Loading ...';
     }
 
-    return kit._id ? kit.title : 'Create new kit';
+    return kit._id ? `Kit: ${kit.title}` : 'Create new kit';
   }
 
   return (
