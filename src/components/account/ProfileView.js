@@ -130,7 +130,7 @@ const ProfileForm = () => {
       <div className="col-12 col-lg-6 pb-3" role="main">
         <h3 className="h5 pb-2">
           Groups
-          <Link className="pl-3" to="/settings/account/groups">
+          <Link className="pl-3" to="/settings/groups">
             join / leave
           </Link>
         </h3>

@@ -13,6 +13,7 @@ import {
   EDIT_GROUP_LEAVE
 } from './types';
 import history from '../helpers/history';
+import { getUser } from './UserActions';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
@@ -228,6 +229,7 @@ export const requestGroupJoin = groupId => dispatch => {
     )
     .then(response => {
       dispatch({ type: CREATE_GROUP_JOIN, payload: response.data });
+      dispatch(getUser());
       history.push(`/settings/groups/${groupId}`);
     })
     .catch(err => {
