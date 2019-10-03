@@ -58,7 +58,7 @@ const ProfilePage = ({ current, match }) => {
       >
         <div className="container">
           <Alert />
-          <ProfileForm />
+          <ProfileForm profile={profile} />
         </div>
       </section>
     </div>

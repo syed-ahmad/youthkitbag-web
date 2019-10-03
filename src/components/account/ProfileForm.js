@@ -6,18 +6,10 @@ import { editProfile } from '../../actions/UserActions';
 import validate from './ProfileFormValidationRules';
 import { TextForm, ImagesForm } from '../includes/forms';
 
-const ProfileForm = () => {
+const ProfileForm = ({ profile }) => {
   const dispatch = useDispatch();
-  const profile = useSelector(state => state.user.profile);
+  //const profile = useSelector(state => state.user.profile);
   const newErrors = useSelector(state => state.toast.errors);
-
-  const initialValues = {
-    firstname: '',
-    lastname: '',
-    username: '',
-    activitys: [],
-    location: ''
-  };
 
   const {
     setChange,
@@ -28,7 +20,7 @@ const ProfileForm = () => {
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateProfile, validate);
+  } = useForm(profile, updateProfile, validate);
 
   useEffect(() => {
     if (newErrors) {
