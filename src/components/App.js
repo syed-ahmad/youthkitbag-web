@@ -25,6 +25,8 @@ import GroupPage from './group/GroupPage';
 import GroupStatus from './group/GroupStatus';
 import GroupMembers from './group/GroupMembers';
 import GroupMemberState from './group/GroupMemberState';
+import GroupMemberJoin from './group/GroupMemberJoin';
+import GroupMemberLeave from './group/GroupMemberLeave';
 
 import ProfilePage from './account/ProfilePage';
 
@@ -214,6 +216,16 @@ class App extends React.Component {
                 path="/settings/groups/:groupId/members"
                 exact
                 component={GroupMembers}
+              />
+              <PrivateRoute
+                path="/settings/groups/:groupId/join"
+                exact
+                component={GroupMemberJoin}
+              />
+              <PrivateRoute
+                path="/settings/groups/:groupId/leave"
+                exact
+                component={GroupMemberLeave}
               />
               <PrivateRoute
                 path="/settings/groups/:groupId"

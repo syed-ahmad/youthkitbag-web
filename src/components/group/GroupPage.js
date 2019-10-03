@@ -67,18 +67,34 @@ const GroupPage = ({ current, fetchGroup, match }) => {
       >
         <div className="container">
           <Alert />
-          {groupId && group.groupAdmin && group.status !== 'blocked' && (
-            <div className="row">
-              <div className="col-12 mb-3 d-flex justify-content-end">
+          <div className="row">
+            <div className="col-12 mb-3 d-flex justify-content-end">
+              {groupId && group.groupAdmin && group.status !== 'blocked' && (
                 <Link
                   to={`/settings/groups/${groupId}/members`}
                   className="btn btn-primary"
                 >
                   Members
                 </Link>
-              </div>
+              )}
+              {groupId && group.status !== 'blocked' && !group.groupMember && (
+                <Link
+                  to={`/settings/groups/${groupId}/join`}
+                  className="btn btn-primary"
+                >
+                  Join
+                </Link>
+              )}
+              {groupId && group.status !== 'blocked' && group.groupMember && (
+                <Link
+                  to={`/settings/groups/${groupId}/leave`}
+                  className="btn btn-primary"
+                >
+                  Leave
+                </Link>
+              )}
             </div>
-          )}
+          </div>
           <GroupForm group={group} />
         </div>
       </section>

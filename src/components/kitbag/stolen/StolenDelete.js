@@ -28,7 +28,7 @@ class StolenDelete extends React.Component {
   }
 
   renderActions() {
-    const stolenId = this.props.match.params.stolenId;
+    const { stolenId } = this.props.match.params;
     return (
       <React.Fragment>
         <Link
