@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
@@ -10,6 +10,8 @@ const GroupForm = ({ group }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
   const userPackage = useSelector(state => state.user.package);
+  const [isReadOnly, setIsReadOnly] = useState(true);
+  const [hasGroupAdmin, setHasGroupAdmin] = useState(false);
 
   const initialValues = { ...group, groupAdmin: true, exists: false };
 
@@ -48,21 +50,29 @@ const GroupForm = ({ group }) => {
     }
   }
 
-  function isReadOnly() {
-    return !values._id || values.appAdmin ? false : true;
-  }
+  useEffect(() => {
+    if (values) {
+      const newGroup = !values._id;
+      const admin =
+        (values.groupAdmin && values.status !== 'blocked') || values.appAdmin;
+      setIsReadOnly(!newGroup && !admin);
+    }
+  }, [values, setIsReadOnly]);
+
+  useEffect(() => {
+    if (userPackage && userPackage.max && userPackage.size) {
+      setHasGroupAdmin(
+        userPackage.max.groupadmins > userPackage.size.groupadmins
+      );
+    }
+  }, [userPackage, setHasGroupAdmin]);
 
   function showSaveCancelButtons() {
     if (!userPackage || !values) return null;
 
-    const hasGrouAdmin =
-      userPackage.max.groupadmins > userPackage.size.groupadmins;
-
     return (
       <div>
-        {((!values._id && hasGrouAdmin) ||
-          values.appAdmin ||
-          values.groupAdmin) && (
+        {((!values._id && hasGroupAdmin) || !isReadOnly) && (
           <button className="btn btn-primary" type="submit">
             Save
           </button>
@@ -78,6 +88,7 @@ const GroupForm = ({ group }) => {
     <div className="row">
       <ImagesForm
         values={values}
+        readOnly={isReadOnly}
         setChange={setChange}
         addArrayItem={addArrayItem}
         error={errors.images}
@@ -89,7 +100,7 @@ const GroupForm = ({ group }) => {
             label="Name"
             value={values.name}
             field="name"
-            readOnly={isReadOnly()}
+            readOnly={isReadOnly}
             handleChange={handleChange}
             error={errors.name}
           />
@@ -98,7 +109,7 @@ const GroupForm = ({ group }) => {
             label="Tagline"
             value={values.tagline}
             field="tagline"
-            readOnly={isReadOnly()}
+            readOnly={isReadOnly}
             handleChange={handleChange}
             error={errors.tagline}
           />
@@ -107,17 +118,18 @@ const GroupForm = ({ group }) => {
             label="Description"
             value={values.description}
             field="description"
-            readOnly={isReadOnly()}
+            readOnly={isReadOnly}
             handleChange={handleChange}
             error={errors.description}
           />
+          {}
           <TextForm
             colFormat="3-9"
             type="email"
             label="Email"
             value={values.email}
             field="email"
-            readOnly={isReadOnly()}
+            readOnly={isReadOnly}
             handleChange={handleChange}
             error={errors.email}
           />
@@ -126,7 +138,7 @@ const GroupForm = ({ group }) => {
             label="Website"
             value={values.website}
             field="website"
-            readOnly={isReadOnly()}
+            readOnly={isReadOnly}
             handleChange={handleChange}
             error={errors.website}
           />
@@ -136,64 +148,56 @@ const GroupForm = ({ group }) => {
             label="Activities"
             value={values.activitys}
             field="activitys"
-            readOnly={isReadOnly()}
+            readOnly={isReadOnly}
             handleChange={handleChange}
             error={errors.activitys}
           />
           <hr />
-          <div>
-            {values.images &&
-              values.images.map((item, index) => (
-                <div key={`${item._id}-${index}`}>
-                  <input
-                    name={`images[${index}]._id`}
-                    type="hidden"
-                    value={values.images[index]._id}
-                  />
-                  <input
-                    name={`images[${index}].image`}
-                    type="hidden"
-                    value={values.images[index].image}
-                  />
-                  <input
-                    name={`images[${index}].imageUrl`}
-                    type="hidden"
-                    value={values.images[index].imageUrl}
-                  />
-                  <input
-                    name={`images[${index}].state`}
-                    type="hidden"
-                    value={values.images[index].state}
-                  />
-                  <input
-                    name={`images[${index}].photoId`}
-                    type="hidden"
-                    value={values.images[index].photoId}
-                  />
-                </div>
-              ))}
-            {values.deletedImages &&
-              values.deletedImages.map((item, index) => (
-                <div key={`${item._id}-${index}`}>
-                  <input
-                    name={`deletedImages[${index}]._id`}
-                    type="hidden"
-                    value={values.deletedImages[index]._id}
-                  />
-                </div>
-              ))}
-          </div>
-          {showSaveCancelButtons()}
-          {(values.appAdmin || values.groupAdmin) && values._id && (
+          {!isReadOnly && (
             <div>
-              <Link
-                className="btn btn-primary"
-                to={`/settings/groups/${values._id}/members`}
-              >
-                Members
-              </Link>
+              {values.images &&
+                values.images.map((item, index) => (
+                  <div key={`${item._id}-${index}`}>
+                    <input
+                      name={`images[${index}]._id`}
+                      type="hidden"
+                      value={values.images[index]._id}
+                    />
+                    <input
+                      name={`images[${index}].image`}
+                      type="hidden"
+                      value={values.images[index].image}
+                    />
+                    <input
+                      name={`images[${index}].imageUrl`}
+                      type="hidden"
+                      value={values.images[index].imageUrl}
+                    />
+                    <input
+                      name={`images[${index}].state`}
+                      type="hidden"
+                      value={values.images[index].state}
+                    />
+                    <input
+                      name={`images[${index}].photoId`}
+                      type="hidden"
+                      value={values.images[index].photoId}
+                    />
+                  </div>
+                ))}
+              {values.deletedImages &&
+                values.deletedImages.map((item, index) => (
+                  <div key={`${item._id}-${index}`}>
+                    <input
+                      name={`deletedImages[${index}]._id`}
+                      type="hidden"
+                      value={values.deletedImages[index]._id}
+                    />
+                  </div>
+                ))}
             </div>
           )}
+          {showSaveCancelButtons()}
         </form>
       </div>
     </div>

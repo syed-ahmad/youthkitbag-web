@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroup } from '../../actions/GroupActions';
 import GroupForm from './GroupForm';
@@ -66,6 +67,18 @@ const GroupPage = ({ current, fetchGroup, match }) => {
       >
         <div className="container">
           <Alert />
+          {groupId && group.groupAdmin && group.status !== 'blocked' && (
+            <div className="row">
+              <div className="col-12 mb-3 d-flex justify-content-end">
+                <Link
+                  to={`/settings/groups/${groupId}/members`}
+                  className="btn btn-primary"
+                >
+                  Members
+                </Link>
+              </div>
+            </div>
+          )}
           <GroupForm group={group} />
         </div>
       </section>
@@ -73,6 +86,16 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   );
 };
 
+// {(values.appAdmin || values.groupAdmin) && values._id && (
+//   <div>
+//     <Link
+//       className="btn btn-primary"
+//       to={`/settings/groups/${values._id}/members`}
+//     >
+//       Members
+//     </Link>
+//   </div>
+// )}
 export default connect(
   mapStateToProps,
   mapDispatchToProps
