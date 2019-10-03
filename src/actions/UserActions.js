@@ -47,7 +47,6 @@ export const editProfile = (userId, formValues) => dispatch => {
       history.push('/settings/account');
     })
     .catch(err => {
-      console.log('ERROR', err);
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
