@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
-const ImagesForm = ({ values, setChange, addArrayItem, error }) => {
+const ImagesForm = ({ values, readOnly, setChange, addArrayItem, error }) => {
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
@@ -40,32 +40,34 @@ const ImagesForm = ({ values, setChange, addArrayItem, error }) => {
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
           {images[i].state !== 'D' && (
             <React.Fragment>
-              <span className="icons-top-left">
-                <button
-                  aria-label="Delete image"
-                  className="btn btn-link p-0 icon-tray-item"
-                  href="#"
-                  onClick={deleteImage.bind(null, images[i]._id)}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fas fa-trash"
-                    title="Delete this image?"
-                  ></i>
-                </button>
-                <button
-                  aria-label="Set as primary image"
-                  className="btn btn-link p-0 icon-tray-item"
-                  href="#"
-                  onClick={setPrimaryImage.bind(null, images[i]._id)}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fas fa-star"
-                    title="Set as primary image"
-                  ></i>
-                </button>
-              </span>
+              {!readOnly && (
+                <span className="icons-top-left">
+                  <button
+                    aria-label="Delete image"
+                    className="btn btn-link p-0 icon-tray-item"
+                    href="#"
+                    onClick={deleteImage.bind(null, images[i]._id)}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="fas fa-trash"
+                      title="Delete this image?"
+                    ></i>
+                  </button>
+                  <button
+                    aria-label="Set as primary image"
+                    className="btn btn-link p-0 icon-tray-item"
+                    href="#"
+                    onClick={setPrimaryImage.bind(null, images[i]._id)}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="fas fa-star"
+                      title="Set as primary image"
+                    ></i>
+                  </button>
+                </span>
+              )}
               <img
                 className="img-fluid mb-3 img-link mini-img mr-1"
                 src={images[i].imageUrl}
@@ -191,27 +193,29 @@ const ImagesForm = ({ values, setChange, addArrayItem, error }) => {
           />
         </div>
         <div>{renderSecondaryImages()}</div>
-        <div className="form-group row">
-          <label className="col-sm-3 col-form-label" htmlFor="photos">
-            Images
-          </label>
-          <div className="col-sm-9">
-            <div className="custom-file">
-              <input
-                type="file"
-                multiple
-                className={`custom-file-input ${error && 'is-invalid'}`}
-                id="photos"
-                aria-describedby="photos"
-                onChange={e => onFileChanged(e)}
-              />
-              <label className="custom-file-label" htmlFor="photos">
-                Choose image(s)
-              </label>
-              {error && <div className="invalid-feedback">{error}</div>}
+        {!readOnly && (
+          <div className="form-group row">
+            <label className="col-sm-3 col-form-label" htmlFor="photos">
+              Images
+            </label>
+            <div className="col-sm-9">
+              <div className="custom-file">
+                <input
+                  type="file"
+                  multiple
+                  className={`custom-file-input ${error && 'is-invalid'}`}
+                  id="photos"
+                  aria-describedby="photos"
+                  onChange={e => onFileChanged(e)}
+                />
+                <label className="custom-file-label" htmlFor="photos">
+                  Choose image(s)
+                </label>
+                {error && <div className="invalid-feedback">{error}</div>}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </React.Fragment>
   );
