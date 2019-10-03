@@ -57,6 +57,7 @@ const GroupForm = ({ group }) => {
         values={values}
         setChange={setChange}
         addArrayItem={addArrayItem}
+        error={errors.images}
       />
       <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
@@ -106,15 +107,6 @@ const GroupForm = ({ group }) => {
             handleChange={handleChange}
             error={errors.website}
           />
-          {/* <TextForm
-            colFormat="3-9"
-            label="Location"
-            value={values.location}
-            field="location"
-            readOnly={isReadOnly()}
-            handleChange={handleChange}
-            error={errors.location}
-          /> */}
           <hr />
           <TextForm
             colFormat="3-9"
@@ -168,7 +160,7 @@ const GroupForm = ({ group }) => {
                 </div>
               ))}
           </div>
-          {(values.appAdmin || values.groupAdmin) && (
+          {(!values._id || values.appAdmin || values.groupAdmin) && (
             <div>
               <button className="btn btn-primary" type="submit">
                 Save

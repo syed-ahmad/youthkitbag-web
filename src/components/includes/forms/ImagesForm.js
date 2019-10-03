@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
-const ImagesForm = ({ values, setChange, addArrayItem }) => {
+const ImagesForm = ({ values, setChange, addArrayItem, error }) => {
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
@@ -200,7 +200,7 @@ const ImagesForm = ({ values, setChange, addArrayItem }) => {
               <input
                 type="file"
                 multiple
-                className="custom-file-input"
+                className={`custom-file-input ${error && 'is-invalid'}`}
                 id="photos"
                 aria-describedby="photos"
                 onChange={e => onFileChanged(e)}
@@ -208,6 +208,7 @@ const ImagesForm = ({ values, setChange, addArrayItem }) => {
               <label className="custom-file-label" htmlFor="photos">
                 Choose image(s)
               </label>
+              {error && <div className="invalid-feedback">{error}</div>}
             </div>
           </div>
         </div>
