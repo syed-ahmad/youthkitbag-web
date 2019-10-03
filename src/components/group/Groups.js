@@ -48,6 +48,23 @@ class Groups extends React.Component {
     });
   }
 
+  renderAddNewButton() {
+    const { userPackage } = this.props;
+    if (
+      !userPackage ||
+      userPackage.max.groupadmins <= userPackage.size.groupadmins
+    )
+      return null;
+
+    return (
+      <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
+        <Link to="/settings/groups/new" className="btn btn-primary">
+          Add new group
+        </Link>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -66,11 +83,7 @@ class Groups extends React.Component {
                   callback={fetchGroups}
                 />
               </div>
-              <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <Link to="/settings/groups/new" className="btn btn-primary">
-                  Add new group
-                </Link>
-              </div>
+              {this.renderAddNewButton()}
             </div>
             <div className="row">{this.renderList()}</div>
             <Pagination />
@@ -85,7 +98,8 @@ const mapStateToProps = state => {
   return {
     items: Object.values(state.group.list),
     filter: state.filter,
-    pagination: state.pagination
+    pagination: state.pagination,
+    userPackage: state.user.package
   };
 };
 

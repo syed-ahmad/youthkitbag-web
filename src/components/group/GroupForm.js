@@ -9,6 +9,7 @@ import { TextForm, TextAreaForm, ImagesForm } from '../includes/forms';
 const GroupForm = ({ group }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
+  const userPackage = useSelector(state => state.user.package);
 
   const initialValues = { ...group, groupAdmin: true, exists: false };
 
@@ -49,6 +50,28 @@ const GroupForm = ({ group }) => {
 
   function isReadOnly() {
     return !values._id || values.appAdmin ? false : true;
+  }
+
+  function showSaveCancelButtons() {
+    if (!userPackage || !values) return null;
+
+    const hasGrouAdmin =
+      userPackage.max.groupadmins > userPackage.size.groupadmins;
+
+    return (
+      <div>
+        {((!values._id && hasGrouAdmin) ||
+          values.appAdmin ||
+          values.groupAdmin) && (
+          <button className="btn btn-primary" type="submit">
+            Save
+          </button>
+        )}
+        <Link className="btn btn-link" to="/settings/groups">
+          Cancel
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -160,16 +183,7 @@ const GroupForm = ({ group }) => {
                 </div>
               ))}
           </div>
-          {(!values._id || values.appAdmin || values.groupAdmin) && (
-            <div>
-              <button className="btn btn-primary" type="submit">
-                Save
-              </button>
-              <Link className="btn btn-link" to="/settings/groups">
-                Cancel
-              </Link>
-            </div>
-          )}
+          {showSaveCancelButtons()}
           {(values.appAdmin || values.groupAdmin) && values._id && (
             <div>
               <Link
