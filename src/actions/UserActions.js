@@ -44,14 +44,15 @@ export const editProfile = (userId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
-      history.push('/settings/account/profile');
+      history.push('/settings/account');
     })
     .catch(err => {
+      console.log('ERROR', err);
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings/account/profile');
+        history.push('/auth/login?return=/settings/account');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
