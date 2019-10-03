@@ -23,7 +23,10 @@ class Pagination extends React.Component {
       : '';
 
   render() {
-    if (!this.props.pagination || this.props.pagination.totalItems <= 12) {
+    if (
+      !this.props.pagination ||
+      this.props.pagination.totalItems <= this.props.pagination.itemsPerPage
+    ) {
       return null;
     }
 
