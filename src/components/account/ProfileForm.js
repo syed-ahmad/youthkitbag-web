@@ -139,7 +139,7 @@ const ProfileForm = ({ profile }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/settings/user">
+            <Link className="btn btn-link" to="/settings/account">
               Cancel
             </Link>
           </div>
