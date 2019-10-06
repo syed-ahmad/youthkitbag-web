@@ -92,9 +92,21 @@ span {
   &.icons-top-left {
     color: #1f79d49c;
     position: absolute;
-    left: 0.5rem;
+    left: 0.4rem;
     .icon-tray-item {
       font-size: 1.5rem;
+      &.ykb-requested {
+        color: #d4a700c7;
+      }
+      &.ykb-approved {
+        color: #3cd400c7;
+      }
+      &.ykb-rejected {
+        color: #bb00d4c7;
+      }
+      &.ykb-suspended {
+        color: #d40000c7;
+      }
     }
   }
 }

@@ -5,6 +5,19 @@ import { useSelector } from 'react-redux';
 const ProfileForm = () => {
   const user = useSelector(state => state.user);
 
+  function stateIcon(state, permissons) {
+    switch (state) {
+      case 'approved':
+        return permissons.includes('admin') ? 'fa-user-shield' : 'fa-user';
+      case 'rejected':
+        return 'fa-user-times';
+      case 'suspended':
+        return 'fa-user-slash';
+      default:
+        return 'fa-user-circle';
+    }
+  }
+
   function renderGroupImages() {
     if (!user || !user.profile || !user.profile.groups) {
       return null;
@@ -13,13 +26,25 @@ const ProfileForm = () => {
     const items = [];
 
     for (let i = 0; i < user.profile.groups.length; i++) {
+      const group = user.profile.groups[i];
+      const member = group.members[0];
       items.push(
         <div key={`groups${i}`} className="carousel-thumbnail d-inline-flex">
           <React.Fragment>
+            <span className="icons-top-left">
+              <i
+                aria-hidden="true"
+                className={`fas ${stateIcon(
+                  member.state,
+                  member.permissions
+                )} icon-tray-item ykb-${member.state}`}
+                title=""
+              ></i>
+            </span>
             <img
               className="img-fluid mb-3 mini-img mr-1"
-              src={user.profile.groups[i].images[0].imageUrl}
-              alt={user.profile.groups[i].name}
+              src={group.images[0].imageUrl}
+              alt={group.name}
               role="presentation"
             />
           </React.Fragment>

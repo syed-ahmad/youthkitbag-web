@@ -30,7 +30,7 @@ class GroupMember extends React.Component {
   }
 
   render() {
-    const { user, permission } = this.props.member;
+    const { user, permissions } = this.props.member;
     const groupId = this.props.groupId;
     return (
       <div className="col-6 col-sm-4 col-lg-3 col-xl-2 mb-3">
@@ -53,7 +53,7 @@ class GroupMember extends React.Component {
               {user.username ? user.username : 'Username ?'}
             </h4>
             <p className="card-text">
-              {permission.length > 0 ? permission.join(', ') : '-'}
+              {permissions.length > 0 ? permissions.join(', ') : '-'}
             </p>
             <span className="icons-bottom-left">
               <span
