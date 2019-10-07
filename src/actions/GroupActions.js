@@ -180,7 +180,7 @@ export const fetchGroupMembers = groupId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/group/${groupId}/members`);
+        history.push(`/auth/login?return=/settings/groups/${groupId}/members`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
@@ -208,7 +208,7 @@ export const editGroupMemberState = (groupId, memberId, state) => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/group/${groupId}/members`);
+        history.push(`/auth/login?return=/settings/groups/${groupId}/members`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -237,9 +237,10 @@ export const requestGroupJoin = groupId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/group/${groupId}`);
+        history.push(`/auth/login?return=/settings/groups/${groupId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      history.push(`/settings/groups/${groupId}`);
     });
 };
 
@@ -265,7 +266,7 @@ export const requestGroupLeave = groupId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/group/${groupId}`);
+        history.push(`/auth/login?return=/settings/groups/${groupId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });

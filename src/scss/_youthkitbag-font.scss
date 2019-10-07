@@ -6,6 +6,15 @@
 //   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Font `Awesome 5 Free" !important;
 // }
 
-.fa, .fab, .fal, .far, .fas {
+.fa,
+.fab,
+.fal,
+.far,
+.fas {
   line-height: 1.5;
+}
+
+.ykb-fa {
+  font-size: 2rem;
+  padding: 1rem;
 }

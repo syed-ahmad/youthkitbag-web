@@ -26,8 +26,16 @@ main {
 footer {
   flex-shrink: 0; }
 
-.fa, .fab, .fal, .far, .fas {
+.fa,
+.fab,
+.fal,
+.far,
+.fas {
   line-height: 1.5; }
+
+.ykb-fa {
+  font-size: 2rem;
+  padding: 1rem; }
 
 .youthkitbag {
   /* colors */

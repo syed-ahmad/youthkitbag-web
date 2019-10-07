@@ -53,7 +53,7 @@ class GroupMemberLeave extends React.Component {
         content={this.renderContent()}
         actions={this.renderActions()}
         onDismiss={() =>
-          history.push(`/settings/group/${this.props.match.params.groupId}`)
+          history.push(`/settings/groups/${this.props.match.params.groupId}`)
         }
       />
     );
