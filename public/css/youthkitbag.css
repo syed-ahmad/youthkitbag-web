@@ -137,6 +137,8 @@ footer {
   .youthkitbag .input-group .group-control-right {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0; }
+  .youthkitbag a[disabled] {
+    pointer-events: none; }
   .youthkitbag .alert {
     border-left-width: 0.45rem; }
     .youthkitbag .alert.alert-callout {

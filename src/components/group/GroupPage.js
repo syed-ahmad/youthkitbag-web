@@ -77,17 +77,17 @@ const GroupPage = ({ current, fetchGroup, match }) => {
                   Members
                 </Link>
               )}
-              {groupId &&
-                group.status !== 'blocked' &&
-                !group.groupMember &&
-                !group.groupMemberState && (
-                  <Link
-                    to={`/settings/groups/${groupId}/join`}
-                    className="btn btn-primary"
-                  >
-                    Join
-                  </Link>
-                )}
+              {groupId && group.status !== 'blocked' && !group.groupMember && (
+                <Link
+                  to={`/settings/groups/${groupId}/join`}
+                  className={`btn btn-primary ${
+                    group.groupMemberState ? 'disabled' : ''
+                  }`}
+                  disabled={group.groupMemberState}
+                >
+                  Join
+                </Link>
+              )}
               {groupId && group.status !== 'blocked' && group.groupMember && (
                 <Link
                   to={`/settings/groups/${groupId}/leave`}

@@ -167,3 +167,7 @@ a.sr-only {
     border-bottom-left-radius: 0;
   }
 }
+
+a[disabled] {
+  pointer-events: none;
+}
