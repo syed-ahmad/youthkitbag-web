@@ -12,7 +12,8 @@ import {
   LOGIN_FAILURE,
   SHOWN_TOAST,
   EDIT_GROUP_STATUS,
-  EDIT_GROUP_MEMBER_STATE
+  EDIT_GROUP_MEMBER_STATE,
+  EDIT_USER_PROFILE
 } from '../actions/types';
 
 const initialState = {
@@ -31,6 +32,7 @@ export default (state = initialState, action) => {
     case CREATE_KITBAG_STOLEN:
     case EDIT_GROUP_STATUS:
     case EDIT_GROUP_MEMBER_STATE:
+    case EDIT_USER_PROFILE:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'success',
