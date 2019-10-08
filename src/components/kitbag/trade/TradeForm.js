@@ -19,7 +19,6 @@ const TradeForm = ({ trade }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
-  const initialGroup = { name: '', available: '2019-01-01' };
   const initialValues = { ...trade };
 
   const {
@@ -127,10 +126,10 @@ const TradeForm = ({ trade }) => {
               values.groups.map((item, index) => (
                 <div className="form-row" key={index}>
                   <TextForm
-                    colFormat="a-6"
-                    value={values.groups[index].title}
+                    colFormat="a-7"
+                    value={values.groups[index].name}
                     label="Name"
-                    field={`groups[${index}].title`}
+                    field={`groups[${index}].name`}
                     handleChange={handleChange}
                     index={index}
                   />
@@ -150,13 +149,6 @@ const TradeForm = ({ trade }) => {
                   />
                 </div>
               ))}
-            <button
-              className="btn btn-secondary"
-              type="button"
-              onClick={() => addArrayItem('groups', [initialGroup])}
-            >
-              Add a new group
-            </button>
           </div>
           <hr />
           <TextForm
