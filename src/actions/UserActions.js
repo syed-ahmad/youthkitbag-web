@@ -44,6 +44,7 @@ export const editProfile = (userId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
+      dispatch(getUser());
       history.push('/settings/account');
     })
     .catch(err => {
