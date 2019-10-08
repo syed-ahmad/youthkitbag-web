@@ -27,26 +27,29 @@ const ProfileForm = () => {
 
     for (let i = 0; i < user.profile.groups.length; i++) {
       const group = user.profile.groups[i];
+      const id = group._id;
       const member = group.members[0];
       items.push(
         <div key={`groups${i}`} className="carousel-thumbnail d-inline-flex">
           <React.Fragment>
-            <span className="icons-top-left">
-              <i
-                aria-hidden="true"
-                className={`fas ${stateIcon(
-                  member.state,
-                  member.permissions
-                )} icon-tray-item ykb-${member.state}`}
-                title=""
-              ></i>
-            </span>
-            <img
-              className="img-fluid mb-3 mini-img mr-1"
-              src={group.images[0].imageUrl}
-              alt={group.name}
-              role="presentation"
-            />
+            <Link to={`/settings/groups/${id}`}>
+              <span className="icons-top-left">
+                <i
+                  aria-hidden="true"
+                  className={`fas ${stateIcon(
+                    member.state,
+                    member.permissions
+                  )} icon-tray-item ykb-${member.state}`}
+                  title=""
+                ></i>
+              </span>
+              <img
+                className="img-fluid mb-3 mini-img mr-1"
+                src={group.images[0].imageUrl}
+                alt={group.name}
+                role="presentation"
+              />
+            </Link>
           </React.Fragment>
         </div>
       );
