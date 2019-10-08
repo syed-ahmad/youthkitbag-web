@@ -184,6 +184,22 @@ class Header extends React.Component {
                     </div>
                   </li>
                 )}
+                {loggedIn && (
+                  <li className="nav-item mr-3">
+                    <Link className="nav-link d-inline" to="/settings/account">
+                      <img
+                        src={
+                          this.props.user.profile.images &&
+                          this.props.user.profile.images.length > 0
+                            ? this.props.user.profile.images[0].imageUrl
+                            : '/images/defaultthumb.png'
+                        }
+                        className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
+                        alt=""
+                      />
+                    </Link>
+                  </li>
+                )}
                 {!loggedIn && (
                   <li className="nav-item">
                     <Link
@@ -223,12 +239,9 @@ class Header extends React.Component {
   }
 }
 
-// const mapDispatchToProps = dispatch = {
-//   actions: {}
-// };
-
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(Header);

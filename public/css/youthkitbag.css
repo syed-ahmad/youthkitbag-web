@@ -139,6 +139,9 @@ footer {
     border-bottom-left-radius: 0; }
   .youthkitbag a[disabled] {
     pointer-events: none; }
+  .youthkitbag .img-avatar {
+    height: 30px;
+    width: 30px; }
   .youthkitbag .alert {
     border-left-width: 0.45rem; }
     .youthkitbag .alert.alert-callout {
