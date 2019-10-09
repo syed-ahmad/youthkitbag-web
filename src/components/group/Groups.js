@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchGroups } from '../../actions';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-
 import Title from '../includes/Title';
 import GroupCard from './GroupCard';
 import SearchForm from '../includes/SearchForm';
@@ -12,9 +11,6 @@ import Alert from '../includes/Alert';
 
 class Groups extends React.Component {
   getTitle() {
-    if (!this.props.pagination) {
-      return 'Loading ...';
-    }
     return `Found groups (${this.props.pagination.totalItems})`;
   }
 
@@ -42,8 +38,47 @@ class Groups extends React.Component {
     }
   }
 
+  renderBlank() {
+    return (
+      <div>
+        <Title title="Loading ...." />
+        <section
+          id="main"
+          className="container-fluid"
+          aria-label="main body of content plus related links and features"
+        >
+          <div className="container">
+            <div className="row">
+              <div className="col-12 col-sm-9">
+                <div className="bg-light hgt-3 mb-3">&nbsp;</div>
+              </div>
+            </div>
+            <div className="row">{this.renderBlankList()}</div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  renderBlankList() {
+    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    return blankList.map((item, index) => {
+      return <GroupCard key={`${item._id}-${index}`} group={item} />;
+    });
+  }
+
   renderList() {
-    return this.props.items.map((item, index) => {
+    if (!this.props.items) return this.renderBlankList();
+
+    let items = [...this.props.items];
+
+    if (items.length < 12) {
+      for (var i = items.length; i < 12; i++) {
+        items.push({});
+      }
+    }
+
+    return items.map((item, index) => {
       return <GroupCard key={`${item._id}-${index}`} group={item} />;
     });
   }
@@ -66,6 +101,8 @@ class Groups extends React.Component {
   }
 
   render() {
+    if (!this.props.items) return this.renderBlank();
+
     return (
       <div>
         <Title title={this.getTitle()} />

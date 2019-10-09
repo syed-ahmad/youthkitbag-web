@@ -33,18 +33,13 @@ class GroupMember extends React.Component {
     return (
       <div className="col-6 col-sm-4 col-lg-3 col-xl-2 mb-3">
         <article className="card card-b1">
-          <div className="p-2">
-            <img
-              className="card-img-top img-thumbnail rounded-circle p-0"
-              src=""
-              alt=""
-              role="presentation"
-            />
+          <div className="d-flex p-2">
+            <div className="blank-circle bg-light" />
           </div>
           <div className="card-body">
-            <h3 className="card-title h4 ellipsis bg-light height-3">&nbsp;</h3>
-            <h4 className="card-title h5 ellipsis bg-light height-3">&nbsp;</h4>
-            <p className="card-text bg-light height-3">&nbsp;</p>
+            <h3 className="card-title h4 ellipsis bg-light hgt-2">&nbsp;</h3>
+            <h4 className="card-title h5 ellipsis bg-light hgt-2">&nbsp;</h4>
+            <p className="card-text bg-light hgt-1">&nbsp;</p>
             <span className="icons-bottom-left">
               <span className="fas fa-meh w-25 text-center text-light"></span>
               <span className="fas fa-laugh w-25 text-center text-light"></span>

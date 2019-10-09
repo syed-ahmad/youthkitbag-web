@@ -85,8 +85,12 @@ footer {
       color: #f0f0f0; }
   .youthkitbag .hgt-1 {
     height: 1rem; }
+  .youthkitbag .hgt-2 {
+    height: 2rem; }
   .youthkitbag .hgt-3 {
     height: 3rem; }
+  .youthkitbag .hgt-6 {
+    height: 6rem; }
   .youthkitbag .hgt-10 {
     height: 10rem; }
   .youthkitbag .wth-10 {
@@ -142,6 +146,22 @@ footer {
   .youthkitbag .img-avatar {
     height: 30px;
     width: 30px; }
+  .youthkitbag .blank-circle {
+    flex: 1;
+    margin: 1%;
+    border-radius: 50%; }
+    .youthkitbag .blank-circle:before {
+      content: '';
+      display: inline-block;
+      padding-top: 100%; }
+  .youthkitbag .blank-square {
+    flex: 1;
+    margin: 1%;
+    border-radius: 0%; }
+    .youthkitbag .blank-square:before {
+      content: '';
+      display: inline-block;
+      padding-top: 100%; }
   .youthkitbag .alert {
     border-left-width: 0.45rem; }
     .youthkitbag .alert.alert-callout {

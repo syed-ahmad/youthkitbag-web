@@ -81,8 +81,14 @@ a.sr-only {
 .hgt-1 {
   height: 1rem;
 }
+.hgt-2 {
+  height: 2rem;
+}
 .hgt-3 {
   height: 3rem;
+}
+.hgt-6 {
+  height: 6rem;
 }
 .hgt-10 {
   height: 10rem;
@@ -175,4 +181,26 @@ a[disabled] {
 .img-avatar {
   height: 30px;
   width: 30px;
+}
+
+.blank-circle {
+  flex: 1;
+  margin: 1%;
+  border-radius: 50%;
+  &:before {
+    content: '';
+    display: inline-block;
+    padding-top: 100%;
+  }
+}
+
+.blank-square {
+  flex: 1;
+  margin: 1%;
+  border-radius: 0%;
+  &:before {
+    content: '';
+    display: inline-block;
+    padding-top: 100%;
+  }
 }

@@ -22,20 +22,6 @@ class GroupMembers extends React.Component {
     }
   }
 
-  renderList() {
-    if (!this.props.memberList.members) return null;
-
-    return this.props.memberList.members.map((member, index) => {
-      return (
-        <GroupMember
-          key={`${member._id}-${index}`}
-          member={member}
-          groupId={this.props.memberList._id}
-        />
-      );
-    });
-  }
-
   renderBlank() {
     return (
       <div>
@@ -54,27 +40,37 @@ class GroupMembers extends React.Component {
   }
 
   renderBlankMembers() {
-    const blankMembers = [
-      { _id: null },
-      { _id: null },
-      { _id: null },
-      { _id: null },
-      { _id: null },
-      { _id: null },
-      { _id: null },
-      { _id: null },
-      { _id: null },
-      { _id: null },
-      { _id: null },
-      { _id: null }
-    ];
+    const blankMembers = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     return blankMembers.map((member, index) => {
       return <GroupMember key={`${member._id}-${index}`} member={member} />;
     });
   }
 
+  renderList() {
+    if (!this.props.memberList.members) return this.renderBlankMembers();
+
+    let members = [...this.props.memberList.members];
+
+    if (members.length < 12) {
+      for (var i = members.length; i < 12; i++) {
+        members.push({});
+      }
+    }
+
+    return members.map((member, index) => {
+      return (
+        <GroupMember
+          key={`${member._id}-${index}`}
+          member={member}
+          groupId={this.props.memberList._id}
+        />
+      );
+    });
+  }
+
   render() {
     if (!this.props.memberList._id) return this.renderBlank();
+
     return (
       <div>
         <Title title={this.getTitle()} />
