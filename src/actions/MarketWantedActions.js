@@ -15,9 +15,14 @@ export const fetchMarketWanteds = (
   page = 1,
   pagesize = 24
 ) => dispatch => {
+  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market/wanted`, {
-      params: { search, by, page, pagesize }
+      params: { search, by, page, pagesize },
+      headers: {
+        Authorization: `bearer ${token}`,
+        'content-type': 'application/json'
+      }
     })
     .then(response => {
       dispatch({ type: FETCH_MARKET_WANTEDS, payload: response.data });

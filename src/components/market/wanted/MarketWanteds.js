@@ -26,7 +26,7 @@ class MarketWanteds extends React.Component {
       by = values.by ? values.by : '';
       page = values.page ? values.page : '';
     }
-
+    console.log('MOUNT', search, by, page, 24);
     this.props.fetchMarketWanteds(search, by, page, 24);
   }
 
@@ -36,6 +36,7 @@ class MarketWanteds extends React.Component {
       const search = values.search ? values.search : '';
       const by = values.by ? values.by : '';
       const page = values.page ? values.page : '';
+      console.log('UPDATE', search, by, page, 24);
       this.props.fetchMarketWanteds(search, by, page, 24);
     }
   }

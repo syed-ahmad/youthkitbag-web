@@ -15,10 +15,17 @@ export const fetchMarketStolens = (
   page = 1,
   pagesize = 24
 ) => dispatch => {
+  axios;
+  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market/stolen`, {
-      params: { search, by, page, pagesize }
+      params: { search, by, page, pagesize },
+      headers: {
+        Authorization: `bearer ${token}`,
+        'content-type': 'application/json'
+      }
     })
+
     .then(response => {
       dispatch({ type: FETCH_MARKET_STOLENS, payload: response.data });
       history.push(

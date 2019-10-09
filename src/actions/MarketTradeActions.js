@@ -15,9 +15,14 @@ export const fetchMarketTrades = (
   page = 1,
   pagesize = 24
 ) => dispatch => {
+  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market/trade`, {
-      params: { search, by, page, pagesize }
+      params: { search, by, page, pagesize },
+      headers: {
+        Authorization: `bearer ${token}`,
+        'content-type': 'application/json'
+      }
     })
     .then(response => {
       dispatch({ type: FETCH_MARKET_TRADES, payload: response.data });
