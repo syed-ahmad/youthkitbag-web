@@ -7,9 +7,6 @@ import GroupMember from './GroupMember';
 
 class GroupMembers extends React.Component {
   getTitle() {
-    if (!this.props.memberList.members) {
-      return 'Loading ...';
-    }
     return `${this.props.memberList.name} - members (${this.props.memberList.members.length})`;
   }
 
@@ -39,8 +36,45 @@ class GroupMembers extends React.Component {
     });
   }
 
+  renderBlank() {
+    return (
+      <div>
+        <Title title="Loading ...." />
+        <section
+          id="main"
+          className="container-fluid"
+          aria-label="main body of content plus related links and features"
+        >
+          <div className="container">
+            <div className="row">{this.renderBlankMembers()}</div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  renderBlankMembers() {
+    const blankMembers = [
+      { _id: null },
+      { _id: null },
+      { _id: null },
+      { _id: null },
+      { _id: null },
+      { _id: null },
+      { _id: null },
+      { _id: null },
+      { _id: null },
+      { _id: null },
+      { _id: null },
+      { _id: null }
+    ];
+    return blankMembers.map((member, index) => {
+      return <GroupMember key={`${member._id}-${index}`} member={member} />;
+    });
+  }
+
   render() {
-    if (!this.props.memberList) return <div>Loading</div>;
+    if (!this.props.memberList._id) return this.renderBlank();
     return (
       <div>
         <Title title={this.getTitle()} />

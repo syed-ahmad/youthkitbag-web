@@ -7,7 +7,7 @@ import {
   EDIT_GROUP
 } from '../actions/types';
 
-const initialState = { current: {}, list: [], memberList: [] };
+const initialState = { current: {}, list: [], memberList: {} };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -15,20 +15,20 @@ export default (state = initialState, action) => {
       return {
         current: {},
         list: action.payload.groups,
-        memberList: []
+        memberList: {}
       };
     case FETCH_GROUP:
       return {
         current: action.payload,
         list: [],
-        memberList: []
+        memberList: {}
       };
     case CREATE_GROUP:
     case EDIT_GROUP:
       return {
         current: action.payload.kit,
         list: [],
-        memberList: []
+        memberList: {}
       };
     case FETCH_GROUP_MEMBERS:
       return { ...state, memberList: action.payload };

@@ -15,7 +15,6 @@ export const fetchMarketStolens = (
   page = 1,
   pagesize = 24
 ) => dispatch => {
-  axios;
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market/stolen`, {

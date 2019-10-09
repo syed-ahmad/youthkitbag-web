@@ -29,7 +29,37 @@ class GroupMember extends React.Component {
     return 'text-muted';
   }
 
+  renderBlank() {
+    return (
+      <div className="col-6 col-sm-4 col-lg-3 col-xl-2 mb-3">
+        <article className="card card-b1">
+          <div className="p-2">
+            <img
+              className="card-img-top img-thumbnail rounded-circle p-0"
+              src=""
+              alt=""
+              role="presentation"
+            />
+          </div>
+          <div className="card-body">
+            <h3 className="card-title h4 ellipsis bg-light height-3">&nbsp;</h3>
+            <h4 className="card-title h5 ellipsis bg-light height-3">&nbsp;</h4>
+            <p className="card-text bg-light height-3">&nbsp;</p>
+            <span className="icons-bottom-left">
+              <span className="fas fa-meh w-25 text-center text-light"></span>
+              <span className="fas fa-laugh w-25 text-center text-light"></span>
+              <span className="fas fa-sad-tear w-25 text-center text-light"></span>
+              <span className="fas fa-meh-blank w-25 text-center text-light"></span>
+            </span>
+          </div>
+        </article>
+      </div>
+    );
+  }
+
   render() {
+    if (!this.props.member._id) return this.renderBlank();
+
     const { user, permissions } = this.props.member;
     const groupId = this.props.groupId;
     return (
@@ -44,7 +74,7 @@ class GroupMember extends React.Component {
             />
           </div>
           <div className="card-body">
-            <h3 className="card-title h4 ellipsis">
+            <h3 className="card-title h4 text-truncate">
               {user.lastname
                 ? `${user.lastname.toUpperCase()}, ${user.firstname}`
                 : 'UNKNOWN'}
