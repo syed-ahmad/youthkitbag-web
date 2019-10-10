@@ -63,7 +63,7 @@ class KitBag extends React.Component {
   renderBlankList() {
     const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     return blankList.map((item, index) => {
-      return <KitCard key={`${item._id}-${index}`} group={item} />;
+      return <KitCard key={`${item._id}-${index}`} kit={item} />;
     });
   }
 
