@@ -13,7 +13,8 @@ import {
   SHOWN_TOAST,
   EDIT_GROUP_STATUS,
   EDIT_GROUP_MEMBER_STATE,
-  EDIT_USER_PROFILE
+  EDIT_USER_PROFILE,
+  API_MARKET_ERROR
 } from '../actions/types';
 
 const initialState = {
@@ -46,6 +47,7 @@ export default (state = initialState, action) => {
         hasShown: false
       };
     case API_KITBAG_ERROR:
+    case API_MARKET_ERROR:
       return {
         currentMessage: action.payload.data.message,
         currentStyle: 'error',

@@ -24,7 +24,6 @@ export const fetchMarketStolens = (
         'content-type': 'application/json'
       }
     })
-
     .then(response => {
       dispatch({ type: FETCH_MARKET_STOLENS, payload: response.data });
       history.push(

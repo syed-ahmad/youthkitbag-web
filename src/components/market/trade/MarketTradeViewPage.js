@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchMarketTrade } from '../../../actions/MarketTradeActions';
 import MarketTradeDetails from './MarketTradeDetails';
 import Title from '../../includes/Title';
+import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
   current: state.market.trade.current
@@ -45,6 +46,7 @@ const MarketTradeViewPage = ({ current, fetchMarketTrade, match }) => {
         aria-label="main body of content plus related links and features"
       >
         <div className="container">
+          <Alert />
           <MarketTradeDetails trade={trade} />
         </div>
       </section>
