@@ -13,7 +13,8 @@ import {
   TextAreaForm,
   RemoveArrayButtonForm,
   ImagesForm,
-  CheckboxForm
+  CheckboxForm,
+  SelectForm
 } from '../../includes/forms';
 
 const TradeForm = ({ trade }) => {
@@ -21,6 +22,8 @@ const TradeForm = ({ trade }) => {
   const newErrors = useSelector(state => state.toast.errors);
 
   const initialValues = { ...trade };
+
+  const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
 
   const {
     setChange,
@@ -91,24 +94,15 @@ const TradeForm = ({ trade }) => {
             handleChange={handleChange}
             error={errors.description}
           />
-          <div className="form-group row">
-            <label htmlFor="condition" className="col-sm-3 col-form-label">
-              Condition
-            </label>
-            <div className="col-sm-9">
-              <select
-                className="custom-select"
-                name="condition"
-                onChange={handleChange}
-                onBlur={handleChange}
-                value={values.condition}
-                aria-describedby="condition"
-              >
-                <option value="used">Used</option>
-                <option value="new">New</option>
-              </select>
-            </div>
-          </div>
+          <SelectForm
+            colFormat="3-9"
+            label="Condition"
+            value={values.status}
+            field="condition"
+            handleChange={handleChange}
+            error={errors.condition}
+            items={conditionItems}
+          />
           <TextForm
             colFormat="3-9"
             type="number"

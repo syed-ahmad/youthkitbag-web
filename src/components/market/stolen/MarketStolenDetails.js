@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import useForm from '../../hooks/useForm';
+import { TextForm, TextAreaForm, DateForm } from '../../includes/forms';
 
 const MarketStolenDetails = ({ stolen }) => {
   const { setChange, values, setValues } = useForm(stolen);
@@ -61,81 +62,36 @@ const MarketStolenDetails = ({ stolen }) => {
         <div>{renderSecondaryImages()}</div>
       </div>
       <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-        <div className="form-group row">
-          <label htmlFor="subtitle" className="col-sm-3 col-form-label">
-            Subtitle
-          </label>
-          <div className="col-sm-9">
-            <input
-              className="form-control"
-              name="subtitle"
-              type="text"
-              disabled
-              value={values.subtitle}
-              aria-describedby="subtitle"
-            />
-          </div>
-        </div>
-        <div className="form-group row">
-          <label htmlFor="description" className="col-sm-3 col-form-label">
-            Description
-          </label>
-          <div className="col-sm-9">
-            <textarea
-              className="form-control"
-              name="description"
-              rows="5"
-              disabled
-              value={values.description}
-              aria-describedby="description"
-            ></textarea>
-          </div>
-        </div>
-        <div className="form-group row">
-          <label htmlFor="stolenon" className="col-sm-3 col-form-label">
-            Stolen On
-          </label>
-          <div className="col-sm-9">
-            <input
-              className="form-control"
-              name="stolenon"
-              type="text"
-              disabled
-              value={values.stolenOn}
-              aria-describedby="stolenon"
-            />
-          </div>
-        </div>
-        <div className="form-group row">
-          <label htmlFor="activitys" className="col-sm-3 col-form-label">
-            Activities
-          </label>
-          <div className="col-sm-9">
-            <input
-              className="form-control"
-              name="activitys"
-              type="text"
-              disabled
-              value={values.activitys}
-              aria-describedby="activitys"
-            />
-          </div>
-        </div>
-        <div className="form-group row">
-          <label htmlFor="security" className="col-sm-3 col-form-label">
-            Security
-          </label>
-          <div className="col-sm-9">
-            <input
-              className="form-control"
-              name="security"
-              type="text"
-              disabled
-              value={values.security}
-              aria-describedby="security"
-            />
-          </div>
-        </div>
+        <TextForm
+          colFormat="3-9"
+          label="Subtitle"
+          value={values.subtitle}
+          readOnly={true}
+        />
+        <TextAreaForm
+          colFormat="3-9"
+          label="Description"
+          value={values.description}
+          readOnly={true}
+        />
+        <DateForm
+          colFormat="3-9"
+          label="Date Stolen"
+          value={values.stolenOn}
+          readOnly={true}
+        />
+        <TextForm
+          colFormat="3-9"
+          label="Activities"
+          value={values.activitys}
+          readOnly={true}
+        />
+        <TextForm
+          colFormat="3-9"
+          label="Security"
+          value={values.security}
+          readOnly={true}
+        />
       </div>
     </div>
   );

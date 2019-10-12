@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const DateInput = ({ value, field, setChange }) => {
+const DateInput = ({ value, field, readOnly, setChange }) => {
   const getDate = value => {
     if (!value) {
       const today = new Date();
@@ -17,6 +17,7 @@ const DateInput = ({ value, field, setChange }) => {
   const [actualDate, setDate] = useState(getDate(value));
 
   const handleDayChange = event => {
+    if (readOnly) return;
     const { value } = event.target;
     if (!value) {
       return updateDate({ ...actualDate, day: '' });
@@ -28,6 +29,7 @@ const DateInput = ({ value, field, setChange }) => {
   };
 
   const handleMonthChange = event => {
+    if (readOnly) return;
     const { value } = event.target;
     if (!value) {
       return updateDate({ ...actualDate, month: '' });
@@ -39,6 +41,7 @@ const DateInput = ({ value, field, setChange }) => {
   };
 
   const handleYearChange = event => {
+    if (readOnly) return;
     const { value } = event.target;
     if (!value) {
       return updateDate({ ...actualDate, year: '' });
@@ -77,6 +80,7 @@ const DateInput = ({ value, field, setChange }) => {
         maxLength="2"
         min="1"
         max="31"
+        readOnly={readOnly}
         onChange={e => handleDayChange(e)}
         onBlur={e => handleDayChange(e)}
       />
@@ -92,6 +96,7 @@ const DateInput = ({ value, field, setChange }) => {
         maxLength="2"
         min="1"
         max="12"
+        readOnly={readOnly}
         onChange={e => handleMonthChange(e)}
         onBlur={e => handleMonthChange(e)}
       />
@@ -107,6 +112,7 @@ const DateInput = ({ value, field, setChange }) => {
         maxLength="4"
         min="2000"
         max="2025"
+        readOnly={readOnly}
         onChange={e => handleYearChange(e)}
         onBlur={e => handleYearChange(e)}
       />
