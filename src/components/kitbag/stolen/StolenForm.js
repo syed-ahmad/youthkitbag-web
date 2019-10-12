@@ -21,8 +21,10 @@ const StolenForm = ({ stolen }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
+  const initialValues = { ...stolen };
+
   const initialReport = {
-    reportedOn: '2019-01-01',
+    reportedOn: new Date(),
     fromUserId: '',
     details: '',
     accepted: false
@@ -38,7 +40,7 @@ const StolenForm = ({ stolen }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(stolen, updateStolen, validate);
+  } = useForm(initialValues, updateStolen, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -122,7 +124,70 @@ const StolenForm = ({ stolen }) => {
             error={errors.tracking}
           />
           <hr />
+          <TextForm
+            colFormat="3-9"
+            label="Activities"
+            value={values.activitys}
+            field="activitys"
+            handleChange={handleChange}
+            error={errors.activitys}
+          />
+          <TextForm
+            colFormat="3-9"
+            label="Security"
+            value={values.security}
+            field="security"
+            handleChange={handleChange}
+            error={errors.security}
+          />
+          {values._id && (
+            <CheckboxForm
+              colFormat="3-1-8"
+              label="Recovered"
+              value={values.recovered}
+              field="recovered"
+              onChange={handleChange}
+              error={errors.recovered}
+              help="If you're fortunate enough to have this item recovered, that is fantastic news. Check this box so that it won't be included on the stolen report anymore."
+            />
+          )}
+          <hr />
           <div>
+            {values.groups &&
+              values.groups.map((item, index) => (
+                <div className="form-row" key={index}>
+                  <TextForm
+                    colFormat="a-6"
+                    value={values.groups[index].name}
+                    label="Name"
+                    field={`groups[${index}].name`}
+                    readOnly={true}
+                    index={index}
+                  />
+                  <DateForm
+                    colFormat="a-4"
+                    value={values.groups[index].available}
+                    label="Available"
+                    field={`groups[${index}].available`}
+                    setChange={setChange}
+                    index={index}
+                  />
+                  <input
+                    name={`groups[${index}].include`}
+                    type="hidden"
+                    value={values.groups[index].include}
+                  />
+                  <RemoveArrayButtonForm
+                    colFormat="a-2"
+                    title="Remove Purchase"
+                    onClick={() => removeArrayItem('groups', index)}
+                    index={index}
+                  />
+                </div>
+              ))}
+          </div>
+          <hr />
+          {/* <div>
             {values.reportDetails &&
               values.reportDetails.map((item, index) => (
                 <div className="form-row" key={index}>
@@ -155,33 +220,7 @@ const StolenForm = ({ stolen }) => {
               onClick={() => addArrayItem('reportDetails', [initialReport])}
             />
           </div>
-          <hr />
-          <TextForm
-            colFormat="3-9"
-            label="Activities"
-            value={values.activitys}
-            field="activitys"
-            handleChange={handleChange}
-            error={errors.activitys}
-          />
-          <TextForm
-            colFormat="3-9"
-            label="Security"
-            value={values.security}
-            field="security"
-            handleChange={handleChange}
-            error={errors.security}
-          />
-          <CheckboxForm
-            colFormat="3-1-8"
-            label="Recovered"
-            value={values.recovered}
-            field="recovered"
-            onChange={handleChange}
-            error={errors.recovered}
-            help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search."
-          />
-          <hr />
+          <hr /> */}
           <div>
             {values.images &&
               values.images.map((item, index) => (

@@ -12,7 +12,8 @@ import {
   TextForm,
   TextAreaForm,
   RemoveArrayButtonForm,
-  ImagesForm
+  ImagesForm,
+  CheckboxForm
 } from '../../includes/forms';
 
 const TradeForm = ({ trade }) => {
@@ -121,16 +122,36 @@ const TradeForm = ({ trade }) => {
             error={errors.askingPrice}
           />
           <hr />
+          <TextForm
+            colFormat="3-9"
+            label="Activities"
+            value={values.activitys}
+            field="activitys"
+            handleChange={handleChange}
+            error={errors.activitys}
+          />
+          {values._id && (
+            <CheckboxForm
+              colFormat="3-1-8"
+              label="Tradeed"
+              value={values.traded}
+              field="traded"
+              onChange={handleChange}
+              error={errors.traded}
+              help="Have you managed to trade this item of kit? If yes, great! Check this box so that it won't be included on the trading market anymore."
+            />
+          )}
+          <hr />
           <div>
             {values.groups &&
               values.groups.map((item, index) => (
                 <div className="form-row" key={index}>
                   <TextForm
-                    colFormat="a-7"
+                    colFormat="a-6"
                     value={values.groups[index].name}
                     label="Name"
                     field={`groups[${index}].name`}
-                    handleChange={handleChange}
+                    readOnly={true}
                     index={index}
                   />
                   <DateForm
@@ -141,8 +162,13 @@ const TradeForm = ({ trade }) => {
                     setChange={setChange}
                     index={index}
                   />
+                  <input
+                    name={`groups[${index}].include`}
+                    type="hidden"
+                    value={values.groups[index].include}
+                  />
                   <RemoveArrayButtonForm
-                    colFormat="a-1"
+                    colFormat="a-2"
                     title="Remove Purchase"
                     onClick={() => removeArrayItem('groups', index)}
                     index={index}
@@ -150,15 +176,6 @@ const TradeForm = ({ trade }) => {
                 </div>
               ))}
           </div>
-          <hr />
-          <TextForm
-            colFormat="3-9"
-            label="Activities"
-            value={values.activitys}
-            field="activitys"
-            handleChange={handleChange}
-            error={errors.activitys}
-          />
           <hr />
           <div>
             {values.images &&

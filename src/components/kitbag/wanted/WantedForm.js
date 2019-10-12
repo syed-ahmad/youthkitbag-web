@@ -21,6 +21,8 @@ const WantedForm = ({ wanted }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
+  const initialValues = { ...wanted };
+
   const initialOffer = {
     offeredOn: '2019-01-01',
     fromUserId: '',
@@ -38,7 +40,7 @@ const WantedForm = ({ wanted }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(wanted, updateWanted, validate);
+  } = useForm(initialValues, updateWanted, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -118,7 +120,60 @@ const WantedForm = ({ wanted }) => {
             error={errors.location}
           />
           <hr />
+          <TextForm
+            colFormat="3-9"
+            label="Activities"
+            value={values.activitys}
+            field="activitys"
+            handleChange={handleChange}
+            error={errors.activitys}
+          />
+          <CheckboxForm
+            colFormat="3-1-8"
+            label="Obtained"
+            value={values.obtained}
+            field="obtained"
+            onChange={handleChange}
+            error={errors.obtained}
+            help="Have you managed to aquire this item. Awesome! Check this box so that it won't be included on the wanted report anymore."
+          />
+          <hr />
           <div>
+            {values.groups &&
+              values.groups.map((item, index) => (
+                <div className="form-row" key={index}>
+                  <TextForm
+                    colFormat="a-6"
+                    value={values.groups[index].name}
+                    label="Name"
+                    field={`groups[${index}].name`}
+                    readOnly={true}
+                    index={index}
+                  />
+                  <DateForm
+                    colFormat="a-4"
+                    value={values.groups[index].available}
+                    label="Available"
+                    field={`groups[${index}].available`}
+                    setChange={setChange}
+                    index={index}
+                  />
+                  <input
+                    name={`groups[${index}].include`}
+                    type="hidden"
+                    value={values.groups[index].include}
+                  />
+                  <RemoveArrayButtonForm
+                    colFormat="a-2"
+                    title="Remove Purchase"
+                    onClick={() => removeArrayItem('groups', index)}
+                    index={index}
+                  />
+                </div>
+              ))}
+          </div>
+          <hr />
+          {/* <div>
             {values.offerDetails &&
               values.offerDetails.map((item, index) => (
                 <div className="form-row" key={index}>
@@ -155,25 +210,7 @@ const WantedForm = ({ wanted }) => {
               onClick={() => addArrayItem('offerDetails', [initialOffer])}
             />
           </div>
-          <hr />
-          <TextForm
-            colFormat="3-9"
-            label="Activities"
-            value={values.activitys}
-            field="activitys"
-            handleChange={handleChange}
-            error={errors.activitys}
-          />
-          <CheckboxForm
-            colFormat="3-1-8"
-            label="Obtained"
-            value={values.obtained}
-            field="obtained"
-            onChange={handleChange}
-            error={errors.obtained}
-            help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search."
-          />
-          <hr />
+          <hr /> */}
           <div>
             {values.images &&
               values.images.map((item, index) => (
