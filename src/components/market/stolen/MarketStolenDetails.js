@@ -1,9 +1,25 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
+import { reportMarketStolen } from '../../../actions/MarketStolenActions';
 import { TextForm, TextAreaForm, DateForm } from '../../includes/forms';
+import validate from './MarketStolenDetailsValidationRules';
 
 const MarketStolenDetails = ({ stolen }) => {
-  const { setChange, values, setValues } = useForm(stolen);
+  const dispatch = useDispatch();
+  //const newErrors = useSelector(state => state.toast.errors);
+
+  const initialValues = { _id: '', reportedOn: '', details: '' };
+
+  const {
+    setChange,
+    handleChange,
+    handleSubmit,
+    values,
+    setValues,
+    errors
+  } = useForm(initialValues, updateStolen, validate);
 
   function renderSecondaryImages() {
     if (!values || !values.images) {
@@ -38,13 +54,17 @@ const MarketStolenDetails = ({ stolen }) => {
 
   useEffect(() => {
     if (stolen) {
-      stolen.topImage =
-        stolen.images && stolen.images.filter(i => i.state !== 'D').length > 0
-          ? stolen.images.filter(i => i.state !== 'D')[0].imageUrl
-          : '/images/default.png';
-      setValues(stolen);
+      setValues({ _id: stolen._id, reportedOn: '', details: '' });
     }
   }, [stolen, setValues]);
+
+  function updateStolen() {
+    // if (values._id) {
+    dispatch(reportMarketStolen(values._id, values));
+    // } else {
+    //   dispatch(createKitbagStolen(values));
+    // }
+  }
 
   return (
     <div className="row">
@@ -54,7 +74,7 @@ const MarketStolenDetails = ({ stolen }) => {
             id="preview"
             name="preview"
             className="img-fluid mb-3"
-            src={values.topImage}
+            src={stolen.topImage}
             alt=""
             role="presentation"
           />
@@ -65,33 +85,96 @@ const MarketStolenDetails = ({ stolen }) => {
         <TextForm
           colFormat="3-9"
           label="Subtitle"
-          value={values.subtitle}
+          value={stolen.subtitle}
           readOnly={true}
         />
         <TextAreaForm
           colFormat="3-9"
           label="Description"
-          value={values.description}
+          value={stolen.description}
           readOnly={true}
         />
         <DateForm
           colFormat="3-9"
           label="Date Stolen"
-          value={values.stolenOn}
+          value={stolen.stolenOn}
           readOnly={true}
         />
         <TextForm
           colFormat="3-9"
           label="Activities"
-          value={values.activitys}
+          value={stolen.activitys}
           readOnly={true}
         />
         <TextForm
           colFormat="3-9"
           label="Security"
-          value={values.security}
+          value={stolen.security}
           readOnly={true}
         />
+        {stolen.reportDetails && stolen.reportDetails.length == 0 && (
+          <React.Fragment>
+            <hr />
+            <h3>Have you seen this?</h3>
+            <p>
+              If you have any information about the location, current ownership
+              or theft of this piece of equipment, then please, please help by
+              providing the details below. It may help lead to it&apos;s
+              recovery.
+            </p>
+            <form className="mb-3" onSubmit={handleSubmit}>
+              <div>
+                <DateForm
+                  colFormat="3-9"
+                  label="Reported On"
+                  value={values.reportedOn}
+                  field="reportedOn"
+                  setChange={setChange}
+                  errors={errors.reportedOn}
+                />
+                <TextAreaForm
+                  colFormat="3-9"
+                  label="Details"
+                  value={values.details}
+                  field="details"
+                  handleChange={handleChange}
+                  errors={errors.reportedOn}
+                />
+              </div>
+              <hr />
+              <div>
+                <button className="btn btn-primary" type="submit">
+                  Save
+                </button>
+                <Link className="btn btn-link" to="/market/stolen">
+                  Cancel
+                </Link>
+              </div>
+            </form>
+          </React.Fragment>
+        )}
+        {stolen.reportDetails && stolen.reportDetails.length > 0 && (
+          <React.Fragment>
+            <hr />
+            <h3>Thank you! You supplied this information</h3>
+            <form className="mb-3" onSubmit={handleSubmit}>
+              <div>
+                <DateForm
+                  colFormat="3-9"
+                  label="Reported On"
+                  value={stolen.reportDetails[0].reportedOn}
+                  readOnly={true}
+                />
+                <TextAreaForm
+                  colFormat="3-9"
+                  label="Details"
+                  value={stolen.reportDetails[0].details}
+                  readOnly={true}
+                />
+              </div>
+            </form>
+          </React.Fragment>
+        )}
       </div>
     </div>
   );
