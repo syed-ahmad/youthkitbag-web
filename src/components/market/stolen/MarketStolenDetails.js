@@ -8,7 +8,7 @@ import validate from './MarketStolenDetailsValidationRules';
 
 const MarketStolenDetails = ({ stolen }) => {
   const dispatch = useDispatch();
-  //const newErrors = useSelector(state => state.toast.errors);
+  const newErrors = useSelector(state => state.toast.errors);
 
   const initialValues = { _id: '', reportedOn: '', details: '' };
 
@@ -18,8 +18,15 @@ const MarketStolenDetails = ({ stolen }) => {
     handleSubmit,
     values,
     setValues,
-    errors
+    errors,
+    setErrors
   } = useForm(initialValues, updateStolen, validate);
+
+  useEffect(() => {
+    if (newErrors) {
+      setErrors(newErrors);
+    }
+  }, [newErrors, setErrors]);
 
   function renderSecondaryImages() {
     if (!values || !values.images) {
@@ -112,7 +119,7 @@ const MarketStolenDetails = ({ stolen }) => {
           value={stolen.security}
           readOnly={true}
         />
-        {stolen.reportDetails && stolen.reportDetails.length == 0 && (
+        {stolen.reportDetails && stolen.reportDetails.length === 0 && (
           <React.Fragment>
             <hr />
             <h3>Have you seen this?</h3>
@@ -144,7 +151,7 @@ const MarketStolenDetails = ({ stolen }) => {
               <hr />
               <div>
                 <button className="btn btn-primary" type="submit">
-                  Save
+                  Report
                 </button>
                 <Link className="btn btn-link" to="/market/stolen">
                   Cancel

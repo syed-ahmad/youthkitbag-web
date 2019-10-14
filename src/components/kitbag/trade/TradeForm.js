@@ -127,7 +127,7 @@ const TradeForm = ({ trade }) => {
           {values._id && (
             <CheckboxForm
               colFormat="3-1-8"
-              label="Tradeed"
+              label="Traded"
               value={values.traded}
               field="traded"
               onChange={handleChange}

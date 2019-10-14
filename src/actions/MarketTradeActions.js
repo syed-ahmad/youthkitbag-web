@@ -3,7 +3,8 @@ import {
   FETCH_MARKET_TRADES,
   FETCH_MARKET_TRADE,
   API_MARKET_ERROR,
-  GETALL_FAILURE
+  GETALL_FAILURE,
+  OFFER_MARKET_TRADE
 } from './types';
 import history from '../helpers/history';
 
@@ -59,6 +60,34 @@ export const fetchMarketTrade = tradeId => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/market/trade');
+      }
+      dispatch({ type: API_MARKET_ERROR, payload: err.response });
+    });
+};
+
+export const offerMarketTrade = (tradeId, formValues) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .post(
+      `${baseUrl}/market/trade/offer/${tradeId}`,
+      { ...formValues },
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          'content-type': 'application/json'
+        }
+      }
+    )
+    .then(response => {
+      dispatch({ type: OFFER_MARKET_TRADE, payload: response.data });
+      history.push(`/market/trade/${tradeId}`);
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(`/auth/login?return=/market/trade/${tradeId}`);
       }
       dispatch({ type: API_MARKET_ERROR, payload: err.response });
     });
