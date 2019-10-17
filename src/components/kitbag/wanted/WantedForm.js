@@ -11,7 +11,6 @@ import {
   DateForm,
   TextForm,
   TextAreaForm,
-  AddArrayButtonForm,
   RemoveArrayButtonForm,
   CheckboxForm,
   ImagesForm
@@ -22,13 +21,6 @@ const WantedForm = ({ wanted }) => {
   const newErrors = useSelector(state => state.toast.errors);
 
   const initialValues = { ...wanted };
-
-  const initialOffer = {
-    offeredOn: '2019-01-01',
-    fromUserId: '',
-    askingPrice: '',
-    accepted: false
-  };
 
   const {
     setChange,

@@ -11,7 +11,6 @@ import {
   DateForm,
   TextForm,
   TextAreaForm,
-  AddArrayButtonForm,
   RemoveArrayButtonForm,
   CheckboxForm,
   ImagesForm
@@ -22,13 +21,6 @@ const StolenForm = ({ stolen }) => {
   const newErrors = useSelector(state => state.toast.errors);
 
   const initialValues = { ...stolen };
-
-  const initialReport = {
-    reportedOn: new Date(),
-    fromUserId: '',
-    details: '',
-    accepted: false
-  };
 
   const {
     setChange,
