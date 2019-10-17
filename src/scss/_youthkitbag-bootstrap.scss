@@ -143,3 +143,15 @@ span {
 .bg-smoke {
   background-color: $smoke;
 }
+
+.btn-facebook {
+  background: #3b5998 url('/images/facebook.svg') no-repeat 13px -10px;
+  background-size: 47px;
+  color: #fff;
+}
+
+.btn-google {
+  border: 1px solid #95989a;
+  background: #fff url('/images/google.svg') no-repeat 25px;
+  background-size: 25px;
+}

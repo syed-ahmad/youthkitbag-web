@@ -25,15 +25,29 @@ const LoginForm = () => {
 
   return (
     <React.Fragment>
-      <h2 className="h3 mb-3">
-        You can use one of these authentication options
-      </h2>
-      <div className="mb-5">
-        <a href={`${baseUrl}/auth/google`}>Authenticate with Google</a>
+      <div className="mb-3">
+        <div className="row mb-3">
+          <a
+            className="btn btn-lg btn-block btn-google"
+            href={`${baseUrl}/auth/google`}
+          >
+            Login with Google
+          </a>
+        </div>
+        <div className="row mb-3">
+          <a
+            className="btn btn-lg btn-block btn-facebook"
+            href={`${baseUrl}/auth/facebook`}
+          >
+            Login with Facebook
+          </a>
+        </div>
       </div>
-      <h2 className="h4 mb-3">
-        Or, you can use the traditional email and password
-      </h2>
+      <p className="mb-3 text-center">
+        <span className="centre-line"></span>
+        or
+        <span className="centre-line"></span>
+      </p>
       <form className="w-100 d-block" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="email">Email</label>
