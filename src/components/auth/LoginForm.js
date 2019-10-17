@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
     email: '',
@@ -23,41 +24,54 @@ const LoginForm = () => {
   }
 
   return (
-    <form className="w-100 d-block" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input
-          className={`form-control ${errors.email && 'is-invalid'}`}
-          name="email"
-          type="email"
-          onChange={handleChange}
-          value={values.email}
-          aria-describedby="email"
-          autoComplete="username email"
-          required
-        />
-        {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+    <React.Fragment>
+      <h2 className="h3 mb-3">
+        You can use one of these authentication options
+      </h2>
+      <div className="mb-5">
+        <a href={`${baseUrl}/auth/google`}>Authenticate with Google</a>
       </div>
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <input
-          className={`form-control ${errors.email && 'is-invalid'}`}
-          name="password"
-          type="password"
-          onChange={handleChange}
-          value={values.password}
-          aria-describedby="password"
-          autoComplete="current-password"
-          required
-        />
-        {errors.password && (
-          <div className="invalid-feedback">{errors.password}</div>
-        )}
-      </div>
-      <button className="btn btn-primary" type="submit">
-        Login
-      </button>
-    </form>
+      <h2 className="h4 mb-3">
+        Or, you can use the traditional email and password
+      </h2>
+      <form className="w-100 d-block" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            className={`form-control ${errors.email && 'is-invalid'}`}
+            name="email"
+            type="email"
+            onChange={handleChange}
+            value={values.email}
+            aria-describedby="email"
+            autoComplete="username email"
+            required
+          />
+          {errors.email && (
+            <div className="invalid-feedback">{errors.email}</div>
+          )}
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            className={`form-control ${errors.email && 'is-invalid'}`}
+            name="password"
+            type="password"
+            onChange={handleChange}
+            value={values.password}
+            aria-describedby="password"
+            autoComplete="current-password"
+            required
+          />
+          {errors.password && (
+            <div className="invalid-feedback">{errors.password}</div>
+          )}
+        </div>
+        <button className="btn btn-primary" type="submit">
+          Login
+        </button>
+      </form>
+    </React.Fragment>
   );
 };
 

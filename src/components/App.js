@@ -17,6 +17,7 @@ import Login from './auth/LoginPage';
 import Reset from './auth/ResetPage';
 import NewPassword from './auth/NewPasswordPage';
 import Logout from './auth/Logout';
+import Token from './auth/Token';
 
 import PurchaseSubscriptionPage from './PurchaseSubscriptionPage';
 
@@ -84,6 +85,7 @@ class App extends React.Component {
               <Route path="/auth/signup" exact component={SignUp} />
               <Route path="/auth/login" exact component={Login} />
               <Route path="/auth/reset" exact component={Reset} />
+              <Route path="/auth/token/:token" exact component={Token} />
               <Route
                 path="/auth/newpassword/:key"
                 exact

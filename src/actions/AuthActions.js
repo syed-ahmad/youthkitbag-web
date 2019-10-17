@@ -38,6 +38,30 @@ export const login = (email, password) => dispatch => {
     });
 };
 
+export const authenticateToken = token => dispatch => {
+  window.localStorage.clear();
+  axios
+    .post(
+      `${baseUrl}/auth/authenticate`,
+      { token },
+      {
+        'content-type': 'application/json'
+      }
+    )
+    .then(response => {
+      const { data } = response;
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.userId);
+      localStorage.setItem('isloggedin', true);
+      dispatch({ type: LOGIN_SUCCESS, payload: data });
+      dispatch(getUser());
+      history.push('/kitbag/kit');
+    })
+    .catch(err => {
+      dispatch({ type: LOGIN_FAILURE, payload: err.response });
+    });
+};
+
 export const signup = (email, password, confirmPassword) => dispatch => {
   window.localStorage.clear();
   axios
