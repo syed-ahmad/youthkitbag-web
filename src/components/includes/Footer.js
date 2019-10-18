@@ -91,19 +91,16 @@ class Footer extends React.Component {
               <div className="col-md-8">
                 <div className="d-flex flex-column flex-md-row">
                   <div className="p-2">
-                    <Link to="/corporate/terms-and-conditions/index">
-                      Terms &amp; conditions{' '}
-                    </Link>
+                    <Link to="/site/terms">Terms &amp; conditions </Link>
                   </div>
                   <div className="p-2">
-                    <Link to="/corporate/privacy-and-cookies/index">
-                      Privacy &amp; cookies
-                    </Link>
+                    <Link to="/site/privacy">Privacy &amp; cookies</Link>
                   </div>
                   <div className="p-2">
-                    <Link to="/corporate/website-accessibility/index">
-                      Website accessibility
-                    </Link>
+                    <Link to="/site/security">Security</Link>
+                  </div>
+                  <div className="p-2">
+                    <Link to="/site/accessibility">Accessibility</Link>
                   </div>
                 </div>
               </div>
