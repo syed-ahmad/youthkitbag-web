@@ -7,10 +7,12 @@ import thunk from 'redux-thunk';
 import App from './components/App';
 import reducers from './reducers';
 
-const composeEnhancers =
-  process.env.NODE_ENV === 'development'
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-    : compose;
+// When ready to switch off dev tools in production, use this block
+// const composeEnhancers =
+//   process.env.NODE_ENV === 'development'
+//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+//     : compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
