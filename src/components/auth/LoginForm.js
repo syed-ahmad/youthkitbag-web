@@ -42,6 +42,14 @@ const LoginForm = () => {
             Login with Facebook
           </a>
         </div>
+        <div className="row mb-3">
+          <a
+            className="btn btn-lg btn-block btn-github"
+            href={`${baseUrl}/auth/github`}
+          >
+            Login with GitHub
+          </a>
+        </div>
       </div>
       <p className="mb-3 text-center">
         <span className="centre-line"></span>

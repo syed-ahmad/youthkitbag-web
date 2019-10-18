@@ -264,5 +264,9 @@ footer {
     border: 1px solid #95989a;
     background: #fff url("/images/google.svg") no-repeat 25px;
     background-size: 25px; }
+  .youthkitbag .btn-github {
+    border: 1px solid #95989a;
+    background: #fff url("/images/github.svg") no-repeat 25px;
+    background-size: 25px; }
 
 /*# sourceMappingURL=youthkitbag.css.map */
