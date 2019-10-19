@@ -12,12 +12,10 @@ class Home extends React.Component {
           <div className="jumbotron">
             <div className="container text-center">
               <h1>YouthKitbag</h1>
-              <h2 className="pb-3">Inventory, Trade, Aquire, Report</h2>
-              <h3 className="">
-                for your school kit, club kit, team kit, any kit
-              </h3>
+              <h2 className="pb-3">Inventory, Trade, Report</h2>
+              <h3 className="">school kit, club kit, team kit, any kit</h3>
               <h4 className="pb-5">
-                sports gear, musical instruments, school uniforms, more
+                sports gear, musical instruments, school uniforms, more ...
               </h4>
             </div>
           </div>
