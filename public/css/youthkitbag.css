@@ -300,5 +300,21 @@ body {
     border: 1px solid #95989a;
     background: #fff url("/images/github.svg") no-repeat 25px;
     background-size: 25px; }
+  .youthkitbag .jumbotron h1 {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #31358e; }
+  .youthkitbag .jumbotron h2 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #31358e; }
+  .youthkitbag .jumbotron h3 {
+    font-size: 2rem;
+    font-style: italic;
+    color: #31358e; }
+  .youthkitbag .jumbotron h4 {
+    color: #31358e; }
+  .youthkitbag .jumbotron .container {
+    border-bottom: #31358e solid 1px; }
 
 /*# sourceMappingURL=youthkitbag.css.map */

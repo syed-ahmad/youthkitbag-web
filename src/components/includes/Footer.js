@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class Footer extends React.Component {
   render() {
     return (
-      <footer>
+      <footer className="purple-gradient">
         <Link
           id="footer-acc-jump"
           className="sr-only sr-only-focusable"
@@ -14,10 +14,7 @@ class Footer extends React.Component {
             <span className="skiplink-text">Skip to header</span>
           </div>
         </Link>
-        <section
-          className="footer purple-gradient"
-          aria-label="secondary navigation"
-        >
+        <section className="footer" aria-label="secondary navigation">
           <div className="container text-center text-md-left p-4">
             <h2 className="sr-only">
               Supplementary navigation to key corporate and informational
@@ -68,22 +65,13 @@ class Footer extends React.Component {
                   <span className="sr-only">Our contact email address is:</span>
                   admin@youthkitbag.com
                 </p>
-                <p>
-                  <span
-                    aria-hidden="true"
-                    className="fas fa-phone mr-3"
-                    title="Contact phone"
-                  ></span>
-                  <span className="sr-only">Our contact phone number is:</span>+
-                  44 7949-420404
-                </p>
               </div>
             </div>
           </div>
         </section>
 
         <section
-          className="footer footer-copyright purple-gradient"
+          className="footer footer-copyright"
           aria-label="links to terms and conditions, privacy and cookies statements and accessibility standards for this website"
         >
           <div className="container text-center py-2">

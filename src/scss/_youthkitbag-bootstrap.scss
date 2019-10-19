@@ -161,3 +161,27 @@ span {
   background: #fff url('/images/github.svg') no-repeat 25px;
   background-size: 25px;
 }
+
+.jumbotron {
+  h1 {
+    font-size: 6rem;
+    font-weight: bold;
+    color: $dark;
+  }
+  h2 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: $dark;
+  }
+  h3 {
+    font-size: 2rem;
+    font-style: italic;
+    color: $dark;
+  }
+  h4 {
+    color: $dark;
+  }
+  .container {
+    border-bottom: $dark solid 1px;
+  }
+}
