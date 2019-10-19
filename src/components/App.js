@@ -11,9 +11,10 @@ import Footer from './includes/Footer';
 import Home from './Home';
 import Why from './Why';
 import Pricing from './Pricing';
-import SiteTerms from './site/Terms';
-import SitePrivacy from './site/Privacy';
-import SiteSecurity from './site/Security';
+import Terms from './site/Terms';
+import Privacy from './site/Privacy';
+import Security from './site/Security';
+import Accessibility from './site/Accessibility';
 
 import SignUp from './auth/SignUpPage';
 import Login from './auth/LoginPage';
@@ -85,9 +86,14 @@ class App extends React.Component {
               <Route path="/why" exact component={Why} />
               <Route path="/pricing" exact component={Pricing} />
 
-              <Route path="/site/terms" exact component={SiteTerms} />
-              <Route path="/site/privacy" exact component={SitePrivacy} />
-              <Route path="/site/security" exact component={SiteSecurity} />
+              <Route path="/site/terms" exact component={Terms} />
+              <Route path="/site/privacy" exact component={Privacy} />
+              <Route path="/site/security" exact component={Security} />
+              <Route
+                path="/site/accessibility"
+                exact
+                component={Accessibility}
+              />
 
               <Route path="/auth/signup" exact component={SignUp} />
               <Route path="/auth/login" exact component={Login} />

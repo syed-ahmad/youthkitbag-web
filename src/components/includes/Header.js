@@ -57,15 +57,15 @@ class Header extends React.Component {
                     aria-labelledby="whyDropdown"
                   >
                     <Link className="dropdown-item" to="/why#created">
-                      ... I created this
+                      ... I created YouthKitbag
                     </Link>
-                    <hr />
+                    {/* <hr />
                     <Link className="dropdown-item" to="/why#tryit">
                       ... you should try it
                     </Link>
                     <Link className="dropdown-item" to="/why#concern">
                       ... you might be concerned
-                    </Link>
+                    </Link> */}
                   </div>
                 </li>
                 <li className="nav-item">

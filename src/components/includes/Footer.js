@@ -85,7 +85,10 @@ class Footer extends React.Component {
                     <Link to="/site/terms">Terms &amp; conditions </Link>
                   </div>
                   <div className="p-2">
-                    <Link to="/site/privacy">Privacy &amp; cookies</Link>
+                    <Link to="/site/privacy">Privacy Policy</Link>
+                  </div>
+                  <div className="p-2">
+                    <Link to="/site/cookiesy">Cookies</Link>
                   </div>
                   <div className="p-2">
                     <Link to="/site/security">Security</Link>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Security = () => {
+const Accessibility = () => {
   return (
     <div>
       <section
@@ -61,4 +61,4 @@ const Security = () => {
   );
 };
 
-export default Security;
+export default Accessibility;
