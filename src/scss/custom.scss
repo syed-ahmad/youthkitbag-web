@@ -10,7 +10,7 @@ $theme-colors: (
   secondary: #535a56,
   success: #1d7631,
   info: #c8e2fc,
-  dark: #0c504a //481056
+  dark: #31358e
 );
 
 @import '../../node_modules/bootstrap/scss/variables';
@@ -35,7 +35,7 @@ $theme-colors: (
 // );
 
 /* 164 background color */
-$body-bg: #0c504a30; //48105630;
+$body-bg: #7d419830;
 
 // /* 172 required to bring link color to AAA standards, but this fails to A link contrast */
 // //$link-color: #004C9E;

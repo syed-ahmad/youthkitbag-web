@@ -14,8 +14,11 @@ class Footer extends React.Component {
             <span className="skiplink-text">Skip to header</span>
           </div>
         </Link>
-        <section className="footer bg-dark" aria-label="secondary navigation">
-          <div className="container-fluid text-center text-md-left p-4">
+        <section
+          className="footer purple-gradient"
+          aria-label="secondary navigation"
+        >
+          <div className="container text-center text-md-left p-4">
             <h2 className="sr-only">
               Supplementary navigation to key corporate and informational
               sections of the website, including contact details
@@ -80,10 +83,10 @@ class Footer extends React.Component {
         </section>
 
         <section
-          className="footer footer-copyright"
+          className="footer footer-copyright purple-gradient"
           aria-label="links to terms and conditions, privacy and cookies statements and accessibility standards for this website"
         >
-          <div className="container-fluid text-center py-2">
+          <div className="container text-center py-2">
             <h2 className="sr-only">
               Navigation to legal and accessibility content
             </h2>

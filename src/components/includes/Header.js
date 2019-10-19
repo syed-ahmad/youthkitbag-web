@@ -17,10 +17,10 @@ class Header extends React.Component {
           </div>
         </Link>
         <nav
-          className="navbar navbar-expand-sm navbar-dark bg-dark"
+          className="navbar navbar-expand-sm navbar-dark purple-gradient"
           aria-label="primary navigation"
         >
-          <div className="container-fluid">
+          <div className="container">
             <Link className="navbar-brand mr-6 navbar-logo" to="/">
               YouthKitbag
             </Link>
