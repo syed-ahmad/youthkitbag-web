@@ -14,7 +14,7 @@ class Footer extends React.Component {
             <span className="skiplink-text">Skip to header</span>
           </div>
         </Link>
-        <section className="footer" aria-label="secondary navigation">
+        <section className="footer bg-dark" aria-label="secondary navigation">
           <div className="container-fluid text-center text-md-left p-4">
             <h2 className="sr-only">
               Supplementary navigation to key corporate and informational

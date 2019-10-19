@@ -106,7 +106,6 @@ a.sr-only {
 }
 
 .footer {
-  background-color: $shark;
   color: $silver;
   h6,
   .h6 {
@@ -116,7 +115,7 @@ a.sr-only {
     background-color: $gallery;
   }
   &.footer-copyright {
-    background-color: $charade;
+    background-color: $darker;
     a {
       color: $montecarlo;
     }

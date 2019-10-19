@@ -21,8 +21,7 @@ class Header extends React.Component {
           aria-label="primary navigation"
         >
           <div className="container-fluid">
-            <Link className="navbar-brand mr-6" to="/">
-              <span className="fas fa-suitcase mr-3" aria-hidden="true"></span>
+            <Link className="navbar-brand mr-6 navbar-logo" to="/">
               YouthKitbag
             </Link>
             <button

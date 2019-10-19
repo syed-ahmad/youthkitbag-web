@@ -16,9 +16,15 @@
 //     url('../../public/css/webfonts/3A630B_0_0.ttf') format('ttf');
 // }
 
+// PrentonRPProLight-Regular,
+
 body {
-  font-family: PrentonRPPro-Regular, PrentonRPProLight-Regular, sans-serif,
-    'Font `Awesome 5 Free' !important;
+  font-family: PrentonRPPro-Regular, sans-serif, 'Font `Awesome 5 Free' !important;
+}
+
+.navbar-brand.navbar-logo {
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .fa,

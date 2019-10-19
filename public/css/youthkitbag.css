@@ -28,7 +28,11 @@ footer {
 
 /* Font */
 body {
-  font-family: PrentonRPPro-Regular, PrentonRPProLight-Regular, sans-serif, 'Font `Awesome 5 Free' !important; }
+  font-family: PrentonRPPro-Regular, sans-serif, 'Font `Awesome 5 Free' !important; }
+
+.navbar-brand.navbar-logo {
+  font-size: 2rem;
+  font-weight: bold; }
 
 .fa,
 .fab,
@@ -103,7 +107,6 @@ body {
     white-space: normal !important;
     word-wrap: break-word; }
   .youthkitbag .footer {
-    background-color: #202329;
     color: #cccccc; }
     .youthkitbag .footer h6,
     .youthkitbag .footer .h6 {
@@ -111,7 +114,7 @@ body {
     .youthkitbag .footer hr {
       background-color: #f0f0f0; }
     .youthkitbag .footer.footer-copyright {
-      background-color: #2d3039; }
+      background-color: #052926; }
       .youthkitbag .footer.footer-copyright a {
         color: #7bcbd1; }
     .youthkitbag .footer ul.links {
