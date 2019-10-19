@@ -26,6 +26,10 @@ main {
 footer {
   flex-shrink: 0; }
 
+/* Font */
+body {
+  font-family: PrentonRPPro-Regular, PrentonRPProLight-Regular, sans-serif, 'Font `Awesome 5 Free' !important; }
+
 .fa,
 .fab,
 .fal,
