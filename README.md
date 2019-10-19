@@ -1,6 +1,6 @@
-[![Known Vulnerabilities](https://snyk.io/test/github/pgmoir/youthkitbag-web/badge.svg)](https://snyk.io/test/github/pgmoir/youthkitbag-web)
+# YouthKitbag
 
-## Youth Kitbag - inventory, sell, buy, give away, recycle, report stolen - kids gear for sports, music, clubs, adventures and more.
+## Inventory, sell, buy, give away, recycle, report stolen - kids gear for sports, music, clubs, adventures and more.
 
 This is a web application written using the [React JavaScript library](https://reactjs.org/), interacting with a [Node.js](https://nodejs.org/en/) API.
 
