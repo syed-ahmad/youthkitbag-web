@@ -28,12 +28,21 @@ const MarketWantedDetails = ({ wanted }) => {
     }
   }, [newErrors, setErrors]);
 
+  useEffect(() => {
+    if (wanted) {
+      wanted.topImage =
+        wanted.images && wanted.images.filter(i => i.state !== 'D').length > 0
+          ? wanted.images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png';
+    }
+  }, [wanted]);
+
   function renderSecondaryImages() {
-    if (!values || !values.images) {
+    if (!wanted || !wanted.images) {
       return null;
     }
 
-    const { images } = values;
+    const { images } = wanted;
     const items = [];
 
     for (let i = 0; i < images.length; i++) {

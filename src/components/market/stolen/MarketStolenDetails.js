@@ -28,12 +28,21 @@ const MarketStolenDetails = ({ stolen }) => {
     }
   }, [newErrors, setErrors]);
 
+  useEffect(() => {
+    if (stolen) {
+      stolen.topImage =
+        stolen.images && stolen.images.filter(i => i.state !== 'D').length > 0
+          ? stolen.images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png';
+    }
+  }, [stolen]);
+
   function renderSecondaryImages() {
-    if (!values || !values.images) {
+    if (!stolen || !stolen.images) {
       return null;
     }
 
-    const { images } = values;
+    const { images } = stolen;
     const items = [];
 
     for (let i = 0; i < images.length; i++) {

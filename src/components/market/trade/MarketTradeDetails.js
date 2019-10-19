@@ -28,12 +28,21 @@ const MarketTradeDetails = ({ trade }) => {
     }
   }, [newErrors, setErrors]);
 
+  useEffect(() => {
+    if (trade) {
+      trade.topImage =
+        trade.images && trade.images.filter(i => i.state !== 'D').length > 0
+          ? trade.images.filter(i => i.state !== 'D')[0].imageUrl
+          : '/images/default.png';
+    }
+  }, [trade]);
+
   function renderSecondaryImages() {
-    if (!values || !values.images) {
+    if (!trade || !trade.images) {
       return null;
     }
 
-    const { images } = values;
+    const { images } = trade;
     const items = [];
 
     for (let i = 0; i < images.length; i++) {
