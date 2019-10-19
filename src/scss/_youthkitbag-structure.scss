@@ -3,6 +3,12 @@ p {
   a {
     text-decoration: underline;
   }
+  &.f-md {
+    font-size: 1.2rem;
+  }
+  &.f-lg {
+    font-size: 1.5rem;
+  }
 }
 ul.std-list {
   a {

@@ -55,7 +55,8 @@ footer {
 
 /* Font */
 body {
-  font-family: PrentonRPPro-Regular, sans-serif, 'Font `Awesome 5 Free' !important; }
+  font-family: PrentonRPPro-Regular, sans-serif, 'Font `Awesome 5 Free' !important;
+  font-size: 20px; }
 
 .navbar-brand.navbar-logo {
   font-size: 2rem;
@@ -77,6 +78,10 @@ body {
   /* header features */ }
   .youthkitbag p a {
     text-decoration: underline; }
+  .youthkitbag p.f-md {
+    font-size: 1.2rem; }
+  .youthkitbag p.f-lg {
+    font-size: 1.5rem; }
   .youthkitbag ul.std-list a {
     text-decoration: underline; }
   .youthkitbag a.status {

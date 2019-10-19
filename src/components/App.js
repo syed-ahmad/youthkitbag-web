@@ -9,7 +9,7 @@ import Header from './includes/Header';
 import Footer from './includes/Footer';
 
 import Home from './Home';
-import Features from './Features';
+import Why from './Why';
 import Pricing from './Pricing';
 import SiteTerms from './site/Terms';
 import SitePrivacy from './site/Privacy';
@@ -82,7 +82,7 @@ class App extends React.Component {
             </Link>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/features" exact component={Features} />
+              <Route path="/why" exact component={Why} />
               <Route path="/pricing" exact component={Pricing} />
 
               <Route path="/site/terms" exact component={SiteTerms} />

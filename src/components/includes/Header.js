@@ -56,15 +56,15 @@ class Header extends React.Component {
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="whyDropdown"
                   >
-                    <Link className="dropdown-item" to="/features">
-                      Features
+                    <Link className="dropdown-item" to="/why#created">
+                      ... I created this
                     </Link>
                     <hr />
-                    <Link className="dropdown-item" to="/features/inventory">
-                      Inventory
+                    <Link className="dropdown-item" to="/why#tryit">
+                      ... you should try it
                     </Link>
-                    <Link className="dropdown-item" to="/features/security">
-                      Security
+                    <Link className="dropdown-item" to="/why#concern">
+                      ... you might be concerned
                     </Link>
                   </div>
                 </li>
