@@ -1,23 +1,5 @@
 /* Font */
 
-// getting a decode error on WOFF using this technique
-// @font-face {
-//   font-family: PrentonRPProLight-Regular;
-//   src: url('../../public/css/webfonts/3A630B_1_0.eot') format('eot');
-//   src: url('../../public/css/webfonts/3A630B_1_0.woff2') format('woff2'),
-//     url('../../public/css/webfonts/3A630B_1_0.woff') format('woff'),
-//     url('../../public/css/webfonts/3A630B_1_0.ttf') format('ttf');
-// }
-// @font-face {
-//   font-family: PrentonRPPro-Regular;
-//   src: url('../../public/css/webfonts/3A630B_0_0.eot') format('eot');
-//   src: url('../../public/css/webfonts/3A630B_0_0.woff2') format('woff2'),
-//     url('../../public/css/webfonts/3A630B_0_0.woff') format('woff'),
-//     url('../../public/css/webfonts/3A630B_0_0.ttf') format('ttf');
-// }
-
-// PrentonRPProLight-Regular,
-
 body {
   font-family: PrentonRPPro-Regular, sans-serif, 'Font `Awesome 5 Free' !important;
 }

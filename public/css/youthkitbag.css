@@ -301,20 +301,57 @@ body {
     background: #fff url("/images/github.svg") no-repeat 25px;
     background-size: 25px; }
   .youthkitbag .jumbotron h1 {
-    font-size: 6rem;
+    font-size: 3rem;
     font-weight: bold;
     color: #31358e; }
   .youthkitbag .jumbotron h2 {
-    font-size: 4rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #31358e; }
   .youthkitbag .jumbotron h3 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-style: italic;
     color: #31358e; }
   .youthkitbag .jumbotron h4 {
+    font-size: 1.2rem;
     color: #31358e; }
   .youthkitbag .jumbotron .container {
     border-bottom: #31358e solid 1px; }
+  @media (min-width: 576px) {
+    .youthkitbag .jumbotron h1 {
+      font-size: 3.6rem; }
+    .youthkitbag .jumbotron h2 {
+      font-size: 2.4rem; }
+    .youthkitbag .jumbotron h3 {
+      font-size: 1.8rem; }
+    .youthkitbag .jumbotron h4 {
+      font-size: 1.44rem; } }
+  @media (min-width: 768px) {
+    .youthkitbag .jumbotron h1 {
+      font-size: 4.2rem; }
+    .youthkitbag .jumbotron h2 {
+      font-size: 2.8rem; }
+    .youthkitbag .jumbotron h3 {
+      font-size: 2.1rem; }
+    .youthkitbag .jumbotron h4 {
+      font-size: 1.68rem; } }
+  @media (min-width: 992px) {
+    .youthkitbag .jumbotron h1 {
+      font-size: 5.1rem; }
+    .youthkitbag .jumbotron h2 {
+      font-size: 3.4rem; }
+    .youthkitbag .jumbotron h3 {
+      font-size: 2.55rem; }
+    .youthkitbag .jumbotron h4 {
+      font-size: 2.04rem; } }
+  @media (min-width: 1200px) {
+    .youthkitbag .jumbotron h1 {
+      font-size: 6rem; }
+    .youthkitbag .jumbotron h2 {
+      font-size: 4rem; }
+    .youthkitbag .jumbotron h3 {
+      font-size: 3rem; }
+    .youthkitbag .jumbotron h4 {
+      font-size: 2.4rem; } }
 
 /*# sourceMappingURL=youthkitbag.css.map */
