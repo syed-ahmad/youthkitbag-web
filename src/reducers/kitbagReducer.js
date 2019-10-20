@@ -1,13 +1,9 @@
 import { combineReducers } from 'redux';
 
 import kitbagKitReducer from './kitbagKitReducer';
-import kitbagTradeReducer from './kitbagTradeReducer';
-import kitbagWantedReducer from './kitbagWantedReducer';
-import kitbagStolenReducer from './kitbagStolenReducer';
+import kitbagMarketReducer from './kitbagMarketReducer';
 
 export default combineReducers({
   kit: kitbagKitReducer,
-  trade: kitbagTradeReducer,
-  wanted: kitbagWantedReducer,
-  stolen: kitbagStolenReducer
+  market: kitbagMarketReducer
 });

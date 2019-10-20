@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class Pagination extends React.Component {
-  getPaginationLink = page => {
+  getPaginationLink(page) {
     return `?page=${page}${this.props.pagination.filterUrl}`;
-  };
+  }
 
-  isFirstPageDisabled = () =>
-    this.props.pagination.currentPage === 1 ? 'disabled' : '';
+  isFirstPageDisabled() {
+    return this.props.pagination.currentPage === 1 ? 'disabled' : '';
+  }
 
   isPreviousPageDisabled = () =>
     !this.props.pagination.hasPreviousPage ? 'disabled' : '';
@@ -22,7 +23,10 @@ class Pagination extends React.Component {
       : '';
 
   render() {
-    if (!this.props.pagination || this.props.pagination.totalItems === 0) {
+    if (
+      !this.props.pagination ||
+      this.props.pagination.totalItems <= this.props.pagination.itemsPerPage
+    ) {
       return null;
     }
 

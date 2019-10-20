@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroup } from '../../actions/GroupActions';
 import GroupForm from './GroupForm';
@@ -66,6 +67,37 @@ const GroupPage = ({ current, fetchGroup, match }) => {
       >
         <div className="container">
           <Alert />
+          <div className="row">
+            <div className="col-12 mb-3 d-flex justify-content-end">
+              {groupId && group.groupAdmin && group.status !== 'blocked' && (
+                <Link
+                  to={`/settings/groups/${groupId}/members`}
+                  className="btn btn-primary"
+                >
+                  Members
+                </Link>
+              )}
+              {groupId && group.status !== 'blocked' && !group.groupMember && (
+                <Link
+                  to={`/settings/groups/${groupId}/join`}
+                  className={`btn btn-primary ${
+                    group.groupMemberState ? 'disabled' : ''
+                  }`}
+                  disabled={group.groupMemberState}
+                >
+                  Join
+                </Link>
+              )}
+              {groupId && group.status !== 'blocked' && group.groupMember && (
+                <Link
+                  to={`/settings/groups/${groupId}/leave`}
+                  className="btn btn-primary"
+                >
+                  Leave
+                </Link>
+              )}
+            </div>
+          </div>
           <GroupForm group={group} />
         </div>
       </section>
@@ -73,6 +105,16 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   );
 };
 
+// {(values.appAdmin || values.groupAdmin) && values._id && (
+//   <div>
+//     <Link
+//       className="btn btn-primary"
+//       to={`/settings/groups/${values._id}/members`}
+//     >
+//       Members
+//     </Link>
+//   </div>
+// )}
 export default connect(
   mapStateToProps,
   mapDispatchToProps

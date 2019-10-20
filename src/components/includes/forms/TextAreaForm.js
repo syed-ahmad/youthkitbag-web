@@ -8,7 +8,6 @@ const TextAreaForm = ({
   field,
   readOnly,
   handleChange,
-  index,
   error
 }) => {
   return (

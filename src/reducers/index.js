@@ -9,6 +9,7 @@ import filterReducer from './filterReducer';
 import paginationReducer from './paginationReducer';
 import toastReducer from './toastReducer';
 import subscriptionReducer from './subscriptionReducer';
+import imageReducer from './imageReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -19,5 +20,6 @@ export default combineReducers({
   filter: filterReducer,
   pagination: paginationReducer,
   toast: toastReducer,
-  subscription: subscriptionReducer
+  subscription: subscriptionReducer,
+  images: imageReducer
 });

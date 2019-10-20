@@ -2,20 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class GroupCard extends React.Component {
-  totalQuantity = () => {
-    return 0;
-  };
-
-  topImage = () => {
-    if (!this.props.group.images) {
+  topImage() {
+    const { images } = this.props.group;
+    if (!images || images.length === 0) {
       return '/images/default.png';
     }
-    return this.props.group.images.length > 0
-      ? this.props.group.images[0].imageUrl
-      : '/images/default.png';
-  };
+    return images[0].imageUrl;
+  }
 
-  statusIcon = status => {
+  statusIcon(status) {
     switch (status) {
       case 'approved':
         return 'fas fa-check-circle text-success';
@@ -24,7 +19,23 @@ class GroupCard extends React.Component {
       default:
         return 'fas fa-question-circle text-warning';
     }
-  };
+  }
+
+  renderBlank() {
+    return (
+      <div className="col-6 col-md-4 col-lg-3 mb-3">
+        <article className="card card-link card-b1">
+          <div className="d-flex">
+            <div className="blank-square bg-light" />
+          </div>
+          <div className="card-body">
+            <h3 className="card-title h6 ellipsis bg-light hgt-2">&nbsp;</h3>
+            <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+          </div>
+        </article>
+      </div>
+    );
+  }
 
   render() {
     const {
@@ -36,10 +47,12 @@ class GroupCard extends React.Component {
       appAdmin
     } = this.props.group;
 
+    if (!_id) return this.renderBlank();
+
     return (
       <div className="col-6 col-md-4 col-lg-3 mb-3">
         <article className="card card-link card-b1">
-          <span className="icons-top-left">
+          <span className="icons-top-left pt-1">
             {appAdmin ? (
               <Link to={`/settings/groups/status/${_id}`}>
                 <span

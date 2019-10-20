@@ -2,7 +2,7 @@ import React from 'react';
 
 import Title from './includes/Title';
 
-const Error404 = props => {
+const Error404 = () => {
   return (
     <div>
       <Title title="Error 404" />
@@ -15,8 +15,8 @@ const Error404 = props => {
           <div className="row">
             <div className="col-12">
               <p className="h3">
-                We're very sorry, but the page you were looking for has not been
-                found.
+                We&apos;re very sorry, but the page you were looking for has not
+                been found.
               </p>
             </div>
           </div>

@@ -1,33 +1,81 @@
 import React from 'react';
 
-import Title from './includes/Title';
-
 class Home extends React.Component {
   render() {
     return (
       <div>
-        <Title title="Welcome to YouthKitbag" />
-        <h1>
-          <i className="fas fa-trash-alt    "></i>
-          <i className="fas fa-star    "></i>
-          <i className="fas fa-undo    "></i>
-          <i className="fas fa-check-circle    "></i>
-          <i className="fas fa-times-circle    "></i>
-          <i className="fas fa-question-circle    "></i>
-          <i className="fas fa-meh    "></i>
-          <i className="fas fa-laugh    "></i>
-          <i className="fas fa-sad-tear    "></i>
-          <i className="fas fa-meh-blank    "></i>
-          <i className="fas fa-home    "></i>
-          <i className="fas fa-envelope    "></i>
-          <i className="fas fa-phone    "></i>
-          <i className="fas fa-suitcase    "></i>
-          <i className="fas fa-sign-in-alt    "></i>
-          <i className="fas fa-sign-out-alt    "></i>
-          <i className="fas fa-coffee    "></i>
-          <i className="fas fa-beer    "></i>
-          <i className="fas fa-cocktail    "></i>
-        </h1>
+        <section
+          id="main"
+          className="container-fluid"
+          aria-label="main body of content plus related links and features"
+        >
+          <div className="jumbotron">
+            <div className="container text-center">
+              <h1>YouthKitbag</h1>
+              <h2 className="pb-3">Inventory, Trade, Report</h2>
+              <h3 className="">school kit, club kit, team kit, any kit</h3>
+              <h4 className="pb-5">
+                sports gear, musical instruments, school uniforms, more ...
+              </h4>
+            </div>
+          </div>
+          <div className="container mb-3">
+            <div className="row">
+              <div className="col-12 col-sm-6 col-md-3">
+                <article className="card card-link card-b1">
+                  <div className="d-flex">
+                    <div className="blank-square bg-light" />
+                  </div>
+                  <div className="card-body">
+                    <h3 className="card-title h6 ellipsis bg-light hgt-2">
+                      &nbsp;
+                    </h3>
+                    <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+                  </div>
+                </article>
+              </div>
+              <div className="col-12 col-sm-6 col-md-3">
+                <article className="card card-link card-b1">
+                  <div className="d-flex">
+                    <div className="blank-square bg-light" />
+                  </div>
+                  <div className="card-body">
+                    <h3 className="card-title h6 ellipsis bg-light hgt-2">
+                      &nbsp;
+                    </h3>
+                    <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+                  </div>
+                </article>
+              </div>
+              <div className="col-12 col-sm-6 col-md-3">
+                <article className="card card-link card-b1">
+                  <div className="d-flex">
+                    <div className="blank-square bg-light" />
+                  </div>
+                  <div className="card-body">
+                    <h3 className="card-title h6 ellipsis bg-light hgt-2">
+                      &nbsp;
+                    </h3>
+                    <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+                  </div>
+                </article>
+              </div>
+              <div className="col-12 col-sm-6 col-md-3">
+                <article className="card card-link card-b1">
+                  <div className="d-flex">
+                    <div className="blank-square bg-light" />
+                  </div>
+                  <div className="card-body">
+                    <h3 className="card-title h6 ellipsis bg-light hgt-2">
+                      &nbsp;
+                    </h3>
+                    <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

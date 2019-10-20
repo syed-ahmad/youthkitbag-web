@@ -8,9 +8,12 @@ import {
   FETCH_GROUP_MEMBERS,
   EDIT_GROUP_MEMBER_STATE,
   API_KITBAG_ERROR,
-  GETALL_FAILURE
+  GETALL_FAILURE,
+  CREATE_GROUP_JOIN,
+  EDIT_GROUP_LEAVE
 } from './types';
 import history from '../helpers/history';
+import { getUser } from './UserActions';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
@@ -177,7 +180,7 @@ export const fetchGroupMembers = groupId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/group/${groupId}/members`);
+        history.push(`/auth/login?return=/settings/groups/${groupId}/members`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
@@ -205,7 +208,65 @@ export const editGroupMemberState = (groupId, memberId, state) => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/group/${groupId}/members`);
+        history.push(`/auth/login?return=/settings/groups/${groupId}/members`);
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    });
+};
+
+export const requestGroupJoin = groupId => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .post(
+      `${baseUrl}/group/${groupId}/members/join`,
+      {},
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          'content-type': 'application/json'
+        }
+      }
+    )
+    .then(response => {
+      dispatch({ type: CREATE_GROUP_JOIN, payload: response.data });
+      dispatch(getUser());
+      history.push(`/settings/groups/${groupId}`);
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(`/auth/login?return=/settings/groups/${groupId}`);
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      history.push(`/settings/groups/${groupId}`);
+    });
+};
+
+export const requestGroupLeave = groupId => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .put(
+      `${baseUrl}/group/${groupId}/members/leave`,
+      {},
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          'content-type': 'application/json'
+        }
+      }
+    )
+    .then(response => {
+      dispatch({ type: EDIT_GROUP_LEAVE, payload: response.data });
+      history.push(`/settings/groups/${groupId}`);
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(`/auth/login?return=/settings/groups/${groupId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });

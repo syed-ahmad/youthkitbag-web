@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CheckboxInput = ({ value, field, handleChange, items, error }) => {
+const CheckboxInput = ({ value, field, handleChange, items }) => {
   return (
     <React.Fragment>
       <select

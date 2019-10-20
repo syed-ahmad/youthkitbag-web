@@ -26,7 +26,7 @@ export const getUser = () => dispatch => {
       dispatch({ type: GETALL_SUCCESS });
       dispatch({ type: GET_USER, payload: data });
     })
-    .catch(err => {});
+    .catch(() => {});
 };
 
 export const editProfile = (userId, formValues) => dispatch => {
@@ -44,14 +44,15 @@ export const editProfile = (userId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
-      history.push('/settings/account/profile');
+      dispatch(getUser());
+      history.push('/settings/account');
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings/account/profile');
+        history.push('/auth/login?return=/settings/account');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });

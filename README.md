@@ -1,68 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# YouthKitbag
 
-## Available Scripts
+## Inventory, sell, buy, give away, recycle, report stolen - kids gear for sports, music, clubs, adventures and more.
 
-In the project directory, you can run:
+This is a web application written using the [React JavaScript library](https://reactjs.org/), interacting with a [Node.js](https://nodejs.org/en/) API.
 
-### `npm start`
+Both applications are running on the [Heroku Cloud Application platform](https://www.heroku.com/), with storage of data on [Mongo DB Atlas cloud](https://cloud.mongodb.com) and physical files such as images on [S3 Amazon Web Services](https://aws.amazon.com/).
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `code`
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Code is hosted on [Github](https://github.com/pgmoir/youthkitbag-web) and is open source. Please feel free to star or fork the project, and submit issues and pull requests for improvements.
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `free tier`
 
-### `npm run build`
+This application has been developed using free tier services provided by the suppliers listed above.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `bootstrap`
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Like it or loathe it, this is a great library that takes the fuss out of making your web application work in a responsive manner across all browsers and platforms. The application uses the latest v4, with a handful of customised variables to ensure it meets AAA accesibility standards as much as possible. A limited set of extra styles have also been added.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `client side image resizing`
 
-### `npm run eject`
+To reduce the cost of storing images on the [S3 Amoazon Web Services platform](https://aws.amazon.com/) and to improve performance of page loading, images are resized on the client, keeping the highest quality possible before uploading via the API. While the S3 bucket needs to provide public access, images names are obfuscated to make them less detectable.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `accesibility`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### `font awesome`

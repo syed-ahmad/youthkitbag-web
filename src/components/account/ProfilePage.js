@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   current: state.user.profile
 });
 
-const ProfilePage = ({ current, fetchProfile, match }) => {
+const ProfilePage = ({ current, match }) => {
   const { profileId } = match.params;
   const [profile, setProfile] = useState({
     firstname: '',
@@ -21,8 +21,7 @@ const ProfilePage = ({ current, fetchProfile, match }) => {
     groups: [],
     badges: [],
     topImage: '/images/default.png',
-    imagesToUpload: 0,
-    newImages: []
+    imagesToUpload: 0
   });
 
   useEffect(() => {
@@ -44,7 +43,9 @@ const ProfilePage = ({ current, fetchProfile, match }) => {
       return 'Loading ...';
     }
 
-    return profile._id ? profile.name : 'Update profile';
+    return profile._id
+      ? `${profile.lastname.toUpperCase()}, ${profile.firstname}`
+      : 'Update profile';
   }
 
   return (
@@ -57,7 +58,7 @@ const ProfilePage = ({ current, fetchProfile, match }) => {
       >
         <div className="container">
           <Alert />
-          <ProfileForm />
+          <ProfileForm profile={profile} />
         </div>
       </section>
     </div>

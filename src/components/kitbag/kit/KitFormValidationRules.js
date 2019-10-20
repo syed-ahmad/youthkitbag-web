@@ -1,4 +1,4 @@
-export default function validate(values) {
+export default function validate() {
   const errors = [];
   return errors;
 }

@@ -15,7 +15,7 @@ const mapDispatchToProps = {
 };
 
 const KitPage = ({ current, fetchKitbagKit, match }) => {
-  const kitId = match.params.id;
+  const kitId = match.params.kitId;
   const [kit, setKit] = useState({
     title: '',
     subtitle: '',
@@ -58,7 +58,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
       return 'Loading ...';
     }
 
-    return kit._id ? kit.title : 'Create new kit';
+    return kit._id ? `Kit: ${kit.title}` : 'Create new kit';
   }
 
   return (
@@ -75,19 +75,19 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
             <div className="row">
               <div className="col-12 mb-3 d-flex justify-content-end">
                 <Link
-                  to={`/kitbag/trades/add/${kitId}`}
+                  to={`/kitbag/market/add/${kitId}/trade`}
                   className="btn btn-primary mr-3"
                 >
                   Trade
                 </Link>
                 <Link
-                  to={`/kitbag/wanteds/add/${kitId}`}
+                  to={`/kitbag/market/add/${kitId}/wanted`}
                   className="btn btn-secondary mr-3"
                 >
                   Wanted
                 </Link>
                 <Link
-                  to={`/kitbag/stolens/add/${kitId}`}
+                  to={`/kitbag/market/add/${kitId}/stolen`}
                   className="btn btn-danger"
                 >
                   Stolen

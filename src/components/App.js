@@ -9,14 +9,19 @@ import Header from './includes/Header';
 import Footer from './includes/Footer';
 
 import Home from './Home';
-import Features from './Features';
+import Why from './Why';
 import Pricing from './Pricing';
+import Terms from './site/Terms';
+import Privacy from './site/Privacy';
+import Security from './site/Security';
+import Accessibility from './site/Accessibility';
 
 import SignUp from './auth/SignUpPage';
 import Login from './auth/LoginPage';
 import Reset from './auth/ResetPage';
 import NewPassword from './auth/NewPasswordPage';
 import Logout from './auth/Logout';
+import Token from './auth/Token';
 
 import PurchaseSubscriptionPage from './PurchaseSubscriptionPage';
 
@@ -25,6 +30,8 @@ import GroupPage from './group/GroupPage';
 import GroupStatus from './group/GroupStatus';
 import GroupMembers from './group/GroupMembers';
 import GroupMemberState from './group/GroupMemberState';
+import GroupMemberJoin from './group/GroupMemberJoin';
+import GroupMemberLeave from './group/GroupMemberLeave';
 
 import ProfilePage from './account/ProfilePage';
 
@@ -32,26 +39,16 @@ import KitBag from './kitbag/kit/KitBag';
 import KitPage from './kitbag/kit/KitPage';
 import KitDelete from './kitbag/kit/KitDelete';
 
-import Trades from './kitbag/trade/Trades';
-import TradePage from './kitbag/trade/TradePage';
-import TradeDelete from './kitbag/trade/TradeDelete';
+import MarketKits from './kitbag/market/MarketKits';
+import MarketKitPage from './kitbag/market/MarketKitPage';
+import MarketKitDelete from './kitbag/market/MarketKitDelete';
 
-import Wanteds from './kitbag/wanted/Wanteds';
-import WantedPage from './kitbag/wanted/WantedPage';
-import WantedDelete from './kitbag/wanted/WantedDelete';
+import MarketItems from './market/MarketItems';
+import MarketItemViewPage from './market/MarketItemViewPage';
 
-import Stolens from './kitbag/stolen/Stolens';
-import StolenPage from './kitbag/stolen/StolenPage';
-import StolenDelete from './kitbag/stolen/StolenDelete';
-
-import MarketTrades from './market/trade/MarketTrades';
-import MarketTradeViewPage from './market/trade/MarketTradeViewPage';
-
-import MarketWanteds from './market/wanted/MarketWanteds';
-import MarketWantedViewPage from './market/wanted/MarketWantedViewPage';
-
-import MarketStolens from './market/stolen/MarketStolens';
-import MarketStolenViewPage from './market/stolen/MarketStolenViewPage';
+import AccountPage from './account/AccountPage';
+import PackagePage from './account/PackagePage';
+import BadgesPage from './account/BadgesPage';
 
 class App extends React.Component {
   render() {
@@ -73,12 +70,22 @@ class App extends React.Component {
             </Link>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/features" exact component={Features} />
+              <Route path="/why" exact component={Why} />
               <Route path="/pricing" exact component={Pricing} />
+
+              <Route path="/site/terms" exact component={Terms} />
+              <Route path="/site/privacy" exact component={Privacy} />
+              <Route path="/site/security" exact component={Security} />
+              <Route
+                path="/site/accessibility"
+                exact
+                component={Accessibility}
+              />
 
               <Route path="/auth/signup" exact component={SignUp} />
               <Route path="/auth/login" exact component={Login} />
               <Route path="/auth/reset" exact component={Reset} />
+              <Route path="/auth/token/:token" exact component={Token} />
               <Route
                 path="/auth/newpassword/:key"
                 exact
@@ -87,110 +94,52 @@ class App extends React.Component {
               <Route path="/auth/logout" exact component={Logout} />
 
               <PrivateRoute
-                path="/purchase/subscription/:id"
+                path="/purchase/subscription/:subscriptionId"
                 exact
                 component={PurchaseSubscriptionPage}
               />
 
               <PrivateRoute
-                path="/market/trades/view/:id"
+                path="/market/view/:marketId"
                 exact
-                component={MarketTradeViewPage}
+                component={MarketItemViewPage}
               />
-              <Route path="/market/trades" component={MarketTrades} />
+              <Route path="/market" component={MarketItems} />
 
+              <PrivateRoute path="/kitbag/kit/new" component={KitPage} />
               <PrivateRoute
-                path="/market/wanteds/view/:id"
-                exact
-                component={MarketWantedViewPage}
-              />
-              <Route path="/market/wanteds" component={MarketWanteds} />
-
-              <PrivateRoute
-                path="/market/stolens/view/:id"
-                exact
-                component={MarketStolenViewPage}
-              />
-              <Route path="/market/stolens" component={MarketStolens} />
-
-              <PrivateRoute path="/kitbag/kits/new" component={KitPage} />
-              <PrivateRoute
-                path="/kitbag/kits/edit/:id"
+                path="/kitbag/kit/edit/:kitId"
                 exact
                 component={KitPage}
               />
               <PrivateRoute
-                path="/kitbag/kits/delete/:id"
+                path="/kitbag/kit/delete/:kitId"
                 exact
                 component={KitDelete}
               />
-              <PrivateRoute path="/kitbag/kits" component={KitBag} />
+              <PrivateRoute path="/kitbag/kit" component={KitBag} />
 
               <PrivateRoute
-                path="/kitbag/trades/new"
+                path="/kitbag/market/new"
                 exact
-                component={TradePage}
+                component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/trades/add/:kit"
+                path="/kitbag/market/add/:kitId/:marketType"
                 exact
-                component={TradePage}
+                component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/trades/edit/:id"
+                path="/kitbag/market/edit/:marketId"
                 exact
-                component={TradePage}
+                component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/trades/delete/:id"
+                path="/kitbag/market/delete/:marketId"
                 exact
-                component={TradeDelete}
+                component={MarketKitDelete}
               />
-              <PrivateRoute path="/kitbag/trades" component={Trades} />
-
-              <PrivateRoute
-                path="/kitbag/wanteds/new"
-                exact
-                component={WantedPage}
-              />
-              <PrivateRoute
-                path="/kitbag/wanteds/add/:kit"
-                exact
-                component={WantedPage}
-              />
-              <PrivateRoute
-                path="/kitbag/wanteds/edit/:id"
-                exact
-                component={WantedPage}
-              />
-              <PrivateRoute
-                path="/kitbag/wanteds/delete/:id"
-                exact
-                component={WantedDelete}
-              />
-              <PrivateRoute path="/kitbag/wanteds" component={Wanteds} />
-
-              <PrivateRoute
-                path="/kitbag/stolens/new"
-                exact
-                component={StolenPage}
-              />
-              <PrivateRoute
-                path="/kitbag/stolens/add/:kit"
-                exact
-                component={StolenPage}
-              />
-              <PrivateRoute
-                path="/kitbag/stolens/edit/:id"
-                exact
-                component={StolenPage}
-              />
-              <PrivateRoute
-                path="/kitbag/stolens/delete/:id"
-                exact
-                component={StolenDelete}
-              />
-              <PrivateRoute path="/kitbag/stolens" component={Stolens} />
+              <PrivateRoute path="/kitbag/market" component={MarketKits} />
 
               <PrivateRoute
                 path="/settings/groups/new"
@@ -213,6 +162,16 @@ class App extends React.Component {
                 component={GroupMembers}
               />
               <PrivateRoute
+                path="/settings/groups/:groupId/join"
+                exact
+                component={GroupMemberJoin}
+              />
+              <PrivateRoute
+                path="/settings/groups/:groupId/leave"
+                exact
+                component={GroupMemberLeave}
+              />
+              <PrivateRoute
                 path="/settings/groups/:groupId"
                 exact
                 component={GroupPage}
@@ -220,9 +179,24 @@ class App extends React.Component {
               <PrivateRoute path="/settings/groups" component={Groups} />
 
               <PrivateRoute
+                path="/settings/account"
+                exact
+                component={AccountPage}
+              />
+              <PrivateRoute
                 path="/settings/account/profile"
                 exact
                 component={ProfilePage}
+              />
+              <PrivateRoute
+                path="/settings/account/package"
+                exact
+                component={PackagePage}
+              />
+              <PrivateRoute
+                path="/settings/account/badges"
+                exact
+                component={BadgesPage}
               />
             </Switch>
           </main>

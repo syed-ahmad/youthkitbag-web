@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 class GroupMember extends React.Component {
   getThumbnail() {
-    if (this.props.member.user.imageUrl) {
-      return this.props.member.user.imageUrl;
+    if (this.props.member.user.images.length) {
+      return this.props.member.user.images[0].imageUrl;
     }
     return '/images/defaultthumb.png';
   }
@@ -29,8 +29,33 @@ class GroupMember extends React.Component {
     return 'text-muted';
   }
 
+  renderBlank() {
+    return (
+      <div className="col-6 col-sm-4 col-lg-3 col-xl-2 mb-3">
+        <article className="card card-b1">
+          <div className="d-flex p-2">
+            <div className="blank-circle bg-light" />
+          </div>
+          <div className="card-body">
+            <h3 className="card-title h4 ellipsis bg-light hgt-2">&nbsp;</h3>
+            <h4 className="card-title h5 ellipsis bg-light hgt-2">&nbsp;</h4>
+            <p className="card-text bg-light hgt-1">&nbsp;</p>
+            <span className="icons-bottom-left">
+              <span className="fas fa-meh w-25 text-center text-light"></span>
+              <span className="fas fa-laugh w-25 text-center text-light"></span>
+              <span className="fas fa-sad-tear w-25 text-center text-light"></span>
+              <span className="fas fa-meh-blank w-25 text-center text-light"></span>
+            </span>
+          </div>
+        </article>
+      </div>
+    );
+  }
+
   render() {
-    const { user, permission } = this.props.member;
+    if (!this.props.member._id) return this.renderBlank();
+
+    const { user, permissions } = this.props.member;
     const groupId = this.props.groupId;
     return (
       <div className="col-6 col-sm-4 col-lg-3 col-xl-2 mb-3">
@@ -44,7 +69,7 @@ class GroupMember extends React.Component {
             />
           </div>
           <div className="card-body">
-            <h3 className="card-title h4 ellipsis">
+            <h3 className="card-title h4 text-truncate">
               {user.lastname
                 ? `${user.lastname.toUpperCase()}, ${user.firstname}`
                 : 'UNKNOWN'}
@@ -53,7 +78,7 @@ class GroupMember extends React.Component {
               {user.username ? user.username : 'Username ?'}
             </h4>
             <p className="card-text">
-              {permission.length > 0 ? permission.join(', ') : '-'}
+              {permissions.length > 0 ? permissions.join(', ') : '-'}
             </p>
             <span className="icons-bottom-left">
               <span

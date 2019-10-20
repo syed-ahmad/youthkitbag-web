@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class Footer extends React.Component {
   render() {
     return (
-      <footer>
+      <footer className="purple-gradient">
         <Link
           id="footer-acc-jump"
           className="sr-only sr-only-focusable"
@@ -15,7 +15,7 @@ class Footer extends React.Component {
           </div>
         </Link>
         <section className="footer" aria-label="secondary navigation">
-          <div className="container-fluid text-center text-md-left p-4">
+          <div className="container text-center text-md-left p-4">
             <h2 className="sr-only">
               Supplementary navigation to key corporate and informational
               sections of the website, including contact details
@@ -65,15 +65,6 @@ class Footer extends React.Component {
                   <span className="sr-only">Our contact email address is:</span>
                   admin@youthkitbag.com
                 </p>
-                <p>
-                  <span
-                    aria-hidden="true"
-                    className="fas fa-phone mr-3"
-                    title="Contact phone"
-                  ></span>
-                  <span className="sr-only">Our contact phone number is:</span>+
-                  44 7949-420404
-                </p>
               </div>
             </div>
           </div>
@@ -83,7 +74,7 @@ class Footer extends React.Component {
           className="footer footer-copyright"
           aria-label="links to terms and conditions, privacy and cookies statements and accessibility standards for this website"
         >
-          <div className="container-fluid text-center py-2">
+          <div className="container text-center py-2">
             <h2 className="sr-only">
               Navigation to legal and accessibility content
             </h2>
@@ -91,19 +82,19 @@ class Footer extends React.Component {
               <div className="col-md-8">
                 <div className="d-flex flex-column flex-md-row">
                   <div className="p-2">
-                    <Link to="/corporate/terms-and-conditions/index">
-                      Terms &amp; conditions{' '}
-                    </Link>
+                    <Link to="/site/terms">Terms &amp; conditions </Link>
                   </div>
                   <div className="p-2">
-                    <Link to="/corporate/privacy-and-cookies/index">
-                      Privacy &amp; cookies
-                    </Link>
+                    <Link to="/site/privacy">Privacy Policy</Link>
                   </div>
                   <div className="p-2">
-                    <Link to="/corporate/website-accessibility/index">
-                      Website accessibility
-                    </Link>
+                    <Link to="/site/cookiesy">Cookies</Link>
+                  </div>
+                  <div className="p-2">
+                    <Link to="/site/security">Security</Link>
+                  </div>
+                  <div className="p-2">
+                    <Link to="/site/accessibility">Accessibility</Link>
                   </div>
                 </div>
               </div>

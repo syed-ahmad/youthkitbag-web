@@ -17,12 +17,11 @@ class Header extends React.Component {
           </div>
         </Link>
         <nav
-          className="navbar navbar-expand-sm navbar-dark bg-dark"
+          className="navbar navbar-expand-sm navbar-dark purple-gradient"
           aria-label="primary navigation"
         >
-          <div className="container-fluid">
-            <Link className="navbar-brand mr-6" to="/">
-              <span className="fas fa-suitcase mr-3" aria-hidden="true"></span>
+          <div className="container">
+            <Link className="navbar-brand mr-6 navbar-logo" to="/">
               YouthKitbag
             </Link>
             <button
@@ -57,16 +56,16 @@ class Header extends React.Component {
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="whyDropdown"
                   >
-                    <Link className="dropdown-item" to="/features">
-                      Features
+                    <Link className="dropdown-item" to="/why#created">
+                      ... I created YouthKitbag
                     </Link>
-                    <hr />
-                    <Link className="dropdown-item" to="/features/inventory">
-                      Inventory
+                    {/* <hr />
+                    <Link className="dropdown-item" to="/why#tryit">
+                      ... you should try it
                     </Link>
-                    <Link className="dropdown-item" to="/features/security">
-                      Security
-                    </Link>
+                    <Link className="dropdown-item" to="/why#concern">
+                      ... you might be concerned
+                    </Link> */}
                   </div>
                 </li>
                 <li className="nav-item">
@@ -74,7 +73,7 @@ class Header extends React.Component {
                     Pricing
                   </Link>
                 </li>
-                <li className="nav-item dropdown mr-3">
+                {/* <li className="nav-item dropdown mr-3">
                   <Link
                     className="nav-item nav-link dropdown-toggle"
                     to="/marketdropdown"
@@ -90,83 +89,126 @@ class Header extends React.Component {
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="marketDropdown"
                   >
-                    <Link className="dropdown-item" to="/market/trades">
+                    <Link className="dropdown-item" to="/market/trade">
                       Trade
                     </Link>
-                    <Link className="dropdown-item" to="/market/wanteds">
+                    <Link className="dropdown-item" to="/market/wanted">
                       Wanted
                     </Link>
-                    <Link className="dropdown-item" to="/market/stolens">
+                    <Link className="dropdown-item" to="/market/stolen">
                       Stolen
                     </Link>
                   </div>
-                </li>
+                </li> */}
               </ul>
               <ul className="navbar-nav ml-auto">
                 {loggedIn && (
-                  <li className="nav-item dropdown mr-3">
-                    <Link
-                      className="nav-item nav-link dropdown-toggle"
-                      to="/kitbagdropdown"
-                      id="kitbagDropdown"
-                      data-toggle="dropdown"
-                      data-display="static"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Kitbag
-                    </Link>
-                    <div
-                      className="dropdown-menu dropdown-menu-right"
-                      aria-labelledby="kitbagDropdown"
-                    >
-                      <Link className="dropdown-item" to="/kitbag/kits">
-                        View Kitbag
+                  <React.Fragment>
+                    <li className="nav-item">
+                      <Link to="/market" className="nav-link">
+                        Market
                       </Link>
-                      <Link className="dropdown-item" to="/kitbag/kits/new">
-                        Add Kit
-                      </Link>
-                      <hr />
-                      <Link className="dropdown-item" to="/kitbag/trades">
-                        Trades
-                      </Link>
-                      <Link className="dropdown-item" to="/kitbag/wanteds">
-                        Want
-                      </Link>
-                      <Link className="dropdown-item" to="/kitbag/stolens">
-                        Stolen
-                      </Link>
-                    </div>
-                  </li>
-                )}
-                {loggedIn && (
-                  <li className="nav-item dropdown mr-3">
-                    <Link
-                      className="nav-item nav-link dropdown-toggle"
-                      to="/settingsdropdown"
-                      id="settingsDropdown"
-                      data-toggle="dropdown"
-                      data-display="static"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Settings
-                    </Link>
-                    <div
-                      className="dropdown-menu dropdown-menu-right"
-                      aria-labelledby="settingsDropdown"
-                    >
+                    </li>
+                    <li className="nav-item dropdown mr-3">
                       <Link
-                        className="dropdown-item"
-                        to="/settings/account/profile"
+                        className="nav-item nav-link dropdown-toggle"
+                        to="/kitbagdropdown"
+                        id="kitbagDropdown"
+                        data-toggle="dropdown"
+                        data-display="static"
+                        aria-haspopup="true"
+                        aria-expanded="false"
                       >
-                        Profile
+                        Kitbag
                       </Link>
-                      <Link className="dropdown-item" to="/settings/groups">
-                        Groups
+                      <div
+                        className="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="kitbagDropdown"
+                      >
+                        <Link className="dropdown-item" to="/kitbag/kit">
+                          Your kit
+                        </Link>
+                        <Link className="dropdown-item" to="/kitbag/kit/new">
+                          Add new kit
+                        </Link>
+                        <hr />
+                        <Link className="dropdown-item" to="/kitbag/market">
+                          Your market place
+                        </Link>
+                        {/* <Link className="dropdown-item" to="/kitbag/trade">
+                        Your trades
                       </Link>
-                    </div>
-                  </li>
+                      <Link className="dropdown-item" to="/kitbag/wanted">
+                        Your wanted items
+                      </Link>
+                      <Link className="dropdown-item" to="/kitbag/stolen">
+                        Your stolen items
+                      </Link> */}
+                      </div>
+                    </li>
+
+                    <li className="nav-item dropdown mr-3">
+                      <Link
+                        className="nav-item nav-link dropdown-toggle"
+                        to="/settingsdropdown"
+                        id="settingsDropdown"
+                        data-toggle="dropdown"
+                        data-display="static"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        Settings
+                      </Link>
+                      <div
+                        className="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="settingsDropdown"
+                      >
+                        <Link className="dropdown-item" to="/settings/account">
+                          Account
+                        </Link>
+                        <Link
+                          className="dropdown-item"
+                          to="/settings/account/profile"
+                        >
+                          Profile
+                        </Link>
+                        <Link
+                          className="dropdown-item"
+                          to="/settings/account/package"
+                        >
+                          Package
+                        </Link>
+                        <Link
+                          className="dropdown-item"
+                          to="/settings/account/badges"
+                        >
+                          Badges
+                        </Link>
+                        <hr />
+                        <Link className="dropdown-item" to="/settings/groups">
+                          Groups
+                        </Link>
+                      </div>
+                    </li>
+
+                    <li className="nav-item mr-3">
+                      <Link
+                        className="nav-link d-inline"
+                        to="/settings/account"
+                      >
+                        <img
+                          src={
+                            this.props.user.profile.images &&
+                            this.props.user.profile.images.length > 0
+                              ? this.props.user.profile.images[0].imageUrl
+                              : '/images/defaultthumb.png'
+                          }
+                          className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
+                          alt=""
+                        />
+                      </Link>
+                    </li>
+                  </React.Fragment>
                 )}
                 {!loggedIn && (
                   <li className="nav-item">
@@ -207,12 +249,9 @@ class Header extends React.Component {
   }
 }
 
-// const mapDispatchToProps = dispatch = {
-//   actions: {}
-// };
-
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(Header);
