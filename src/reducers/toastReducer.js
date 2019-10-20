@@ -3,11 +3,9 @@ import {
   API_KITBAG_ERROR,
   LOGOUT,
   CREATE_GROUP,
-  CREATE_KITBAG_WANTED,
-  CREATE_KITBAG_STOLEN,
-  CREATE_KITBAG_TRADE,
+  CREATE_MARKET_KIT,
   CREATE_KITBAG_KIT,
-  DELETE_KITBAG_TRADE,
+  DELETE_MARKET_KIT,
   DELETE_KITBAG_KIT,
   LOGIN_FAILURE,
   SHOWN_TOAST,
@@ -28,9 +26,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case CREATE_GROUP:
     case CREATE_KITBAG_KIT:
-    case CREATE_KITBAG_TRADE:
-    case CREATE_KITBAG_WANTED:
-    case CREATE_KITBAG_STOLEN:
+    case CREATE_MARKET_KIT:
     case EDIT_GROUP_STATUS:
     case EDIT_GROUP_MEMBER_STATE:
     case EDIT_USER_PROFILE:
@@ -40,7 +36,7 @@ export default (state = initialState, action) => {
         hasShown: false
       };
     case DELETE_KITBAG_KIT:
-    case DELETE_KITBAG_TRADE:
+    case DELETE_MARKET_KIT:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'warning',

@@ -1,25 +1,28 @@
 import {
-  FETCH_KITBAG_WANTED,
-  CREATE_KITBAG_WANTED,
-  EDIT_KITBAG_WANTED,
-  LOGOUT,
-  FETCH_KITBAG_WANTEDS
+  FETCH_MARKET_KIT,
+  CREATE_MARKET_KIT,
+  EDIT_MARKET_KIT,
+  DELETE_MARKET_KIT,
+  FETCH_MARKET_KITS,
+  LOGOUT
 } from '../actions/types';
 
 const initialState = { current: {}, list: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_KITBAG_WANTED:
+    case FETCH_MARKET_KIT:
       return { ...state, current: action.payload };
-    case CREATE_KITBAG_WANTED:
-      return { current: action.payload.wanted, list: [] };
-    case EDIT_KITBAG_WANTED:
+    case CREATE_MARKET_KIT:
+      return { current: action.payload.stolen, list: [] };
+    case EDIT_MARKET_KIT:
       return { ...state, current: action.payload };
-    case FETCH_KITBAG_WANTEDS:
+    case DELETE_MARKET_KIT:
+      return { ...state };
+    case FETCH_MARKET_KITS:
       return {
         ...state,
-        list: action.payload.wanteds,
+        list: action.payload.items,
         current: {}
       };
     case LOGOUT:

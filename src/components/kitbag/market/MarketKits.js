@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchKitbagStolens } from '../../../actions';
+import { fetchMarketKits } from '../../../actions/KitbagMarketActions';
 import queryString from 'query-string';
 import Title from '../../includes/Title';
-import StolenCard from './StolenCard';
+import MarketKitCard from './MarketKitCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 import Alert from '../../includes/Alert';
 
-class Stolens extends React.Component {
+class MarketKits extends React.Component {
   getTitle() {
-    return `Your stolen kit (${this.props.pagination.totalItems})`;
+    return `Your kit for market (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {
@@ -25,7 +25,7 @@ class Stolens extends React.Component {
       page = values.page ? values.page : '';
     }
 
-    this.props.fetchKitbagStolens(search, by, page, 24);
+    this.props.fetchMarketKits(search, by, page, 24);
   }
 
   componentDidUpdate(prevProps) {
@@ -34,7 +34,7 @@ class Stolens extends React.Component {
       const search = values.search ? values.search : '';
       const by = values.by ? values.by : '';
       const page = values.page ? values.page : '';
-      this.props.fetchKitbagStolens(search, by, page, 24);
+      this.props.fetchMarketKits(search, by, page, 24);
     }
   }
 
@@ -63,7 +63,7 @@ class Stolens extends React.Component {
   renderBlankList() {
     const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     return blankList.map((item, index) => {
-      return <StolenCard key={`${item._id}-${index}`} stolen={item} />;
+      return <MarketKitCard key={`${item._id}-${index}`} market={item} />;
     });
   }
 
@@ -79,7 +79,7 @@ class Stolens extends React.Component {
     }
 
     return items.map((item, index) => {
-      return <StolenCard key={`${item._id}-${index}`} stolen={item} />;
+      return <MarketKitCard key={`${item._id}-${index}`} market={item} />;
     });
   }
 
@@ -100,12 +100,12 @@ class Stolens extends React.Component {
               <div className="col-12 col-sm-9">
                 <SearchForm
                   search={this.props.location.search}
-                  callback={fetchKitbagStolens}
+                  callback={fetchMarketKits}
                 />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <Link to="/kitbag/stolen/new" className="btn btn-primary">
-                  Add new stolen
+                <Link to="/kitbag/market/new" className="btn btn-primary">
+                  Add new market
                 </Link>
               </div>
             </div>
@@ -120,7 +120,7 @@ class Stolens extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    items: Object.values(state.kitbag.stolen.list),
+    items: Object.values(state.kitbag.market.list),
     filter: state.filter,
     pagination: state.pagination
   };
@@ -128,5 +128,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchKitbagStolens }
-)(Stolens);
+  { fetchMarketKits }
+)(MarketKits);

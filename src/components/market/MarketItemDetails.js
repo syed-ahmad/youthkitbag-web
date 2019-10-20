@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import useForm from '../../hooks/useForm';
-import { offerMarketWanted } from '../../../actions/MarketWantedActions';
-import { TextForm, TextAreaForm, DateForm } from '../../includes/forms';
-import validate from './MarketWantedDetailsValidationRules';
+import useForm from '../hooks/useForm';
+import { respondMarketItem } from '../../actions/MarketActions';
+import { TextForm, TextAreaForm, DateForm } from '../includes/forms';
+import validate from './MarketItemDetailsValidationRules';
 
-const MarketWantedDetails = ({ wanted }) => {
+const MarketItemDetails = ({ marketItem }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
-  const initialValues = { _id: '', offeredOn: '', details: '', askingPrice: 0 };
+  const initialValues = { _id: '', offeredOn: '', details: '', offerPrice: 0 };
 
   const {
     setChange,
@@ -20,7 +20,7 @@ const MarketWantedDetails = ({ wanted }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateWanted, validate);
+  } = useForm(initialValues, updateTrade, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -29,20 +29,21 @@ const MarketWantedDetails = ({ wanted }) => {
   }, [newErrors, setErrors]);
 
   useEffect(() => {
-    if (wanted) {
-      wanted.topImage =
-        wanted.images && wanted.images.filter(i => i.state !== 'D').length > 0
-          ? wanted.images.filter(i => i.state !== 'D')[0].imageUrl
+    if (marketItem) {
+      marketItem.topImage =
+        marketItem.images &&
+        marketItem.images.filter(i => i.state !== 'D').length > 0
+          ? marketItem.images.filter(i => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
     }
-  }, [wanted]);
+  }, [marketItem]);
 
   function renderSecondaryImages() {
-    if (!wanted || !wanted.images) {
+    if (!marketItem || !marketItem.images) {
       return null;
     }
 
-    const { images } = wanted;
+    const { images } = marketItem;
     const items = [];
 
     for (let i = 0; i < images.length; i++) {
@@ -69,19 +70,19 @@ const MarketWantedDetails = ({ wanted }) => {
   }
 
   useEffect(() => {
-    if (wanted) {
+    if (marketItem) {
       setValues({
-        _id: wanted._id,
+        _id: marketItem._id,
         offeredOn: '',
         details: '',
-        askingPrice: 0
+        offerPrice: 0
       });
     }
-  }, [wanted, setValues]);
+  }, [marketItem, setValues]);
 
-  function updateWanted() {
+  function updateTrade() {
     // if (values._id) {
-    dispatch(offerMarketWanted(values._id, values));
+    dispatch(respondMarketItem(values._id, values));
     // } else {
     //   dispatch(createKitbagStolen(values));
     // }
@@ -95,7 +96,7 @@ const MarketWantedDetails = ({ wanted }) => {
             id="preview"
             name="preview"
             className="img-fluid mb-3"
-            src={wanted.topImage}
+            src={marketItem.topImage}
             alt=""
             role="presentation"
           />
@@ -106,36 +107,41 @@ const MarketWantedDetails = ({ wanted }) => {
         <TextForm
           colFormat="3-9"
           label="Subtitle"
-          value={wanted.subtitle}
+          value={marketItem.subtitle}
           readOnly={true}
         />
         <TextAreaForm
           colFormat="3-9"
           label="Description"
-          value={wanted.description}
+          value={marketItem.description}
           readOnly={true}
         />
         <TextForm
           colFormat="3-9"
-          label="Offer Price"
-          value={`£${wanted.offerPrice.toFixed(2)}`}
+          label="Condition"
+          value={marketItem.condition}
+          readOnly={true}
+        />
+        <TextForm
+          colFormat="3-9"
+          label="Asking Price"
+          value={`£${marketItem.askingPrice.toFixed(2)}`}
           readOnly={true}
         />
         <TextForm
           colFormat="3-9"
           label="Activities"
-          value={wanted.activitys}
+          value={marketItem.activitys}
           readOnly={true}
         />
-        {wanted.offerDetails && wanted.offerDetails.length === 0 && (
+        {marketItem.offerDetails && marketItem.offerDetails.length === 0 && (
           <React.Fragment>
             <hr />
-            <h3>Can you provide this item</h3>
+            <h3>Are you interested in this item</h3>
             <p>
-              If you have one of these items, and would be willing to trade to
-              this person, then please fill in your details below and a
-              reasonable asking price or just recycle your unwanted gear and
-              offer it for free.
+              If you are interested in aquiring this item, then make an offer
+              and leave details below. The owner will get back to you as quickly
+              as possible
             </p>
             <form className="mb-3" onSubmit={handleSubmit}>
               <div>
@@ -158,14 +164,14 @@ const MarketWantedDetails = ({ wanted }) => {
                 <TextForm
                   colFormat="3-9"
                   type="number"
-                  label="Asking Price"
-                  value={values.askingPrice}
-                  field="askingPrice"
+                  label="Offer Price"
+                  value={values.offerPrice}
+                  field="offerPrice"
                   step=".01"
                   min="0"
                   max="99999.99"
                   handleChange={handleChange}
-                  error={errors.askingPrice}
+                  error={errors.offerPrice}
                 />
               </div>
               <hr />
@@ -173,14 +179,14 @@ const MarketWantedDetails = ({ wanted }) => {
                 <button className="btn btn-primary" type="submit">
                   Offer
                 </button>
-                <Link className="btn btn-link" to="/market/wanted">
+                <Link className="btn btn-link" to="/market/marketItem">
                   Cancel
                 </Link>
               </div>
             </form>
           </React.Fragment>
         )}
-        {wanted.offerDetails && wanted.offerDetails.length > 0 && (
+        {marketItem.offerDetails && marketItem.offerDetails.length > 0 && (
           <React.Fragment>
             <hr />
             <h3>Thank you! You made this offer</h3>
@@ -189,19 +195,19 @@ const MarketWantedDetails = ({ wanted }) => {
                 <DateForm
                   colFormat="3-9"
                   label="Offered On"
-                  value={wanted.offerDetails[0].offeredOn}
+                  value={marketItem.offerDetails[0].offeredOn}
                   readOnly={true}
                 />
                 <TextAreaForm
                   colFormat="3-9"
                   label="Details"
-                  value={wanted.offerDetails[0].details}
+                  value={marketItem.offerDetails[0].details}
                   readOnly={true}
                 />
                 <TextForm
                   colFormat="3-9"
-                  label="Asking Price"
-                  value={`£${wanted.offerDetails[0].askingPrice.toFixed(2)}`}
+                  label="Offer"
+                  value={`£${marketItem.offerDetails[0].offerPrice.toFixed(2)}`}
                   readOnly={true}
                 />
               </div>
@@ -213,4 +219,4 @@ const MarketWantedDetails = ({ wanted }) => {
   );
 };
 
-export default MarketWantedDetails;
+export default MarketItemDetails;

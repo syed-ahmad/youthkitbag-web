@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchMarketTrade } from '../../../actions/MarketTradeActions';
-import MarketTradeDetails from './MarketTradeDetails';
-import Title from '../../includes/Title';
-import Alert from '../../includes/Alert';
+import { fetchMarketItem } from '../../actions/MarketActions';
+import MarketItemDetails from './MarketItemDetails';
+import Title from '../includes/Title';
+import Alert from '../includes/Alert';
 
 const mapStateToProps = state => ({
-  current: state.market.trade.current
+  current: state.market.market.current
 });
 
 const mapDispatchToProps = {
-  fetchMarketTrade
+  fetchMarketItem
 };
 
-const MarketTradeViewPage = ({ current, fetchMarketTrade, match }) => {
-  const tradeId = match.params.tradeId;
+const MarketItemViewPage = ({ current, fetchMarketItem, match }) => {
+  const marketId = match.params.marketId;
 
-  const [trade, setTrade] = useState({
-    title: 'Loading requested item of trade ...',
+  const [market, setTrade] = useState({
+    title: 'Loading requested item of market ...',
     subtitle: '',
     description: '',
     condition: '',
@@ -28,8 +28,8 @@ const MarketTradeViewPage = ({ current, fetchMarketTrade, match }) => {
   });
 
   useEffect(() => {
-    fetchMarketTrade(tradeId);
-  }, [fetchMarketTrade, tradeId]);
+    fetchMarketItem(marketId);
+  }, [fetchMarketItem, marketId]);
 
   useEffect(() => {
     if (current && current._id) {
@@ -39,7 +39,7 @@ const MarketTradeViewPage = ({ current, fetchMarketTrade, match }) => {
 
   return (
     <div>
-      <Title title={!trade ? 'Loading...' : trade.title} />
+      <Title title={!market ? 'Loading...' : market.title} />
       <section
         id="main"
         className="container-fluid"
@@ -47,7 +47,7 @@ const MarketTradeViewPage = ({ current, fetchMarketTrade, match }) => {
       >
         <div className="container">
           <Alert />
-          <MarketTradeDetails trade={trade} />
+          <MarketItemDetails market={market} />
         </div>
       </section>
     </div>
@@ -57,4 +57,4 @@ const MarketTradeViewPage = ({ current, fetchMarketTrade, match }) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MarketTradeViewPage);
+)(MarketItemViewPage);

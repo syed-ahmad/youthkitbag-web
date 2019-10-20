@@ -2,15 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
-  fetchKitbagTrade,
-  deleteKitbagTrade
-} from '../../../actions/KitbagTradeActions';
+  fetchMarketKit,
+  deleteMarketKit
+} from '../../../actions/KitbagMarketActions';
 import Modal from '../../includes/Modal';
 import history from '../../../helpers/history';
 
-class TradeDelete extends React.Component {
+class MarketKitDelete extends React.Component {
   componentDidMount() {
-    this.props.fetchKitbagTrade(this.props.match.params.id);
+    this.props.fetchMarketKit(this.props.match.params.id);
   }
 
   renderTitle() {
@@ -41,7 +41,7 @@ class TradeDelete extends React.Component {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => this.props.deleteKitbagTrade(tradeId)}
+          onClick={() => this.props.deleteMarketKit(tradeId)}
         >
           Delete
         </button>
@@ -67,5 +67,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchKitbagTrade, deleteKitbagTrade }
-)(TradeDelete);
+  { fetchMarketKit, deleteMarketKit }
+)(MarketKitDelete);

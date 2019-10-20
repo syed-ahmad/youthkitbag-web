@@ -3,24 +3,27 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import {
-  createKitbagStolen,
-  editKitbagStolen
-} from '../../../actions/KitbagStolenActions';
-import validate from './StolenFormValidationRules';
+  createMarketKit,
+  editMarketKit
+} from '../../../actions/KitbagMarketActions';
+import validate from './MarketKitFormValidationRules';
 import {
   DateForm,
   TextForm,
   TextAreaForm,
   RemoveArrayButtonForm,
+  ImagesForm,
   CheckboxForm,
-  ImagesForm
+  SelectForm
 } from '../../includes/forms';
 
-const StolenForm = ({ stolen }) => {
+const MarketForm = ({ market }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
-  const initialValues = { ...stolen };
+  const initialValues = { ...market };
+
+  const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
 
   const {
     setChange,
@@ -32,7 +35,7 @@ const StolenForm = ({ stolen }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateStolen, validate);
+  } = useForm(initialValues, updateMarket, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -41,20 +44,20 @@ const StolenForm = ({ stolen }) => {
   }, [newErrors, setErrors]);
 
   useEffect(() => {
-    if (stolen) {
-      stolen.topImage =
-        stolen.images && stolen.images.filter(i => i.state !== 'D').length > 0
-          ? stolen.images.filter(i => i.state !== 'D')[0].imageUrl
+    if (market) {
+      market.topImage =
+        market.images && market.images.filter(i => i.state !== 'D').length > 0
+          ? market.images.filter(i => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
-      setValues(stolen);
+      setValues(market);
     }
-  }, [stolen, setValues]);
+  }, [market, setValues]);
 
-  function updateStolen() {
+  function updateMarket() {
     if (values._id) {
-      dispatch(editKitbagStolen(values._id, values));
+      dispatch(editMarketKit(values._id, values));
     } else {
-      dispatch(createKitbagStolen(values));
+      dispatch(createMarketKit(values));
     }
   }
 
@@ -91,29 +94,26 @@ const StolenForm = ({ stolen }) => {
             handleChange={handleChange}
             error={errors.description}
           />
-          <DateForm
+          <SelectForm
             colFormat="3-9"
-            label="Date Stolen"
-            value={values.stolenOn}
-            field="stolenOn"
-            setChange={setChange}
-            errors={errors}
+            label="Condition"
+            value={values.status}
+            field="condition"
+            handleChange={handleChange}
+            error={errors.condition}
+            items={conditionItems}
           />
           <TextForm
             colFormat="3-9"
-            label="Location"
-            value={values.location}
-            field="location"
+            type="number"
+            label="Asking Price"
+            value={values.askingPrice}
+            field="askingPrice"
+            step=".01"
+            min="0"
+            max="99999.99"
             handleChange={handleChange}
-            error={errors.location}
-          />
-          <TextForm
-            colFormat="3-9"
-            label="Tracking"
-            value={values.tracking}
-            field="tracking"
-            handleChange={handleChange}
-            error={errors.tracking}
+            error={errors.askingPrice}
           />
           <hr />
           <TextForm
@@ -124,23 +124,15 @@ const StolenForm = ({ stolen }) => {
             handleChange={handleChange}
             error={errors.activitys}
           />
-          <TextForm
-            colFormat="3-9"
-            label="Security"
-            value={values.security}
-            field="security"
-            handleChange={handleChange}
-            error={errors.security}
-          />
           {values._id && (
             <CheckboxForm
               colFormat="3-1-8"
-              label="Recovered"
-              value={values.recovered}
-              field="recovered"
+              label="Marketd"
+              value={values.marketd}
+              field="marketd"
               onChange={handleChange}
-              error={errors.recovered}
-              help="If you're fortunate enough to have this item recovered, that is fantastic news. Check this box so that it won't be included on the stolen report anymore."
+              error={errors.marketd}
+              help="Have you managed to market this item of kit? If yes, great! Check this box so that it won't be included on the trading market anymore."
             />
           )}
           <hr />
@@ -179,40 +171,6 @@ const StolenForm = ({ stolen }) => {
               ))}
           </div>
           <hr />
-          {/* <div>
-            {values.reportDetails &&
-              values.reportDetails.map((item, index) => (
-                <div className="form-row" key={index}>
-                  <DateForm
-                    colFormat="a-4"
-                    value={values.reportDetails[index].reportedOn}
-                    label="Reported On"
-                    field={`reportDetails[${index}].reportedOn`}
-                    setChange={setChange}
-                    index={index}
-                  />
-                  <TextForm
-                    colFormat="a-6"
-                    value={values.reportDetails[index].details}
-                    label="Details"
-                    field={`reportDetails[${index}].details`}
-                    handleChange={handleChange}
-                    index={index}
-                  />
-                  <RemoveArrayButtonForm
-                    colFormat="a-1"
-                    title="Remove Report"
-                    onClick={() => removeArrayItem('reportDetails', index)}
-                    index={index}
-                  />
-                </div>
-              ))}
-            <AddArrayButtonForm
-              label="Add a new report"
-              onClick={() => addArrayItem('reportDetails', [initialReport])}
-            />
-          </div>
-          <hr /> */}
           <div>
             {values.images &&
               values.images.map((item, index) => (
@@ -259,7 +217,7 @@ const StolenForm = ({ stolen }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/kitbag/stolen">
+            <Link className="btn btn-link" to="/kitbag/market">
               Cancel
             </Link>
           </div>
@@ -269,4 +227,4 @@ const StolenForm = ({ stolen }) => {
   );
 };
 
-export default StolenForm;
+export default MarketForm;

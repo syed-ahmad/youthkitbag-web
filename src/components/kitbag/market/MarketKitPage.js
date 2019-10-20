@@ -1,71 +1,75 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  fetchKitbagWanted,
-  fetchKitbagWantedFromKit
-} from '../../../actions/KitbagWantedActions';
-import WantedForm from './WantedForm';
+  fetchMarketKit,
+  fetchMarketKitFromKit
+} from '../../../actions/KitbagMarketActions';
+import MarketKitForm from './MarketKitForm';
 import Title from '../../includes/Title';
 import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
-  current: state.kitbag.wanted.current
+  current: state.kitbag.market.current
 });
 
 const mapDispatchToProps = {
-  fetchKitbagWanted,
-  fetchKitbagWantedFromKit
+  fetchMarketKit,
+  fetchMarketKitFromKit
 };
 
-const WantedPage = ({
+const MarketKitPage = ({
   current,
-  fetchKitbagWanted,
-  fetchKitbagWantedFromKit,
+  fetchMarketKit,
+  fetchMarketKitFromKit,
   match
 }) => {
-  const { wantedId, kitId } = match.params;
+  const marketId = match.params.marketId;
+  const kitId = match.params.kitId;
+  const marketType = match.params.marketType;
 
-  const [wanted, setWanted] = useState({
+  const [market, setMarketKit] = useState({
     title: '',
     subtitle: '',
     description: '',
-    offerPrice: 0.0,
     location: '',
-    offerDetails: [],
-    obtained: false,
-    activitys: '',
-    groups: [],
     images: [],
+    activitys: '',
+    condition: 'used',
+    askingPrice: 0.0,
+    marketd: false,
     sourceId: '',
     userId: '',
+    groups: [],
+    marketDetails: [],
     topImage: '/images/default.png',
     imagesToUpload: 0
   });
 
   useEffect(() => {
-    if (wantedId) {
-      fetchKitbagWanted(wantedId);
+    if (marketId) {
+      fetchMarketKit(marketId);
     }
-  }, [fetchKitbagWanted, wantedId]);
+  }, [fetchMarketKit, marketId]);
 
   useEffect(() => {
     if (kitId) {
-      fetchKitbagWantedFromKit(kitId);
+      fetchMarketKitFromKit(kitId, marketType);
     }
-  }, [fetchKitbagWantedFromKit, kitId]);
+  }, [fetchMarketKitFromKit, kitId, marketType]);
 
   useEffect(() => {
     if (current && (current._id || current.sourceId)) {
-      const newWanted = {
+      const newMarketKit = {
         ...current,
         imagesToUpload: 0
       };
-      setWanted(newWanted);
+      console.log('SETMARKETKIT', current);
+      setMarketKit(newMarketKit);
     }
   }, [current]);
 
   function itemIsLoding() {
-    return wantedId && !wanted._id;
+    return marketId && !market._id;
   }
 
   function getTitle() {
@@ -73,9 +77,9 @@ const WantedPage = ({
       return 'Loading ...';
     }
 
-    return wanted._id
-      ? `Wanted: ${wanted.title}`
-      : 'Create a new item that you want';
+    return market._id
+      ? `MarketKit: ${market.title}`
+      : 'Create a new item for market';
   }
 
   return (
@@ -88,7 +92,7 @@ const WantedPage = ({
       >
         <div className="container">
           <Alert />
-          <WantedForm wanted={wanted} />
+          <MarketKitForm market={market} />
         </div>
       </section>
     </div>
@@ -98,4 +102,4 @@ const WantedPage = ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WantedPage);
+)(MarketKitPage);

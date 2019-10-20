@@ -73,7 +73,7 @@ class Header extends React.Component {
                     Pricing
                   </Link>
                 </li>
-                <li className="nav-item dropdown mr-3">
+                {/* <li className="nav-item dropdown mr-3">
                   <Link
                     className="nav-item nav-link dropdown-toggle"
                     to="/marketdropdown"
@@ -99,34 +99,43 @@ class Header extends React.Component {
                       Stolen
                     </Link>
                   </div>
-                </li>
+                </li> */}
               </ul>
               <ul className="navbar-nav ml-auto">
                 {loggedIn && (
-                  <li className="nav-item dropdown mr-3">
-                    <Link
-                      className="nav-item nav-link dropdown-toggle"
-                      to="/kitbagdropdown"
-                      id="kitbagDropdown"
-                      data-toggle="dropdown"
-                      data-display="static"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Kitbag
-                    </Link>
-                    <div
-                      className="dropdown-menu dropdown-menu-right"
-                      aria-labelledby="kitbagDropdown"
-                    >
-                      <Link className="dropdown-item" to="/kitbag/kit">
-                        Your kit
+                  <React.Fragment>
+                    <li className="nav-item">
+                      <Link to="/market" className="nav-link">
+                        Market
                       </Link>
-                      <Link className="dropdown-item" to="/kitbag/kit/new">
-                        Add new kit
+                    </li>
+                    <li className="nav-item dropdown mr-3">
+                      <Link
+                        className="nav-item nav-link dropdown-toggle"
+                        to="/kitbagdropdown"
+                        id="kitbagDropdown"
+                        data-toggle="dropdown"
+                        data-display="static"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        Kitbag
                       </Link>
-                      <hr />
-                      <Link className="dropdown-item" to="/kitbag/trade">
+                      <div
+                        className="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="kitbagDropdown"
+                      >
+                        <Link className="dropdown-item" to="/kitbag/kit">
+                          Your kit
+                        </Link>
+                        <Link className="dropdown-item" to="/kitbag/kit/new">
+                          Add new kit
+                        </Link>
+                        <hr />
+                        <Link className="dropdown-item" to="/kitbag/market">
+                          Your market place
+                        </Link>
+                        {/* <Link className="dropdown-item" to="/kitbag/trade">
                         Your trades
                       </Link>
                       <Link className="dropdown-item" to="/kitbag/wanted">
@@ -134,70 +143,72 @@ class Header extends React.Component {
                       </Link>
                       <Link className="dropdown-item" to="/kitbag/stolen">
                         Your stolen items
-                      </Link>
-                    </div>
-                  </li>
-                )}
-                {loggedIn && (
-                  <li className="nav-item dropdown mr-3">
-                    <Link
-                      className="nav-item nav-link dropdown-toggle"
-                      to="/settingsdropdown"
-                      id="settingsDropdown"
-                      data-toggle="dropdown"
-                      data-display="static"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Settings
-                    </Link>
-                    <div
-                      className="dropdown-menu dropdown-menu-right"
-                      aria-labelledby="settingsDropdown"
-                    >
-                      <Link className="dropdown-item" to="/settings/account">
-                        Account
-                      </Link>
+                      </Link> */}
+                      </div>
+                    </li>
+
+                    <li className="nav-item dropdown mr-3">
                       <Link
-                        className="dropdown-item"
-                        to="/settings/account/profile"
+                        className="nav-item nav-link dropdown-toggle"
+                        to="/settingsdropdown"
+                        id="settingsDropdown"
+                        data-toggle="dropdown"
+                        data-display="static"
+                        aria-haspopup="true"
+                        aria-expanded="false"
                       >
-                        Profile
+                        Settings
                       </Link>
+                      <div
+                        className="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="settingsDropdown"
+                      >
+                        <Link className="dropdown-item" to="/settings/account">
+                          Account
+                        </Link>
+                        <Link
+                          className="dropdown-item"
+                          to="/settings/account/profile"
+                        >
+                          Profile
+                        </Link>
+                        <Link
+                          className="dropdown-item"
+                          to="/settings/account/package"
+                        >
+                          Package
+                        </Link>
+                        <Link
+                          className="dropdown-item"
+                          to="/settings/account/badges"
+                        >
+                          Badges
+                        </Link>
+                        <hr />
+                        <Link className="dropdown-item" to="/settings/groups">
+                          Groups
+                        </Link>
+                      </div>
+                    </li>
+
+                    <li className="nav-item mr-3">
                       <Link
-                        className="dropdown-item"
-                        to="/settings/account/package"
+                        className="nav-link d-inline"
+                        to="/settings/account"
                       >
-                        Package
+                        <img
+                          src={
+                            this.props.user.profile.images &&
+                            this.props.user.profile.images.length > 0
+                              ? this.props.user.profile.images[0].imageUrl
+                              : '/images/defaultthumb.png'
+                          }
+                          className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
+                          alt=""
+                        />
                       </Link>
-                      <Link
-                        className="dropdown-item"
-                        to="/settings/account/badges"
-                      >
-                        Badges
-                      </Link>
-                      <hr />
-                      <Link className="dropdown-item" to="/settings/groups">
-                        Groups
-                      </Link>
-                    </div>
-                  </li>
-                )}
-                {loggedIn && (
-                  <li className="nav-item mr-3">
-                    <Link className="nav-link d-inline" to="/settings/account">
-                      <img
-                        src={
-                          this.props.user.profile.images &&
-                          this.props.user.profile.images.length > 0
-                            ? this.props.user.profile.images[0].imageUrl
-                            : '/images/defaultthumb.png'
-                        }
-                        className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                        alt=""
-                      />
-                    </Link>
-                  </li>
+                    </li>
+                  </React.Fragment>
                 )}
                 {!loggedIn && (
                   <li className="nav-item">

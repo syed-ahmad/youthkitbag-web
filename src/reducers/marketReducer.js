@@ -1,11 +1,20 @@
-import { combineReducers } from 'redux';
+import {
+  FETCH_MARKET_ITEMS,
+  FETCH_MARKET_ITEM,
+  LOGOUT
+} from '../actions/types';
 
-import marketTradeReducer from './marketTradeReducer';
-import marketWantedReducer from './marketWantedReducer';
-import marketStolenReducer from './marketStolenReducer';
+const initialState = { list: [], current: {} };
 
-export default combineReducers({
-  trade: marketTradeReducer,
-  wanted: marketWantedReducer,
-  stolen: marketStolenReducer
-});
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case FETCH_MARKET_ITEMS:
+      return { list: action.payload.items, current: {} };
+    case FETCH_MARKET_ITEM:
+      return { list: [], current: action.payload };
+    case LOGOUT:
+      return initialState;
+    default:
+      return state;
+  }
+};

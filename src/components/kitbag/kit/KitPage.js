@@ -75,19 +75,19 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
             <div className="row">
               <div className="col-12 mb-3 d-flex justify-content-end">
                 <Link
-                  to={`/kitbag/trade/add/${kitId}`}
+                  to={`/kitbag/market/add/${kitId}/trade`}
                   className="btn btn-primary mr-3"
                 >
                   Trade
                 </Link>
                 <Link
-                  to={`/kitbag/wanted/add/${kitId}`}
+                  to={`/kitbag/market/add/${kitId}/wanted`}
                   className="btn btn-secondary mr-3"
                 >
                   Wanted
                 </Link>
                 <Link
-                  to={`/kitbag/stolen/add/${kitId}`}
+                  to={`/kitbag/market/add/${kitId}/stolen`}
                   className="btn btn-danger"
                 >
                   Stolen
