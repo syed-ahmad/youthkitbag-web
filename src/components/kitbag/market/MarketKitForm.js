@@ -107,13 +107,13 @@ const MarketForm = ({ market }) => {
             colFormat="3-9"
             type="number"
             label="Asking Price"
-            value={values.askingPrice}
-            field="askingPrice"
+            value={values.marketPrice}
+            field="marketPrice"
             step=".01"
             min="0"
             max="99999.99"
             handleChange={handleChange}
-            error={errors.askingPrice}
+            error={errors.marketPrice}
           />
           <hr />
           <TextForm

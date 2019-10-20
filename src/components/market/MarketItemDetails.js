@@ -6,7 +6,7 @@ import { respondMarketItem } from '../../actions/MarketActions';
 import { TextForm, TextAreaForm, DateForm } from '../includes/forms';
 import validate from './MarketItemDetailsValidationRules';
 
-const MarketItemDetails = ({ marketItem }) => {
+const MarketItemDetails = ({ market }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
@@ -29,21 +29,20 @@ const MarketItemDetails = ({ marketItem }) => {
   }, [newErrors, setErrors]);
 
   useEffect(() => {
-    if (marketItem) {
-      marketItem.topImage =
-        marketItem.images &&
-        marketItem.images.filter(i => i.state !== 'D').length > 0
-          ? marketItem.images.filter(i => i.state !== 'D')[0].imageUrl
+    if (market) {
+      market.topImage =
+        market.images && market.images.filter(i => i.state !== 'D').length > 0
+          ? market.images.filter(i => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
     }
-  }, [marketItem]);
+  }, [market]);
 
   function renderSecondaryImages() {
-    if (!marketItem || !marketItem.images) {
+    if (!market || !market.images) {
       return null;
     }
 
-    const { images } = marketItem;
+    const { images } = market;
     const items = [];
 
     for (let i = 0; i < images.length; i++) {
@@ -70,15 +69,15 @@ const MarketItemDetails = ({ marketItem }) => {
   }
 
   useEffect(() => {
-    if (marketItem) {
+    if (market) {
       setValues({
-        _id: marketItem._id,
+        _id: market._id,
         offeredOn: '',
         details: '',
         offerPrice: 0
       });
     }
-  }, [marketItem, setValues]);
+  }, [market, setValues]);
 
   function updateTrade() {
     // if (values._id) {
@@ -96,7 +95,7 @@ const MarketItemDetails = ({ marketItem }) => {
             id="preview"
             name="preview"
             className="img-fluid mb-3"
-            src={marketItem.topImage}
+            src={market.topImage}
             alt=""
             role="presentation"
           />
@@ -107,34 +106,34 @@ const MarketItemDetails = ({ marketItem }) => {
         <TextForm
           colFormat="3-9"
           label="Subtitle"
-          value={marketItem.subtitle}
+          value={market.subtitle}
           readOnly={true}
         />
         <TextAreaForm
           colFormat="3-9"
           label="Description"
-          value={marketItem.description}
+          value={market.description}
           readOnly={true}
         />
         <TextForm
           colFormat="3-9"
           label="Condition"
-          value={marketItem.condition}
+          value={market.condition}
           readOnly={true}
         />
         <TextForm
           colFormat="3-9"
           label="Asking Price"
-          value={`£${marketItem.askingPrice.toFixed(2)}`}
+          value={`£${market.marketPrice.toFixed(2)}`}
           readOnly={true}
         />
         <TextForm
           colFormat="3-9"
           label="Activities"
-          value={marketItem.activitys}
+          value={market.activitys}
           readOnly={true}
         />
-        {marketItem.offerDetails && marketItem.offerDetails.length === 0 && (
+        {market.offerDetails && market.offerDetails.length === 0 && (
           <React.Fragment>
             <hr />
             <h3>Are you interested in this item</h3>
@@ -179,14 +178,14 @@ const MarketItemDetails = ({ marketItem }) => {
                 <button className="btn btn-primary" type="submit">
                   Offer
                 </button>
-                <Link className="btn btn-link" to="/market/marketItem">
+                <Link className="btn btn-link" to="/market/market">
                   Cancel
                 </Link>
               </div>
             </form>
           </React.Fragment>
         )}
-        {marketItem.offerDetails && marketItem.offerDetails.length > 0 && (
+        {market.offerDetails && market.offerDetails.length > 0 && (
           <React.Fragment>
             <hr />
             <h3>Thank you! You made this offer</h3>
@@ -195,19 +194,19 @@ const MarketItemDetails = ({ marketItem }) => {
                 <DateForm
                   colFormat="3-9"
                   label="Offered On"
-                  value={marketItem.offerDetails[0].offeredOn}
+                  value={market.offerDetails[0].offeredOn}
                   readOnly={true}
                 />
                 <TextAreaForm
                   colFormat="3-9"
                   label="Details"
-                  value={marketItem.offerDetails[0].details}
+                  value={market.offerDetails[0].details}
                   readOnly={true}
                 />
                 <TextForm
                   colFormat="3-9"
                   label="Offer"
-                  value={`£${marketItem.offerDetails[0].offerPrice.toFixed(2)}`}
+                  value={`£${market.offerDetails[0].offerPrice.toFixed(2)}`}
                   readOnly={true}
                 />
               </div>

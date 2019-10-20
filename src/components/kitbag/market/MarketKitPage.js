@@ -35,7 +35,7 @@ const MarketKitPage = ({
     images: [],
     activitys: '',
     condition: 'used',
-    askingPrice: 0.0,
+    marketPrice: 0.0,
     marketd: false,
     sourceId: '',
     userId: '',

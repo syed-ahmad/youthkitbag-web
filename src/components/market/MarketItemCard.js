@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class MarketItemCard extends React.Component {
-  renderAskingPrice = askingPrice => {
-    if (!askingPrice || askingPrice === 0) return 'Free';
-    return `£${askingPrice.toFixed(2)}`;
+  renderAskingPrice = marketPrice => {
+    if (!marketPrice || marketPrice === 0) return 'Free';
+    return `£${marketPrice.toFixed(2)}`;
   };
 
   topImage() {
@@ -32,7 +32,7 @@ class MarketItemCard extends React.Component {
   }
 
   render() {
-    const { _id, title, subtitle, askingPrice } = this.props.market;
+    const { _id, title, subtitle, marketPrice } = this.props.market;
 
     if (!_id) return this.renderBlank();
 
@@ -40,9 +40,9 @@ class MarketItemCard extends React.Component {
       <div className="col-6 col-md-4 col-lg-3 mb-3">
         <article className="card card-link card-b1">
           <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
-            {this.renderAskingPrice(askingPrice)}
+            {this.renderAskingPrice(marketPrice)}
           </span>
-          <Link to={`/market/market/view/${_id}`}>
+          <Link to={`/market/view/${_id}`}>
             <img
               className="card-img-top"
               src={this.topImage()}

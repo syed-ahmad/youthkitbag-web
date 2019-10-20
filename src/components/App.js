@@ -100,7 +100,7 @@ class App extends React.Component {
               />
 
               <PrivateRoute
-                path="/market/view/:tradeId"
+                path="/market/view/:marketId"
                 exact
                 component={MarketItemViewPage}
               />

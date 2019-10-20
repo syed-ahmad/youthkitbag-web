@@ -6,7 +6,7 @@ import Title from '../includes/Title';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = state => ({
-  current: state.market.market.current
+  current: state.market.current
 });
 
 const mapDispatchToProps = {
@@ -21,7 +21,7 @@ const MarketItemViewPage = ({ current, fetchMarketItem, match }) => {
     subtitle: '',
     description: '',
     condition: '',
-    askingPrice: 0.0,
+    marketPrice: 0.0,
     activitys: '',
     images: [],
     topImage: '/images/default.png'

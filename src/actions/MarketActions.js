@@ -43,6 +43,7 @@ export const fetchMarketItems = (
 };
 
 export const fetchMarketItem = marketId => dispatch => {
+  console.log('FETCH', marketId);
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market/${marketId}`, {
